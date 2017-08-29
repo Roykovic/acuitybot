@@ -51,9 +51,9 @@ restService.post('/hook', function (req, res) {
 		if (req.body.result.parameters['date']) {
 			date = req.body.result.parameters['date'];
 			console.log('Date: ' + date);
-			date = "on" + date;
+			date = "on " + date;
 			}
-        speech = "It will be hot in" + city + date;
+        speech = "It will be hot in " + city + " " + date;
 
         return res.json({
             speech: speech,
