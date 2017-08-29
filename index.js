@@ -18,31 +18,75 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const wwoApiKey = 'bf3cda6282ba461782b81407172908';
+const host = 'api.worldweatheronline.com';
 
 const restService = express();
 restService.use(bodyParser.json());
 
 restService.post('/hook', function (req, res) {
- // Get the city and date from the request
-  let city = req.body.result.parameters['geo-city']; // city is a required param
-  // Get the date for the weather forecast (if present)
-  let date = '';
-  if (req.body.result.parameters['date']) {
-    date = req.body.result.parameters['date'];
-    console.log('Date: ' + date);
-  }
-  // Call the weather API
-  callWeatherApi(city, date).then((output) => {
-    // Return the results of the weather API to API.AI
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ 'speech': output, 'displayText': output }));
-  }).catch((error) => {
-    // If there is an error let the user know
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify({ 'speech': error, 'displayText': error }));
-  });
-};
+
+    console.log('hook request');
+
+    try {
+        var speech = 'empty speech';
+		
+		let city = req.body.result.parameters['geo-city'];
+		let date = '';
+			if (req.body.result.parameters['date']) {
+				date = req.body.result.parameters['date'];
+				console.log('Date: ' + date);
+			}
+			
+			callWeatherApi(city, date).then((output) => {
+				return res.json({
+				speech: speech,
+				displayText: speech,
+				source: 'apiai-webhook-sample'
+				});
+			};
+  
+			
+			
+			
+        if (req.body) {
+            var requestBody = req.body;
+
+            if (requestBody.result) {
+                speech = '';
+
+                if (requestBody.result.fulfillment) {
+                    speech += requestBody.result.fulfillment.speech;
+                    speech += ' ';
+                }
+
+                if (requestBody.result.action) {
+                    speech += 'action: ' + requestBody.result.action;
+                }
+            }
+        }
+		
+
+        console.log('result: ', speech);
+
+        return res.json({
+            speech: speech,
+            displayText: speech,
+            source: 'apiai-webhook-sample'
+        });
+    } catch (err) {
+        console.error("Can't process request", err);
+
+        return res.status(400).json({
+            status: {
+                code: 400,
+                errorType: err.message
+            }
+        });
+    }
+});
+
+
 function callWeatherApi (city, date) {
   return new Promise((resolve, reject) => {
     // Create the path for the HTTP request to get the weather
@@ -75,9 +119,7 @@ function callWeatherApi (city, date) {
       });
     });
   });
-    
-    }
-});
+}
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
