@@ -46,6 +46,8 @@ restService.post('/hook', function (req, res) {
                 }
             }
         }
+		
+		speech = "API call worked";
 
         console.log('result: ', speech);
 
