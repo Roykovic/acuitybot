@@ -4,7 +4,7 @@
 * @param {Object} req Cloud Function request context.
 * @param {Object} res Cloud Function response context.
 */
-exports.helloHttp = function helloHttp (req, res) {
+helloHttp = function helloHttp (req, res) {
   response = "This is a sample response from your webhook!" //Default response from the webhook to show it's working
 
   res.setHeader('Content-Type', 'application/json'); //Requires application/json MIME type
