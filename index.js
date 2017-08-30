@@ -33,8 +33,8 @@ restService.post('/hook', function(req, res) {
 
 			
 			query(req, function(result){
-					speech = result.rows;
-					console.log("Speech: "+speech)
+					speech = Work In Progress;
+					console.log(result.rows)
 					return res.json({
 						speech: speech,
 						displayText: speech,
