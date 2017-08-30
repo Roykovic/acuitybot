@@ -42,7 +42,8 @@ restService.post('/hook', function(req, res) {
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-		pool.connect(function(err, client) {
+		 var speech = yield wait.for(pool.connect(function(err, client) {
+			
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 
@@ -52,12 +53,8 @@ restService.post('/hook', function(req, res) {
 			.catch(e => console.error(e.stack));
 			speech = "speech2";
 			console.log('speech2 is: ' +speech);
-		});
-		console.error("speech is: " +speech);
-        
-					
-			
-		
+		});)
+
         return res.json({
             speech: speech,
             displayText: speech,
