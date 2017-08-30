@@ -41,7 +41,14 @@ restService.post('/hook', function (req, res) {
 		var fullName = firstName + " " + lastName;
 		
 		pg.defaults.ssl = true;
-		pool.connect(function(err, client) {
+		const client = await pool.connect()
+		const result = await client.query({
+		  rowMode: 'array',
+		  text: 'SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';"
+		})
+		speech = result.fields[0].id;
+		await client.end()
+		/* pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 
@@ -50,7 +57,7 @@ restService.post('/hook', function (req, res) {
 			.then(res => console.log(res.rows[0].id)) 
 			.catch(e => console.error(e.stack));
 			speech = "worked2";
-		});
+		}); */
         
 					
 			
