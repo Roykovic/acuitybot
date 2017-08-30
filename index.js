@@ -45,18 +45,11 @@ restService.post('/hook', function(req, res) {
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-			.then(res => console.log(res.rows))
+			.then(res => speech = res.rows[0].id)
 			.catch(e => console.error(e.stack));
 
 			
-						})
-						
-		});
-
-		return res.json({
-		speech: speech,
-		displayText: speech,
-		source: 'apiai-webhook-sample'
+		})
     } 
 	catch (err) {
         console.error("Can't process request", err);
@@ -68,6 +61,12 @@ restService.post('/hook', function(req, res) {
             }
         });
     }
+	
+	return res.json({
+		speech: speech,
+		displayText: speech,
+		source: 'apiai-webhook-sample'				
+		});
 });
 
 restService.listen((process.env.PORT || 5000), function () {
