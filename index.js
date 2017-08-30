@@ -18,14 +18,14 @@
  
 var connectionString = "postgres://kajfadstryppyp:f165079bc885c141465673e6e3c15f5372b0cdc77a739f99e2ce5384130295a5@ec2-184-72-230-93.compute-1.amazonaws.com:5432/dc533m8c3hgprj?ssl=true"
 var pg = require('pg');
-pg.connect(connectionString, function(err, client, done) {
+/* pg.connect(connectionString, function(err, client, done) {
 			client.query('SELECT Name FROM salesforce.Contact', function(err, result) {
 				done();
 				if(err) return console.error(err);
 				console.log(result.rows);
 			});
-		});
- 
+		}); */
+		
  
  
  
@@ -61,13 +61,14 @@ restService.post('/hook', function (req, res) {
             }
         }
 		 let name = req.body.result.parameters['given-name'];
-		pg.connect(connectionString, function(err, client, done) {
-			client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE ' + name, function(err, result) {
-				done();
-				if(err) return console.error(err);
+			pool.connect(function(err, client, done) {
+				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE ' + name, function(err, result) {
+					done();
+					if(err) return console.error(err);
+				});
 			});
-		});
-		
+			
+			pool.end()	
 		speech = result.rows;
         return res.json({
             speech: speech,
