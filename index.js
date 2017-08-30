@@ -51,10 +51,7 @@ restService.post('/hook', function(req, res) {
 			
 						})
 						
-		}
-
-
-    } 
+		} 
 	catch (err) {
         console.error("Can't process request", err);
 
