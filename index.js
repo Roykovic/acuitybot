@@ -62,7 +62,7 @@ restService.post('/hook', function (req, res) {
             }
         }
 		 let name = req.body.result.parameters['given-name'];
-			pool.connect(function(err, client, done) {
+			pool.connect(connectionString, function(err, client, done) {
 				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE ' + name, function(err, result) {
 					done();
 					if(err) return console.error(err);
