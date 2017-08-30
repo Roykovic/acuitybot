@@ -32,15 +32,16 @@ restService.post('/hook', function (req, res) {
 		var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
 		var pg = require('pg');
 		 
-		var pool = new pg.Pool({
-		  connectionString: connectionString,
-		})
+		
 		var requestBody = req.body;
 		var firstName = requestBody.result.parameters['given-name']
 		var lastName = requestBody.result.parameters['last-name']
 		var fullName = firstName + " " + lastName;
 		
 		pg.defaults.ssl = true;
+		const pool = new Pool({
+		  connectionString: connectionString,
+		})
 		const client = await pool.connect()
 		const result = await client.query({
 		  rowMode: 'array',
