@@ -68,11 +68,11 @@ restService.post('/hook', function (req, res) {
 				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE John Bond', function(err, result) {
 					done();
 					if(err) return console.error(err);
+							speech = result.rows;
 				});
 			});
 			
 			pool.end()	
-		speech = result.rows;
         return res.json({
             speech: speech,
             displayText: speech,
