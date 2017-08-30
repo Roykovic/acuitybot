@@ -22,7 +22,7 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
-restService.post('/hook', async(req, res) {
+restService.post('/hook', function(req, res) {
 
     console.log('hook request');
 
@@ -39,26 +39,20 @@ restService.post('/hook', async(req, res) {
 		var fullName = firstName + " " + lastName;
 		
 		pg.defaults.ssl = true;
-		const pool = new Pool({
+		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-		const client = await pool.connect()
-		const result = await client.query({
-		  rowMode: 'array',
-		  text: 'SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';"
-		})
-		speech = result.fields[0].id;
-		await client.end()
-		/* pool.connect(function(err, client) {
+		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 
 		  client
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-			.then(res => console.log(res.rows[0].id)) 
+			.then(res => console.log(res.rows[0])) 
 			.catch(e => console.error(e.stack));
 			speech = "worked2";
-		}); */
+		});
+		console.error("speech is: " +speech);
         
 					
 			
