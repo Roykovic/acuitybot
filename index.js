@@ -33,8 +33,19 @@ restService.post('/hook', function(req, res) {
 
 			
 			query(req, function(result){
-				console.log(result.rows[0].mailingstreet)
-					speech = result.rows[0].mailingstreet;
+				if(result != undefined){
+				speech = result.rows[0].mailingstreet;
+				else{
+					 if (requestBody.result.fulfillment) {
+						speech += requestBody.result.fulfillment.speech;
+						speech += ' ';
+					}
+
+					if (requestBody.result.action) {
+						speech += 'action: ' + requestBody.result.action;
+					}
+				}
+					
 					return res.json({
 						speech: speech,
 						displayText: speech,
