@@ -32,7 +32,7 @@ restService.post('/hook', function(req, res) {
     try {
 
 			
-			query(function(){
+			query(req, function(){
 					console.log("about to send json")
 	return res.json({
 	speech: speech,
@@ -54,8 +54,8 @@ restService.post('/hook', function(req, res) {
     }
 })
 
-function query(callBack){
-				var requestBody = req.body;
+function query(req, callBack){
+			var requestBody = req.body;
 			var firstName = requestBody.result.parameters['given-name']
 			var lastName = requestBody.result.parameters['last-name']
 			var fullName = firstName + " " + lastName;
@@ -70,7 +70,7 @@ function query(callBack){
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
 				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-				.then(res => console.log(res.rows))
+				.then(res => console.log(res.rows), callBack())
 				.catch(e => console.error(e.stack));
 			})
 }
