@@ -46,9 +46,12 @@ restService.post('/hook', function(req, res) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 
-		  var result = client.query('SELECT * FROM salesforce.Contact;')
-		  //client.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-			console.log("Result : "+result.rows)
+		  client
+			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+			.then(res => console.log(res.rows)
+			.catch(e => console.error(e.stack));
+			
+			console.log(fullName)
 		return res.json({
 							speech: speech,
 							displayText: speech,
