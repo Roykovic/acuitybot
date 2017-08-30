@@ -65,10 +65,10 @@ restService.post('/hook', function (req, res) {
 			client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE ' + name, function(err, result) {
 				done();
 				if(err) return console.error(err);
-				console.log(result.rows);
 			});
 		});
 		
+		speech = result.rows;
         return res.json({
             speech: speech,
             displayText: speech,
