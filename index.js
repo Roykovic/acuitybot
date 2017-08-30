@@ -47,6 +47,7 @@ restService.post('/hook', function (req, res) {
 		 let Firstname = req.body.result.parameters['given-name'];
 		 let Lastname = req.body.result.parameters['last-name'];
 		 let Fullname = Firstname + " " + Lastname;
+		 
 			pool.connect(connectionString, function(err, client, done) {
 				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE John Bond', function(err, result) {
 					done();
@@ -54,7 +55,7 @@ restService.post('/hook', function (req, res) {
 							speech = "Val kapot";
 				});
 			});
-			
+			speech = Fullname;
 			pool.end()	
         return res.json({
             speech: speech,
