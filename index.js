@@ -40,7 +40,11 @@ const client = new Client({
   connectionString: connectionString,
 })
 client.connect()
- 
+client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE John Bond', function(err, result) {
+					done();
+					if(err) return console.error(err);
+
+				});
  
  
  
