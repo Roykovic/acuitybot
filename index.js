@@ -40,15 +40,13 @@ restService.post('/hook', function(req, res) {
 		  connectionString: connectionString,
 		})
 		
-		var ding = pool.connect(function(err, client) {
+		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 			.then(res => speech = res.rows[0].id)
 			.catch(e => console.error(e.stack));
-
-			
 		})
     } 
 	catch (err) {
