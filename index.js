@@ -70,6 +70,7 @@ restService.post('/hook', function (req, res) {
 			});
 			
 			pool.end()	
+			console.log("THIS IS THE RESULT OF THE QUERY: " + result.rows);
 		speech = result.rows;
         return res.json({
             speech: speech,
