@@ -42,6 +42,7 @@ restService.post('/hook', function (req, res) {
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
+		var requestBody = req.body;
 		var firstName = requestBody.result.parameters['given-name']
 		var lastName = requestBody.result.parameters['last-name']
 		var fullName = firstName + " " + lastName;
