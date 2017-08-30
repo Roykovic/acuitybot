@@ -70,7 +70,7 @@ function query(req, callBack){
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
-				.query('SELECT MailingAddress FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+				.query('SELECT MailingStreet, MailingPostalCode FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
