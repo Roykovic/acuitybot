@@ -50,6 +50,7 @@ restService.post('/hook', function(req, res) {
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 			.then(res => speech = res.rows[0].id) 
 			.catch(e => console.error(e.stack));
+			speech = "speech2";
 			console.log('speech2 is: ' +speech);
 		});
 		console.error("speech is: " +speech);
