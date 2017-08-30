@@ -67,7 +67,7 @@ restService.post('/hook', function(req, res) {
 		speech: speech,
 		displayText: speech,
 		source: 'apiai-webhook-sample'
-});
+});})
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
