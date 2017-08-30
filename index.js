@@ -36,6 +36,7 @@ restService.post('/hook', function(req, res) {
 				if(result.rows[0] != undefined){
 				speech = result.rows[0].mailingstreet;}
 				else{
+				var requestBody = req.body;
 					 if (requestBody.result.fulfillment) {
 						speech += requestBody.result.fulfillment.speech;
 						speech += ' ';
