@@ -49,17 +49,17 @@ restService.post('/hook', function(req, res) {
 		  client
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 			.then(res => speech = res.rows[0].id)
-			.then(
-					callback(res.json({
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					}));
-			)
+			.done(		return res.json({
+							speech: speech,
+							displayText: speech,
+							source: 'apiai-webhook-sample'
+						});)
 			.catch(e => console.error(e.stack));
 			speech = "speech2";
 			console.log('speech2 is: ' +speech);
 		});
+		
+
     } catch (err) {
         console.error("Can't process request", err);
 
