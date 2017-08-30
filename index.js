@@ -28,9 +28,7 @@ pool.connect(function(err, client) {
 
   client
     .query('SELECT table_schema,table_name FROM information_schema.tables;')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
+    .then(res => console.log(res.rows[0]));
 });
  
  
