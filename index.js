@@ -71,7 +71,7 @@ function query(req, callBack){
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
 				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-				.then(callBack(res))
+				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
 }
