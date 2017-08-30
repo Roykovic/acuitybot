@@ -46,14 +46,14 @@ restService.post('/hook', function (req, res) {
                 }
             }
         }
-		 let city = req.body.result.parameters['geo-city']; // city is a required param
+		 let city = req.body.result.parameters['geo-city'];
 			 let date = 'Today';
 		if (req.body.result.parameters['date']) {
 			date = req.body.result.parameters['date'];
 			console.log('Date: ' + date);
 			date = "on " + date;
 			}
-        speech = "It will be hot in " + city + " " + date;
+        speech = salesforce.contact;
 
         return res.json({
             speech: speech,
