@@ -61,16 +61,17 @@ restService.post('/hook', function (req, res) {
                 }
             }
         }
-		 let name = req.body.result.parameters['given-name'];
+		 let Firstname = req.body.result.parameters['given-name'];
+		 let Lastname = req.body.result.parameters['last-name'];
+		 let Fullname = Firstname + " " + Lastname;
 			pool.connect(connectionString, function(err, client, done) {
-				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE ' + name, function(err, result) {
+				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE ' + Fullname, function(err, result) {
 					done();
 					if(err) return console.error(err);
 				});
 			});
 			
 			pool.end()	
-			console.log("THIS IS THE RESULT OF THE QUERY: " + result.rows);
 		speech = result.rows;
         return res.json({
             speech: speech,
