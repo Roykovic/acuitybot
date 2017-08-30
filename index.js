@@ -44,23 +44,6 @@ restService.post('/hook', function (req, res) {
 
     try {
         var speech = 'empty speech';
-
-        if (req.body) {
-            var requestBody = req.body;
-
-            if (requestBody.result) {
-                speech = '';
-
-                if (requestBody.result.fulfillment) {
-                    speech += requestBody.result.fulfillment.speech;
-                    speech += ' ';
-                }
-
-                if (requestBody.result.action) {
-                    speech += 'action: ' + requestBody.result.action;
-                }
-            }
-        }
 		 let Firstname = req.body.result.parameters['given-name'];
 		 let Lastname = req.body.result.parameters['last-name'];
 		 let Fullname = Firstname + " " + Lastname;
