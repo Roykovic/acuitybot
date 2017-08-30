@@ -33,7 +33,7 @@ restService.post('/hook', function(req, res) {
 
 			
 			query(req, function(result){
-					speech = result.rows[0].id;
+					speech = result.rows[0];
 					return res.json({
 						speech: speech,
 						displayText: speech,
@@ -69,7 +69,7 @@ function query(req, callBack){
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
-				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+				.query('SELECT MailingAddress FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
