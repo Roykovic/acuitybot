@@ -15,36 +15,20 @@
  */
  
  
+ 
+ var pg = require('pg');
 
-/* pg.connect(connectionString, function(err, client, done) {
-			client.query('SELECT Name FROM salesforce.Contact', function(err, result) {
-				done();
-				if(err) return console.error(err);
-				console.log(result.rows);
-			});
-		}); */
-		
-const { Pool, Client } = require('pg')
-const connectionString = "postgres://kajfadstryppyp:f165079bc885c141465673e6e3c15f5372b0cdc77a739f99e2ce5384130295a5@ec2-184-72-230-93.compute-1.amazonaws.com:5432/dc533m8c3hgprj?ssl=true"
+pg.defaults.ssl = true;
+pg.connect(process.env.DATABASE_URL, function(err, client) {
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
 
-const pool = new Pool({
-  connectionString: connectionString,
-})
-
-pool.query('SELECT NOW()', (err, res) => {
-  console.log(err, res)
-  pool.end()
-})
-
-const client = new Client({
-  connectionString: connectionString,
-})
-client.connect()
-client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE John Bond', function(err, result) {
-					done();
-					if(err) return console.error(err);
-
-				});
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+});
  
  
  
@@ -64,18 +48,32 @@ restService.post('/hook', function (req, res) {
 
     try {
         var speech = 'empty speech';
-		 let Firstname = req.body.result.parameters['given-name'];
-		 let Lastname = req.body.result.parameters['last-name'];
-		 let Fullname = Firstname + " " + Lastname;
-		 
-			pool.connect(function(err, client, done) {
-				client.query('SELECT * FROM salesforce.Contact WHERE Name LIKE John Bond', function(err, result) {
-					done();
-					if(err) return console.error(err);
 
-				});
-			});
-			pool.end()	
+        if (req.body) {
+            var requestBody = req.body;
+
+            if (requestBody.result) {
+                speech = '';
+
+                if (requestBody.result.fulfillment) {
+                    speech += requestBody.result.fulfillment.speech;
+                    speech += ' ';
+                }
+
+                if (requestBody.result.action) {
+                    speech += 'action: ' + requestBody.result.action;
+                }
+            }
+        }
+		 let city = req.body.result.parameters['geo-city'];
+			 let date = 'Today';
+		if (req.body.result.parameters['date']) {
+			date = req.body.result.parameters['date'];
+			console.log('Date: ' + date);
+			date = "on " + date;
+			}
+        speech = "It will be hot in " + city + " " + date;
+
         return res.json({
             speech: speech,
             displayText: speech,
