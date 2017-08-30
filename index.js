@@ -15,9 +15,12 @@
  */
  
  
- 
+ var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
  var pg = require('pg');
-var pool = new pg.Pool(process.env.DATABASE_URL)
+ 
+var pool = new pg.Pool({
+  connectionString: connectionString,
+})
 pg.defaults.ssl = true;
 pool.connect(function(err, client) {
   if (err) throw err;
