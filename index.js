@@ -18,6 +18,7 @@
  
 var connectionString = "postgres://kajfadstryppyp:f165079bc885c141465673e6e3c15f5372b0cdc77a739f99e2ce5384130295a5@ec2-184-72-230-93.compute-1.amazonaws.com:5432/dc533m8c3hgprj?ssl=true"
 var pg = require('pg');
+var pool = new pg.Pool()
 /* pg.connect(connectionString, function(err, client, done) {
 			client.query('SELECT Name FROM salesforce.Contact', function(err, result) {
 				done();
