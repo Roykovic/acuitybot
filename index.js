@@ -50,11 +50,11 @@ restService.post('/hook', function(req, res) {
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 			.then(res => speech = res.rows[0].id)
 			.then(
-					return res.json({
+					callback(res.json({
 						speech: speech,
 						displayText: speech,
 						source: 'apiai-webhook-sample'
-					});
+					});)
 			)
 			.catch(e => console.error(e.stack));
 			speech = "speech2";
