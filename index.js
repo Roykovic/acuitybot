@@ -62,6 +62,7 @@ restService.post('/hook', function(req, res) {
             }
         });
     }
+	console.log("about to send json")
 	return res.json({
 	speech: speech,
 	displayText: speech,
