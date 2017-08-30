@@ -30,26 +30,26 @@ restService.post('/hook', function(req, res) {
 	var pg = require('pg');
 		 
     try {
-		var requestBody = req.body;
-		var firstName = requestBody.result.parameters['given-name']
-		var lastName = requestBody.result.parameters['last-name']
-		var fullName = firstName + " " + lastName;
-		
-		pg.defaults.ssl = true;
-		var pool = new pg.Pool({
-		  connectionString: connectionString,
-		})
-		
-		var ding = pool.connect(function(err, client) {
-		  if (err) throw err;
-		  console.log('Connected to postgres! Getting schemas...');
-		  client
-			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-			.then(res => console.log(res.rows))
-			.catch(e => console.error(e.stack));
-
+			var requestBody = req.body;
+			var firstName = requestBody.result.parameters['given-name']
+			var lastName = requestBody.result.parameters['last-name']
+			var fullName = firstName + " " + lastName;
 			
-						})
+			pg.defaults.ssl = true;
+			var pool = new pg.Pool({
+			  connectionString: connectionString,
+			})
+			
+			pool.connect(function(err, client) {
+			  if (err) throw err;
+			  console.log('Connected to postgres! Getting schemas...');
+			  client
+				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+				.then(res => console.log(res.rows))
+				.catch(e => console.error(e.stack));
+
+				
+			})
 						
 		} 
 	catch (err) {
@@ -63,11 +63,12 @@ restService.post('/hook', function(req, res) {
         });
     }
 	
-			return res.json({
-		speech: speech,
-		displayText: speech,
-		source: 'apiai-webhook-sample'
-});})
+	return res.json({
+	speech: speech,
+	displayText: speech,
+	source: 'apiai-webhook-sample'
+	});
+})
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
