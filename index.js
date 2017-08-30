@@ -48,7 +48,7 @@ restService.post('/hook', function(req, res) {
 
 		  client
 			.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-			.then(res => console.log(res.rows)
+			.then(res => console.log(res.rows))
 			.catch(e => console.error(e.stack));
 			
 			console.log(fullName)
