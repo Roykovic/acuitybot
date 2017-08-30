@@ -30,15 +30,7 @@ restService.post('/hook', function(req, res) {
 	var pg = require('pg');
 		 
     try {
-			var requestBody = req.body;
-			var firstName = requestBody.result.parameters['given-name']
-			var lastName = requestBody.result.parameters['last-name']
-			var fullName = firstName + " " + lastName;
-			
-			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
+
 			
 			query(function(){
 					console.log("about to send json")
@@ -63,6 +55,15 @@ restService.post('/hook', function(req, res) {
 })
 
 function query(callBack){
+				var requestBody = req.body;
+			var firstName = requestBody.result.parameters['given-name']
+			var lastName = requestBody.result.parameters['last-name']
+			var fullName = firstName + " " + lastName;
+			
+			pg.defaults.ssl = true;
+			var pool = new pg.Pool({
+			  connectionString: connectionString,
+			})
 	
 			pool.connect(function(err, client) {
 			  if (err) throw err;
