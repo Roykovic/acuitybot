@@ -13,14 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
- 
- 
 
- 
- 
- 
- 
- 
 'use strict';
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -54,7 +47,8 @@ restService.post('/hook', function (req, res) {
 
 		  client
 			.query('SELECT * FROM salesforce.Contact WHERE name LIKE ' + fullName + ";")
-			.then(res => console.log(res.rows[0]));
+			.then(res => console.log(res.rows[0])) 
+			.catch(e => console.error(e.stack));
 		});
         
         return res.json({
