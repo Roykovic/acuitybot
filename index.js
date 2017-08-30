@@ -45,7 +45,7 @@ restService.post('/hook', function(req, res) {
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
 				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-				.then(res => console.log(res.rows))
+				.then(res => speech = res.rows[0].id)
 				.catch(e => console.error(e.stack));
 
 				
@@ -67,7 +67,6 @@ restService.post('/hook', function(req, res) {
 	displayText: speech,
 	source: 'apiai-webhook-sample'
 	});
-	console.log("Json sent")
 })
 
 restService.listen((process.env.PORT || 5000), function () {
