@@ -66,7 +66,7 @@ restService.post('/hook', function (req, res) {
         return res.status(400).json({
             status: {
                 code: 400,
-                errorType: err.message
+                errorType: salesforce.contact
             }
         });
     }
