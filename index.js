@@ -40,16 +40,14 @@ restService.post('/hook', function(req, res) {
 			  connectionString: connectionString,
 			})
 			
-			pool.connect(function(err, client) {
-			  if (err) throw err;
-			  console.log('Connected to postgres! Getting schemas...');
-			  client
-				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-				.then(res => console.log(res.rows))
-				.catch(e => console.error(e.stack));
-
-				
-			})
+			query(function(){
+					console.log("about to send json")
+	return res.json({
+	speech: speech,
+	displayText: speech,
+	source: 'apiai-webhook-sample'
+	});
+			});
 						
 		} 
 	catch (err) {
@@ -62,13 +60,19 @@ restService.post('/hook', function(req, res) {
             }
         });
     }
-	console.log("about to send json")
-	return res.json({
-	speech: speech,
-	displayText: speech,
-	source: 'apiai-webhook-sample'
-	});
 })
+
+function query(callBack){
+	
+			pool.connect(function(err, client) {
+			  if (err) throw err;
+			  console.log('Connected to postgres! Getting schemas...');
+			  client
+				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+				.then(res => console.log(res.rows)
+				.catch(e => console.error(e.stack));
+			})
+}
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
