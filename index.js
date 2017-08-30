@@ -15,21 +15,7 @@
  */
  
  
- var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
- var pg = require('pg');
- 
-var pool = new pg.Pool({
-  connectionString: connectionString,
-})
-pg.defaults.ssl = true;
-pool.connect(function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
 
-  client
-    .query('SELECT table_schema,table_name FROM information_schema.tables;')
-    .then(res => console.log(res.rows[0]));
-});
  
  
  
@@ -50,30 +36,27 @@ restService.post('/hook', function (req, res) {
     try {
         var speech = 'empty speech';
 
-        if (req.body) {
-            var requestBody = req.body;
+		var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
+		var pg = require('pg');
+		 
+		var pool = new pg.Pool({
+		  connectionString: connectionString,
+		})
+		var firstName = requestBody.result.parameters['given-name']
+		var lastName = requestBody.result.parameters['last-name']
+		var fullName = firstName + " " + lastName;
+		
+		pg.defaults.ssl = true;
+		pool.connect(function(err, client) {
+		  if (err) throw err;
+		  console.log('Connected to postgres! Getting schemas...');
 
-            if (requestBody.result) {
-                speech = '';
-
-                if (requestBody.result.fulfillment) {
-                    speech += requestBody.result.fulfillment.speech;
-                    speech += ' ';
-                }
-
-                if (requestBody.result.action) {
-                    speech += 'action: ' + requestBody.result.action;
-                }
-            }
-        }
-		 let city = req.body.result.parameters['geo-city'];
-			 let date = 'Today';
-		if (req.body.result.parameters['date']) {
-			date = req.body.result.parameters['date'];
-			console.log('Date: ' + date);
-			date = "on " + date;
-			}
-        speech = "It will be hot in " + city + " " + date;
+		  client
+			.query('SELECT * FROM salesforce.Contact WHERE name LIKE ' + fullName + ";")
+			.then(res => console.log(res.rows[0]));
+		});
+        
+        speech = res.rows[0];
 
         return res.json({
             speech: speech,
