@@ -43,7 +43,7 @@ restService.post('/hook', function(req, res) {
 					console.log("resultKey: ")
 					console.log(resultKey)
 					console.log("result: ")
-					console.log(result.rows[0].resultKey)
+					console.log(result.rows[0][resultKey])
 				speech = result.rows[0].resultKey;}
 				else{
 				var requestBody = req.body;
