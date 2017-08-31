@@ -31,12 +31,16 @@ restService.post('/hook', function(req, res) {
 		 
     try {
 
-			
+			var fullName = requestBody.result.parameters['sf-name']
 			query(req, function(result){
 				if(result.rows[0] != undefined){
 					var keys = Object.keys(result.rows[0]);
 					var resultKey = keys[0]
-				speech = "Sure thing! The " + resultKey + " is " +result.rows[0][resultKey];}
+					var answer = result.rows[0][resultKey];
+					if(answer == null){
+						speech = "Sorry i couldn't find" + fullName + "\'s " + resultKey; 
+					}
+				speech = "The " + resultKey + " is " +answer;}
 					
 					return res.json({
 						speech: speech,
@@ -60,9 +64,8 @@ restService.post('/hook', function(req, res) {
 
 function query(req, callBack){
 			var requestBody = req.body;
-			var fullName = requestBody.result.parameters['sf-name']
 			var column = requestBody.result.parameters['Variable_row']
-			
+			var fullName = requestBody.result.parameters['sf-name']
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
 			  connectionString: connectionString,
