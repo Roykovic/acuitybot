@@ -31,7 +31,7 @@ restService.post('/hook', function(req, res) {
 		 
     try {
 
-			var fullName = requestBody.result.parameters['sf-name']
+			var fullName = req.body.result.parameters['sf-name']
 			query(req, function(result){
 				if(result.rows[0] != undefined){
 					var keys = Object.keys(result.rows[0]);
