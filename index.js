@@ -34,6 +34,8 @@ restService.post('/hook', function(req, res) {
 			
 			query(req, function(result){
 				if(result.rows[0] != undefined){
+					console.log("This is the returned object: ")
+					console.log( result.rows[0])
 				speech = result.rows[0].mailingstreet;}
 				else{
 				var requestBody = req.body;
