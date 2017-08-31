@@ -75,7 +75,8 @@ function query(req, callBack){
 			var lastName = requestBody.result.parameters['last-name']
 			var fullName = firstName + " " + lastName;
 			var column = requestBody.result.parameters['column']
-			console.log("column: " + column) 
+			console.log("parameters: ")
+			console.log(requestBody.result.parameters) 
 			
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
