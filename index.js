@@ -60,7 +60,7 @@ restService.post('/hook', function(req, res) {
 
 function query(req, callBack){
 			var requestBody = req.body;
-			var fullname = requestBody.result.parameters['sf-name']
+			var fullName = requestBody.result.parameters['sf-name']
 			var column = requestBody.result.parameters['Variable_row']
 			
 			pg.defaults.ssl = true;
