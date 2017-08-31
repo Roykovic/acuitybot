@@ -36,7 +36,7 @@ restService.post('/hook', function(req, res) {
 				if(result.rows[0] != undefined){
 					console.log("This is the returned object: ")
 					console.log( result.rows[0])
-				speech = result.rows[0].mailingstreet;}
+				speech = result.rows[0].email;}
 				else{
 				var requestBody = req.body;
 					 if (requestBody.result.fulfillment) {
@@ -86,7 +86,7 @@ function query(req, callBack){
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
 				.query('SELECT '+ column + ' FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-				.then(res => console.log(res))
+				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
 }
