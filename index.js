@@ -74,6 +74,8 @@ function query(req, callBack){
 			var firstName = requestBody.result.parameters['given-name']
 			var lastName = requestBody.result.parameters['last-name']
 			var fullName = firstName + " " + lastName;
+			var column = requestBody.result.parameters['column']
+			console.log("column: " + column) 
 			
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
@@ -84,7 +86,7 @@ function query(req, callBack){
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
-				.query('SELECT * FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+				.query('SELECT'+  + 'FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 				.then(res => console.log(res))
 				.catch(e => console.error(e.stack));
 			})
