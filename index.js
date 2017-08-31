@@ -48,7 +48,7 @@ restService.post('/hook', function(req, res) {
 						displayText: speech,
 						source: 'apiai-webhook-sample'
 					});
-			});
+			};
 						
 	} 
 	catch (err) {
