@@ -33,11 +33,11 @@ restService.post('/hook', function(req, res) {
 
 			var fullName = req.body.result.parameters['sf-name']
 			query(req, function(result){
-				if(result.rows[0] != undefined){
+				if(result.rows[0]){
 					var keys = Object.keys(result.rows[0]);
 					var resultKey = keys[0]
 					var answer = result.rows[0][resultKey];
-					if(answer == null){
+					if(!answer){
 						speech = "Sorry i couldn't find" + fullName + "\'s " + resultKey; 
 					}
 				speech = "The " + resultKey + " is " +answer;}
