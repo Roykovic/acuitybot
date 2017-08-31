@@ -38,17 +38,18 @@ restService.post('/hook', function(req, res) {
 					var resultKey = keys[0]
 					var answer = result.rows[0][resultKey];
 					if(!answer){
-						speech = "Sorry i couldn't find" + fullName + "\'s " + resultKey; 
+						speech = "Sorry i couldn't find " + fullName + "\'s " + resultKey; 
 					}
 					else{
-				speech = "The " + resultKey + " is " +answer;}
+						speech = "The " + resultKey + " is " +answer;
+					}
 					
 					return res.json({
 						speech: speech,
 						displayText: speech,
 						source: 'apiai-webhook-sample'
 					});
-			};
+				};
 						
 			})	
 		} 
