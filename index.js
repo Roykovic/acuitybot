@@ -68,7 +68,7 @@ restService.post('/hook', function(req, res) {
 
 function query(req, callBack){
 			var requestBody = req.body;
-			var firstName = requestBody.result.parameters['any']
+			var firstName = capitalizeFirstLetter(requestBody.result.parameters['any'])
 			var lastName = requestBody.result.parameters['last-name']
 			var fullName = firstName + " " + lastName;
 			var column = requestBody.result.parameters['Variable_row']
@@ -86,6 +86,10 @@ function query(req, callBack){
 				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 restService.listen((process.env.PORT || 5000), function () {
