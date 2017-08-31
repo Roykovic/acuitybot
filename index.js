@@ -45,17 +45,6 @@ restService.post('/hook', function(req, res) {
 					console.log("Result: ")
 					console.log(result.rows[0][resultKey])
 				speech = "Sure thing! His " + resultKey + " is: " +result.rows[0][resultKey];}
-				else{
-				var requestBody = req.body;
-					 if (requestBody.result.fulfillment) {
-						speech += requestBody.result.fulfillment.speech;
-						speech += ' ';
-					}
-
-					if (requestBody.result.action) {
-						speech += 'action: ' + requestBody.result.action;
-					}
-				}
 					
 					return res.json({
 						speech: speech,
@@ -79,7 +68,7 @@ restService.post('/hook', function(req, res) {
 
 function query(req, callBack){
 			var requestBody = req.body;
-			var firstName = requestBody.result.parameters['given-name']
+			var firstName = requestBody.result.parameters['any']
 			var lastName = requestBody.result.parameters['last-name']
 			var fullName = firstName + " " + lastName;
 			var column = requestBody.result.parameters['Variable_row']
