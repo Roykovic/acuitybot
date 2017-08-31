@@ -36,6 +36,14 @@ restService.post('/hook', function(req, res) {
 				if(result.rows[0] != undefined){
 					var keys = Object.keys(result.rows[0]);
 					var resultKey = keys[0]
+					console.log("Result: ")
+					console.log(result.rows[0])
+					console.log("Keys: ")
+					console.log(keys)
+					console.log("Resultkey: ")
+					console.log(resultKey)
+					console.log("Result: ")
+					console.log(result.rows[0][resultKey])
 				speech = "Sure thing! His " + resultKey + " is: " +result.rows[0][resultKey];}
 				else{
 				var requestBody = req.body;
