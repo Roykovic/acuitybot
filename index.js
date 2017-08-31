@@ -36,7 +36,7 @@ restService.post('/hook', function(req, res) {
 				if(result.rows[0] != undefined){
 					console.log("This is the returned object: ")
 					console.log( result.rows[0])
-					var keys = Object.keys(res);
+					var keys = Object.keys(result.rows[0]);
 					console.log("Keys: ")
 					console.log(keys)
 					var resultKey = keys[0]
