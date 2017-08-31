@@ -40,6 +40,7 @@ restService.post('/hook', function(req, res) {
 					if(!answer){
 						speech = "Sorry i couldn't find" + fullName + "\'s " + resultKey; 
 					}
+					else{
 				speech = "The " + resultKey + " is " +answer;}
 					
 					return res.json({
