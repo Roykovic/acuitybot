@@ -40,10 +40,10 @@ restService.post('/hook', function(req, res) {
 		
 	}	 
     try {
-						console.log("try")
 			var fullName = req.body.result.parameters['sf-name']
 			
 			query(req, function(result){														//Run 'query' function, and when finished run this function)
+				console.log("query callBack")
 				var resultObject = result.rows[0]
 				if(resultObject){																//If there is a result
 					var keys = Object.keys(resultObject);
@@ -64,6 +64,7 @@ restService.post('/hook', function(req, res) {
 				};
 						
 			})	
+									console.log("passed query")
 		} 
 	catch (err) {
         console.error("Can't process request", err);
