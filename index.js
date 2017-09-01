@@ -116,5 +116,6 @@ function query(req, callBack){
 			.catch(e => console.error(e.stack));
 		})
 	}
+	callBack(null);
 }
 
