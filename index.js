@@ -40,12 +40,11 @@ restService.post('/hook', function(req, res) {
 		
 	}	 
     try {
+						console.log("try")
 			var fullName = req.body.result.parameters['sf-name']
 			
 			query(req, function(result){														//Run 'query' function, and when finished run this function)
 				var resultObject = result.rows[0]
-				console.log("Result object")
-				console.log(resultObject);
 				if(resultObject){																//If there is a result
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
