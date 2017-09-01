@@ -18,16 +18,17 @@
 
 var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
 var pg = require('pg');
+var speech = 'empty speech';
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
+
 restService.post('/hook', function(req, res) {
 
     console.log('hook request');
-	var speech = 'empty speech';
 
 	if(req.body.result.metadata.intentName == "Default Welcome Intent"){
 		wakeUp(req);
@@ -101,7 +102,7 @@ function query(req, callBack){
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
-				.query('SELECT salutation, '+ column + ' FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+				.query('SELECT '+ column + ' FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
 				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
