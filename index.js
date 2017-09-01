@@ -30,7 +30,7 @@ restService.post('/hook', function(req, res) {
 
     console.log('hook request');
 
-	if(req.body.result.metadata.intentName == "Default Welcome Intent"){
+	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.contains("smalltalk.")){
 		wakeUp(req);
 		return res.json({															//return the result in a json response
 						speech: speech,
