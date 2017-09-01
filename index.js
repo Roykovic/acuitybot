@@ -31,9 +31,8 @@ restService.post('/hook', function(req, res) {
     console.log('hook request');
 
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
-		console.log("jup")
 		wakeUp(req);
-		return res.json({															//return the result in a json response
+		return res.json({																		//return the result in a json response
 						speech: speech,
 						displayText: speech,
 						source: 'apiai-webhook-sample'
@@ -44,8 +43,7 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 			
 			query(req, function(result){														//Run 'query' function, and when finished run this function)
-				console.log("query callBack")
-				if(result && result.rows[0]){																//If there is a result
+				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
@@ -65,7 +63,6 @@ restService.post('/hook', function(req, res) {
 				};
 						
 			})	
-									console.log("passed query")
 		} 
 	catch (err) {
         console.error("Can't process request", err);
