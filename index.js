@@ -76,40 +76,43 @@ restService.post('/hook', function(req, res) {
     }
 })
 
-function wakeUp(req){
-	        if (req.body) {
-            var requestBody = req.body;
-
-            if (requestBody.result) {
-                speech = '';
-
-                if (requestBody.result.fulfillment) {
-                    speech += requestBody.result.fulfillment.speech;
-                    speech += ' ';
-                }
-            }
-        }
-}
-
-function query(req, callBack){
-			var requestBody = req.body;														//Body of the json response received from the bot
-			var column = requestBody.result.parameters['Variable_row']						
-			var fullName = requestBody.result.parameters['sf-name']
-			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
-	
-			pool.connect(function(err, client) {
-			  if (err) throw err;
-			  console.log('Connected to postgres! Getting schemas...');
-			  client
-				.query('SELECT '+ column + ' FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
-				.then(res => callBack(res))
-				.catch(e => console.error(e.stack));
-			})
-}
-
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
+
+function wakeUp(req){
+	if (req.body) {
+		var requestBody = req.body;
+
+		if (requestBody.result) {
+			speech = '';
+
+			if (requestBody.result.fulfillment) {
+				speech += requestBody.result.fulfillment.speech;
+				speech += ' ';
+			}
+		}
+	}
+}
+
+function query(req, callBack){
+	var requestBody = req.body;														//Body of the json response received from the bot
+	var column = requestBody.result.parameters['Variable_row']
+	if(column){
+		var fullName = requestBody.result.parameters['sf-name']
+		pg.defaults.ssl = true;
+		var pool = new pg.Pool({
+		  connectionString: connectionString,
+		})
+
+		pool.connect(function(err, client) {
+		  if (err) throw err;
+		  console.log('Connected to postgres! Getting schemas...');
+		  client
+			.query('SELECT '+ column + ' FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+			.then(res => callBack(res))
+			.catch(e => console.error(e.stack));
+		})
+	}
+}
+
