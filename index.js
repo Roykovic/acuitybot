@@ -1,5 +1,5 @@
 /**
- * Copyright 2017 Google Inc. All Rights Reserved.
+ * Copyright 2017 Acuity BV. All Rights Reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 
 'use strict';
+
+var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
+var pg = require('pg');
+
 const express = require('express');
 const bodyParser = require('body-parser');
-	var connectionString = 'postgres://xkmrmtanjzvitd:50a15571798f062acd52e12385a13083eeaa326ca4d562272ef7002fcc2a641e@ec2-54-75-239-190.eu-west-1.compute.amazonaws.com:5432/danmi0s4e2dhn4'
-	var pg = require('pg');
-
 const restService = express();
 restService.use(bodyParser.json());
 
@@ -28,15 +29,17 @@ restService.post('/hook', function(req, res) {
     console.log('hook request');
 	var speech = 'empty speech';
 
-		 
+	if(req.body.result.metadata.intentName == "Default Welcome Intent"){
+		wakeUp(req);
+	}	 
     try {
-
 			var fullName = req.body.result.parameters['sf-name']
-			query(req, function(result){
-				if(result.rows[0]){
+			
+			query(req, function(result){														//Run 'query' function, and when finished run this function)
+				if(result.rows[0]){																//If there is a result
 					var keys = Object.keys(result.rows[0]);
 					var resultKey = keys[0]
-					var answer = result.rows[0][resultKey];
+					var answer = result.rows[0][resultKey];										//Get the first property present in the result.rows[0] object
 					if(!answer){
 						speech = "Sorry i couldn't find " + fullName + "\'s " + resultKey; 
 					}
@@ -44,7 +47,7 @@ restService.post('/hook', function(req, res) {
 						speech = "The " + resultKey + " is " +answer;
 					}
 					
-					return res.json({
+					return res.json({															//return the result in a json response
 						speech: speech,
 						displayText: speech,
 						source: 'apiai-webhook-sample'
@@ -65,9 +68,28 @@ restService.post('/hook', function(req, res) {
     }
 })
 
+function wakeUp(req){
+	        if (req.body) {
+            var requestBody = req.body;
+
+            if (requestBody.result) {
+                speech = '';
+
+                if (requestBody.result.fulfillment) {
+                    speech += requestBody.result.fulfillment.speech;
+                    speech += ' ';
+                }
+
+                if (requestBody.result.action) {
+                    speech += 'action: ' + requestBody.result.action;
+                }
+            }
+        }
+}
+
 function query(req, callBack){
-			var requestBody = req.body;
-			var column = requestBody.result.parameters['Variable_row']
+			var requestBody = req.body;														//Body of the json response received from the bot
+			var column = requestBody.result.parameters['Variable_row']						
 			var fullName = requestBody.result.parameters['sf-name']
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
@@ -82,10 +104,6 @@ function query(req, callBack){
 				.then(res => callBack(res))
 				.catch(e => console.error(e.stack));
 			})
-}
-
-function capitalizeFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 restService.listen((process.env.PORT || 5000), function () {
