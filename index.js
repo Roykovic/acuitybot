@@ -32,6 +32,12 @@ restService.post('/hook', function(req, res) {
 
 	if(req.body.result.metadata.intentName == "Default Welcome Intent"){
 		wakeUp(req);
+		return res.json({															//return the result in a json response
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
+		
 	}	 
     try {
 			var fullName = req.body.result.parameters['sf-name']
