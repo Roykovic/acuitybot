@@ -43,7 +43,7 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 			
 			query(req, function(result){														//Run 'query' function, and when finished run this function)
-				var resultObject = result.rows[1]
+				var resultObject = result.rows[0]
 				if(resultObject){																//If there is a result
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
@@ -86,10 +86,6 @@ function wakeUp(req){
                 if (requestBody.result.fulfillment) {
                     speech += requestBody.result.fulfillment.speech;
                     speech += ' ';
-                }
-
-                if (requestBody.result.action) {
-                    speech += 'action: ' + requestBody.result.action;
                 }
             }
         }
