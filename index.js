@@ -16,7 +16,7 @@
 
 'use strict';
 
-var connectionString = require('config/connectionString.js');
+var connectionString = require('config/config.js');
 var pg = require('pg');
 var speech = 'empty speech';
 
