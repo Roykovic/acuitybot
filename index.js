@@ -111,7 +111,7 @@ function query(req, callBack){
 		  client
 			.query('SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName])
 			.then(res => callBack(res, column))
-			.catch(e => console.error("Error while executing query") console.error(e.stack));
+			.catch(e => console.error("Error while executing query"); console.error(e.stack));
 		})
 	}
 	callBack(null)
