@@ -100,10 +100,8 @@ function wakeUp(req){
 
 function checkColumn(column){
 	query("*", "false", function(columns){
-		console.log("Columns")
-		console.log(columns.fields);
-		for (var i = 0, len = columns.length; i < len; i++) {
-			if(columns[i] == column){
+		for (var i = 0, len = columns.fields.length; i < len; i++) {
+			if(columns.fields[i].name == column){
 				return column;
 			}
 		}
