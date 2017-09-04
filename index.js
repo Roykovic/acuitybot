@@ -48,16 +48,14 @@ restService.post('/hook', function(req, res) {
 			query(column, fullName, function(result, columnName){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
-					console.log('Result object')
-					console.log(resultObject)
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
 					var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
 					if(!answer){
-						speech = "Sorry i couldn't find " + fullName + "\'s " + columnName; 
+						speech = "Sorry i couldn't find " + fullName + "\'s " + resultKey; 
 					}
 					else{
-						speech =  fullName + "\'s " + columnName + " is " + answer;
+						speech =  fullName + "\'s " + resultKey + " is " + answer;
 					}
 					
 					return res.json({															//return the result in a json response
