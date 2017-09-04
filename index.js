@@ -110,6 +110,7 @@ function query(req, callBack){
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
+		  console.log(column)
 		  client
 			.query('SELECT $1::text FROM salesforce.Contact WHERE name= $2',[column,fullName])
 			.then(res => callBack(res, column))
