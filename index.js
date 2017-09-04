@@ -47,7 +47,7 @@ restService.post('/hook', function(req, res) {
 					var resultObject = result.rows[0]
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
-					var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
+					var answer = resultObject[columnName];										//Get the first property present in the result.rows[0] object
 					if(!answer){
 						speech = "Sorry i couldn't find " + fullName + "\'s " + columnName; 
 					}
