@@ -104,7 +104,8 @@ function query(req, callBack){
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-		
+		var sql = escape('INSERT INTO %I VALUES(%L)', 'books', "O'Reilly");
+console.log(sql);
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
