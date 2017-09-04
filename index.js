@@ -104,8 +104,6 @@ function query(req, callBack){
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-
-		('SELECT name, age FROM users;', [], function (err, result)
 		
 		pool.connect(function(err, client) {
 		  if (err) throw err;
