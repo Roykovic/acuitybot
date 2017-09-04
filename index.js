@@ -97,7 +97,7 @@ function wakeUp(req){
 
 function query(req, callBack){
 	var requestBody = req.body;														//Body of the json response received from the bot
-	var column = quote_ident(requestBody.result.parameters['Variable_row'])
+	var column = requestBody.result.parameters['Variable_row']
 	if(column){
 		var fullName = requestBody.result.parameters['sf-name']
 		pg.defaults.ssl = true;
