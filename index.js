@@ -109,7 +109,7 @@ function query(req, callBack){
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-			.query('SELECT '+column+' FROM salesforce.Contact WHERE name= $2',[column,fullName])
+			.query('SELECT '+column+' FROM salesforce.Contact WHERE name= $1',[fullName])
 			.then(res => callBack(res, column))
 			.catch(e => console.error(e.stack));
 		})
