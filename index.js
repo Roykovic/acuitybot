@@ -98,9 +98,16 @@ function wakeUp(req){
 	}
 }
 
+function checkColumn(column){
+/* 	for (var i = 0, len = arr.length; i < len; i++) {
+		someFn(arr[i]);
+	} */
+	return column;
+}
+
 function query(req, callBack){
 	var requestBody = req.body;														//Body of the json response received from the bot
-	var column = requestBody.result.parameters['Variable_row']
+	var column = checkColumn(requestBody.result.parameters['Variable_row'])
 	if(column){
 		var fullName = requestBody.result.parameters['sf-name']
 		pg.defaults.ssl = true;
@@ -111,13 +118,13 @@ function query(req, callBack){
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-		  .query("select * from salesforce.contact where false;")
-			//.query('SELECT $1 FROM salesforce.contact WHERE name=$2', [column, fullName])
-			.then(res => console.log(res))
-			//.then(res => callBack(res, column))
+		  //.query("select * from salesforce.contact where false;")
+			.query('SELECT $1 FROM salesforce.contact WHERE name=$2', [column, fullName])
+			.then(res => callBack(res, column))
 			.catch(e => console.error("Error while executing query\n" +e.stack));
 		})
 	}
+	done();
 	callBack(null)
 }
 
