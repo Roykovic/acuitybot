@@ -111,7 +111,7 @@ function query(req, callBack){
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-		  .query("select * from table_name where false;")
+		  .query("select * from salesforce.contact where false;")
 			//.query('SELECT $1 FROM salesforce.contact WHERE name=$2', [column, fullName])
 			.then(res => console.log(res))
 			//.then(res => callBack(res, column))
