@@ -18,7 +18,6 @@
 
 var connectionString = require('./config/config.js');
 var pg = require('pg');
-var pgEscape = require("pg-escape")
 
 var speech = 'empty speech';
 
@@ -54,7 +53,7 @@ restService.post('/hook', function(req, res) {
 						speech = "Sorry i couldn't find " + fullName + "\'s " + columnName; 
 					}
 					else{
-						speech =  fullName + "\'s " + columnName + " is " +answer;
+						speech =  fullName + "\'s " + columnName + " is " + answer;
 					}
 					
 					return res.json({															//return the result in a json response
