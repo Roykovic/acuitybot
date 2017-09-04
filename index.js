@@ -43,6 +43,8 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 			
 			query(req, function(result, columnName){														//Run 'query' function, and when finished run this function)
+				console.log("Result")
+				console.log(result)
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
 					var keys = Object.keys(resultObject);
@@ -110,7 +112,6 @@ function query(req, callBack){
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
-		  console.log(column)
 		  client
 			.query('SELECT $1::text FROM salesforce.Contact WHERE name= $2',[column,fullName])
 			.then(res => callBack(res, column))
