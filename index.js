@@ -18,6 +18,8 @@
 
 var connectionString = require('./config/config.js');
 var pg = require('pg');
+var pgEscape = require("pg-escape")
+
 var speech = 'empty speech';
 
 const express = require('express');
@@ -104,7 +106,7 @@ function query(req, callBack){
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-		var sql = escape('INSERT INTO %I VALUES(%L)', 'books', "O'Reilly");
+		var sql = escape('SELECT * FROM %I WHERE name=VALUES(%L)', column, fullName);
 console.log(sql);
 		pool.connect(function(err, client) {
 		  if (err) throw err;
@@ -112,7 +114,7 @@ console.log(sql);
 		  $escapedIdentifier = pg_escape_identifier(column)
 		  $escapedVariable = escape(fullName)
 		  client
-			.query('SELECT $1 FROM salesforce.Contact WHERE name= $2',[$escapedIdentifier, $escapedVariable])
+			.query(sql)
 			.then(res => callBack(res, column))
 			.catch(e => console.error(e.stack));
 		})
