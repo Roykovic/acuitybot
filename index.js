@@ -110,8 +110,6 @@ console.log(sql);
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
-		  $escapedIdentifier = pg_escape_identifier(column)
-		  $escapedVariable = escape(fullName)
 		  client
 			.query(sql)
 			.then(res => callBack(res, column))
