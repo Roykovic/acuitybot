@@ -105,13 +105,13 @@ function query(req, callBack){
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-		var sql = escape('SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName]);
+		var sql = 'SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName];
 console.log(sql);
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-			.query(sql)
+			.query('SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName])
 			.then(res => callBack(res, column))
 			.catch(e => console.error(e.stack));
 		})
