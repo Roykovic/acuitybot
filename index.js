@@ -99,14 +99,15 @@ function wakeUp(req){
 }
 
 function checkColumn(column){
-	query("*", "false", function(result){
-		console.log("Checkcolumn result: ")
-		console.log(result)
+	query("*", "false", function(columns){
+		for (var i = 0, len = result.length; i < len; i++) {
+			if(columns[i] == column){
+				return column;
+			}
+		}
 	})
-/* 	for (var i = 0, len = arr.length; i < len; i++) {
-		someFn(arr[i]);
-	} */
-	return column;
+
+	return false;
 }
 
 function query(column, variable, callBack){
