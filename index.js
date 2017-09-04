@@ -45,7 +45,7 @@ restService.post('/hook', function(req, res) {
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
 				var column = checkColumn(requestBody.result.parameters['Variable_row'])
-			query(column, fullName, function(result, columnName){											//Run 'query' function, and when finished run this function
+			query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
 					var keys = Object.keys(resultObject);
@@ -101,7 +101,7 @@ function wakeUp(req){
 function checkColumn(column){
 	query("*", "false", function(columns){
 		console.log("Columns")
-		console.log(columns.row[0]);
+		console.log(columns);
 		for (var i = 0, len = columns.length; i < len; i++) {
 			if(columns[i] == column){
 				return column;
