@@ -43,7 +43,7 @@ restService.post('/hook', function(req, res) {
     try {
 			var fullName = req.body.result.parameters['sf-name']
 			
-			query(req, function(result, columnName){											//Run 'query' function, and when finished run this function)
+			query(req, function(result, columnName){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
 					var keys = Object.keys(resultObject);
@@ -111,7 +111,7 @@ function query(req, callBack){
 		  client
 			.query('SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName])
 			.then(res => callBack(res, column))
-			.catch(e => console.error("Error while executing query"); console.error(e.stack));
+			.catch(e => console.error("Error while executing query"));
 		})
 	}
 	callBack(null)
