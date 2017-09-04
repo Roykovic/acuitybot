@@ -42,17 +42,17 @@ restService.post('/hook', function(req, res) {
     try {
 			var fullName = req.body.result.parameters['sf-name']
 			
-			query(req, function(result){														//Run 'query' function, and when finished run this function)
+			query(req, function(result, columnName){														//Run 'query' function, and when finished run this function)
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
 					var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
 					if(!answer){
-						speech = "Sorry i couldn't find " + fullName + "\'s " + resultKey; 
+						speech = "Sorry i couldn't find " + fullName + "\'s " + columnName; 
 					}
 					else{
-						speech =  fullName + "\'s " + resultKey + " is " +answer;
+						speech =  fullName + "\'s " + columnName + " is " +answer;
 					}
 					
 					return res.json({															//return the result in a json response
@@ -110,7 +110,7 @@ function query(req, callBack){
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
 			.query('SELECT $1::text FROM salesforce.Contact WHERE name= $2',[column,fullName])
-			.then(res => callBack(res))
+			.then(res => callBack(res, column))
 			.catch(e => console.error(e.stack));
 		})
 	}
