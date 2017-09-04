@@ -42,8 +42,10 @@ restService.post('/hook', function(req, res) {
 	}	 
     try {
 			var fullName = req.body.result.parameters['sf-name']
-			
-			query(req, function(result, columnName){											//Run 'query' function, and when finished run this function
+				var requestBody = req.body;	
+				var fullName = requestBody.result.parameters['sf-name']
+				var column = checkColumn(requestBody.result.parameters['Variable_row'])
+			query(column, fullName, function(result, columnName){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
 					console.log('Result object')
@@ -99,17 +101,18 @@ function wakeUp(req){
 }
 
 function checkColumn(column){
+	query("*", "false", function(result){
+		console.log("Checkcolumn result: ")
+		console.log(result)
+	}
 /* 	for (var i = 0, len = arr.length; i < len; i++) {
 		someFn(arr[i]);
 	} */
 	return column;
 }
 
-function query(req, callBack){
-	var requestBody = req.body;														//Body of the json response received from the bot
-	var column = checkColumn(requestBody.result.parameters['Variable_row'])
-	if(column){
-		var fullName = requestBody.result.parameters['sf-name']
+function query(column, variable, callBack){
+	if(column && variable){
 		pg.defaults.ssl = true;
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
@@ -119,12 +122,11 @@ function query(req, callBack){
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
 		  //.query("select * from salesforce.contact where false;")
-			.query('SELECT $1::text FROM salesforce.contact WHERE name=$2', [column, fullName])
-			.then(res => callBack(res, column))
+			.query('SELECT $1::text FROM salesforce.contact WHERE name=$2', [column, variable])
+			.then(res => callBack(res))
 			.catch(e => console.error("Error while executing query\n" +e.stack));
 		})
 	}
-
 	callBack(null)
 }
 
