@@ -106,7 +106,7 @@ function query(req, callBack){
 		var pool = new pg.Pool({
 		  connectionString: connectionString,
 		})
-		var sql = escape('SELECT * FROM %I WHERE name=VALUES(%L)', column, fullName);
+		var sql = escape('SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', {column, fullName]);
 console.log(sql);
 		pool.connect(function(err, client) {
 		  if (err) throw err;
