@@ -121,7 +121,7 @@ function query(column, variable, callBack){
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-			.query('SELECT'+ column +'FROM salesforce.contact WHERE name=$1', [variable])
+			.query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
 			.then(res => callBack(res))
 			.catch(e => console.error("Error while executing query\n" +e.stack));
 		})
