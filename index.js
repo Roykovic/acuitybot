@@ -111,7 +111,7 @@ console.log(sql);
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-			.query('SELECT $1::name FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName])
+			.query('SELECT $1::text FROM salesforce.contact WHERE name=VALUES($2)', [column, fullName])
 			.then(res => callBack(res, column))
 			.catch(e => console.error(e.stack));
 		})
