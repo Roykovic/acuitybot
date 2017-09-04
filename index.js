@@ -104,7 +104,7 @@ function checkColumn(column){
 	query("*", "false", function(result){
 		console.log("Checkcolumn result: ")
 		console.log(result)
-	}
+	})
 /* 	for (var i = 0, len = arr.length; i < len; i++) {
 		someFn(arr[i]);
 	} */
