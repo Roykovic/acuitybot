@@ -108,10 +108,10 @@ function query(req, callBack){
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
-		  var sql = escape('INSERT INTO %I VALUES(%L)', column, fullName);
+		  var sql = escape('SELECT %I FROM salesforce.contact WHERE name=(%L)', column, fullName);
 				console.log(sql);
 		  client
-			//.query('SELECT '+ client.escapeId(column) +' FROM salesforce.Contact WHERE name= $1',[fullName])
+			.query(sql)
 			.then(res => callBack(res, column))
 			.catch(e => console.error(e.stack));
 		})
