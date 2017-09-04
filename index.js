@@ -105,11 +105,13 @@ function query(req, callBack){
 		  connectionString: connectionString,
 		})
 
+		('SELECT name, age FROM users;', [], function (err, result)
+		
 		pool.connect(function(err, client) {
 		  if (err) throw err;
 		  console.log('Connected to postgres! Getting schemas...');
 		  client
-			.query('SELECT '+ column + ' FROM salesforce.Contact WHERE name=\'' + fullName + "\';")
+			.query('SELECT $1 FROM salesforce.Contact WHERE name= $2',[column,fullName])
 			.then(res => callBack(res))
 			.catch(e => console.error(e.stack));
 		})
