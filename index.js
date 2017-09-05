@@ -48,8 +48,6 @@ restService.post('/hook', function(req, res) {
 			query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
-					console.log("Resultobject")
-					console.log(resultObject)
 					var keys = Object.keys(resultObject);
 					var resultKey = keys[0]
 					var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
@@ -101,9 +99,10 @@ function wakeUp(req){
 }
 
 function checkColumn(column){
+	console.log("Column")
+	console.log(column)
 	query("*", "false", function(columns){
 		if(columns){
-			console.log(columns.fields[1]);
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				if(columns.fields[i].name == column){
 					return column;
