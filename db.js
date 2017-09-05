@@ -6,22 +6,6 @@ var pg = require('pg');
 
 
 module.exports = {
-  checkColumn: function checkColumn(column, callBack){
-	query("*", "false", function(columns){
-		if(columns){
-			for (var i = 0, len = columns.fields.length; i < len; i++) {
-				var columnFromDB = columns.fields[i].name;
-				var lowerCaseColumn = columnFromDB.toLowerCase();
-				if(lowerCaseColumn == column.toLowerCase()){
-					callBack(column);
-					return
-				}
-			}
-		}
-	})
-	callBack(null);
-	return;
-	},
 	  query: function query(column, variable, callBack){
 		if(column && variable){
 			pg.defaults.ssl = true;
@@ -38,5 +22,22 @@ module.exports = {
 			})
 		}
 		callBack(null)
+	}, 
+	checkColumn: function checkColumn(column, callBack){
+	query("*", "false", function(columns){
+		if(columns){
+			for (var i = 0, len = columns.fields.length; i < len; i++) {
+				var columnFromDB = columns.fields[i].name;
+				var lowerCaseColumn = columnFromDB.toLowerCase();
+				if(lowerCaseColumn == column.toLowerCase()){
+					callBack(column);
+					return
+				}
+			}
+		}
+	})
+	callBack(null);
+	return;
 	}
+
 }
