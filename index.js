@@ -102,6 +102,9 @@ function checkColumn(column){
 	query("*", "false", function(columns){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
+				console.log(columns.fields[i].name.toLowerCase())
+				console.log(column.toLowerCase)
+				console.log(columns.fields[i].name.toLowerCase() == column.toLowerCase)
 				if(columns.fields[i].name.toLowerCase() == column.toLowerCase){
 					console.log("Column is found in database")
 					return column;
