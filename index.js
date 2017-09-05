@@ -45,6 +45,8 @@ restService.post('/hook', function(req, res) {
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
 				var column = checkColumn(requestBody.result.parameters['Variable_row'])
+				console.log("Column")
+				console.log(column)
 			query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
@@ -104,11 +106,7 @@ function checkColumn(column){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				var columnFromDB = columns.fields[i].name;
 				var lowerCaseColumn = columnFromDB.toLowerCase();
-				console.log(lowerCaseColumn)
-				console.log(column)
-				console.log(lowerCaseColumn == column.toLowerCase())
 				if(lowerCaseColumn == column.toLowerCase()){
-					console.log("Column is found in database")
 					return column;
 				}
 			}
