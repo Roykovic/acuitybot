@@ -114,6 +114,7 @@ function checkColumn(column, callBack){
 				console.log(lowerCaseColumn == column.toLowerCase())
 				if(lowerCaseColumn == column.toLowerCase()){
 					callBack(column);
+					return
 				}
 			}
 		}
