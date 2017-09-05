@@ -42,33 +42,31 @@ restService.post('/hook', function(req, res) {
 	}	 
     try {
 			var fullName = req.body.result.parameters['sf-name']
-				var requestBody = req.body;
-				checkName(requestBody.result.parameters['sf-name'], function(fullName){					
-					checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
-						query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
-						if(result && result.rows[0]){													//If there is a result
-							var resultObject = result.rows[0]
-							var keys = Object.keys(resultObject);
-							var resultKey = keys[0]
-							var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
-							if(!answer){
-								speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
-							}
-							else{
-								speech =  fullName + "\'s " + resultKey + " is " + answer;
-							}
+				var requestBody = req.body;	
+				var fullName = requestBody.result.parameters['sf-name']
+				checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
+					query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
+					if(result && result.rows[0]){													//If there is a result
+						var resultObject = result.rows[0]
+						var keys = Object.keys(resultObject);
+						var resultKey = keys[0]
+						var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
+						if(!answer){
+							speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
+						}
+						else{
+							speech =  fullName + "\'s " + resultKey + " is " + answer;
+						}
+						
+						return res.json({															//return the result in a json response
+							speech: speech,
+							displayText: speech,
+							source: 'apiai-webhook-sample'
+						});
+					};
 							
-							return res.json({															//return the result in a json response
-								speech: speech,
-								displayText: speech,
-								source: 'apiai-webhook-sample'
-							});
-						};
-								
-						})	
-					})					
+					})	
 				})
-
 				
 	} 
 	catch (err) {
@@ -117,28 +115,6 @@ function checkColumn(column, callBack){
 	})
 	callBack(null);
 	return;
-}
-
-function checkName(name, callBack){
-	query("*", "true", function(contacts){
-		console.log("contacts")
-		console.log(contacts)
-	return name
-})
-	
-/* 		if(contacts){
-			for (var i = 0, len = contacts.fields.length; i < len; i++) {
-				var nameFromDB = contacts.fields[i];
-				var lowerCasename = nameFromDB.toLowerCase();
-				if(lowerCasename == name.toLowerCase()){
-					callBack(name);
-					return
-				}
-			}
-		}
-	})
-	callBack(null);
-	return; */
 }
 
 function query(column, variable, callBack){
