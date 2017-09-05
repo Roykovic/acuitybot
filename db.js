@@ -3,10 +3,9 @@
 var self = this;
 var connectionString = require('./config/config.js');
 var pg = require('pg');
+var exports = module.exports = {};
 
-
-module.exports = {
-	  query: function query(column, variable, callBack){
+exports.query = function (column, variable, callBack){
 		if(column && variable){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
@@ -22,9 +21,10 @@ module.exports = {
 			})
 		}
 		callBack(null)
-	}, 
-	checkColumn: function checkColumn(column, callBack){
-	db.query("*", "false", function(columns){
+}
+
+exports.checkColumn = function (column, callBack){
+	exports.query("*", "false", function(columns){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				var columnFromDB = columns.fields[i].name;
@@ -38,6 +38,4 @@ module.exports = {
 	})
 	callBack(null);
 	return;
-	}
-
 }
