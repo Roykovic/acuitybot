@@ -44,7 +44,7 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
-				checkColumn(requestBody.result.parameters['Variable_row'], function(column){
+				checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
 					query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
 					if(result && result.rows[0]){													//If there is a result
 						var resultObject = result.rows[0]
@@ -113,7 +113,8 @@ function checkColumn(column, callBack){
 			}
 		}
 	})
-	return null;
+	callback(null);
+	return;
 }
 
 function query(column, variable, callBack){
