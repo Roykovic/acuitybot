@@ -124,7 +124,7 @@ function checkName(name, callBack){
 		console.log("contacts")
 		console.log(contacts)
 	return name
-}}
+})}
 	
 /* 		if(contacts){
 			for (var i = 0, len = contacts.fields.length; i < len; i++) {
