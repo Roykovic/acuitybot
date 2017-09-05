@@ -16,10 +16,8 @@
 
 'use strict';
 
-var connectionString = require('./config/config.js');
-var pg = require('pg');
-
 var speech = 'empty speech';
+var db = require('./db');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -44,8 +42,8 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
-				checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
-					query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
+				db.checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
+					db.query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
 					if(result && result.rows[0]){													//If there is a result
 						var resultObject = result.rows[0]
 						var keys = Object.keys(resultObject);
@@ -98,40 +96,5 @@ function wakeUp(req){
 			}
 		}
 	}
-}
-
-function checkColumn(column, callBack){
-	query("*", "false", function(columns){
-		if(columns){
-			for (var i = 0, len = columns.fields.length; i < len; i++) {
-				var columnFromDB = columns.fields[i].name;
-				var lowerCaseColumn = columnFromDB.toLowerCase();
-				if(lowerCaseColumn == column.toLowerCase()){
-					callBack(column);
-					return
-				}
-			}
-		}
-	})
-	callBack(null);
-	return;
-}
-
-function query(column, variable, callBack){
-	if(column && variable){
-		pg.defaults.ssl = true;
-		var pool = new pg.Pool({
-		  connectionString: connectionString,
-		})
-		pool.connect(function(err, client) {
-		  if (err) throw err;
-		  console.log('Connected to postgres! Getting schemas...');
-		  client
-			.query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
-			.then(res => callBack(res))
-			.catch(e => console.error("Error while executing query\n" +e.stack));
-		})
-	}
-	callBack(null)
 }
 
