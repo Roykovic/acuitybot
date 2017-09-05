@@ -45,6 +45,8 @@ restService.post('/hook', function(req, res) {
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
 				var column = checkColumn(requestBody.result.parameters['Variable_row'])
+				console.log("column")
+				console.log(column)
 			query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 				if(result && result.rows[0]){													//If there is a result
 					var resultObject = result.rows[0]
