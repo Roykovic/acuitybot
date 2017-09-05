@@ -44,7 +44,7 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
-				var column = checkColumn(requestBody.result.parameters['Variable_row'], function(){
+				checkColumn(requestBody.result.parameters['Variable_row'], function(column){
 				
 				console.log("column")
 				console.log(column)
@@ -103,7 +103,7 @@ function wakeUp(req){
 	}
 }
 
-function checkColumn(column){
+function checkColumn(column, callBack){
 	query("*", "false", function(columns){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
@@ -113,7 +113,7 @@ function checkColumn(column){
 				console.log(column.toLowerCase())
 				console.log(lowerCaseColumn == column.toLowerCase())
 				if(lowerCaseColumn == column.toLowerCase()){
-					return column;
+					callback(column);
 				}
 			}
 		}
