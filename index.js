@@ -45,30 +45,27 @@ restService.post('/hook', function(req, res) {
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
 				checkColumn(requestBody.result.parameters['Variable_row'], function(column){
-				
-				console.log("column")
-				console.log(column)
-			query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
-				if(result && result.rows[0]){													//If there is a result
-					var resultObject = result.rows[0]
-					var keys = Object.keys(resultObject);
-					var resultKey = keys[0]
-					var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
-					if(!answer){
-						speech = "Sorry i couldn't find " + fullName + "\'s " + resultKey; 
-					}
-					else{
-						speech =  fullName + "\'s " + resultKey + " is " + answer;
-					}
-					
-					return res.json({															//return the result in a json response
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
-				};
+					query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
+					if(result && result.rows[0]){													//If there is a result
+						var resultObject = result.rows[0]
+						var keys = Object.keys(resultObject);
+						var resultKey = keys[0]
+						var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
+						if(!answer){
+							speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
+						}
+						else{
+							speech =  fullName + "\'s " + resultKey + " is " + answer;
+						}
 						
-			})	
+						return res.json({															//return the result in a json response
+							speech: speech,
+							displayText: speech,
+							source: 'apiai-webhook-sample'
+						});
+					};
+							
+					})	
 				})
 				
 	} 
@@ -109,9 +106,6 @@ function checkColumn(column, callBack){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				var columnFromDB = columns.fields[i].name;
 				var lowerCaseColumn = columnFromDB.toLowerCase();
-				console.log(lowerCaseColumn)
-				console.log(column.toLowerCase())
-				console.log(lowerCaseColumn == column.toLowerCase())
 				if(lowerCaseColumn == column.toLowerCase()){
 					callBack(column);
 					return
