@@ -26,16 +26,9 @@ restService.use(bodyParser.json());
 
 
 restService.post('/hook', function(req, res) {
-
     console.log('hook request');
-
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
-		wakeUp(req);
-		return res.json({																		//return the result in a json response
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
+		return wakeUp(req);
 		
 	}	 
     try {
@@ -43,7 +36,7 @@ restService.post('/hook', function(req, res) {
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
 				db.checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
-					db.query(column, fullName, function(result){										//Run 'query' function, and when finished run this function
+					db.query(column, fullName, function(result){									//Run 'query' function, and when finished run this function
 					if(result && result.rows[0]){													//If there is a result
 						var resultObject = result.rows[0]
 						var keys = Object.keys(resultObject);
@@ -96,5 +89,10 @@ function wakeUp(req){
 			}
 		}
 	}
+	return res.json({																				//return the result in a json response
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
 }
 
