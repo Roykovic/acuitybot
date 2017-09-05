@@ -103,6 +103,7 @@ function checkColumn(column){
 	console.log(column)
 	query("*", "false", function(columns){
 		if(columns){
+			console.log("columns is not null")
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				if(columns.fields[i].name == column){
 					console.log("Column is found in database")
@@ -110,6 +111,7 @@ function checkColumn(column){
 				}
 			}
 		}
+		console.log("columns is null")
 	})
 	return false;
 }
