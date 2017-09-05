@@ -44,7 +44,8 @@ restService.post('/hook', function(req, res) {
 			var fullName = req.body.result.parameters['sf-name']
 				var requestBody = req.body;	
 				var fullName = requestBody.result.parameters['sf-name']
-				var column = checkColumn(requestBody.result.parameters['Variable_row'])
+				var column = checkColumn(requestBody.result.parameters['Variable_row'], function(){
+				
 				console.log("column")
 				console.log(column)
 			query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
@@ -68,6 +69,8 @@ restService.post('/hook', function(req, res) {
 				};
 						
 			})	
+				})
+				
 	} 
 	catch (err) {
         console.error("Can't process request", err);
