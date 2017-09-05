@@ -120,7 +120,7 @@ function checkColumn(column, callBack){
 }
 
 function checkName(name, callBack){
-	query("*", "salesforce.contact", function(contacts){
+	query("*", "true", function(contacts){
 		console.log("contacts")
 		console.log(contacts)
 	return name
