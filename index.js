@@ -106,8 +106,8 @@ function checkColumn(column){
 				var lowerCaseColumn = columnFromDB.toLowerCase();
 				console.log(lowerCaseColumn)
 				console.log(column)
-				console.log(lowerCaseColumn == column.toLowerCase)
-				if(lowerCaseColumn == column.toLowerCase){
+				console.log(lowerCaseColumn == column.toLowerCase())
+				if(lowerCaseColumn == column.toLowerCase()){
 					console.log("Column is found in database")
 					return column;
 				}
