@@ -1,5 +1,6 @@
 'use strict'
 
+var self = this;
 var connectionString = require('./config/config.js');
 var pg = require('pg');
 
@@ -38,4 +39,4 @@ function checkColumn(column, callBack){
 	return;
 }
 
-module.exports = this;
+module.exports = self;
