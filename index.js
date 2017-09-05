@@ -105,6 +105,7 @@ function checkColumn(column){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				if(columns.fields[i].name == column){
+					console.log("Column is found in database")
 					return column;
 				}
 			}
