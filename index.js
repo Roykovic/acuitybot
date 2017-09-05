@@ -99,19 +99,17 @@ function wakeUp(req){
 }
 
 function checkColumn(column){
-	console.log("Column")
-	console.log(column)
 	query("*", "false", function(columns){
 		if(columns){
-			console.log("columns is not null")
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
+					console.log(columns.fields[i].name)
+					console.log(column)
 				if(columns.fields[i].name == column){
 					console.log("Column is found in database")
 					return column;
 				}
 			}
 		}
-		console.log("columns is null")
 	})
 	return false;
 }
