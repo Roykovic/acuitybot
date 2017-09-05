@@ -24,7 +24,6 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
-
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
