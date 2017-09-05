@@ -24,7 +24,7 @@ module.exports = {
 		callBack(null)
 	}, 
 	checkColumn: function checkColumn(column, callBack){
-	query("*", "false", function(columns){
+	db.query("*", "false", function(columns){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				var columnFromDB = columns.fields[i].name;
