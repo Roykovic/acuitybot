@@ -32,32 +32,30 @@ restService.post('/hook', function(req, res) {
 		
 	}	 
     try {
-			var fullName = req.body.result.parameters['sf-name']
-				var requestBody = req.body;	
-				var fullName = requestBody.result.parameters['sf-name']
-				db.checkColumn(requestBody.result.parameters['Variable_row'], function(column){		//check if the column exist in the db (to prevent exploits)
-					db.query(column, fullName, function(result){									//Run 'query' function, and when finished run this function
-					if(result && result.rows[0]){													//If there is a result
-						var resultObject = result.rows[0]
-						var keys = Object.keys(resultObject);
-						var resultKey = keys[0]
-						var answer = resultObject[resultKey];										//Get the first property present in the result.rows[0] object
-						if(!answer){
-							speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
-						}
-						else{
-							speech =  fullName + "\'s " + resultKey + " is " + answer;
-						}
-						
-						return res.json({															//return the result in a json response
-							speech: speech,
-							displayText: speech,
-							source: 'apiai-webhook-sample'
-						});
-					};
-							
-					})	
-				})
+		var fullName = req.body.result.parameters['sf-name']
+		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
+			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
+			if(result && result.rows[0]){															//If there is a result
+				var resultObject = result.rows[0]
+				var keys = Object.keys(resultObject);
+				var resultKey = keys[0]
+				var answer = resultObject[resultKey];												//Get the first property present in the result.rows[0] object
+				if(!answer){
+					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
+				}
+				else{
+					speech =  fullName + "\'s " + resultKey + " is " + answer;
+				}
+				
+				return res.json({																	//return the result in a json response
+					speech: speech,
+					displayText: speech,
+					source: 'apiai-webhook-sample'
+				});
+			};
+					
+			})	
+		})
 				
 	} 
 	catch (err) {
@@ -78,13 +76,11 @@ restService.listen((process.env.PORT || 5000), function () {
 
 function wakeUp(req, res){
 	if (req.body) {
-		var requestBody = req.body;
-
-		if (requestBody.result) {
+		if (req.body.result) {
 			speech = '';
 
-			if (requestBody.result.fulfillment) {
-				speech += requestBody.result.fulfillment.speech;
+			if (req.body.result.fulfillment) {
+				speech += req.body.result.fulfillment.speech;
 				speech += ' ';
 			}
 		}
