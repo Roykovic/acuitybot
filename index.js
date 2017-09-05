@@ -113,7 +113,7 @@ function checkColumn(column, callBack){
 				console.log(column.toLowerCase())
 				console.log(lowerCaseColumn == column.toLowerCase())
 				if(lowerCaseColumn == column.toLowerCase()){
-					callback(column);
+					callBack(column);
 				}
 			}
 		}
