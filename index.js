@@ -113,7 +113,7 @@ function checkColumn(column, callBack){
 			}
 		}
 	})
-	callback(null);
+	callBack(null);
 	return;
 }
 
