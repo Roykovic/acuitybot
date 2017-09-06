@@ -33,7 +33,6 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(req.body.result.metadata.intentName == "Login"){
-		console.log("LOGIN")
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
 		loginController.login(user, pass, function(succes){
@@ -56,6 +55,8 @@ restService.post('/hook', function(req, res) {
 	}
 	
 	if(!auth || req.body.sessionId != sessionId){
+		console.log(auth)
+		console.log(req.body.sessionId != sessionId)
 	return res.json({																				
 						name: "Login",
 						displayText: speech,
