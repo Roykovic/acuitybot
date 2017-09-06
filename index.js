@@ -56,6 +56,7 @@ restService.post('/hook', function(req, res) {
 	}
 	if(!login){
 		if(!auth || req.body.sessionId != sessionId){
+			console.log("THINGS")
 		return res.json({																				
 							name: "Login",
 							displayText: speech,
