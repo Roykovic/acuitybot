@@ -44,7 +44,7 @@ restService.post('/hook', function(req, res) {
 		return returnJson(res, "Login succesful, welcome back!");			
 		
 		return returnJson(res, "Login failed, please check username and password");	 */	
-		}){
+		})
 
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
