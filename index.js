@@ -39,7 +39,7 @@ restService.post('/hook', function(req, res) {
 							name:"login"
 						}
 					});
-   }
+   
 		return returnJson(res, "You are not authorized for this action, please login");
 	}
     try {
