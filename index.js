@@ -31,9 +31,15 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(!auth){
-	return res.followupEvent({																				
-						name: "Login"
+	return res.json({																				
+						name: "Login",
+						displayText: speech,
+						source: 'apiai-webhook-sample',
+						followupEvent: {
+							name:"login"
+						}
 					});
+   }
 		return returnJson(res, "You are not authorized for this action, please login");
 	}
     try {
