@@ -31,6 +31,10 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(!auth){
+	return res.followupEvent({																				
+						name: "Login"
+					});
+   }
 		return returnJson(res, "You are not authorized for this action, please login");
 	}
     try {
@@ -71,14 +75,6 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
-function returnJson(res, speech){
-	return res.json({																				
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
-}
-
 function wakeUp(req, res){
 	if (req.body) {
 		if (req.body.result) {
@@ -91,5 +87,13 @@ function wakeUp(req, res){
 		}
 	}
 	return returnJson(res, speech);
+}
+
+function returnJson(res, speech){
+	return res.json({																				
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
 }
 
