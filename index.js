@@ -55,14 +55,14 @@ restService.post('/hook', function(req, res) {
 	}
 	
 	if(!auth || req.body.sessionId != sessionId){
-	return res.json({																				
+/* 	return res.json({																				
 						name: "Login",
 						displayText: speech,
 						source: 'apiai-webhook-sample',
 						followupEvent: {
 							name:"login"
 						}
-					});
+					}); */
 	}
     try {
 		var fullName = req.body.result.parameters['sf-name']
