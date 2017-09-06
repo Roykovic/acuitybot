@@ -12,5 +12,5 @@ exports.login = function (username, password){
 			}
 		}
 	})
-				callback(return false)
+				callback(false)
 }
