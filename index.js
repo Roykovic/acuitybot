@@ -40,6 +40,14 @@ restService.post('/hook', function(req, res) {
 			auth = true;
 		}
 	}
+	if(req.body.result.metadata.intentName == "Logout"){
+		if(loginController.loginSucces(user, pass)){
+			sessionId = "";
+			auth = false;
+		}
+		return returnJson(res, "User logged out succesfully");
+	}
+	
 	if(!auth || req.body.sessionId != sessionId){
 	return res.json({																				
 						name: "Login",
