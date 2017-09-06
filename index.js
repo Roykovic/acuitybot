@@ -35,7 +35,7 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Login"){
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
-		loginController.login(user, function(succes){
+		loginController.login(user, pass, function(succes){
 
 				console.log("BOOLEAN")
 				console.log(succes)
