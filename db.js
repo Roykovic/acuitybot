@@ -39,10 +39,12 @@ exports.getUser = function(username, callBack){
 				.query('SELECT * FROM salesforce.auth__c WHERE name=$1', [username])
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
-				return;
+
+
 			})
+			return;
 		}
-console.log("Got there and username is: " + username);
+		console.log("got there")
 }
 
 exports.checkColumn = function (column, callBack){
