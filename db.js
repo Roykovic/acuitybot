@@ -41,6 +41,7 @@ exports.getUser = function(username, callBack){
 				return;
 			})
 		}
+		console.log("Still got there")
 }
 
 exports.checkColumn = function (column, callBack){
