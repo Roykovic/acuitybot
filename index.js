@@ -18,6 +18,7 @@
 
 var speech = 'empty speech';
 var db = require('./db');
+var login = require('./login')
 var auth = false;
 
 const express = require('express');
