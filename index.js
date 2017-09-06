@@ -30,6 +30,13 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
+	if(req.body.result.metadata.intentName == "Login"){
+		var user = req.body.result.parameters['Username']
+		var pass = req.body.result.parameters['Password']
+		if(loginController.loginSucces(user, pass)){
+			console.log(req.body[sessionId]);
+		}
+	}
 	if(!auth){
 	return res.json({																				
 						name: "Login",
@@ -39,8 +46,6 @@ restService.post('/hook', function(req, res) {
 							name:"login"
 						}
 					});
-   
-		return returnJson(res, "You are not authorized for this action, please login");
 	}
     try {
 		var fullName = req.body.result.parameters['sf-name']
