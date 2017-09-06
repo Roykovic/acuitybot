@@ -57,7 +57,7 @@ restService.post('/hook', function(req, res) {
 		return returnJson(res, "User logged out succesfully, see you later!");
 	}
 	
-	if(!auth || req.body.sessionId != sessionId && !login){
+	if((!auth || req.body.sessionId != sessionId) && !login){
 		console.log(auth)
 		console.log(req.body.sessionId != sessionId)
 	return res.json({																				
