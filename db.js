@@ -24,6 +24,8 @@ exports.query = function (column, variable, callBack){
 }
 
 exports.checkColumn = function (column, callBack){
+	console.log("column: ")
+	console.log(column)
 	exports.query("*", "false", function(columns){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
