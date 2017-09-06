@@ -29,7 +29,7 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	console.log(req.body.result.parameters['Variable_row']);
+	console.log(req.body.result.parameters['sf-name']);
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
