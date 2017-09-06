@@ -18,6 +18,7 @@
 
 var speech = 'empty speech';
 var db = require('./db');
+var auth = false;
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -28,8 +29,10 @@ restService.post('/hook', function(req, res) {
     console.log('hook request');
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
-		
 	}	 
+	if(!auth){
+		return returnJson(res, "Please login");
+	}
     try {
 		var fullName = req.body.result.parameters['sf-name']
 		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
@@ -55,7 +58,6 @@ restService.post('/hook', function(req, res) {
 	} 
 	catch (err) {
         console.error("Can't process request", err);
-
         return res.status(400).json({
             status: {
                 code: 400,
