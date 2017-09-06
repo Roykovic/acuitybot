@@ -12,13 +12,11 @@ exports.login = function (username, password, callback){
 	db.getUser(username, function(result){
 		if(result){
 			if(result.rows[0].pass__c == password){
-				console.log("HANS")
+				callback(true)
 				return;
 			}
 		}
 	})
-	console.log("RESULT")
-	console.log(result)
 	callback(false)
 	return;
 }
