@@ -23,6 +23,24 @@ exports.query = function (column, variable, callBack){
 		callBack(null)
 }
 
+exports.getUser = function(username, pass, callBack){
+		if(username && pass){
+			pg.defaults.ssl = true;
+			var pool = new pg.Pool({
+			  connectionString: connectionString,
+			})
+			pool.connect(function(err, client) {
+			  if (err) throw err;
+			  console.log('Connected to postgres! Getting schemas...');
+			  client
+				.query('SELECT '+ * +' FROM salesforce.account WHERE name=$1 AND password =$2', [user, pass])
+				.then(res => callBack(res))
+				.catch(e => console.error("Error while executing query\n" +e.stack));
+			})
+		}
+		callBack(null)	
+}
+
 exports.checkColumn = function (column, callBack){
 	exports.query("*", "false", function(columns){
 		if(columns){
