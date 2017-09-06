@@ -29,7 +29,6 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	console.log(req.body.result.parameters['sf-name']);
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
@@ -38,8 +37,10 @@ restService.post('/hook', function(req, res) {
 		var pass = req.body.result.parameters['Password']
 		if(loginController.loginSucces(user, pass)){
 			sessionId = req.body.sessionId;
-			auth = true;
+			auth = true;		
+		return returnJson(res, "User logged in succesfully");			
 		}
+		return returnJson(res, "Login failed, please check username and password");
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";
