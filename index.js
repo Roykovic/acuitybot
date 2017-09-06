@@ -46,11 +46,7 @@ restService.post('/hook', function(req, res) {
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				
-				return res.json({																	//return the result in a json response
-					speech: speech,
-					displayText: speech,
-					source: 'apiai-webhook-sample'
-				});
+				return returnJson(speech)
 			};
 					
 			})	
@@ -73,6 +69,14 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
+function returnJson(speech){
+	return res.json({																				
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
+}
+
 function wakeUp(req, res){
 	if (req.body) {
 		if (req.body.result) {
@@ -84,10 +88,6 @@ function wakeUp(req, res){
 			}
 		}
 	}
-	return res.json({																				//return the result in a json response
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
+	return returnJson(speech);
 }
 
