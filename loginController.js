@@ -9,6 +9,7 @@ exports.loginSucces = function (username, password){
 		if(result){
 			console.log("result is set")
 			if(result.rows[0].pass__c == password){
+				console.log("true")
 				return true
 			}
 		}
