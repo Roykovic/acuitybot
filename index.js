@@ -21,7 +21,7 @@ var db = require('./db');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
-
+var login = false;
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -33,10 +33,10 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(req.body.result.metadata.intentName == "Login"){
+		login = false;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
-		console.log("HERE IT COMES: ")
-		console.log(loginController.login(user, pass, function(succes){
+		return loginController.login(user, pass, function(succes){
 			if(succes){			
 				sessionId = req.body.sessionId;
 				auth = true;		
@@ -45,8 +45,8 @@ restService.post('/hook', function(req, res) {
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-	return returnJson(res, speech);
-		}))
+	return returnJson(res, speech)
+		})
 
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
@@ -54,17 +54,17 @@ restService.post('/hook', function(req, res) {
 			auth = false;
 		return returnJson(res, "User logged out succesfully, see you later!");
 	}
-	
-	if(!auth || req.body.sessionId != sessionId){
-		console.log(auth)
-	return res.json({																				
-						name: "Login",
-						displayText: speech,
-						source: 'apiai-webhook-sample',
-						followupEvent: {
-							name:"login"
-						}
-					});
+	if(!login){
+		if(!auth || req.body.sessionId != sessionId){
+		return res.json({																				
+							name: "Login",
+							displayText: speech,
+							source: 'apiai-webhook-sample',
+							followupEvent: {
+								name:"login"
+							}
+						});
+		}
 	}
     try {
 		var fullName = req.body.result.parameters['sf-name']
