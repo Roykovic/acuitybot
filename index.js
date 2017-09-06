@@ -43,8 +43,8 @@ restService.post('/hook', function(req, res) {
 			}
 			else{
 				return returnJson(res, "Login failed, please check username and password");	
-			} 
-			console.log('dingen') */
+			} */
+			console.log('dingen') 
 
 		})
 
