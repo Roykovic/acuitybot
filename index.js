@@ -20,6 +20,7 @@ var speech = 'empty speech';
 var db = require('./db');
 var loginController = require('./loginController')
 var auth = false;
+var sessionId = "";
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -35,10 +36,11 @@ restService.post('/hook', function(req, res) {
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
 		if(loginController.loginSucces(user, pass)){
-			console.log(req.body.sessionId);
+			sessionId = req.body.sessionId;
+			auth = true;
 		}
 	}
-	if(!auth){
+	if(!auth || req.body.sessionId != sessionId){
 	return res.json({																				
 						name: "Login",
 						displayText: speech,
