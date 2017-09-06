@@ -35,12 +35,17 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Login"){
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
-		if(loginController.login(user, pass)){
-			sessionId = req.body.sessionId;
+		loginController.login(user, function(succes){
+
+				console.log("BOOLEAN")
+				console.log(succes)
+/* 			sessionId = req.body.sessionId;
 			auth = true;		
 		return returnJson(res, "Login succesful, welcome back!");			
-		}
-		return returnJson(res, "Login failed, please check username and password");
+		
+		return returnJson(res, "Login failed, please check username and password");	 */	
+		}){
+
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";

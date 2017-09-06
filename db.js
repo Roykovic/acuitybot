@@ -18,6 +18,7 @@ exports.query = function (column, variable, callBack){
 				.query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
+				return;
 			})
 		}
 		callBack(null)
@@ -36,6 +37,7 @@ exports.getUser = function(username, callBack){
 				.query('SELECT * FROM salesforce.auth__c WHERE name=$1', [username])
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
+				return;
 			})
 		}
 		callBack(null)	
