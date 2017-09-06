@@ -34,7 +34,6 @@ restService.post('/hook', function(req, res) {
 	return res.followupEvent({																				
 						name: "Login"
 					});
-   }
 		return returnJson(res, "You are not authorized for this action, please login");
 	}
     try {
