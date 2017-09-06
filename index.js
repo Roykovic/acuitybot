@@ -35,7 +35,7 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Login"){
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
-		if(loginController.loginSucces(user, pass)){
+		if(loginController.login(user, pass)){
 			sessionId = req.body.sessionId;
 			auth = true;		
 		return returnJson(res, "Login succesful, welcome back!");			
