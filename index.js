@@ -35,7 +35,7 @@ restService.post('/hook', function(req, res) {
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
 		if(loginController.loginSucces(user, pass)){
-			console.log(req.body);
+			console.log(req.body.sessionId);
 		}
 	}
 	if(!auth){
