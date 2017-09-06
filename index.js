@@ -18,7 +18,7 @@
 
 var speech = 'empty speech';
 var db = require('./db');
-var login = require('./loginController')
+var loginController = require('./loginController')
 var auth = false;
 
 const express = require('express');
