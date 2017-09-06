@@ -36,7 +36,7 @@ exports.getUser = function(username, callBack){
 			  console.log(username);
 			  console.log('SELECT * FROM salesforce.auth__c WHERE name=$1', [username])
 			  client
-				.query('SELECT * FROM salesforce.auth__c WHERE name=$1', [username])
+				.query('SELECT * FROM salesforce.auth__c WHERE name=\'Roy\'')
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 				return;
