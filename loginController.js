@@ -5,9 +5,10 @@ var exports = module.exports = {};
 var db = require('./db');
 
 exports.loginSucces = function (username, password){
-	db.getUser(username, password, function(result){
-		console.log("accounts")
-		console.log(result)
+	db.getUser(username, function(result){
+		if(result.rows[0].pass_c == password){
+			console.log(true);
+		}
 	})
 	
 	
