@@ -6,7 +6,7 @@ var exports = module.exports = {};
 exports.loginSucces = function (username, password){
 	console.log("username and password: ")
 	console.log(username +" "+ password)
-			if(user == "Roy" && pass == "1234" ){
+			if(username == "Roy" && password == "1234" ){
 				console.log(true)
 				return true
 			}
