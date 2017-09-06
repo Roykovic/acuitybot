@@ -40,8 +40,11 @@ restService.post('/hook', function(req, res) {
 				sessionId = req.body.sessionId;
 				auth = true;		
 				return returnJson(res, "Login succesful, welcome back!");		
-			}		
-		return returnJson(res, "Login failed, please check username and password");	
+			}
+			else{
+				return returnJson(res, "Login failed, please check username and password");	
+			}
+
 		})
 
 	}
