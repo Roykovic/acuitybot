@@ -33,7 +33,7 @@ exports.getUser = function(username, pass, callBack){
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
-				.query('SELECT * FROM salesforce.account WHERE name=$1 AND password =$2', [username, pass])
+				.query('SELECT * FROM salesforce.account')
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 			})
