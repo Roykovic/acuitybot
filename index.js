@@ -46,7 +46,7 @@ restService.post('/hook', function(req, res) {
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				
-				return returnJson(speech)
+				return returnJson(res, speech)
 			};
 					
 			})	
@@ -69,7 +69,7 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
-function returnJson(speech){
+function returnJson(res, speech){
 	return res.json({																				
 						speech: speech,
 						displayText: speech,
@@ -88,6 +88,6 @@ function wakeUp(req, res){
 			}
 		}
 	}
-	return returnJson(speech);
+	return returnJson(res, speech);
 }
 
