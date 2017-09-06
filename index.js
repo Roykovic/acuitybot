@@ -40,17 +40,18 @@ restService.post('/hook', function(req, res) {
 			if(succes){
 				
 				sessionId = req.body.sessionId;
-				console.log("succes")
 				auth = true;		
-				console.log("succes")
 				speech = "Login succesful, welcome back!"
-				console.log("succes")
 			}
 			else{
 				console.log("no succes")
 				speech = "Login failed, please check username and password"	
 			}
-			return returnJson(res, speech)
+	return res.json({																				
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
 		})
 
 	}
