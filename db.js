@@ -25,9 +25,7 @@ exports.query = function (column, variable, callBack){
 }
 
 exports.getUser = function(username, callBack){
-		console.log("DB")
 		if(username){
-			console.log("Got here too tho")
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
 			  connectionString: connectionString,
