@@ -10,6 +10,7 @@ exports.login = function (username, password, callback){
 	} */
 	
 	db.getUser(username, function(result){
+		console.log("LoginController")
 		if(result){
 			if(result.rows[0].pass__c == password){
 				callback(true)

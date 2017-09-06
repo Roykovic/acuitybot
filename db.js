@@ -6,6 +6,7 @@ var pg = require('pg');
 var exports = module.exports = {};
 
 exports.query = function (column, variable, callBack){
+	console.log("DB")
 		if(column && variable){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
