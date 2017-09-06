@@ -31,7 +31,7 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(!auth){
-		return returnJson(res, "Please login");
+		return returnJson(res, "You are not authorized for this action, please login");
 	}
     try {
 		var fullName = req.body.result.parameters['sf-name']
