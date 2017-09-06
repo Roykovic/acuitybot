@@ -5,6 +5,7 @@ var exports = module.exports = {};
 var db = require('./db');
 
 exports.login = function (username, password, callback){
+	console.log("LoginController call")
 /* 	if(username == "Roy" && password == "1234"){
 		return true;
 	} */

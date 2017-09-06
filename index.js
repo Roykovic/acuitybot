@@ -34,6 +34,7 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(req.body.result.metadata.intentName == "Login"){
+		console.log("index call")
 		login = true;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
