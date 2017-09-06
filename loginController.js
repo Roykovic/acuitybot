@@ -17,6 +17,8 @@ exports.login = function (username, password, callback){
 			}
 		}
 	})
+	console.log("RESULT")
+	console.log(result)
 	callback(false)
 	return;
 }
