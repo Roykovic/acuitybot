@@ -21,6 +21,7 @@ var db = require('./db');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
+var login = false;
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -33,6 +34,7 @@ restService.post('/hook', function(req, res) {
 		return wakeUp(req, res);
 	}	 
 	if(req.body.result.metadata.intentName == "Login"){
+		login = true;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
 		loginController.login(user, pass, function(succes){
@@ -55,7 +57,7 @@ restService.post('/hook', function(req, res) {
 		return returnJson(res, "User logged out succesfully, see you later!");
 	}
 	
-	if(!auth || req.body.sessionId != sessionId){
+	if(!auth || req.body.sessionId != sessionId && !login){
 		console.log(auth)
 		console.log(req.body.sessionId != sessionId)
 	return res.json({																				
