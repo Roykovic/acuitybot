@@ -27,6 +27,29 @@ const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
 
+
+
+var express = require('express');
+var app = express();
+
+var oneDay = 86400000;
+
+app.use(express.compress());
+
+app.use(express.static(__dirname + '/public', { maxAge: oneDay }));
+
+app.use(express.bodyParser());
+
+app.listen(process.env.PORT);
+
+app.post('/', function(req, res){
+  var result = req.rawBody;
+  res.send("hello there world data is " + result);
+});
+
+
+
+
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
