@@ -55,7 +55,7 @@ restService.post('/hook', function(req, res) {
 	if(req.body.type == "auth"){
 		var pass = req.body.uid
 		var name = req.body.name
-		name.replace(/['"]+/g, '')
+		name = name.replace(/['"]+/g, '')
 		var names = name.split(" ");
 		var user = names[0];
 		console.log("USER " + user)
