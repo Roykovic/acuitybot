@@ -29,23 +29,28 @@ restService.use(bodyParser.json());
 
 
 
-var express = require('express');
-var app = express();
+
 
 var oneDay = 86400000;
 
-app.use(express.compress());
+restService.use(express.compress());
 
-app.use(express.static(__dirname + '/public', { maxAge: oneDay }));
+restService.use(express.static(__dirname + '/public', { maxAge: oneDay }));
 
-app.use(express.bodyParser());
+restService.use(express.bodyParser());
 
-app.listen(process.env.PORT);
+restService.listen(process.env.PORT);
 
-app.post('/', function(req, res){
+restService.post('/', function(req, res){
   var result = req.rawBody;
   res.send("hello there world data is " + result);
 });
+
+
+
+
+
+
 
 
 
