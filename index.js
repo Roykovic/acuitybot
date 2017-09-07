@@ -38,17 +38,15 @@ restService.post('/hook', function(req, res) {
 		var pass = req.body.result.parameters['Password']
 		loginController.login(user, pass, function(succes){
 			if(succes){
-				console.log("succes is true")
 				sessionId = req.body.sessionId;
 				auth = true;		
 				speech = "Login succesful, welcome back!"
 			}
 			else{
-				console.log("succes: ")
 				speech = "Login failed, please check username and password"	
 			}
+			return returnJson(res, speech)
 		})
-	return returnJson(res, speech)
 
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
