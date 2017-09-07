@@ -46,6 +46,8 @@ restService.post('/hook', function(req, res) {
 				speech = "Login failed, please check username and password"	
 			}
 		})
+		console.log("speech")
+		console.log(speech)
 	return returnJson(res, speech)
 
 	}
