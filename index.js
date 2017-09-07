@@ -37,8 +37,6 @@ restService.post('/hook', function(req, res) {
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
 		return loginController.login(user, pass, function(succes){
-			console.log("succes")
-			console.log(succes)
 			if(succes){
 				sessionId = req.body.sessionId;
 				auth = true;		
@@ -59,7 +57,6 @@ restService.post('/hook', function(req, res) {
 	}
 	if(!login){
 		if(!auth || req.body.sessionId != sessionId){
-			console.log("THINGS")
 		return res.json({																				
 							name: "Login",
 							displayText: speech,
@@ -113,6 +110,10 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
+restService.get('/login', function(req, res){
+	res.redirect('./login.html');
+})
+
 function wakeUp(req, res){
 	if (req.body) {
 		if (req.body.result) {
@@ -128,7 +129,6 @@ function wakeUp(req, res){
 }
 
 function returnJson(res, speech){
-	console.log("JSON SENT")
 	return res.json({																				
 						speech: speech,
 						displayText: speech,
