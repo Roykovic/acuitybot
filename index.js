@@ -30,27 +30,21 @@ restService.use(bodyParser.json());
 
 
 
+var http = require('http');
+var fs = require('fs');
 
-var oneDay = 86400000;
+const PORT=8080; 
 
-restService.use(express.compress());
+fs.readFile('./index.html', function (err, html) {
 
-restService.use(express.static(__dirname + '/public', { maxAge: oneDay }));
+    if (err) throw err;    
 
-restService.use(express.bodyParser());
-
-restService.listen(process.env.PORT);
-
-restService.post('/', function(req, res){
-  var result = req.rawBody;
-  res.send("hello there world data is " + result);
+    http.createServer(function(request, response) {  
+        response.writeHeader(200, {"Content-Type": "text/html"});  
+        response.write(html);  
+        response.end();  
+    }).listen(PORT);
 });
-
-
-
-
-
-
 
 
 
@@ -138,9 +132,9 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
-// restService.get('/login', function(req, res){
-	// res.redirect('/login.html');
-// })
+restService.get('/login', function(req, res){
+	res.redirect('./login.html');
+})
 
 function wakeUp(req, res){
 	if (req.body) {
