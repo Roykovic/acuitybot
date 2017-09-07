@@ -36,7 +36,7 @@ restService.post('/hook', function(req, res) {
 		login = false;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
-		return loginController.login(user, pass, function(succes){
+		loginController.login(user, pass, function(succes){
 			if(succes){			
 				sessionId = req.body.sessionId;
 				auth = true;		
@@ -45,13 +45,8 @@ restService.post('/hook', function(req, res) {
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-	//return returnJson(res, speech)
-		return res.json({																				
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
 		})
+	return returnJson(res, speech)
 
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
