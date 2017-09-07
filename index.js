@@ -57,6 +57,7 @@ restService.post('/hook', function(req, res) {
 		var name = req.body.name
 		var names = name.split(" ");
 		var user = names[0];
+		console.log("USER " + user)
 
 		return loginController.login(user, pass, function(succes){
 			if(succes){
