@@ -26,15 +26,25 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 restService.use(bodyParser.json());
+// Add headers
+restService.use(function (req, res, next) {
 
+    // Website you wish to allow to connect
+    res.setHeader('Access-Control-Allow-Origin', 'http://html-login.herokuapp.com/');
 
+    // Request methods you wish to allow
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
 
+    // Request headers you wish to allow
+    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
 
-var http = require('http');
-var fs = require('fs');
+    // Set to true if you need the website to include cookies in the requests sent
+    // to the API (e.g. in case you use sessions)
+    res.setHeader('Access-Control-Allow-Credentials', false);
 
-
-
+    // Pass to next layer of middleware
+    next();
+});
 
 
 
@@ -120,21 +130,6 @@ restService.post('/hook', function(req, res) {
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
-
-restService.get('/login', function(req, res){
-	const PORT=8080; 
-
-fs.readFile('./login.html', function (err, html) {
-
-    if (err) throw err;    
-
-    http.createServer(function(request, response) {  
-        response.writeHeader(200, {"Content-Type": "text/html"});  
-        response.write(html);  
-        response.end();  
-    }).listen(PORT);
-});
-})
 
 function wakeUp(req, res){
 	if (req.body) {
