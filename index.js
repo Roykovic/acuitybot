@@ -49,7 +49,7 @@ restService.use(function (req, res, next) {
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	console.log(req.body)
+	console.log(req)
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
