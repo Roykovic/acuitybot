@@ -8,7 +8,7 @@ exports.login = function (username, password, callback){
 	db.getUser(username, function(result){
 		if(result){
 			console.log("result")
-			console.log(result.rows[0].pass__c)
+			console.log(result.rows[0])
 			console.log(password)
 			console.log(result.rows[0].pass__c == password)
 			if(result.rows[0].pass__c == password){
