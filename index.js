@@ -44,6 +44,8 @@ restService.use(function (req, res, next) {
     // Pass to next layer of middleware
     next();
 });
+restService.use(bodyParser.urlencoded({ extended: true }));        
+
 restService.use(bodyParser.json());
 
 
