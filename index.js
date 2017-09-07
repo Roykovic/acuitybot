@@ -56,10 +56,32 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
-	if(req.body.result.metadata.intentName == "Login"){
-		login = false;
-		var user = req.body.result.parameters['Username']
-		var pass = req.body.result.parameters['Password']
+	
+	
+	// if(req.body.result.metadata.intentName == "Login"){
+		// login = false;
+		// var user = req.body.result.parameters['Username']
+		// var pass = req.body.result.parameters['Password']
+		// return loginController.login(user, pass, function(succes){
+			// if(succes){
+				// sessionId = req.body.sessionId;
+				// auth = true;		
+				// speech = "Login succesful, welcome back!"
+			// }
+			// else{
+				// speech = "Login failed, please check username and password"	
+			// }
+			// return returnJson(res, speech)
+		// })
+
+
+	// }
+	
+	if(req.body.name == "auth"){
+		var pass = req.body.uid
+		var user = req.body.name
+		console.log(user)
+		console.log(pass)
 		return loginController.login(user, pass, function(succes){
 			if(succes){
 				sessionId = req.body.sessionId;
@@ -71,9 +93,8 @@ restService.post('/hook', function(req, res) {
 			}
 			return returnJson(res, speech)
 		})
-
-
 	}
+	
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";
 			auth = false;
