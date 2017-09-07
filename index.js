@@ -36,7 +36,7 @@ restService.post('/hook', function(req, res) {
 		login = false;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
-		loginController.login(user, pass, function(succes){
+		return loginController.login(user, pass, function(succes){
 			console.log("succes")
 			console.log(succes)
 			if(succes){
@@ -47,7 +47,7 @@ restService.post('/hook', function(req, res) {
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-								return returnJson(res, speech)
+			return returnJson(res, speech)
 		})
 
 
