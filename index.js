@@ -45,7 +45,12 @@ restService.post('/hook', function(req, res) {
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-	return returnJson(res, speech)
+	//return returnJson(res, speech)
+		return res.json({																				
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
 		})
 
 	}
@@ -83,7 +88,12 @@ restService.post('/hook', function(req, res) {
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				
-				return returnJson(res, speech)
+				//return returnJson(res, speech)
+					return res.json({																				
+						speech: speech,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
 			};
 					
 			})	
