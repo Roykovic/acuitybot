@@ -62,13 +62,11 @@ restService.post('/hook', function(req, res) {
 
 		return loginController.login(user, pass, function(succes){
 			if(succes){
-				console.log("Succes")
 				sessionId = req.body.sessionId;
 				auth = true;		
 				speech = "Login succesful, welcome back!"
 			}
 			else{
-				console.log("no succes")
 				speech = "Login failed, please check username and password"	
 			}
 			return returnJson(res, speech)
@@ -174,6 +172,7 @@ function wakeUp(req, res){
 }
 
 function returnJson(res, speech){
+	console.log("Json sent")
 	return res.json({																				
 						speech: speech,
 						displayText: speech,
