@@ -54,9 +54,10 @@ restService.post('/hook', function(req, res) {
 	
 	if(req.body.type == "auth"){
 		var pass = req.body.uid
-		var user = req.body.name
-		console.log(user)
-		console.log(pass)
+		var name = req.body.name
+		var names = name.split(" ");
+		var user = names[0];
+
 		return loginController.login(user, pass, function(succes){
 			if(succes){
 				console.log("Succes")
