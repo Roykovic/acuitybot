@@ -110,9 +110,9 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
-restService.get('/login', function(req, res){
-	res.redirect('./login.html');
-})
+// restService.get('/login', function(req, res){
+	// res.redirect('/login.html');
+// })
 
 function wakeUp(req, res){
 	if (req.body) {
