@@ -5,7 +5,7 @@ var exports = module.exports = {};
 var db = require('./db');
 
 exports.login = function (username, password, callback){
-	db.getUser(username, function(result){
+	db.getUser('Roy', function(result){
 		if(result){
 			console.log("result")
 			console.log(result)
