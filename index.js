@@ -47,8 +47,9 @@ restService.post('/hook', function(req, res) {
 			else{
 				speech = "Login failed, please check username and password"	
 			}
+								return returnJson(res, speech)
 		})
-					return returnJson(res, speech)
+
 
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
