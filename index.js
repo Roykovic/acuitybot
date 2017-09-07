@@ -44,6 +44,7 @@ restService.post('/hook', function(req, res) {
 				speech = "Login succesful, welcome back!"
 			}
 			else{
+				console.log("but also false?")
 				speech = "Login failed, please check username and password"	
 			}
 		})
