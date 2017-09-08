@@ -67,7 +67,7 @@ restService.post('/hook', function(req, res) {
 		auth = false;
 		return returnJson(res, "User logged out succesfully, see you later!");
         break;
-    case "yes - update":
+    case "data for update":
         console.log(req.body.result.contexts) 
         break;
 
