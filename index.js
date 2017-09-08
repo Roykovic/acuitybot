@@ -18,6 +18,7 @@
 
 var speech = 'empty speech';
 var db = require('./db');
+var interactor = require('./interactor');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
@@ -70,16 +71,13 @@ restService.post('/hook', function(req, res) {
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-			return returnJson(res, speech, messages)
+			return interactor.returnJson(res, speech, messages)
 		})
-
-
 	}
-	
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";
 			auth = false;
-		return returnJson(res, "User logged out succesfully, see you later!");
+		return interactor.returnJson(res, "User logged out succesfully, see you later!");
 	}
 	if(!login){
 		if(!auth || req.body.sessionId != sessionId){
@@ -93,43 +91,7 @@ restService.post('/hook', function(req, res) {
 						});
 		}
 	}
-    try {
-		var fullName = req.body.result.parameters['sf-name']
-		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
-			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
-			if(result && result.rows[0]){															//If there is a result
-				var resultObject = result.rows[0]
-				var keys = Object.keys(resultObject);
-				var resultKey = keys[0]
-				var answer = resultObject[resultKey];												//Get the first property present in the result.rows[0] object
-				if(!answer){
-					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
-				}
-				else{
-					speech =  fullName + "\'s " + resultKey + " is " + answer;
-				}
-				
-				//return returnJson(res, speech)
-					return res.json({																				
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
-			};
-					
-			})	
-		})
-				
-	} 
-	catch (err) {
-        console.error("Can't process request", err);
-        return res.status(400).json({
-            status: {
-                code: 400,
-                errorType: err.message
-            }
-        });
-    }
+	return interactor.getUserInfo(req, res)
 })
 
 restService.listen((process.env.PORT || 5000), function () {
@@ -147,15 +109,8 @@ function wakeUp(req, res){
 			}
 		}
 	}
-	return returnJson(res, speech);
+	return interactor.interactor.returnJson(res, speech);
 }
 
-function returnJson(res, speech, messages){
-	return res.json({																				
-						speech: speech,
-						messages: messages,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
-}
+
 
