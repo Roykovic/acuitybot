@@ -60,7 +60,7 @@ restService.post('/hook', function(req, res) {
         break;
     case "Login":
 	console.log("Login reached")
-		return login();
+		return login(req, res);
         break;
     case "Logout":
         sessionId = "";
@@ -118,7 +118,7 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
-function login(){
+function login(req, res){
 	console.log("login function")
 			login = false;
 		var user = req.body.result.parameters['Username']
