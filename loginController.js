@@ -6,17 +6,11 @@ var db = require('./db');
 
 exports.login = function (username, password, callback){
 	db.getUser(username, function(result){
+		var dbPass = "";
 		if(result){
-			console.log("result")
-			console.log(result.rows[0])
-			console.log(password)
-			console.log(result.rows[0].pass__c == password)
-			if(result.rows[0].pass__c == password){
-				callback(true)
-				return;
-			}
+			dbPass = result.rows[0].pass__c; 
 		}
-			callback(false)
-			return;
+		var succes = result.rows[0].pass__c == password;
+		callback(succes);
 	})
 }
