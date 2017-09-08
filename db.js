@@ -24,6 +24,23 @@ exports.query = function (column, variable, callBack){
 		callBack(null)
 }
 
+exports.updateQuery = function(columns, variables, callBack){
+	if(column && variable){
+			pg.defaults.ssl = true;
+			var pool = new pg.Pool({
+			  connectionString: connectionString,
+			})
+			pool.connect(function(err, client) {
+			  if (err) throw err;
+			  console.log('Connected to postgres! Getting schemas...');
+			  client
+				.query('UPDATE salesforce.contact SET '+columns[0]+'=$1 WHERE '+columns[2]+'=$2', variables)
+				.catch(e => console.error("Error while executing query\n" +e.stack));
+				return;
+			})
+		}
+}
+
 exports.getUser = function(username, callBack){
 		if(username){
 			pg.defaults.ssl = true;

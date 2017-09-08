@@ -35,7 +35,6 @@ restService.use(function (req, res, next) {															//Method to allow http
     next();
 });
 restService.use(bodyParser.urlencoded({ extended: true }));        
-
 restService.use(bodyParser.json());
 
 
@@ -46,8 +45,6 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
-	
-	
 	if(req.body.result.metadata.intentName == "Login"){
 		login = false;
 		var user = req.body.result.parameters['Username']
@@ -56,27 +53,14 @@ restService.post('/hook', function(req, res) {
 			if(succes){
 				sessionId = req.body.sessionId;
 				auth = true;		
-				speech = ""
-				var messages = [
-						{
-						"type": 0,
-						"speech": "Login succesful, welcome back!"
-						},
-						{
-						"type": 0,
-						"speech": vc.getUserInfo("John Bond", "address")
-						}
-						]
+				speech = "Login succesful, welcome back!"
 			}
 			else{
 				speech = "Login failed, please check username and password"	
 			}
 			return returnJson(res, speech, messages)
 		})
-
-
 	}
-	
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";
 			auth = false;
@@ -105,6 +89,14 @@ restService.post('/hook', function(req, res) {
 				var answer = resultObject[resultKey];												//Get the first property present in the result.rows[0] object
 				if(!answer){
 					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
+					return res.json({																				
+							name: "Login",
+							displayText: speech,
+							source: 'apiai-webhook-sample',
+							followupEvent: {
+								name:"update"
+							}
+						});
 				}
 				else{
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
