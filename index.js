@@ -54,7 +54,7 @@ restService.post('/hook', function(req, res) {
 		}
 	}
 	
-	switch () {
+	switch (intent) {
     case "Default Welcome Intent":
        	return wakeUp(req, res);
         break;
