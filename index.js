@@ -26,22 +26,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 // Add headers
-restService.use(function (req, res, next) {
-
-    // Website you wish to allow to connect
+restService.use(function (req, res, next) {															//Method to allow http request from login site, this is a WIP, as there is no login site yet...
     res.setHeader('Access-Control-Allow-Origin', 'http://html-login.herokuapp.com');
-
-    // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-
-    // Request headers you wish to allow
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-
-    // Set to true if you need the website to include cookies in the requests sent
-    // to the API (e.g. in case you use sessions)
     res.setHeader('Access-Control-Allow-Credentials', false);
-
-    // Pass to next layer of middleware
     next();
 });
 restService.use(bodyParser.urlencoded({ extended: true }));        
@@ -66,12 +55,22 @@ restService.post('/hook', function(req, res) {
 			if(succes){
 				sessionId = req.body.sessionId;
 				auth = true;		
-				speech = "Login succesful, welcome back!"
+				speech = ""
+				var messages = [
+						{
+						"type": 0,
+						"speech": "Login succesful, welcome back!"
+						},
+						{
+						"type": 0,
+						"speech": "Second message"
+						}
+						]
 			}
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-			return returnJson(res, speech)
+			return returnJson(res, speech, messages)
 		})
 
 
@@ -151,10 +150,10 @@ function wakeUp(req, res){
 	return returnJson(res, speech);
 }
 
-function returnJson(res, speech){
-	console.log("Json sent")
+function returnJson(res, speech, messages){
 	return res.json({																				
 						speech: speech,
+						messages: messages,
 						displayText: speech,
 						source: 'apiai-webhook-sample'
 					});
