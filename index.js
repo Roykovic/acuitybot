@@ -40,19 +40,21 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	
-	if(!auth || req.body.sessionId != sessionId){
-	return res.json({																				
-						name: "Login",
-						displayText: speech,
-						source: 'apiai-webhook-sample',
-						followupEvent: {
-							name:"login"
-						}
-					});
+	var intent = req.body.result.metadata.intentName;
+	if(intent != login){
+		if(!auth || req.body.sessionId != sessionId){
+		return res.json({																				
+							name: "Login",
+							displayText: speech,
+							source: 'apiai-webhook-sample',
+							followupEvent: {
+								name:"login"
+							}
+						});
+		}
 	}
-	console.log(req.body.result.metadata.intentName)
-	switch (req.body.result.metadata.intentName) {
+	
+	switch () {
     case "Default Welcome Intent":
        	return wakeUp(req, res);
         break;
