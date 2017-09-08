@@ -22,6 +22,7 @@ var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
 var login = false;
+var passwordHash = require('password-hash')
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -61,7 +62,9 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Login"){
 		login = false;
 		var user = req.body.result.parameters['Username']
-		var pass = req.body.result.parameters['Password']
+		var pass = passwordHash.generate(req.body.result.parameters['Password'])
+		console.log("password")
+		console.log(pass)
 		return loginController.login(user, pass, function(succes){
 			if(succes){
 				sessionId = req.body.sessionId;
