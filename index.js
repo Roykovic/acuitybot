@@ -48,7 +48,7 @@ restService.post('/hook', function(req, res) {
     case "Login":
         
         break;
-    case "Logout"
+    case "Logout":
         
         break;
     case "updateYN":
