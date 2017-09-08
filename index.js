@@ -40,7 +40,6 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	console.log(req.body.result.metadata.intentName)
 	
 	switch (req.body.result.metadata.intentName) {
     case "Default Welcome Intent":
@@ -53,7 +52,7 @@ restService.post('/hook', function(req, res) {
         
         break;
     case "yes - update":
-         return returnJson(res, "Go fucking change it yourself you piece of shit")
+         
         break;
 
 }
