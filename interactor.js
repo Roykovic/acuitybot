@@ -1,6 +1,5 @@
+var db = require('./db');
 var exports = module.exports = {};
-
-
 
 exports.getUserInfo = function (req, res){
 	    try {
