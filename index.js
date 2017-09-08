@@ -16,6 +16,7 @@
 
 'use strict';
 
+var self = this;
 var speech = 'empty speech';
 var db = require('./db');
 var vc = require('./viewController');
@@ -60,7 +61,7 @@ restService.post('/hook', function(req, res) {
         break;
     case "Login":
 	console.log("Login reached")
-		login();
+		self.login();
         break;
     case "Logout":
         sessionId = "";
