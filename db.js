@@ -25,6 +25,7 @@ exports.query = function (column, variable, callBack){
 }
 
 exports.updateQuery = function(column, variables, callBack){
+	console.log('updatequery')
 	if(column && variables){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
