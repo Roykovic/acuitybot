@@ -43,6 +43,7 @@ restService.post('/hook', function(req, res) {
 	var intent = req.body.result.metadata.intentName;
 	if(intent != login){
 		if(!auth || req.body.sessionId != sessionId){
+			console.log("if statement")
 		return res.json({																				
 							name: "Login",
 							displayText: speech,
