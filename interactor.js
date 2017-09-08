@@ -1,4 +1,8 @@
-function getUserInfo(req, res){
+var exports = module.exports = {};
+
+
+
+exports.getUserInfo = function (req, res){
 	    try {
 		var fullName = req.body.result.parameters['sf-name']
 		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
@@ -38,7 +42,7 @@ function getUserInfo(req, res){
     }
 }
 
-function returnJson(res, speech, messages){
+exports.returnJson = function (res, speech, messages){
 	return res.json({																				
 						speech: speech,
 						messages: messages,
