@@ -3,6 +3,7 @@
 var self = this;
 var exports = module.exports = {};
 var db = require('./db');
+var passwordHash = require('password-hash');
 
 exports.login = function (username, password, callback){
 	db.getUser(username, function(result){
