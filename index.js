@@ -51,13 +51,13 @@ restService.post('/hook', function(req, res) {
 						}
 					});
 	}
-	
+	console.log(req.body.result.metadata.intentName)
 	switch (req.body.result.metadata.intentName) {
     case "Default Welcome Intent":
        	return wakeUp(req, res);
         break;
     case "Login":
-	console.log("LOGIN2")
+	console.log("Login reached")
 		return login();
         break;
     case "Logout":
