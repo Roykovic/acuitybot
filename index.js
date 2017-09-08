@@ -52,7 +52,7 @@ restService.post('/hook', function(req, res) {
     case "Logout":
         
         break;
-    case "updateYN":
+    case "yes - update":
          return returnJson(res, "Go fucking change it yourself you piece of shit")
         break;
 
