@@ -109,7 +109,7 @@ function wakeUp(req, res){
 			}
 		}
 	}
-	return interactor.interactor.returnJson(res, speech);
+	return interactor.returnJson(res, speech);
 }
 
 
