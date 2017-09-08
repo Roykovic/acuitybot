@@ -18,7 +18,6 @@
 
 var speech = 'empty speech';
 var db = require('./db');
-var interactor = require('./interactor');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
@@ -26,7 +25,7 @@ var login = false;
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
-// Add headers
+
 restService.use(function (req, res, next) {															//Method to allow http request from login site, this is a WIP, as there is no login site yet...
     res.setHeader('Access-Control-Allow-Origin', 'http://html-login.herokuapp.com');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -55,8 +54,7 @@ restService.post('/hook', function(req, res) {
 		return loginController.login(user, pass, function(succes){
 			if(succes){
 				sessionId = req.body.sessionId;
-				auth = true;
-				var answerSpeech = interactor.getUserInfo("John Bond", "address", res);
+				auth = true;		
 				speech = ""
 				var messages = [
 						{
@@ -65,7 +63,7 @@ restService.post('/hook', function(req, res) {
 						},
 						{
 						"type": 0,
-						"speech": answerSpeech
+						"speech": "Second message"
 						}
 						]
 			}
@@ -74,7 +72,10 @@ restService.post('/hook', function(req, res) {
 			}
 			return returnJson(res, speech, messages)
 		})
+
+
 	}
+	
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";
 			auth = false;
@@ -92,9 +93,38 @@ restService.post('/hook', function(req, res) {
 						});
 		}
 	}
-	var name = req.body.result.parameters['sf-name'];
-	var column = req.body.result.parameters['Variable_row']
-	return interactor.getUserInfo(name, column, res)
+    try {
+		var fullName = req.body.result.parameters['sf-name']
+		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
+			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
+			if(result && result.rows[0]){															//If there is a result
+				var resultObject = result.rows[0]
+				var keys = Object.keys(resultObject);
+				var resultKey = keys[0]
+				var answer = resultObject[resultKey];												//Get the first property present in the result.rows[0] object
+				if(!answer){
+					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
+				}
+				else{
+					speech =  fullName + "\'s " + resultKey + " is " + answer;
+				}
+				
+				return returnJson(res, speech)
+			};
+					
+			})	
+		})
+				
+	} 
+	catch (err) {
+        console.error("Can't process request", err);
+        return res.status(400).json({
+            status: {
+                code: 400,
+                errorType: err.message
+            }
+        });
+    }
 })
 
 restService.listen((process.env.PORT || 5000), function () {
@@ -123,5 +153,6 @@ function returnJson(res, speech, messages){
 						source: 'apiai-webhook-sample'
 					});
 }
+
 
 
