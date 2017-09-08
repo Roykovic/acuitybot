@@ -61,6 +61,7 @@ restService.post('/hook', function(req, res) {
         break;
     case "Login":
 	console.log("Login reached")
+	console.log(self)
 		self.login();
         break;
     case "Logout":
