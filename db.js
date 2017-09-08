@@ -32,10 +32,10 @@ exports.updateQuery = function(column, variables, callBack){
 			})
 			pool.connect(function(err, client) {
 			  if (err) throw err;
-			  console.log('Connected to postgres! Getting schemas...');
+			  console.log('Connected to postgres! Getting schemas for update...');
 			  client
 				.query('UPDATE salesforce.contact SET '+column+'=$1 WHERE name =$2', variables)
-				.then(console.log(query.sql))
+				.then(callback())
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 				return;
 			})
