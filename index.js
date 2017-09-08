@@ -41,6 +41,21 @@ restService.use(bodyParser.json());
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	
+	switch (req.body.result.metadata.intentName) {
+    case "Default Welcome Intent":
+       
+        break;
+    case "Login":
+        
+        break;
+    case "Logout"
+        
+        break;
+    case "updateYN":
+         returnJson(res, "Go fucking change it yourself you piece of shit")
+        break;
+
+}
 	
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
