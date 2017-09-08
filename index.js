@@ -117,6 +117,7 @@ restService.listen((process.env.PORT || 5000), function () {
 });
 
 function login(){
+	console.log("login function")
 			login = false;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
