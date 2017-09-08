@@ -41,58 +41,35 @@ restService.use(bodyParser.json());
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	
+	
+	if(!auth || req.body.sessionId != sessionId){
+	return res.json({																				
+						name: "Login",
+						displayText: speech,
+						source: 'apiai-webhook-sample',
+						followupEvent: {
+							name:"login"
+						}
+					});
+	}
+	
 	switch (req.body.result.metadata.intentName) {
     case "Default Welcome Intent":
-       
+       	return wakeUp(req, res);
         break;
     case "Login":
-        
+		return login;
         break;
     case "Logout":
-        
+        sessionId = "";
+		auth = false;
+		return returnJson(res, "User logged out succesfully, see you later!");
         break;
     case "yes - update":
-         
+        console.log(req.body) 
         break;
 
 }
-	
-	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
-		return wakeUp(req, res);
-	}	 
-	if(req.body.result.metadata.intentName == "Login"){
-		login = false;
-		var user = req.body.result.parameters['Username']
-		var pass = req.body.result.parameters['Password']
-		return loginController.login(user, pass, function(succes){
-			if(succes){
-				sessionId = req.body.sessionId;
-				auth = true;		
-				speech = "Login succesful, welcome back!"
-			}
-			else{
-				speech = "Login failed, please check username and password"	
-			}
-			return returnJson(res, speech)
-		})
-	}
-	if(req.body.result.metadata.intentName == "Logout"){
-			sessionId = "";
-			auth = false;
-		return returnJson(res, "User logged out succesfully, see you later!");
-	}
-	if(!login){
-		if(!auth || req.body.sessionId != sessionId){
-		return res.json({																				
-							name: "Login",
-							displayText: speech,
-							source: 'apiai-webhook-sample',
-							followupEvent: {
-								name:"login"
-							}
-						});
-		}
-	}
     try {
 		var fullName = req.body.result.parameters['sf-name']
 		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
@@ -138,6 +115,23 @@ restService.post('/hook', function(req, res) {
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
+
+function login(){
+			login = false;
+		var user = req.body.result.parameters['Username']
+		var pass = req.body.result.parameters['Password']
+		return loginController.login(user, pass, function(succes){
+			if(succes){
+				sessionId = req.body.sessionId;
+				auth = true;		
+				speech = "Login succesful, welcome back!"
+			}
+			else{
+				speech = "Login failed, please check username and password"	
+			}
+			return returnJson(res, speech)
+		})
+}
 
 function wakeUp(req, res){
 	if (req.body) {
