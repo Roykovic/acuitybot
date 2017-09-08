@@ -68,7 +68,12 @@ restService.post('/hook', function(req, res) {
 		return returnJson(res, "User logged out succesfully, see you later!");
         break;
     case "data for update":
-        console.log(req.body.result.contexts[0]) 
+	var request = req.body.result.contexts[0]
+	var column = request.parameters.Variable_row;
+	var variables = [request.parameters.variable, request.parameters.sf-name];
+        db.updateQuery(column, variables, function(){
+			console.log("ja dingen enzo")
+		}
         break;
 
 }
@@ -120,6 +125,7 @@ restService.listen((process.env.PORT || 5000), function () {
 
 function login(req, res){
 	console.log("login function")
+			login = false;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
 		return loginController.login(user, pass, function(succes){

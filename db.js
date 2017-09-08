@@ -1,4 +1,4 @@
-'use strict'
+'use strict' "
 
 var self = this;
 var connectionString = require('./config/config.js');
@@ -24,8 +24,8 @@ exports.query = function (column, variable, callBack){
 		callBack(null)
 }
 
-exports.updateQuery = function(columns, variables, callBack){
-	if(column && variable){
+exports.updateQuery = function(column, variables, callBack){
+	if(column && variables){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
 			  connectionString: connectionString,
@@ -34,7 +34,7 @@ exports.updateQuery = function(columns, variables, callBack){
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
-				.query('UPDATE salesforce.contact SET '+columns[0]+'=$1 WHERE '+columns[2]+'=$2', variables)
+				.query('UPDATE salesforce.contact SET '+column+'=$1 WHERE name =$2', variables)
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 				return;
 			})
