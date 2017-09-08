@@ -57,6 +57,7 @@ restService.post('/hook', function(req, res) {
        	return wakeUp(req, res);
         break;
     case "Login":
+	console.log("LOGIN2")
 		return login();
         break;
     case "Logout":
