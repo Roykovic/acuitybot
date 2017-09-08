@@ -1,7 +1,7 @@
 var db = require('./db');
 var exports = module.exports = {};
 
-exports.getUserInfo = function (fullName, column, res){
+exports.getUserInfo = function (fullName, column){
 	    try {
 		db.checkColumn(column, function(column){				//check if the column exists in the db (to prevent exploits)
 			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
@@ -33,13 +33,4 @@ exports.getUserInfo = function (fullName, column, res){
             }
         });
     }
-}
-
-exports.returnJson = function (res, speech, messages){
-	return res.json({																				
-						speech: speech,
-						messages: messages,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
 }

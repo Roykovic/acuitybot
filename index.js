@@ -18,6 +18,7 @@
 
 var speech = 'empty speech';
 var db = require('./db');
+var vc = require('./viewController');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
@@ -63,7 +64,7 @@ restService.post('/hook', function(req, res) {
 						},
 						{
 						"type": 0,
-						"speech": "Second message"
+						"speech": vc.getUserInfo("John Bond", "address")
 						}
 						]
 			}
