@@ -11,6 +11,8 @@ exports.login = function (username, password, callback){
 		if(result){
 			dbPass = result.rows[0].pass__c; 
 		}
+		console.log(password)
+		console.log(dbPass)
 		var succes = passwordHash.verify(password, dbPass)
 		callback(succes);
 	})
