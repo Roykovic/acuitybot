@@ -41,8 +41,9 @@ restService.use(bodyParser.json());
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	var intent = req.body.result.metadata.intentName;
-	if(intent != "login"){
+	if(intent != "Login"){
 		if(!auth || req.body.sessionId != sessionId){
+			console.log('if statement')
 		return res.json({																				
 							name: "Login",
 							displayText: speech,
