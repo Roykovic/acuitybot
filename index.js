@@ -22,7 +22,7 @@ var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
 var login = false;
-var passwordHash = require('password-hash');
+	  var passwordHash = require('password-hash');
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -53,6 +53,7 @@ restService.use(bodyParser.json());
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	
+	
 	if(req.body.result.metadata.intentName == "Default Welcome Intent" || req.body.result.action.includes("smalltalk.")){
 		return wakeUp(req, res);
 	}	 
@@ -61,9 +62,7 @@ restService.post('/hook', function(req, res) {
 	if(req.body.result.metadata.intentName == "Login"){
 		login = false;
 		var user = req.body.result.parameters['Username']
-		var pass = passwordHash.generate(req.body.result.parameters['Password'])
-		console.log("hashedpass")
-		console.log(pass)
+		var pass = req.body.result.parameters['Password']
 		return loginController.login(user, pass, function(succes){
 			if(succes){
 				sessionId = req.body.sessionId;

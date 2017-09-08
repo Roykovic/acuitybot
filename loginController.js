@@ -10,7 +10,7 @@ exports.login = function (username, password, callback){
 		if(result){
 			dbPass = result.rows[0].pass__c; 
 		}
-		var succes = result.rows[0].pass__c == password;
+		var succes = passwordHash.verify(password, dbPass)
 		callback(succes);
 	})
 }
