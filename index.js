@@ -43,7 +43,6 @@ restService.post('/hook', function(req, res) {
 	var intent = req.body.result.metadata.intentName;
 	if(intent != "Login"){
 		if(!auth || req.body.sessionId != sessionId){
-			console.log('if statement')
 		return res.json({																				
 							name: "Login",
 							displayText: speech,
@@ -61,7 +60,7 @@ restService.post('/hook', function(req, res) {
         break;
     case "Login":
 	console.log("Login reached")
-		return login();
+		login();
         break;
     case "Logout":
         sessionId = "";
