@@ -17,7 +17,7 @@ exports.getUserInfo = function (fullName, column, res){
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				
-				return exports.returnJson(res, speech)
+				return speech
 			};
 					
 			})	

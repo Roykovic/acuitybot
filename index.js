@@ -56,7 +56,7 @@ restService.post('/hook', function(req, res) {
 			if(succes){
 				sessionId = req.body.sessionId;
 				auth = true;
-				interactor
+				var answerSpeech = interactor.getUserInfo("John Bond", "address", res);
 				speech = ""
 				var messages = [
 						{
@@ -65,20 +65,20 @@ restService.post('/hook', function(req, res) {
 						},
 						{
 						"type": 0,
-						"speech": "Second message"
+						"speech": answerSpeech
 						}
 						]
 			}
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-			return interactor.returnJson(res, speech, messages)
+			return returnJson(res, speech, messages)
 		})
 	}
 	if(req.body.result.metadata.intentName == "Logout"){
 			sessionId = "";
 			auth = false;
-		return interactor.returnJson(res, "User logged out succesfully, see you later!");
+		return returnJson(res, "User logged out succesfully, see you later!");
 	}
 	if(!login){
 		if(!auth || req.body.sessionId != sessionId){
@@ -112,8 +112,16 @@ function wakeUp(req, res){
 			}
 		}
 	}
-	return interactor.returnJson(res, speech);
+	return returnJson(res, speech);
 }
 
+function returnJson(res, speech, messages){
+	return res.json({																				
+						speech: speech,
+						messages: messages,
+						displayText: speech,
+						source: 'apiai-webhook-sample'
+					});
+}
 
 
