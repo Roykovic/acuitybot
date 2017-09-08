@@ -36,7 +36,7 @@ exports.updateQuery = function(column, variables, callBack){
 			  console.log('Connected to postgres! Getting schemas for update...');
 			  client
 				.query('UPDATE salesforce.contact SET '+column+'=$1 WHERE name =$2', variables)
-				.then(callback())
+				.then(callBack())
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 				return;
 			})
