@@ -40,7 +40,7 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	
+	console.log(req.body.result.metadata.intentName)
 	
 	if(!auth || req.body.sessionId != sessionId){
 	return res.json({																				
