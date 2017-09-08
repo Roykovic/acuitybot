@@ -73,7 +73,7 @@ restService.post('/hook', function(req, res) {
 	var variables = [request.parameters.variable, request.parameters.sf-name];
         db.updateQuery(column, variables, function(){
 			console.log("ja dingen enzo")
-		}
+		})
         break;
 
 }
