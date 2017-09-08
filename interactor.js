@@ -1,10 +1,9 @@
 var db = require('./db');
 var exports = module.exports = {};
 
-exports.getUserInfo = function (req, res){
+exports.getUserInfo = function (fullName, column, res){
 	    try {
-		var fullName = req.body.result.parameters['sf-name']
-		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
+		db.checkColumn(column, function(column){				//check if the column exists in the db (to prevent exploits)
 			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 			if(result && result.rows[0]){															//If there is a result
 				var resultObject = result.rows[0]
@@ -18,12 +17,7 @@ exports.getUserInfo = function (req, res){
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				
-				//return returnJson(res, speech)
-					return res.json({																				
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample'
-					});
+				return returnJson(res, speech)
 			};
 					
 			})	

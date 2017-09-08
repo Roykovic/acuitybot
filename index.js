@@ -55,7 +55,8 @@ restService.post('/hook', function(req, res) {
 		return loginController.login(user, pass, function(succes){
 			if(succes){
 				sessionId = req.body.sessionId;
-				auth = true;		
+				auth = true;
+				interactor
 				speech = ""
 				var messages = [
 						{
@@ -91,7 +92,9 @@ restService.post('/hook', function(req, res) {
 						});
 		}
 	}
-	return interactor.getUserInfo(req, res)
+	var name = req.body.result.parameters['sf-name'];
+	var column = req.body.result.parameters['Variable_row']
+	return interactor.getUserInfo(name, column, res)
 })
 
 restService.listen((process.env.PORT || 5000), function () {
