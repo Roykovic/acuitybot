@@ -23,7 +23,6 @@ var vc = require('./viewController');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
-var login = false;
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
