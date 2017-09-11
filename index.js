@@ -73,7 +73,7 @@ restService.post('/hook', function(req, res) {
 						return returnJson(res, "Record added to database", []);
 			})
 		break;
-	default:
+	case "User-info":
 		try {
 		var fullName = req.body.result.parameters['sf-name']
 		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
@@ -114,6 +114,16 @@ restService.post('/hook', function(req, res) {
             }
         });
     }
+		break;
+	default:
+		return res.json({																				
+								name: "Fallback",
+								displayText: speech,
+								source: 'apiai-webhook-sample',
+								followupEvent: {
+									name:"input.unknown"
+								}
+							});
 		break;
 	}
 })
