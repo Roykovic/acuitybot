@@ -69,7 +69,7 @@ restService.post('/hook', function(req, res) {
 		var column = request.parameters.Variable_row;
 		var variables = [request.parameters['variable'], request.parameters['sf-name']];
 			db.updateQuery(column, variables, function(){
-						return returnJson(res, "Record added to database", [{"name":"yes-update", "lifespan":0, "parameters":{}}]);
+						return returnJson(res, "Record added to database");
 			})
 		break;
 	case "User-info":
@@ -159,7 +159,7 @@ function wakeUp(req, res){
 function returnJson(res, speech, messages){
 	return res.json({																				
 						speech: speech,
-						contextOut: messages,
+						//contextOut: messages,
 						displayText: speech,
 						source: 'apiai-webhook-sample'
 					});
