@@ -40,25 +40,24 @@ restService.use(bodyParser.json());
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	var intent = req.body.result.metadata.intentName;
-	if(intent != "Login"){
-		if(!auth || req.body.sessionId != sessionId){
-		return res.json({																				
-							name: "Login",
-							displayText: speech,
-							source: 'apiai-webhook-sample',
-							followupEvent: {
-								name:"login"
-							}
-						});
-		}
-	}
+	// if(intent != "Login"){
+		// if(!auth || req.body.sessionId != sessionId){
+		// return res.json({																				
+							// name: "Login",
+							// displayText: speech,
+							// source: 'apiai-webhook-sample',
+							// followupEvent: {
+								// name:"login"
+							// }
+						// });
+		// }
+	// }
 	
 	switch (intent) {
     case "Default Welcome Intent":
        	return wakeUp(req, res);
         break;
     case "Login":
-	console.log("Login reached")
 		return login(req, res);
         break;
     case "Logout":
@@ -123,7 +122,6 @@ restService.listen((process.env.PORT || 5000), function () {
 });
 
 function login(req, res){
-	console.log("login function")
 			login = false;
 		var user = req.body.result.parameters['Username']
 		var pass = req.body.result.parameters['Password']
