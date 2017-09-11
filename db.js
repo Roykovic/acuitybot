@@ -26,6 +26,7 @@ exports.query = function (column, variable, callBack){
 
 exports.updateQuery = function(column, variables, callBack){
 	console.log('updatequery')
+	console.log(column && variables)
 	if(column && variables){
 		console.log("Column")
 		console.log(column)
