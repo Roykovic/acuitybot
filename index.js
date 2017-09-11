@@ -40,7 +40,7 @@ restService.use(bodyParser.json());
 restService.post('/hook', function(req, res) {
     console.log('hook request');
 	var intent = req.body.result.metadata.intentName;
-	// if(intent != "Login"){
+	if(intent != "Login"){
 		// if(!auth || req.body.sessionId != sessionId){
 		// return res.json({																				
 							// name: "Login",
@@ -51,7 +51,7 @@ restService.post('/hook', function(req, res) {
 							// }
 						// });
 		// }
-	// }
+	}
 	
 	switch (intent) {
     case "Default Welcome Intent":
@@ -70,9 +70,9 @@ restService.post('/hook', function(req, res) {
 		var column = request.parameters.Variable_row;
 		var variables = [request.parameters['variables'], request.parameters['sf-name']];
 			db.updateQuery(column, variables, function(){
+						return returnJson(res, "Record added to database");
+						break;
 			})
-		return returnJson(res, "Record added to database");
-        break;
 
 }
     try {
