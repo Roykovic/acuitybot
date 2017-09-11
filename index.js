@@ -16,7 +16,6 @@
 
 'use strict';
 
-var self = this;
 var speech = 'empty speech';
 var db = require('./db');
 var loginController = require('./loginController')
@@ -62,10 +61,9 @@ restService.post('/hook', function(req, res) {
 		auth = false;
 		return returnJson(res, "User logged out succesfully, see you later!");
         break;
+	case "update":	
     case "data for update":
 		var request = req.body.result.contexts[0]
-		console.log("request")
-		console.log(request)
 		var column = request.parameters.Variable_row;
 		var variables = [request.parameters['variable'], request.parameters['sf-name']];
 			db.updateQuery(column, variables, function(){
@@ -119,7 +117,6 @@ restService.post('/hook', function(req, res) {
         break;
 	}
 })
-
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
