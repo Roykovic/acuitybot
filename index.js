@@ -54,9 +54,6 @@ restService.post('/hook', function(req, res) {
 	}
 	
 	switch (intent) {
-    case "Default Welcome Intent":
-       	return wakeUp(req, res);
-        break;
     case "Login":
 		return login(req, res);
         break;
@@ -116,15 +113,8 @@ restService.post('/hook', function(req, res) {
     }
 		break;
 	default:
-		return res.json({																				
-								name: "Fallback",
-								displayText: speech,
-								source: 'apiai-webhook-sample',
-								followupEvent: {
-									name:"input.unknown"
-								}
-							});
-		break;
+       	return wakeUp(req, res);
+        break;
 	}
 })
 
