@@ -71,7 +71,7 @@ restService.post('/hook', function(req, res) {
 		console.log('Column')
 		console.log(column)
 		console.log('variables')
-		console.log(request.parameters['variables'])
+		console.log(request.parameters['variable'])
 		console.log('sf-name')
 		console.log(request.parameters['sf-name'])
 		var variables = [request.parameters['variables'], request.parameters['sf-name']];
