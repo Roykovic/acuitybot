@@ -71,8 +71,8 @@ restService.post('/hook', function(req, res) {
 		var variables = [request.parameters['variables'], request.parameters['sf-name']];
 			db.updateQuery(column, variables, function(){
 						return returnJson(res, "Record added to database");
-						break;
 			})
+		break;
 
 }
     try {
