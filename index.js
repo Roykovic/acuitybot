@@ -19,7 +19,6 @@
 var self = this;
 var speech = 'empty speech';
 var db = require('./db');
-var vc = require('./viewController');
 var loginController = require('./loginController')
 var auth = false;
 var sessionId = "";
