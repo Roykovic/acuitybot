@@ -114,9 +114,9 @@ restService.post('/hook', function(req, res) {
             }
         });
     }
-})
-		break;
 }
+		break;
+})
 
 
 restService.listen((process.env.PORT || 5000), function () {
