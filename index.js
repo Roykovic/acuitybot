@@ -73,9 +73,8 @@ restService.post('/hook', function(req, res) {
 						return returnJson(res, "Record added to database");
 			})
 		break;
-
-}
-    try {
+	default:
+		try {
 		var fullName = req.body.result.parameters['sf-name']
 		db.checkColumn(req.body.result.parameters['Variable_row'], function(column){				//check if the column exists in the db (to prevent exploits)
 			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
@@ -116,6 +115,9 @@ restService.post('/hook', function(req, res) {
         });
     }
 })
+		break;
+}
+
 
 restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
