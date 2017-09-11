@@ -114,8 +114,8 @@ restService.post('/hook', function(req, res) {
             }
         });
     }
-}
 		break;
+	}
 })
 
 
