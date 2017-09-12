@@ -67,7 +67,7 @@ restService.post('/hook', function(req, res) {
 		var column = request.parameters.Variable_row;
 		var variables = [request.parameters['variable'], request.parameters['sf-name']];
 			db.updateQuery(column, variables, function(){
-						return returnJson(res, request.parameters['sf-name']+"s"+column+" changed to "+[request.parameters['variable']);
+						return returnJson(res, request.parameters['sf-name']+"\'s"+column+" changed to "+request.parameters['variable']);
 			})
 		break;
 	case "User-info":
