@@ -1,3 +1,5 @@
+'use strict'
+
 var exports = module.exports = {};
 var db = require('./db');
 
@@ -13,14 +15,12 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 				var resultKey = keys[0]
 				var answer = resultObject[resultKey];												//Get the first property present in the result.rows[0] object
 				if(!answer){
-					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey;
-					return callback("", "update")
+					return callback("", "update")													//the query returned 'null' so the record doesn't exist, the user is now given an update event
 				}
 				else{
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
-				
-				return callback(speech)
+				return callback(speech)																//the value is shown to the user
 			};
 					
 			})	

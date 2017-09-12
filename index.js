@@ -45,16 +45,16 @@ restService.post('/hook', function(req, res) {
 	result = res;
 	var intent = req.body.result.metadata.intentName;
 	if(intent != "Login"){
-		// if(!auth || request.body.sessionId != sessionId){
-		// return result.json({																				
-							// name: "Login",
-							// displayText: speech,
-							// source: 'apiai-webhook-sample',
-							// followupEvent: {
-								// name:"login"
-							// }
-						// });
-		// }
+//		if(!auth || request.body.sessionId != sessionId){
+//		return result.json({																				
+//							name: "Login",
+//							displayText: speech,
+//							source: 'apiai-webhook-sample',
+//							followupEvent: {
+//								name:"login"
+//							}
+//						});
+//		}
 	}
 	
 	switch (intent) {
@@ -93,20 +93,20 @@ restService.listen((process.env.PORT || 5000), function () {
 });
 
 function login(){
-			login = false;
-		var user = request.body.result.parameters['Username']
-		var pass = request.body.result.parameters['Password']
-		return loginController.login(user, pass, function(succes){
-			if(succes){
-				sessionId = request.body.sessionId;
-				auth = true;		
-				speech = "Login succesful, welcome back!"
-			}
-			else{
-				speech = "Login failed, please check username and password"	
-			}
-			return returnJson(speech)
-		})
+	login = false;
+	var user = request.body.result.parameters['Username']
+	var pass = request.body.result.parameters['Password']
+	return loginController.login(user, pass, function(succes){
+		if(succes){
+			sessionId = request.body.sessionId;
+			auth = true;		
+			speech = "Login succesful, welcome back!"
+		}
+		else{
+			speech = "Login failed, please check username and password"	
+		}
+		return returnJson(speech)
+	})
 }
 
 function wakeUp(){
