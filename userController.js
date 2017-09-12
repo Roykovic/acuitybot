@@ -18,7 +18,7 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 					return callback("", "update")													//the query returned 'null' so the record doesn't exist, the user is now given an update event
 				}
 				else{
-					speech =  fullName + "\'s " + resultKey + " is " + answer;
+					var speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				return callback(speech)																//the value is shown to the user
 			};
