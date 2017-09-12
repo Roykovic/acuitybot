@@ -16,6 +16,8 @@
 
 'use strict';
 
+var request;
+var result;
 var speech = 'empty speech';
 var db = require('./db');
 var loginController = require('./loginController')
@@ -39,10 +41,12 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
+	request = req;
+	result = res;
 	var intent = req.body.result.metadata.intentName;
 	if(intent != "Login"){
-		// if(!auth || req.body.sessionId != sessionId){
-		// return res.json({																				
+		// if(!auth || request.body.sessionId != sessionId){
+		// return result.json({																				
 							// name: "Login",
 							// displayText: speech,
 							// source: 'apiai-webhook-sample',
@@ -55,29 +59,31 @@ restService.post('/hook', function(req, res) {
 	
 	switch (intent) {
     case "Login":
-		return login(req, res);
+		return login();
         break;
     case "Logout":
         sessionId = "";
 		auth = false;
-		return returnJson(res, "User logged out succesfully, see you later!");
+		return returnJson("User logged out succesfully, see you later!");
         break;
 	case "update":	
     case "data for update":
-		var request = req.body.result.contexts[0]
-		var column = request.parameters.Variable_row;
-		var variables = [request.parameters['variable'], request.parameters['sf-name']];
+		var context = req.body.result.contexts[0]
+		var column = context.parameters.Variable_row;
+		var variables = [context.parameters['variable'], context.parameters['sf-name']];
 			db.updateQuery(column, variables, function(){
-			return returnJson(res, request.parameters['sf-name']+"\'s "+column+" changed to "+request.parameters['variable']);
+			return returnJson(context.parameters['sf-name']+"\'s "+column+" changed to "+context.parameters['variable']);
 			})
 		break;
 	case "User-info":
-		var fullName = req.body.result.parameters['sf-name']
-		var column = req.body.result.parameters['Variable_row']
-		return userController.getUserInfo(fullName, column, function(){});
+		var fullName = request.body.result.parameters['sf-name']
+		var column = request.body.result.parameters['Variable_row']
+		userController.getUserInfo(fullName, column, function(speech, followUp){
+			return returnJson(speech, followUp)
+		});
 		break;
 	default:
-       	return wakeUp(req, res);
+       	return wakeUp();
         break;
 	}
 })
@@ -86,43 +92,45 @@ restService.listen((process.env.PORT || 5000), function () {
     console.log("Server listening");
 });
 
-function login(req, res){
+function login(){
 			login = false;
-		var user = req.body.result.parameters['Username']
-		var pass = req.body.result.parameters['Password']
+		var user = request.body.result.parameters['Username']
+		var pass = request.body.result.parameters['Password']
 		return loginController.login(user, pass, function(succes){
 			if(succes){
-				sessionId = req.body.sessionId;
+				sessionId = request.body.sessionId;
 				auth = true;		
 				speech = "Login succesful, welcome back!"
 			}
 			else{
 				speech = "Login failed, please check username and password"	
 			}
-			return returnJson(res, speech)
+			return returnJson(speech)
 		})
 }
 
-function wakeUp(req, res){
-	if (req.body) {
-		if (req.body.result) {
+function wakeUp(){
+	if (request.body) {
+		if (request.body.result) {
 			speech = '';
 
-			if (req.body.result.fulfillment) {
-				speech += req.body.result.fulfillment.speech;
+			if (request.body.result.fulfillment) {
+				speech += request.body.result.fulfillment.speech;
 				speech += ' ';
 			}
 		}
 	}
-	return returnJson(res, speech);
+	return returnJson(speech);
 }
 
-function returnJson(res, speech, messages){
-	return res.json({																				
+function returnJson(speech, followUp){
+	return result.json({																				
 						speech: speech,
-						//contextOut: messages,
 						displayText: speech,
-						source: 'apiai-webhook-sample'
+						source: 'apiai-webhook-sample',
+						followupEvent: {
+							name:followUp
+						}						
 					});
 }
 

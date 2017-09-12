@@ -13,21 +13,14 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 				var resultKey = keys[0]
 				var answer = resultObject[resultKey];												//Get the first property present in the result.rows[0] object
 				if(!answer){
-					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey; 
-					return res.json({																				
-							name: "Login",
-							displayText: speech,
-							source: 'apiai-webhook-sample',
-							followupEvent: {
-								name:"update"
-							}
-						});
+					speech = "Sorry i could"+[[][[]]+[]][+[]][++[+[]][+[]]]+"'t find " + fullName + "\'s " + resultKey;
+					return callback("", "update")
 				}
 				else{
 					speech =  fullName + "\'s " + resultKey + " is " + answer;
 				}
 				
-				return returnJson(res, speech)
+				return callback(speech)
 			};
 					
 			})	
