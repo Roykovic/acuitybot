@@ -150,7 +150,8 @@ var req = http.request(options, function (res) {
 
   res.on("end", function () {
     var body = Buffer.concat(chunks);
-    console.log(body.toString());
+    console.log(res);
+	console.log(chunks);
   });
 });
 
