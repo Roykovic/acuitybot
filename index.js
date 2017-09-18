@@ -140,22 +140,22 @@ function wakeUp(){
 
 function getJSON(options)
 {
-var req = http.request(options, function (res) {
+var httpRequest = http.request(options, function (httpResult) {
   var chunks = [];
 
-  res.on("data", function (chunk) {
+  httpResult.on("data", function (chunk) {
 	  console.log("chunk")
 	  console.log(chunk)
     chunks.push(chunk);
   });
 
-  res.on("end", function () {
+  httpResult.on("end", function () {
     var body = Buffer.concat(chunks);
 	//returnJson(chunks)
   });
 });
 
-req.end();
+httpRequest.end();
 }
 
 function returnJson(speech, followUp){
