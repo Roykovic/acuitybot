@@ -154,6 +154,7 @@ var req = http.request(options, function (res) {
 });
 
 req.end();
+returnJson(res.statusCode)
 }
 
 function returnJson(speech, followUp){
