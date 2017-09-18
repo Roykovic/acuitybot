@@ -38,9 +38,9 @@ restService.use(function (req, res, next) {															//Method to allow http
 restService.use(bodyParser.urlencoded({ extended: true }));        
 restService.use(bodyParser.json());
 
-
 restService.post('/hook', function(req, res) {
     console.log('hook request');
+	console.log(req)
 	request = req;
 	result = res;
 	var intent = req.body.result.metadata.intentName;
@@ -82,6 +82,18 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech, followUp)
 		});
 		break;
+	case "ibmtest":
+		function httpGetAsync(theUrl, callback)
+		{
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.onreadystatechange = function() { 
+				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+					callback(xmlHttp.responseText);
+			}
+			xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+			xmlHttp.send(null);
+		}
+		break;		
 	default:
        	return wakeUp();
         break;

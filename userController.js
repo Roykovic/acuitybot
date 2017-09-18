@@ -5,8 +5,6 @@ var db = require('./db');
 
 exports.getUserInfo = function (fullName, Pcolumn, callback){
 	try {
-		//var fullName = req.body.result.parameters['sf-name']
-		//var column = req.body.result.parameters['Variable_row']
 		db.checkColumn(Pcolumn , function(column){													//check if the column exists in the db (to prevent exploits)
 			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 			if(result && result.rows[0]){															//If there is a result
