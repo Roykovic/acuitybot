@@ -151,10 +151,10 @@ var req = http.request(options, function (res) {
     var body = Buffer.concat(chunks);
     console.log(body.toString());
   });
+  returnJson(res.statusCode)
 });
 
 req.end();
-returnJson(res.statusCode)
 }
 
 function returnJson(speech, followUp){
