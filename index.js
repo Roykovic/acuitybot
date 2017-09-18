@@ -149,11 +149,11 @@ function getJSON(options, onResult)
         var output = '';
         console.log(options.host + ':' + res.statusCode);
         res.setEncoding('utf8');
-
+		console.log('1')
         res.on('data', function (chunk) {
             output += chunk;
         });
-
+		console.log('2')
         res.on('end', function() {
 			console.log("output")
 			console.log(output)
