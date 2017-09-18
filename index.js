@@ -83,7 +83,7 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech, followUp)
 		});
 		break;
-	case "ibmtest"	
+	case "ibmtest":	
 		var options = {
 			host: 'https://apps.ce.collabserv.com/communities/service/atom/communities/my',
 			port: 443,
