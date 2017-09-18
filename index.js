@@ -144,7 +144,7 @@ function getJSON(options, onResult)
     console.log("rest::getJSON");
 
     var port = options.port == 443 ? https : http;
-	console.log(port)
+	console.log(options.port)
     var req = port.request(options, function(res)
     {
         var output = '';
