@@ -130,24 +130,33 @@ function wakeUp(){
 function getJSON(URL, onResult)
 {
     console.log("rest::getJSON");
-	try{	
-		https.get('URL', (resp) => {
-		  let data = '';
-		  // A chunk of data has been recieved.
-		  resp.on('data', (chunk) => {
-			data += chunk;
-		  });
-		 
-		  // The whole response has been received. Print out the result.
-		  resp.on('end', () => {
-			console.log(JSON.parse(data).explanation);
-		  });
-		});
-	}
-	catch(e){
-		console.log("ERROR")
-		console.log(e)
-	}
+	try {
+    var request = https.get(URL, function(response) {
+        console.log(response.statusCode);
+    }).on("error", function(error) {
+        console.log(error.message);
+    });
+} catch(e) {
+    console.log(e);
+}
+//	try{	
+//		https.get('URL', (resp) => {
+//		  let data = '';
+//		  // A chunk of data has been recieved.
+//		  resp.on('data', (chunk) => {
+//			data += chunk;
+//		  });
+//		 
+//		  // The whole response has been received. Print out the result.
+//		  resp.on('end', () => {
+//			console.log(JSON.parse(data).explanation);
+//		  });
+//		});
+//	}
+//	catch(e){
+//		console.log("ERROR")
+//		console.log(e)
+//	}
 };
 
 function returnJson(speech, followUp){
