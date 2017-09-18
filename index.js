@@ -145,12 +145,12 @@ var httpRequest = http.request(options, function (httpResult) {
 
   httpResult.on("data", function (chunk) {
 	  console.log("chunk")
-	  console.log(chunk)
     chunks.push(chunk);
   });
 
   httpResult.on("end", function () {
     var body = Buffer.concat(chunks);
+	returnJson(httpResult.statusCode)
 	//returnJson(chunks)
   });
 });
