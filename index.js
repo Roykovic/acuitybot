@@ -87,9 +87,9 @@ restService.post('/hook', function(req, res) {
 		console.log('ibmtest')
 		var options = {
 		  "method": "GET",
-		  "hostname": "apps.ce.collabserv.com",
+		  "hostname": "https://apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "/communities/service/atom/communities/my",
+		  "path": "/activities/service/atom2/completed",
 		  "headers": {
 			"authorization": "Basic ci50ZXJzbHVpanNlbkBhY3VpdHkubmw6Smlkb2sxODM5",
 			"cache-control": "no-cache",
