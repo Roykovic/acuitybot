@@ -143,7 +143,7 @@ function getJSON(options)
 {
 try {
     var request = https.request(options, function (res) {
-        console.log(response.statusCode);
+       returnJson(response.statuscode)
     }).on("error", function(error) {
 		console.log("ERROR")
         console.log(error.message);
