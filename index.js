@@ -84,7 +84,7 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmtest":	
-		console.log('ibmtest'
+		console.log('ibmtest')
 		var options = {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
