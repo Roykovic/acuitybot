@@ -40,7 +40,6 @@ restService.use(bodyParser.json());
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
-	console.log(req)
 	request = req;
 	result = res;
 	var intent = req.body.result.metadata.intentName;
@@ -83,6 +82,7 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmtest":
+	console.log("ibmtest")
 	httpGetAsync("https://apps.ce.collabserv.com/communities/service/atom/communities/my", function(HttpResult){
 		return returnJson(HttpResult)
 	})
