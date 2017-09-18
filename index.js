@@ -141,19 +141,18 @@ function wakeUp(){
 
 function getJSON(options)
 {
-	var req = http.request(options, function (res) {
-  var chunks = [];
+try {
+    var request = https.request(options, function (res) {
+        console.log(response.statusCode);
+    }).on("error", function(error) {
+		console.log("ERROR")
+        console.log(error.message);
+    });
+} catch(e) {
+	console.log("ERROR")	
+    console.log(e);
+}
 
-  res.on("data", function (chunk) {
-    chunks.push(chunk);
-  });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-	console.log(body)
-    console.log(body.toString());
-  });
-});
 
 req.end();
 }
