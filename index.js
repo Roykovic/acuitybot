@@ -24,6 +24,8 @@ var loginController = require('./loginController')
 var userController = require('./userController')
 var auth = false;
 var sessionId = "";
+var http = require("http");
+var https = require("https");
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -81,11 +83,19 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech, followUp)
 		});
 		break;
-	case "ibmtest":
-	console.log("ibmtest")
-	httpGetAsync("https://apps.ce.collabserv.com/communities/service/atom/communities/my", function(HttpResult){
-		return returnJson(HttpResult)
-	})
+		var options = {
+			host: 'https://apps.ce.collabserv.com/communities/service/atom/communities/my',
+			port: 443,
+			path: '/some/path',
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		};
+		getJSON(options, function(statusCode, httpResult) {
+			console.log("GET RESULT")
+			console.log(httpResult)
+		});		
 		break;		
 	default:
        	return wakeUp();
@@ -128,16 +138,33 @@ function wakeUp(){
 	return returnJson(speech);
 }
 
-function httpGetAsync(theUrl, callback)
+function getJSON(options, onResult)
 {
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.onreadystatechange = function() { 
-				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-					callback(xmlHttp.responseText);
-			}
-			xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-			xmlHttp.send(null);
-		}
+    console.log("rest::getJSON");
+
+    var port = options.port == 443 ? https : http;
+    var req = port.request(options, function(res)
+    {
+        var output = '';
+        console.log(options.host + ':' + res.statusCode);
+        res.setEncoding('utf8');
+
+        res.on('data', function (chunk) {
+            output += chunk;
+        });
+
+        res.on('end', function() {
+            var obj = JSON.parse(output);
+            onResult(res.statusCode, obj);
+        });
+    });
+
+    req.on('error', function(err) {
+        //res.send('error: ' + err.message);
+    });
+
+    req.end();
+};
 
 function returnJson(speech, followUp){
 	return result.json({																				
