@@ -134,9 +134,11 @@ function getJSON(URL, onResult)
     var request = https.get(URL, function(response) {
         console.log(response.statusCode);
     }).on("error", function(error) {
+			console.log("ERROR")
         console.log(error.message);
     });
 } catch(e) {
+	console.log("ERROR")
     console.log(e);
 }
 //	try{	
