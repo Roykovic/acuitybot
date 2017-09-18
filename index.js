@@ -150,6 +150,7 @@ function getJSON(options)
 
   res.on("end", function () {
     var body = Buffer.concat(chunks);
+	console.log("HERE")
     console.log(body.toString());
   });
 });
