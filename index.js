@@ -84,19 +84,7 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmtest":	
-		var options = {
-			host: 'https://apps.ce.collabserv.com/communities/service/atom/communities/my',
-			port: '',
-			path: '/some/path',
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		};
-		getJSON(options, function(statusCode, httpResult) {
-			console.log("GET RESULT")
-			console.log(httpResult)
-		});		
+		getJSON('https://apps.ce.collabserv.com/communities/service/atom/communities/my');		
 		break;		
 	default:
        	return wakeUp();
@@ -139,35 +127,25 @@ function wakeUp(){
 	return returnJson(speech);
 }
 
-function getJSON(options, onResult)
+function getJSON(URL, onResult)
 {
     console.log("rest::getJSON");
-
-    var port = options.port == 443 ? https : http;
-	console.log(options.port)
-    var req = port.request(options, function(res)
-    {
-        var output = '';
-        console.log(options.host + ':' + res.statusCode);
-        res.setEncoding('utf8');
-		console.log('1')
-        res.on('data', function (chunk) {
-            output += chunk;
-        });
-		console.log('2')
-        res.on('end', function() {
-			console.log("output")
-			console.log(output)
-            var obj = JSON.parse(output);
-            onResult(res.statusCode, obj);
-        });
-    });
-
-    req.on('error', function(err) {
-        //res.send('error: ' + err.message);
-    });
-
-    req.end();
+	https.get('URL', (resp) => {
+	  let data = '';
+	 
+	  // A chunk of data has been recieved.
+	  resp.on('data', (chunk) => {
+		data += chunk;
+	  });
+	 
+	  // The whole response has been received. Print out the result.
+	  resp.on('end', () => {
+		console.log(JSON.parse(data).explanation);
+	  });
+	 
+	}).on("error", (err) => {
+	  console.log("Error: " + err.message);
+	});
 };
 
 function returnJson(speech, followUp){
