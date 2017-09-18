@@ -152,9 +152,6 @@ try {
 	console.log("ERROR")	
     console.log(e);
 }
-
-
-req.end();
 }
 
 function returnJson(speech, followUp){
