@@ -91,7 +91,7 @@ restService.post('/hook', function(req, res) {
 		  "port": null,
 		  "path": "/activities/service/atom2/completed",
 		  "headers": {
-			//"authorization": "Basic ci50ZXJzbHVpanNlbkBhY3VpdHkubmw6Smlkb2sxODM5",
+			"authorization": "Basic ci50ZXJzbHVpanNlbkBhY3VpdHkubmw6Smlkb2sxODM5",
 			"cache-control": "no-cache",
 		  }
 		};
