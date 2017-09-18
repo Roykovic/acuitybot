@@ -142,7 +142,7 @@ function getJSON(URL, onResult)
 		  resp.on('end', () => {
 			console.log(JSON.parse(data).explanation);
 		  });
-		}
+		});
 	}
 	catch(e){
 		console.log("ERROR")
