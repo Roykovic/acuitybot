@@ -83,16 +83,9 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmtest":
-		function httpGetAsync(theUrl, callback)
-		{
-			var xmlHttp = new XMLHttpRequest();
-			xmlHttp.onreadystatechange = function() { 
-				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-					callback(xmlHttp.responseText);
-			}
-			xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-			xmlHttp.send(null);
-		}
+	httpGetAsync(https://apps.ce.collabserv.com/communities/service/atom/communities/my, function(HttpResult){
+		return returnJson(HttpResult)
+	})
 		break;		
 	default:
        	return wakeUp();
@@ -134,6 +127,17 @@ function wakeUp(){
 	}
 	return returnJson(speech);
 }
+
+function httpGetAsync(theUrl, callback)
+{
+			var xmlHttp = new XMLHttpRequest();
+			xmlHttp.onreadystatechange = function() { 
+				if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+					callback(xmlHttp.responseText);
+			}
+			xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+			xmlHttp.send(null);
+		}
 
 function returnJson(speech, followUp){
 	return result.json({																				
