@@ -84,7 +84,18 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmtest":	
-		getJSON('https://apps.ce.collabserv.com/communities/service/atom/communities/my');		
+		var options = {
+		  "method": "GET",
+		  "hostname": "apps.ce.collabserv.com",
+		  "port": null,
+		  "path": "/communities/service/atom/communities/my",
+		  "headers": {
+			"authorization": "Basic ci50ZXJzbHVpanNlbkBhY3VpdHkubmw6Smlkb2sxODM5",
+			"cache-control": "no-cache",
+			"postman-token": "96dbebfb-d1d2-9f64-958a-c668f5c81d35"
+		  }
+		};
+		getJson(options)
 		break;		
 	default:
        	return wakeUp();
@@ -127,38 +138,22 @@ function wakeUp(){
 	return returnJson(speech);
 }
 
-function getJSON(URL, onResult)
+function getJSON(options)
 {
-    console.log("rest::getJSON");
-	try {
-    var request = https.get(URL, function(response) {
-        console.log(response.statusCode);
-    }).on("error", function(error) {
-			console.log("ERROR")
-        console.log(error.message);
-    });
-} catch(e) {
-	console.log("ERROR")
-    console.log(e);
-}
-//	try{	
-//		https.get('URL', (resp) => {
-//		  let data = '';
-//		  // A chunk of data has been recieved.
-//		  resp.on('data', (chunk) => {
-//			data += chunk;
-//		  });
-//		 
-//		  // The whole response has been received. Print out the result.
-//		  resp.on('end', () => {
-//			console.log(JSON.parse(data).explanation);
-//		  });
-//		});
-//	}
-//	catch(e){
-//		console.log("ERROR")
-//		console.log(e)
-//	}
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.end();
 };
 
 function returnJson(speech, followUp){
