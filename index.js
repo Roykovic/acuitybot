@@ -96,7 +96,7 @@ restService.post('/hook', function(req, res) {
 			"postman-token": "96dbebfb-d1d2-9f64-958a-c668f5c81d35"
 		  }
 		};
-		getJson(options)
+		getJSON(options)
 		break;		
 	default:
        	return wakeUp();
@@ -141,7 +141,6 @@ function wakeUp(){
 
 function getJSON(options)
 {
-	console.log("getjson")
 	var req = http.request(options, function (res) {
   var chunks = [];
 
