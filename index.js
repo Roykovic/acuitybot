@@ -141,17 +141,20 @@ function wakeUp(){
 
 function getJSON(options)
 {
-try {
-    var request = https.request(options, function (res) {
-       returnJson(response.statuscode)
-    }).on("error", function(error) {
-		console.log("ERROR")
-        console.log(error.message);
-    });
-} catch(e) {
-	console.log("ERROR")	
-    console.log(e);
-}
+var req = http.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function () {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+});
+
+req.end();
 }
 
 function returnJson(speech, followUp){
