@@ -93,7 +93,6 @@ restService.post('/hook', function(req, res) {
 		  "headers": {
 			"authorization": "Basic ci50ZXJzbHVpanNlbkBhY3VpdHkubmw6Smlkb2sxODM5",
 			"cache-control": "no-cache",
-			"postman-token": "96dbebfb-d1d2-9f64-958a-c668f5c81d35"
 		  }
 		};
 		getJSON(options)
