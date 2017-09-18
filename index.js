@@ -83,7 +83,7 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmtest":
-	httpGetAsync(https://apps.ce.collabserv.com/communities/service/atom/communities/my, function(HttpResult){
+	httpGetAsync("https://apps.ce.collabserv.com/communities/service/atom/communities/my", function(HttpResult){
 		return returnJson(HttpResult)
 	})
 		break;		
