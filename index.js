@@ -86,7 +86,7 @@ restService.post('/hook', function(req, res) {
 	case "ibmtest":	
 		var options = {
 			host: 'https://apps.ce.collabserv.com/communities/service/atom/communities/my',
-			port: ,
+			port: '',
 			path: '/some/path',
 			method: 'GET',
 			headers: {
