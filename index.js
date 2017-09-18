@@ -155,6 +155,8 @@ function getJSON(options, onResult)
         });
 
         res.on('end', function() {
+			console.log("output")
+			console.log(output)
             var obj = JSON.parse(output);
             onResult(res.statusCode, obj);
         });
