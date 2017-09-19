@@ -93,7 +93,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "/activities/service/atom2/todos",
+		  "path": "/activities/service/atom2/activities",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
@@ -165,7 +165,7 @@ https.get(options, (resp) => {
 			}
 			names += entries[index]['title'][0]['_'];
 		}
-		returnJson("These are you todo's: " + names);
+		returnJson("These are you activities: " + names);
 	})
   });
 
