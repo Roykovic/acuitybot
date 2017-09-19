@@ -93,7 +93,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "/activities/service/atom2/completed",
+		  "path": "/communities/service/atom/communities/my",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
@@ -158,7 +158,7 @@ https.get(options, (resp) => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, result){
 
-		returnJson((result['feed']['entry'][0]['title'][0]['_']));
+		returnJson(result['feed']['entry'][0]['title'][0]['_']);
 	})
   });
 
