@@ -159,13 +159,13 @@ https.get(options, (resp) => {
 		console.log(result['feed'])
 		var entries = result['feed']['entry'];
 		var names = ""
-		for(index = 0; index < entries.length; ++index){
+		for(var index = 0; index < entries.length; ++index){
 			names += entries[index]['title'][0]['_'];
 			if(index>0){
 				names+=" ,"
 			}
 		}
-		returnJson("These are you todo's " + names);
+		returnJson("These are you todo's: " + names);
 	})
   });
 
