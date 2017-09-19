@@ -167,12 +167,9 @@ https.get(options, (resp) => {
 		}
 		
 		return result.json({																				
-						speech: speech,
-						displayText: speech,
-						source: 'apiai-webhook-sample',
-						followupEvent: {
-							name:followUp
-						},	
+						speech: "Hans",
+						displayText: "Hans",
+						source: 'apiai-webhook-sample',,	
 						messages: [
 								{
 								  "type": 4,
