@@ -143,24 +143,45 @@ function wakeUp(){
 
 function getJSON(options)
 {
-var req = http.request(options, function (res) {
-  var chunks = [];
-
-  res.on("data", function (chunk) {
-	  console.log("On data")
-    chunks.push(chunk);
+	
+	const https = require('https');
+ 
+https.get('apps.ce.collabserv.com/activities/service/atom2/completed', (resp) => {
+  let data = '';
+ 
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    data += chunk;
   });
-
-  res.on("end", function () {
-    var body = Buffer.concat(chunks);
-	console.log("body")
-	console.log(body.toString())
-	console.log(res.statusCode)
-			returnJson('hans')
+ 
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(data).explanation);
   });
+ 
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
 });
 
-req.end();
+	
+// var req = http.request(options, function (res) {
+  // var chunks = [];
+
+  // res.on("data", function (chunk) {
+	  // console.log("On data")
+    // chunks.push(chunk);
+  // });
+
+  // res.on("end", function () {
+    // var body = Buffer.concat(chunks);
+	// console.log("body")
+	// console.log(body.toString())
+	// console.log(res.statusCode)
+			// returnJson('hans')
+  // });
+// });
+
+// req.end();
 }
 
 function returnJson(speech, followUp){
