@@ -97,7 +97,7 @@ restService.post('/hook', function(req, res) {
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
-		  }
+		}};
 		break;		
 	default:
        	return wakeUp();
