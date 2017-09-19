@@ -89,8 +89,6 @@ restService.post('/hook', function(req, res) {
 		var password = 'Jidok1839';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 
-
-var header = {'Host': 'www.example.com', 'Authorization': auth};
 		var options = {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
@@ -157,8 +155,7 @@ var req = http.request(options, function (res) {
     var body = Buffer.concat(chunks);
   });
       console.log("Functions:");
-		console.log(res)
-		returnJson("hans")
+		returnJson(body.toString())
 });
 
 req.end();
