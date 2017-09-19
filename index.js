@@ -157,7 +157,15 @@ https.get(options, (resp) => {
 	parser.parseString(data, function (err, result){
 
 		console.log(result['feed'])
-		returnJson(result['feed']['entry'][0]['title'][0]['_']);
+		var entries = result['feed']['entry'];
+		var names = ""
+		for(index = 0; index < entries.length; ++index){
+			names += entries[index]['title'][0]['_'];
+			if(index>0){
+				names+=" ,"
+			}
+		}
+		returnJson("These are you todo's " + names);
 	})
   });
 
