@@ -163,8 +163,7 @@ https.get(options, (resp) => {
 			if(index>0){
 				names+= ", "
 			}
-			names += entries[index]['link'];
-			console.log(names)
+			names += entries[index]['link'][0]['_'];
 		}
 		returnJson("These are you files: " + names);
 	})
