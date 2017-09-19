@@ -183,13 +183,7 @@ function returnJson(speech, followUp){
 						source: 'apiai-webhook-sample',
 						followupEvent: {
 							name:followUp
-						},
-						messages: [
-								{
-								  "type": 4,
-								  "speech": "Hi! Nice to meet you, $name! What is your hobby?"
-								}
-							  ]							
+						}						
 					});
 }
 
