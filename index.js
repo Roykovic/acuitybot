@@ -93,7 +93,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "/forums/atom/mysearch/results?query=\"blue\"",
+		  "path": "/activities/service/atom2/completed",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
