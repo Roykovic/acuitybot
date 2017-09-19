@@ -92,7 +92,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "/blogs/writer/feed/comments/atom",
+		  "path": "/dogear/atom/popular",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
