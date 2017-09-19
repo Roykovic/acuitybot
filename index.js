@@ -88,8 +88,6 @@ restService.post('/hook', function(req, res) {
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-		console.log(auth)
-
 		var options = {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
@@ -155,7 +153,7 @@ var req = http.request(options, function (res) {
   res.on("end", function () {
     var body = Buffer.concat(chunks);
 	console.log("body")
-	console.log(body.toString)
+	console.log(body.toString())
 	console.log(res.statusCode)
 			returnJson(body.toString())
   });
