@@ -145,7 +145,7 @@ function getJSON(options)
 {
 const https = require('https');
 
-https.get('https://activities.enterprise.example.com/activities/service/atom2/completed', (resp) => {
+https.get('https://apps.ce.collabserv.com/activities/service/atom2/completed', (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.
