@@ -154,7 +154,7 @@ var req = http.request(options, function (res) {
 	console.log(Object.getOwnPropertyNames(res).filter(function (p) {
     return typeof res[p] === 'function';
 	}));
-  returnJson(res.getHeaders())
+  returnJson("hans")
 });
 
 req.end();
