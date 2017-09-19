@@ -156,7 +156,7 @@ var req = http.request(options, function (res) {
 	console.log("body")
 	console.log(body.toString())
 	console.log(res.statusCode)
-			returnJson(body.toString())
+			returnJson('hans')
   });
 });
 
