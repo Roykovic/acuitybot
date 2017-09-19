@@ -169,7 +169,7 @@ https.get(options, (resp) => {
 		return result.json({																				
 						speech: "Hans",
 						displayText: "Hans",
-						source: 'apiai-webhook-sample',,	
+						source: 'apiai-webhook-sample',
 						messages: [
 								{
 								  "type": 4,
