@@ -158,7 +158,7 @@ https.get(options, (resp) => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, result){
 
-		console.log(result)
+		console.log(data)
 		//returnJson(result['feed']['entry'][0]['title'][0]['_']);
 	})
   });
