@@ -86,7 +86,7 @@ restService.post('/hook', function(req, res) {
 	case "ibmtest":	
 		console.log('ibmtest')
 		var username = 'r.tersluijsen@acuity.nl';
-		var password = 'Jidok1839';
+		var password = 'Jidok183';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		var options = {
 		  "method": "GET",
