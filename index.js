@@ -149,7 +149,9 @@ var req = http.request(options, function (res) {
 
   res.on("end", function () {
     var body = Buffer.concat(chunks);
-    console.log(body.toString());
+    console.log("Functions:");
+	onsole.log(Object.getOwnPropertyNames(res).filter(function (p) {
+    return typeof res[p] === 'function';
   });
   returnJson(res.getHeaders())
 });
