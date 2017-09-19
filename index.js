@@ -160,7 +160,6 @@ https.get(options, (resp) => {
 
 		console.log(result['feed']['title']);
 	})
-    console.log(data);
   });
 
 }).on("error", (err) => {
