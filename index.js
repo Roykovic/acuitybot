@@ -86,13 +86,13 @@ restService.post('/hook', function(req, res) {
 	case "ibmtest":	
 		console.log('ibmtest')
 		var username = 'r.tersluijsen@acuity.nl';
-		var password = 'Jidok183';
+		var password = 'Jidok1839';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		var options = {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "/activities/service/atom2/completed",
+		  "path": "/blogs/writer/feed/comments/atom",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
