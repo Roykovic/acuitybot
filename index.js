@@ -93,7 +93,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": require('querystring').escape("/forums/atom/mysearch/results? query='blue'"),
+		  "path": "/activities/service/atom2/todos",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
@@ -148,12 +148,10 @@ const https = require('https');
 https.get(options, (resp) => {
   let data = '';
 
-  // A chunk of data has been recieved.
   resp.on('data', (chunk) => {
     data += chunk;
   });
 
-  // The whole response has been received. Print out the result.
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, result){
