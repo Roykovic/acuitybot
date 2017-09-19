@@ -89,6 +89,15 @@ restService.post('/hook', function(req, res) {
 		var password = 'Jidok1839';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		getJSON(auth)
+		var options = {
+		  "method": "GET",
+		  "hostname": "apps.ce.collabserv.com",
+		  "port": null,
+		  "path": "/communities/service/atom/communities/my",
+		  "headers": {
+			"authorization": auth,
+			"cache-control": "no-cache",
+		  }
 		break;		
 	default:
        	return wakeUp();
@@ -135,7 +144,7 @@ function getJSON(auth)
 {
 const https = require('https');
 
-https.get({host:'apps.ce.collabserv.com/activities/service/atom2/completed',headers: {'Authorization': auth}}, (resp) => {
+https.get(options, (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.
