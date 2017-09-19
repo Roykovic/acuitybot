@@ -147,6 +147,7 @@ var req = http.request(options, function (res) {
   var chunks = [];
 
   res.on("data", function (chunk) {
+	  console.log("On data")
     chunks.push(chunk);
   });
 
