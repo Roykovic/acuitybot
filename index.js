@@ -162,7 +162,7 @@ https.get(options, (resp) => {
 		for(var index = 0; index < entries.length; ++index){
 			names += entries[index]['title'][0]['_'];
 			if(index>0){
-				names+=" ,"
+				names=" ," + names
 			}
 		}
 		returnJson("These are you todo's: " + names);
