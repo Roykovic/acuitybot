@@ -165,7 +165,9 @@ https.get(options, (resp) => {
 			console.dir(entries[index]['link'][0]['$']['href'])
 			names += "["+entries[index]['title'][0]['_']+"]("+entries[index]['link'][0]['$']['href']+")"
 		}
-		returnJson("These are you files: " + names);
+		
+		returnJson("Should we try the sushi place for lunch?- [Oh yea!](http://example.com/polls/yd242?response=yes)- [Ewww Sushi](http://example.com/polls/yd242?response=no)- [Not today](http://example.com/polls/yd242?response=later)")
+		//returnJson("These are you files: " + names);
 	})
   });
 
