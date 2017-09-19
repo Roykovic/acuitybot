@@ -88,7 +88,6 @@ restService.post('/hook', function(req, res) {
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-		getJSON(auth)
 		var options = {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
@@ -98,6 +97,7 @@ restService.post('/hook', function(req, res) {
 			"authorization": auth,
 			"cache-control": "no-cache",
 		}};
+				getJSON(options)
 		break;		
 	default:
        	return wakeUp();
@@ -140,7 +140,7 @@ function wakeUp(){
 	return returnJson(speech);
 }
 
-function getJSON(auth)
+function getJSON(options)
 {
 const https = require('https');
 
