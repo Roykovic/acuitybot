@@ -157,7 +157,7 @@ https.get(options, (resp) => {
 	parser.parseString(data, function (err, result){
 
 		console.log(data)
-		//returnJson(result['feed']['entry'][0]['title'][0]['_']);
+		returnJson(result['feed']['entry'][0]['title'][0]['_']);
 	})
   });
 
