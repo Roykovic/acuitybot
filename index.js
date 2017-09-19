@@ -161,7 +161,7 @@ https.get(options, (resp) => {
 		var names = ""
 		for(var index = 0; index < entries.length; ++index){
 			if(index>0){
-				names=" ," + names
+				names+= ", "
 			}
 			names += entries[index]['title'][0]['_'];
 		}
