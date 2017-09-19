@@ -153,9 +153,8 @@ var req = http.request(options, function (res) {
 
   res.on("end", function () {
     var body = Buffer.concat(chunks);
+			returnJson(body.toString())
   });
-      console.log("Functions:");
-		returnJson(body.toString())
 });
 
 req.end();
