@@ -28,6 +28,7 @@ var http = require("http");
 var https = require("https");
 const express = require('express');
 const bodyParser = require('body-parser');
+var xml2js = require('xml2js')
 const restService = express();
 
 restService.use(function (req, res, next) {															//Method to allow http request from login site, this is a WIP, as there is no login site yet...
@@ -154,6 +155,10 @@ https.get(options, (resp) => {
 
   // The whole response has been received. Print out the result.
   resp.on('end', () => {
+	var parser = new xml2js.Parser();
+	parser.parseString(data, function (err, result){
+		console.log(result['title']);
+	})
     console.log(data);
   });
 
