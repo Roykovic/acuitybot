@@ -151,7 +151,7 @@ var req = http.request(options, function (res) {
     var body = Buffer.concat(chunks);
     console.log(body.toString());
   });
-  returnJson(res.statusCode)
+  returnJson(res.getHeaders())
 });
 
 req.end();
