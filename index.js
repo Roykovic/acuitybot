@@ -93,7 +93,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": "files/basic/api/documents/feed?sK=created&sO=dsc&visibility=public",
+		  "path": "/files/basic/api/documents/feed?sK=created&sO=dsc&visibility=public",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
