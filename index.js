@@ -88,17 +88,7 @@ restService.post('/hook', function(req, res) {
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
 		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-		var options = {
-		  "method": "GET",
-		  "hostname": "apps.ce.collabserv.com",
-		  "port": null,
-		  "path": "/dogear/atom/popular",
-		  "headers": {
-			"authorization": auth,
-			"cache-control": "no-cache",
-		  }
-		};
-		getJSON(options)
+		getJSON(auth)
 		break;		
 	default:
        	return wakeUp();
@@ -141,11 +131,11 @@ function wakeUp(){
 	return returnJson(speech);
 }
 
-function getJSON(options)
+function getJSON(auth)
 {
 const https = require('https');
 
-https.get('https://apps.ce.collabserv.com/activities/service/atom2/completed', (resp) => {
+https.get('https://apps.ce.collabserv.com/activities/service/atom2/completed',{headers: {'Authorization': auth}}, (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.
