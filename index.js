@@ -172,7 +172,7 @@ https.get(options, (resp) => {
 						source: 'apiai-webhook-sample',
 						followupEvent: {
 							name:followUp
-						}	
+						},	
 						messages: [
 								{
 								  "type": 4,
