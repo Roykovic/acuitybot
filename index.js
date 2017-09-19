@@ -93,7 +93,7 @@ restService.post('/hook', function(req, res) {
 		  "method": "GET",
 		  "hostname": "apps.ce.collabserv.com",
 		  "port": null,
-		  "path": require('querystring').escape("/forums/atom/mysearch/results?query=\"mail\""),
+		  "path": "/forums/atom/mysearch/results?query=\"mail\"",
 		  "headers": {
 			"authorization": auth,
 			"cache-control": "no-cache",
