@@ -156,13 +156,13 @@ https.get(options, (resp) => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, result){
 
-		console.log(result['feed'])
 		var entries = result['feed']['entry'];
 		var names = ""
 		for(var index = 0; index < entries.length; ++index){
 			if(index>0){
 				names+= ", "
 			}
+			console.dir(entries[index])
 			names += entries[index]['title'][0]['_'];
 		}
 		returnJson("These are you files: " + names);
