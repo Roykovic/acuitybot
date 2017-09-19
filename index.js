@@ -26,9 +26,9 @@ var auth = false;
 var sessionId = "";
 var http = require("http");
 var https = require("https");
+var xml2js = require('xml2js');
 const express = require('express');
 const bodyParser = require('body-parser');
-var xml2js = require('xml2js')
 const restService = express();
 
 restService.use(function (req, res, next) {															//Method to allow http request from login site, this is a WIP, as there is no login site yet...
