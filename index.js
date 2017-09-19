@@ -163,7 +163,7 @@ https.get(options, (resp) => {
 				names+= ", "
 			}
 			console.dir(entries[index]['link'][0]['$']['href'])
-			names += entries[index]['title'][0]['_'];
+			names += "["+entries[index]['title'][0]['_']+"]("+entries[index]['link'][0]['$']['href']+")"
 		}
 		returnJson("These are you files: " + names);
 	})
