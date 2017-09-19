@@ -145,7 +145,7 @@ function getJSON(options)
 {
 const https = require('https');
 
-https.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', (resp) => {
+https.get('https://activities.enterprise.example.com/activities/service/atom2/completed', (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.
