@@ -143,45 +143,24 @@ function wakeUp(){
 
 function getJSON(options)
 {
-	
-	const https = require('https');
- 
-https.get('https://apps.ce.collabserv.com/activities/service/atom2/completed', (resp) => {
-  let data = '';
- 
-  // A chunk of data has been recieved.
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
- 
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(data).explanation);
-  });
- 
+const https = require('https');
+
+https.get('https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY', (resp) => {
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(data).explanation);
+  });
+
 }).on("error", (err) => {
-  console.log("Error: " + err.message);
+  console.log("Error: " + err.message);
 });
-
-	
-// var req = http.request(options, function (res) {
-  // var chunks = [];
-
-  // res.on("data", function (chunk) {
-	  // console.log("On data")
-    // chunks.push(chunk);
-  // });
-
-  // res.on("end", function () {
-    // var body = Buffer.concat(chunks);
-	// console.log("body")
-	// console.log(body.toString())
-	// console.log(res.statusCode)
-			// returnJson('hans')
-  // });
-// });
-
-// req.end();
 }
 
 function returnJson(speech, followUp){
