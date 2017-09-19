@@ -135,7 +135,7 @@ function getJSON(auth)
 {
 const https = require('https');
 
-https.get('https://apps.ce.collabserv.com/activities/service/atom2/completed',{headers: {'Authorization': auth}}, (resp) => {
+https.get({url:'https://apps.ce.collabserv.com/activities/service/atom2/completed',headers: {'Authorization': auth}}, (resp) => {
   let data = '';
 
   // A chunk of data has been recieved.
