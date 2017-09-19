@@ -178,7 +178,7 @@ https.get(options, (resp) => {
 
 function returnJson(speech, followUp){
 	return result.json({																				
-						speech: speech,
+						markdown: speech,
 						displayText: speech,
 						source: 'apiai-webhook-sample',
 						followupEvent: {
