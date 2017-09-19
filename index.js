@@ -166,18 +166,6 @@ https.get(options, (resp) => {
 			names += "["+entries[index]['title'][0]['_']+"]("+entries[index]['link'][0]['$']['href']+")"
 		}
 		
-		return result.json({																				
-						speech: "Hans",
-						displayText: "Hans",
-						source: 'apiai-webhook-sample',
-						messages: [
-								{
-								  "type": 4,
-								  "speech": "Hi! Nice to meet you, $name! What is your hobby?"
-								}
-							  ]						
-					});
-		
 		returnJson("- [Oh yea!](http://example.com/polls/yd242?response=yes)\n- [Ewww Sushi](http://example.com/polls/yd242?response=no)\n- [Not today](http://example.com/polls/yd242?response=later)")
 		//returnJson("These are you files: " + names);
 	})
@@ -195,7 +183,13 @@ function returnJson(speech, followUp){
 						source: 'apiai-webhook-sample',
 						followupEvent: {
 							name:followUp
-						}						
+						},
+						messages: [
+								{
+								  "type": 4,
+								  "speech": "Hi! Nice to meet you, $name! What is your hobby?"
+								}
+							  ]							
 					});
 }
 
