@@ -154,9 +154,9 @@ https.get(options, (resp) => {
 
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
-	parser.parseString(data, function (err, result){
+	parser.parseString(data, function (err, HTTPresult){
 
-		var entries = result['feed']['entry'];
+		var entries = HTTPresult['feed']['entry'];
 		var names = ""
 		for(var index = 0; index < entries.length; ++index){
 			if(index>0){
