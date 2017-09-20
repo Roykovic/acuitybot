@@ -85,7 +85,7 @@ restService.post('/hook', function(req, res) {
 	case "ibmCom":	
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
-		//verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getCommunities(function(speech){
 			returnJson(speech);
 		});

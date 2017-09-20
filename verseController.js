@@ -28,7 +28,7 @@ var options = {
 	  "port": null,
 	  "path": path,
 	  "headers": {
-		"authorization": exports.auth,
+		//"authorization": exports.auth,
 		"cache-control": "no-cache",
 		}
 	};
