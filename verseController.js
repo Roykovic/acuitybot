@@ -36,7 +36,8 @@ https.get(options, (resp) => {
   resp.on('data', (chunk) => {
     data += chunk;
   });
-
+	console.log("data")
+	console.log(data)
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
