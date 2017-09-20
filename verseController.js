@@ -39,17 +39,16 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
-
+		console.log(HTTPresult.statusCode)
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
 			if(index>0){
 				titles+= ", "
 			}
-			var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-			titles += "\n"+entries[index]['title'][0]['_']+"\n"+URL
+			titles += "\n"+entries[index]['title'][0]['_']+"\n"+
 		}
-		returnJson("These are you files: " + titles);
+		returnJson("These are you Communities: " + titles);
 	})
   });
 
