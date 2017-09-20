@@ -9,9 +9,8 @@ exports.auth = "";
 exports.getCommunities = function (){
 	var method = "GET"
 	var path = "/communities/service/atom/communities/my"
-		exports.getJSON(method, path);
-		
-		return exports.getJSON();
+	return	exports.getJSON(method, path);
+
 }
 
 // exports.getFiles = function(){
@@ -22,10 +21,10 @@ exports.getJSON = function(method, path)
 {
 const https = require('https');
 var options = {
-	  "method": "GET",
+	  "method": method,
 	  "hostname": "apps.ce.collabserv.com",
 	  "port": null,
-	  "path": "/communities/service/atom/communities/my",
+	  "path": path,
 	  "headers": {
 		"authorization": exports.auth,
 		"cache-control": "no-cache",
