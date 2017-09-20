@@ -82,7 +82,7 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech, followUp)
 		});
 		break;
-	case "ibmtest":	
+	case "ibmCom":	
 		console.log('ibmtest')
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
