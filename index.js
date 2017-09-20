@@ -87,7 +87,8 @@ restService.post('/hook', function(req, res) {
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-		verseController.getCommunities();
+		console.log("Auth :" + verseController.auth)
+		//verseController.getCommunities();
 		break;		
 	default:
        	return wakeUp();
