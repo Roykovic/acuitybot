@@ -11,7 +11,7 @@ exports.getCommunities = function (){
 	var path = "/communities/service/atom/communities/my"
 		exports.getJSON(method, path);
 		
-		return getJSON();
+		return exports.getJSON();
 }
 
 // exports.getFiles = function(){
