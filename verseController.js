@@ -32,7 +32,7 @@ var options = {
 	  "method": "GET",
 	  "hostname": "apps.ce.collabserv.com",
 	  "port": null,
-	  "path": '/files/basic/api/myuserlibrary/feed',
+	  "path": '/files/basic/api/documents/feed?visibility=public',
 	  "headers": {
 	  "authorization": exports.auth,
 		"cache-control": "no-cache",
