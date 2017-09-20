@@ -2,6 +2,9 @@
 
 var auth = "";
 var exports = module.exports = {};
+var http = require("http");
+var https = require("https");
+var xml2js = require('xml2js');
 
 exports.getCommunities = function (){
 	var method = "GET"
