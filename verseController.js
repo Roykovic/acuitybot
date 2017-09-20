@@ -1,6 +1,6 @@
 'use strict'
 
-var auth = "";
+var auth;
 var exports = module.exports = {};
 var http = require("http");
 var https = require("https");
@@ -19,6 +19,7 @@ exports.getCommunities = function (){
 exports.getJSON = function(method, path)
 {
 const https = require('https');
+console.log("Auth 2:" + auth)
 var options = {
 	  "method": method,
 	  "hostname": "apps.ce.collabserv.com",
