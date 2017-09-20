@@ -28,7 +28,7 @@ var options = {
 	  "port": null,
 	  "path": path,
 	  "headers": {
-		//"authorization": exports.auth,
+	//  "authorization": exports.auth,
 		"cache-control": "no-cache",
 		}
 	};
@@ -56,6 +56,6 @@ https.get(options, (resp) => {
   });
 
 }).on("error", (err) => {
-  console.log("Error: " + err.message);
+  callback(err);
 });
 }
