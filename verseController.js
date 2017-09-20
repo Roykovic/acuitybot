@@ -56,7 +56,7 @@ https.get(options, (resp) => {
 				titles+= ", "
 			}
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
-			if(entries[index][link]){
+			if(entries[index]["linkl"]){
 				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
 				titles += URL;
 			}
