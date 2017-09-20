@@ -1,6 +1,5 @@
 'use strict'
 
-var auth;
 var exports = module.exports = {};
 var http = require("http");
 var https = require("https");
