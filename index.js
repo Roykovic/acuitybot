@@ -22,6 +22,7 @@ var speech = 'empty speech';
 var db = require('./db');
 var loginController = require('./loginController')
 var userController = require('./userController')
+var verseController = require('./verseController')
 var auth = false;
 var sessionId = "";
 var http = require("http");
@@ -88,17 +89,8 @@ restService.post('/hook', function(req, res) {
 		console.log('ibmtest')
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
-		var auth = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-		var options = {
-		  "method": "GET",
-		  "hostname": "apps.ce.collabserv.com",
-		  "port": null,
-		  "path": "/files/basic/api/documents/feed?sK=created&sO=dsc&visibility=public",
-		  "headers": {
-			"authorization": auth,
-			"cache-control": "no-cache",
-		}};
-				getJSON(options)
+		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+		verseController.getCommunities();
 		break;		
 	default:
        	return wakeUp();
@@ -139,39 +131,6 @@ function wakeUp(){
 		}
 	}
 	return returnJson(speech);
-}
-
-function getJSON(options)
-{
-const https = require('https');
-
-https.get(options, (resp) => {
-  let data = '';
-
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-
-  resp.on('end', () => {
-	var parser = new xml2js.Parser();
-	parser.parseString(data, function (err, HTTPresult){
-
-		var entries = HTTPresult['feed']['entry'];
-		var names = ""
-		for(var index = 0; index < entries.length; ++index){
-			if(index>0){
-				names+= ", "
-			}
-			var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-			names += "\n"+entries[index]['title'][0]['_']+"\n"+URL
-		}
-		returnJson("These are you files: " + names);
-	})
-  });
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
 }
 
 function returnJson(speech, followUp){
