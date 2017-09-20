@@ -6,10 +6,12 @@ var https = require("https");
 var xml2js = require('xml2js');
 
 exports.auth = "";
-exports.getCommunities = function (){
+exports.getCommunities = function (callback){
 	var method = "GET"
 	var path = "/communities/service/atom/communities/my"
-	return	exports.getJSON(method, path);
+	return	exports.getJSON(method, path, function(speech){
+		callback(speech)
+	});
 
 }
 
@@ -17,7 +19,7 @@ exports.getCommunities = function (){
 	
 // }
 
-exports.getJSON = function(method, path)
+exports.getJSON = function(method, path, callback)
 {
 const https = require('https');
 var options = {
@@ -48,7 +50,7 @@ https.get(options, (resp) => {
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
 		}
 		console.log(titles)
-		return ("These are you Communities: " + titles)
+		callback("These are you Communities: " + titles)
 	})
   });
 
