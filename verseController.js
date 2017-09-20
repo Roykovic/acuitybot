@@ -47,10 +47,10 @@ https.get(options, (resp) => {
     data += chunk;
   });
   resp.on('end', () => {
-	console.log("**********************DATA**********************")
-	console.dir(data)
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
+			console.log("**********************DATA**********************")
+			console.log(HTTPresult)
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
