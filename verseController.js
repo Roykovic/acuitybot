@@ -29,10 +29,10 @@ exports.getJSON = function(method, path, callback)
 {
 const https = require('https');
 var options = {
-	  "method": method,
+	  "method": "GET",
 	  "hostname": "apps.ce.collabserv.com",
 	  "port": null,
-	  "path": path,
+	  "path": '/files/basic/api/myuserlibrary/feed',
 	  "headers": {
 	  "authorization": exports.auth,
 		"cache-control": "no-cache",
