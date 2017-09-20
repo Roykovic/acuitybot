@@ -41,6 +41,7 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
+				console.log(HTTPresult.statusCode)
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
@@ -49,7 +50,6 @@ https.get(options, (resp) => {
 			}
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
 		}
-		console.log(titles)
 		callback("These are you Communities: " + titles)
 	})
   });
