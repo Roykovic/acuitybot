@@ -165,8 +165,15 @@ https.get(options, (resp) => {
 			console.dir(entries[index]['link'][0]['$']['href'])
 			names += "["+entries[index]['title'][0]['_']+"]("+entries[index]['link'][0]['$']['href']+")"
 		}
-		
-		return returnJson("- [Oh yea!](http://example.com/polls/yd242?response=yes)\n- [Ewww Sushi](http://example.com/polls/yd242?response=no)\n- [Not today](http://example.com/polls/yd242?response=later)")
+		return result.json({
+  "roomId" : "Y2lzY29zcGFyazovL3VzL1JPT00vYmJjZWIxYWQtNDNmMS0zYjU4LTkxNDctZjE0YmIwYzRkMTU0",
+  "toPersonId" : "Y2lzY29zcGFyazovL3VzL1BFT1BMRS9mMDZkNzFhNS0wODMzLTRmYTUtYTcyYS1jYzg5YjI1ZWVlMmX",
+  "toPersonEmail" : "julie@example.com",
+  "text" : "PROJECT UPDATE - A new project plan has been published on Box: http://box.com/s/lf5vj. The PM for this project is Mike C. and the Engineering Manager is Jane W.",
+  "markdown" : "**PROJECT UPDATE** A new project plan has been published [on Box](http://box.com/s/lf5vj). The PM for this project is <@personEmail:mike@example.com> and the Engineering Manager is <@personEmail:jane@example.com>.",
+  "files" : [ "http://www.example.com/images/media.png" ]
+}			
+					});
 		//returnJson("These are you files: " + names);
 	})
   });
