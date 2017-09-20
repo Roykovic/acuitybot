@@ -172,7 +172,7 @@ https.get(options, (resp) => {
 						displayText: "Frits",
 						source: 'apiai-webhook-sample',
 						followupEvent: {
-							name:followUp
+							name:null
 						}	
 	});
 		//returnJson("These are you files: " + names);
