@@ -50,8 +50,7 @@ https.get(options, (resp) => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
 			console.log("**********************DATA**********************")
-			console.log(HTTPresult)
-		var entries = HTTPresult['feed']['0'];
+		var entries = HTTPresult['feed'][0];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
 			if(index>0){
