@@ -83,8 +83,8 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmCom":	
-//		var username = 'r.tersluijsen@acuity.nl';
-//		var password = 'Jidok1839';
+		var username = 'r.tersluijsen@acuity.nl';
+		var password = 'Jidok18359';
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getCommunities(function(speech){
 			returnJson(speech);
