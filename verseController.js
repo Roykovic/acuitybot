@@ -38,6 +38,8 @@ var options = {
 		"cache-control": "no-cache",
 		}
 	};
+console.log("**********************OPTIONS**********************")
+console.log(options)	
 https.get(options, (resp) => {
   let data = '';
 
