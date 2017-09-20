@@ -17,7 +17,7 @@ exports.getCommunities = function (callback){
 
 exports.getFiles = function (callback){
 	var method = "GET"
-	var path = "/files/basic/api/myuserlibrary/feed"
+	var path = "/files/basic/api/documents/feed"
 	return	exports.getJSON(method, path, function(speech){
 		callback(speech)
 	});
@@ -49,9 +49,8 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
-			console.log("**********************DATA**********************")
-			console.log(HTTPresult['feed'][0])
-		var entries = HTTPresult['feed'][0];
+
+		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
 			if(index>0){
