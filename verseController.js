@@ -18,7 +18,7 @@ exports.getCommunities = function (callback){
 exports.getActivities = function (callback){
 	var method = "GET"
 	var path = "/activities/service/atom2/activities?includeCommunityActivities=no"
-	return	exports.getJSON(method, path,"communities", function(speech){
+	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
 	});
 
