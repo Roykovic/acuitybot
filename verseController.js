@@ -9,7 +9,16 @@ exports.auth = "";
 exports.getCommunities = function (callback){
 	var method = "GET"
 	var path = "/communities/service/atom/communities/my"
-	return	exports.getJSON(method, path,"Communities", function(speech){
+	return	exports.getJSON(method, path,"communities", function(speech){
+		callback(speech)
+	});
+
+}
+
+exports.getActivities = function (callback){
+	var method = "GET"
+	var path = "/activities/service/atom2/activities?includeCommunityActivities=no"
+	return	exports.getJSON(method, path,"communities", function(speech){
 		callback(speech)
 	});
 
@@ -24,9 +33,7 @@ exports.getFiles = function (callback){
 
 }
 
-
-exports.getJSON = function(method, path, type, callback)
-{
+exports.getJSON = function(method, path, type, callback){
 const https = require('https');
 var options = {
 	  "method": method,

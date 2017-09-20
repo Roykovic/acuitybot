@@ -90,6 +90,14 @@ restService.post('/hook', function(req, res) {
 			returnJson(speech);
 		});
 		break;		
+	case "ibmAct":	
+		var username = 'r.tersluijsen@acuity.nl';
+		var password = 'Jidok1839';
+		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+		verseController.getActivities(function(speech){
+			returnJson(speech);
+		});
+		break;		
 	case "ibmFiles":	
 		var username = 'r.tersluijsen@acuity.nl';
 		var password = 'Jidok1839';
