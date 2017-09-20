@@ -169,7 +169,7 @@ https.get(options, (resp) => {
   text : "PROJECT UPDATE - A new project plan has been published on Box: http://box.com/s/lf5vj. The PM for this project is Mike C. and the Engineering Manager is Jane W.",
   markdown : "**PROJECT UPDATE** A new project plan has been published [on Box](http://box.com/s/lf5vj). The PM for this project is <@personEmail:mike@example.com> and the Engineering Manager is <@personEmail:jane@example.com>.",
 						speech: "Frits",
-						displayText: "Frits",
+						displayText: "**Frits**",
 						source: 'apiai-webhook-sample',
 						followupEvent: {
 							name:null
