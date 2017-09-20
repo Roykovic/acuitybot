@@ -9,7 +9,7 @@ exports.auth = "";
 exports.getCommunities = function (callback){
 	var method = "GET"
 	var path = "/communities/service/atom/communities/my"
-	return	exports.getJSON(method, path, function(speech){
+	return	exports.getJSON(method, path,"Communities", function(speech){
 		callback(speech)
 	});
 
@@ -18,14 +18,14 @@ exports.getCommunities = function (callback){
 exports.getFiles = function (callback){
 	var method = "GET"
 	var path = "/files/basic/api/documents/feed?visibility=public"
-	return	exports.getJSON(method, path, function(speech){
+	return	exports.getJSON(method, path, "files", function(speech){
 		callback(speech)
 	});
 
 }
 
 
-exports.getJSON = function(method, path, callback)
+exports.getJSON = function(method, path, type, callback)
 {
 const https = require('https');
 var options = {
@@ -56,13 +56,13 @@ https.get(options, (resp) => {
 				titles+= ", "
 			}
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
-			if(entries[index]["link"]){
+			if(type == "files"){
 				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
 				titles += URL;
 			}
 			
 		}
-		callback("These are you Communities: " + titles)
+		callback("These are you "+type+": " + titles)
 	})
   });
 
