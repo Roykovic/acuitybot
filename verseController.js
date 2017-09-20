@@ -29,7 +29,7 @@ var options = {
 		"cache-control": "no-cache",
 		}
 	};
-
+try{
 https.get(options, (resp) => {
   let data = '';
 
@@ -41,7 +41,6 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
-		console.log(HTTPresult.statusCode)
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
@@ -54,7 +53,8 @@ https.get(options, (resp) => {
 	})
   });
 
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
+})}
+catch(e){
+  console.log("Error: " + e.message);
+});}
 }
