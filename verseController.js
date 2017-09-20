@@ -15,9 +15,15 @@ exports.getCommunities = function (callback){
 
 }
 
-// exports.getFiles = function(){
-	
-// }
+exports.getFiles = function (callback){
+	var method = "GET"
+	var path = "/files/basic/api/myuserlibrary/feed"
+	return	exports.getJSON(method, path, function(speech){
+		callback(speech)
+	});
+
+}
+
 
 exports.getJSON = function(method, path, callback)
 {
@@ -50,6 +56,11 @@ https.get(options, (resp) => {
 				titles+= ", "
 			}
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
+			if(entries[index][link]){
+				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+				titles += URL;
+			}
+			
 		}
 		callback("These are you Communities: " + titles)
 	})
