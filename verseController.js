@@ -5,6 +5,7 @@ var http = require("http");
 var https = require("https");
 var xml2js = require('xml2js');
 
+exports.auth = "";
 exports.getCommunities = function (){
 	var method = "GET"
 	var path = "/communities/service/atom/communities/my"
@@ -18,7 +19,7 @@ exports.getCommunities = function (){
 exports.getJSON = function(method, path)
 {
 const https = require('https');
-console.log("Auth 2:" + auth)
+console.log("Auth 2:" + exports.auth)
 var options = {
 	  "method": method,
 	  "hostname": "apps.ce.collabserv.com",
