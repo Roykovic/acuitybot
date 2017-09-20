@@ -49,7 +49,7 @@ https.get(options, (resp) => {
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
 		}
 		console.log(titles)
-		return "These are you Communities: " + titles
+		return ("These are you Communities: " + titles)
 	})
   });
 
