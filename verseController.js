@@ -10,6 +10,8 @@ exports.getCommunities = function (){
 	var method = "GET"
 	var path = "/communities/service/atom/communities/my"
 		exports.getJSON(method, path);
+		
+		return getJSON();
 }
 
 // exports.getFiles = function(){
@@ -19,7 +21,6 @@ exports.getCommunities = function (){
 exports.getJSON = function(method, path)
 {
 const https = require('https');
-console.log("Auth 2:" + exports.auth)
 var options = {
 	  "method": method,
 	  "hostname": "apps.ce.collabserv.com",
@@ -30,7 +31,6 @@ var options = {
 		"cache-control": "no-cache",
 		}
 	};
-console.log(options)
 https.get(options, (resp) => {
   let data = '';
 
@@ -40,7 +40,6 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
-		console.log(HTTPresult.statusCode)
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
@@ -49,7 +48,7 @@ https.get(options, (resp) => {
 			}
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
 		}
-		returnJson("These are you Communities: " + titles);
+		return "These are you Communities: " + titles
 	})
   });
 
