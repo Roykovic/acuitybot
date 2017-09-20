@@ -27,7 +27,8 @@ var options = {
 	  "headers": {
 		"authorization": auth,
 		"cache-control": "no-cache",
-	}};
+		}
+	};
 
 https.get(options, (resp) => {
   let data = '';
@@ -46,7 +47,7 @@ https.get(options, (resp) => {
 			if(index>0){
 				titles+= ", "
 			}
-			titles += "\n"+entries[index]['title'][0]['_']+"\n"+
+			titles += "\n"+entries[index]['title'][0]['_']+"\n";
 		}
 		returnJson("These are you Communities: " + titles);
 	})
