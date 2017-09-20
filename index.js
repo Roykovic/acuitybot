@@ -162,8 +162,8 @@ https.get(options, (resp) => {
 			if(index>0){
 				names+= ", "
 			}
-			console.dir(entries[index])
-			names += "\n"+entries[index]['title'][0]['_']+"\n"+entries[index]['link'][0]['$']['href']
+			var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+			names += "\n"+entries[index]['title'][0]['_']+"\n"+URL
 		}
 		returnJson("These are you files: " + names);
 	})
