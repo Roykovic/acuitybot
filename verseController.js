@@ -17,7 +17,7 @@ exports.getCommunities = function (callback){
 
 exports.getFiles = function (callback){
 	var method = "GET"
-	var path = "/files/basic/api/documents/feed"
+	var path = "/files/basic/api/documents/feed?visibility=public"
 	return	exports.getJSON(method, path, function(speech){
 		callback(speech)
 	});
@@ -29,17 +29,16 @@ exports.getJSON = function(method, path, callback)
 {
 const https = require('https');
 var options = {
-	  "method": "GET",
+	  "method": method,
 	  "hostname": "apps.ce.collabserv.com",
 	  "port": null,
-	  "path": '/files/basic/api/documents/feed?visibility=public',
+	  "path": path,
 	  "headers": {
 	  "authorization": exports.auth,
 		"cache-control": "no-cache",
 		}
 	};
-console.log("**********************OPTIONS**********************")
-console.log(options)	
+
 https.get(options, (resp) => {
   let data = '';
 
@@ -49,8 +48,7 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
-console.log("**********************HTTPresult**********************")
-console.log(HTTPresult)	
+
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
