@@ -13,7 +13,7 @@ exports.getCommunities = function (){
 	
 // }
 
-function getJSON(method, path)
+exports.getJSON = function(method, path)
 {
 const https = require('https');
 var options = {
