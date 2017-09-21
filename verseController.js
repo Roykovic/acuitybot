@@ -67,6 +67,8 @@ https.get(options, (resp) => {
 	var parser = new xml2js.Parser();
 	parser.parseString(data, function (err, HTTPresult){
 
+		console.log("************************************Result************************************")
+		console.log(HTTPresult)
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
