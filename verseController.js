@@ -36,7 +36,7 @@ exports.getFiles = function (callback){
 exports.postActivities = function (callback){
 	var method = "POST"
 	var path = "/activities/service/atom2/activitynode"
-	var body ='<entry\r\n    xmlns="http://www.w3.org/2005/Atom"\r\n    xmlns:app="http://www.w3.org/2007/app"\r\n    xmlns:snx="http://www.ibm.com/xmlns/prod/sn"\r\n    xmlns:xhtml="http://www.w3.org/1999/xhtml"\r\n    xmlns:thr="http://purl.org/syndication/thread/1.0"\r\n  >\r\n    <title type="text">New</title>\r\n\r\n    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>\r\n    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>\r\n    <category term="tag1" />\r\n    <category term="tag2" />\r\n    <content type="html">\r\n          \tGoalOfActivity\r\n     </content>\r\n</entry>'
+	var body ='<entry\r\n    xmlns="http://www.w3.org/2005/Atom"\r\n    xmlns:app="http://www.w3.org/2007/app"\r\n    xmlns:snx="http://www.ibm.com/xmlns/prod/sn"\r\n    xmlns:xhtml="http://www.w3.org/1999/xhtml"\r\n    xmlns:thr="http://purl.org/syndication/thread/1.0"\r\n  >\r\n  <id>1234</id>\r\n    <title type="text">New</title>\r\n\r\n    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>\r\n    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>\r\n    <category term="tag1" />\r\n    <category term="tag2" />\r\n    <content type="html">\r\n          \tGoalOfActivity\r\n     </content>\r\n</entry>'
 	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
 	}, body);
