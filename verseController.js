@@ -68,7 +68,7 @@ https.get(options, (resp) => {
 	parser.parseString(data, function (err, HTTPresult){
 
 		console.log("************************************Result************************************")
-		console.log(HTTPresult)
+		console.log(HTTPresult);
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
