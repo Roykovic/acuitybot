@@ -16,6 +16,8 @@
 
 'use strict';
 
+var username = 'r.tersluijsen@acuity.nl';
+var password = 'Jidok1839';
 var request;
 var result;
 var speech = 'empty speech';
@@ -83,29 +85,29 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmCom":	
-		var username = 'r.tersluijsen@acuity.nl';
-		var password = 'Jidok1839';
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getCommunities(function(speech){
 			returnJson(speech);
 		});
 		break;		
 	case "ibmAct":	
-		var username = 'r.tersluijsen@acuity.nl';
-		var password = 'Jidok1839';
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getActivities(function(speech){
 			returnJson(speech);
 		});
 		break;		
 	case "ibmFiles":	
-		var username = 'r.tersluijsen@acuity.nl';
-		var password = 'Jidok1839';
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getFiles(function(speech){
 			returnJson(speech);
 		});
 		break;		
+	case "ibmPost":	
+		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+		verseController.postActivities(function(speech){
+			returnJson(speech);
+		});
+		break;				
 	default:
        	return wakeUp();
         break;
