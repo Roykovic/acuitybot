@@ -43,7 +43,7 @@ exports.postActivities = function (callback){
 
 }
 
-exports.getJSON = function(method, path, type, callback){
+exports.getJSON = function(method, path, type, callback, body){
 const https = require('https');
 var options = {
 	  "body" : body,
