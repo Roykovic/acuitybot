@@ -53,8 +53,7 @@ var options = {
 	  "path": path,
 	  "headers": {
 		  "Content-Type": 'application/atom+xml',
-		  "authorization": exports.auth,
-		"cache-control": "no-cache",
+		  "authorization": exports.auth
 		}
 	};
 
