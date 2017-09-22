@@ -65,6 +65,8 @@ https.get(options, (resp) => {
   });
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
+		console.log("************************************DATA************************************")
+		console.log(data);
 	parser.parseString(data, function (err, HTTPresult){
 
 		console.log("************************************Result************************************")
