@@ -35,7 +35,7 @@ exports.getFiles = function (callback){
 
 exports.postActivities = function (callback){
 	var method = "POST"
-	var body = '<entry>\r\n  <id>1234</id>\r\n    <title type="text">New</title>\r\n\r\n  <UUID>1234</UUID>\r\n\r\n  <category term="tag1" />\r\n    <category term="tag2" />\r\n    <content type="html">\r\n          \tGoalOfActivity\r\n     </content>\r\n</entry>'
+	var body = ''
 	var path = "/activities/service/atom2/activitynode"
 	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
