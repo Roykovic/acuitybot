@@ -53,7 +53,8 @@ var options = {
 	  "path": path,
 	  "headers": {
 		  "activityuuid": '7081f8-417c-407c-a3bb-c13ddc541ea8',
-	  "authorization": exports.auth,
+		  "Content-Type": 'application/atom+xml',
+		  "authorization": exports.auth,
 		"cache-control": "no-cache",
 		}
 	};
