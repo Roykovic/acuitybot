@@ -35,7 +35,7 @@ exports.getFiles = function (callback){
 
 exports.postActivities = function (callback){
 	var method = "POST"
-	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn">\r\n\t<title type="text">TEST11111111111111111111</title>\r\n\t<category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>\r\n\t<content type="html">          \t&lt;p dir="ltr">TEST&lt;/p>      \t  </content>\r\n\t<snx:communityUuid/>\r\n</entry>'
+	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">TEST11111111111111111111</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
 	var path = "/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8"
 	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
