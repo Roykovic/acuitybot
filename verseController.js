@@ -47,7 +47,7 @@ exports.getJSON = function(method, path, type, callback, body){
 const https = require('https');
 var options = {
 	  "body" : body,
-	  "method": "GET",
+	  "method": method,
 	  "hostname": "apps.ce.collabserv.com",
 	  "port": null,
 	  "path": path,
