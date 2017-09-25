@@ -57,7 +57,7 @@ var options = {
 		}
 	};
 	
-https.get(options, (resp) => {
+https.post(options, (resp) => {
   let data = '';
 
   resp.on('data', (chunk) => {
