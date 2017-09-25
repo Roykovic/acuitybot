@@ -66,7 +66,8 @@ https.get(options, (resp) => {
   resp.on('end', () => {
 	var parser = new xml2js.Parser();
 		parser.parseString(data, function (err, HTTPresult){
-
+		console.log("************************************Data************************************")
+		console.log(data)		
 		console.log("************************************Result************************************")
 		console.log(HTTPresult);
 		var entries = HTTPresult['feed']['entry'];
