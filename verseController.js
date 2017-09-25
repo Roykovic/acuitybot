@@ -56,38 +56,45 @@ var options = {
 		  "authorization": exports.auth
 		}
 	};
+	
+https.post(options, function(res){
+	res.setEncoding('utf8');
+	res.on('data', function(chunk) {
+		console.log(chunk);
+	});
+});
 
-https.get(options, (resp) => {
-  let data = '';
-
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-  resp.on('end', () => {
-	var parser = new xml2js.Parser();
-		parser.parseString(data, function (err, HTTPresult){
-		console.log("************************************Data************************************")
-		console.log(data)		
-		console.log("************************************Result************************************")
-		console.log(HTTPresult);
-		var entries = HTTPresult['feed']['entry'];
-		var titles = ""
-		for(var index = 0; index < entries.length; ++index){
-			if(index>0){
-				titles+= ", "
-			}
-			titles += "\n"+entries[index]['title'][0]['_']+"\n";
-			if(type == "files"){
-				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-				titles += URL;
-			}
-			
-		}
-		callback("These are you "+type+": " + titles)
-	})
-  });
-
-}).on("error", (err) => {
-  callback(err);
+//https.get(options, (resp) => {
+//  let data = '';
+//
+//  resp.on('data', (chunk) => {
+//    data += chunk;
+//  });
+//  resp.on('end', () => {
+//	var parser = new xml2js.Parser();
+//		parser.parseString(data, function (err, HTTPresult){
+//		console.log("************************************Data************************************")
+//		console.log(data)		
+//		console.log("************************************Result************************************")
+//		console.log(HTTPresult);
+//		var entries = HTTPresult['feed']['entry'];
+//		var titles = ""
+//		for(var index = 0; index < entries.length; ++index){
+//			if(index>0){
+//				titles+= ", "
+//			}
+//			titles += "\n"+entries[index]['title'][0]['_']+"\n";
+//			if(type == "files"){
+//				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+//				titles += URL;
+//			}
+//			
+//		}
+//		callback("These are you "+type+": " + titles)
+//	})
+//  });
+//
+//}).on("error", (err) => {
+//  callback(err);
 });
 }
