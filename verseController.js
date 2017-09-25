@@ -46,23 +46,15 @@ exports.postActivities = function (callback){
 exports.getJSON = function(method, path, type, callback, body){
 const https = require('https');
 var options = {
-	 hostname: 'www.postcatcher.in',
-  port: 80,
-  path: '/catchers/59c907c45ee6de0400000001',
-  method: 'POST',
-  headers: {
-      'Content-Type': 'application/json',
-  }
-	
-//	  "body" : body,
-//	  "method": method,
-//	  "hostname": "apps.ce.collabserv.com",
-//	  "port": null,
-//	  "path": path,
-//	  "headers": {
-//		  "Content-Type": 'application/atom+xml',
-//		  "authorization": exports.auth
-//		}
+	  "body" : body,
+	  "method": method,
+	  "hostname": "apps.ce.collabserv.com",
+	  "port": null,
+	  "path": path,
+	  "headers": {
+		  "Content-Type": 'string',
+		  "authorization": exports.auth
+		}
 	};
 	
 https.request(options, (resp) => {
