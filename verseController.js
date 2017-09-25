@@ -59,7 +59,7 @@ var options = {
 	
 https.request(options, (resp) => {
   let data = '';
-
+	console.log("1");
   resp.on('data', (chunk) => {
     data += chunk;
   });
