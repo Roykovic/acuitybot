@@ -61,6 +61,7 @@ var options = {
 
 http.post('http://apps.ce.collabserv.com/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8', options, function(res){
 			console.log("************************************Callback************************************")
+			console.log(res)
 res.setEncoding('utf8');
 	res.on('data', function(chunk) {
 			console.log("************************************Data************************************")
