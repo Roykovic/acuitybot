@@ -57,37 +57,46 @@ var options = {
 		}
 	};
 	
-https.post(options, (resp) => {
-  let data = '';
-
-  resp.on('data', (chunk) => {
-    data += chunk;
-  });
-  resp.on('end', () => {
-	var parser = new xml2js.Parser();
-		parser.parseString(data, function (err, HTTPresult){
-		console.log("************************************Data************************************")
-		console.log(data)		
-		console.log("************************************Result************************************")
-		console.log(HTTPresult);
-		var entries = HTTPresult['feed']['entry'];
-		var titles = ""
-		for(var index = 0; index < entries.length; ++index){
-			if(index>0){
-				titles+= ", "
-			}
-			titles += "\n"+entries[index]['title'][0]['_']+"\n";
-			if(type == "files"){
-				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-				titles += URL;
-			}
-			
-		}
-		callback("These are you "+type+": " + titles)
-	})
-  });
-
-}).on("error", (err) => {
-  callback(err);
+	var request = require('request');
+request.post({
+  headers: {'content-type' : 'application/x-www-form-urlencoded'},
+  url:     'http://localhost/test2.php',
+  body:    "mes=heydude"
+}, function(error, response, body){
+  console.log(body);
 });
+	
+//https.post(options, (resp) => {
+//  let data = '';
+//
+//  resp.on('data', (chunk) => {
+//    data += chunk;
+//  });
+//  resp.on('end', () => {
+//	var parser = new xml2js.Parser();
+//		parser.parseString(data, function (err, HTTPresult){
+//		console.log("************************************Data************************************")
+//		console.log(data)		
+//		console.log("************************************Result************************************")
+//		console.log(HTTPresult);
+//		var entries = HTTPresult['feed']['entry'];
+//		var titles = ""
+//		for(var index = 0; index < entries.length; ++index){
+//			if(index>0){
+//				titles+= ", "
+//			}
+//			titles += "\n"+entries[index]['title'][0]['_']+"\n";
+//			if(type == "files"){
+//				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+//				titles += URL;
+//			}
+//			
+//		}
+//		callback("These are you "+type+": " + titles)
+//	})
+//  });
+//
+//}).on("error", (err) => {
+//  callback(err);
+//});
 }
