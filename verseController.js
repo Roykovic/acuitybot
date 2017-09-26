@@ -3,6 +3,7 @@
 var exports = module.exports = {};
 var http = require("http");
 var https = require("https");
+http.post = require('http-post');
 var xml2js = require('xml2js');
 
 exports.auth = "";
@@ -57,7 +58,7 @@ var options = {
 		}
 	};
 	
-http-post(options, (resp) => {
+http.post(options, (resp) => {
   let data = '';
 
   resp.on('data', (chunk) => {
