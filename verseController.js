@@ -68,7 +68,7 @@ res.setEncoding('utf8');
 	res.on('data', function(chunk) {
 			console.log("************************************Data************************************")
 			console.log(data)		
-	});.
+	});
 });
 	
 //http.post(options, (resp) => {
