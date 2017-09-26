@@ -4,6 +4,7 @@ var exports = module.exports = {};
 var http = require("http");
 var https = require("https");
 var xml2js = require('xml2js');
+var request = require('request');
 
 exports.auth = "";
 exports.getCommunities = function (callback){
@@ -57,7 +58,6 @@ var options = {
 		}
 	};
 	
-	var request = require('request');
 	request.post({
 	  headers: {'content-type' : 'application/x-www-form-urlencoded'},
 	  url:     'http://localhost/test2.php',
