@@ -58,12 +58,8 @@ var options = {
 		}
 	};
 	
-	var data = {
-		body : '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">TEST22222222222222222</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
-	
-};
 
-http.post('http://apps.ce.collabserv.com/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8', data, function(res){
+http.post('http://apps.ce.collabserv.com/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8', options, function(res){
 			console.log("************************************Callback************************************")
 res.setEncoding('utf8');
 	res.on('data', function(chunk) {
