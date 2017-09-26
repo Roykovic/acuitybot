@@ -49,9 +49,11 @@ const https = require('https');
 var options = {
 	  "body" : body,
 	  "method": method,
-	  "hostname": "apps.ce.collabserv.com",
+	  //"hostname": "apps.ce.collabserv.com",
+	  "hostname": "requestb.in",
 	  "port": null,
-	  "path": path,
+	 // "path": path,
+	 "path":"/16qzsm81",
 	  "headers": {
 		  "Content-Type": 'application/atom+xml',
 		  "authorization": exports.auth
