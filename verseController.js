@@ -85,7 +85,7 @@ var options = {
 request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 	var parser = new xml2js.Parser();
-		console.log("********************BODY********************")
+	console.log("********************BODY********************")
 	console.log(body)
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
@@ -104,5 +104,8 @@ request(options, function (error, response, body) {
 	if (!error && response.statusCode == 201){
 		callback("Entry has been succesfully added to your "+type)
 	}
+	console.log("**ERROR**")
+	console.log(error)
+	console.log(response.statusCode)
 })
 }
