@@ -7,9 +7,30 @@ http.post = require('http-post');
 var xml2js = require('xml2js');
 
 exports.auth = "";
+
+exports.getFromIBM = function (type, callback){
+	var path;
+	
+	switch(type) {
+    case communities:
+		var path = "/communities/service/atom/communities/my"
+        break;
+    case activities:
+        var path = "/activities/service/atom2/?includeCommunityActivities=no"
+        break;
+	case GET:
+        var path = "/files/basic/api/documents/feed?visibility=public"
+}
+	var method ="GET"
+	
+	return	exports.getJSON(method, path, type, function(speech){
+		callback(speech)
+	});
+}
+
 exports.getCommunities = function (callback){
 	var method = "GET"
-	var path = "/communities/service/atom/communities/my"
+	
 	return	exports.getJSON(method, path,"communities", function(speech){
 		callback(speech)
 	});
@@ -18,7 +39,6 @@ exports.getCommunities = function (callback){
 
 exports.getActivities = function (callback){
 	var method = "GET"
-	var path = "/activities/service/atom2/activities?includeCommunityActivities=no"
 	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
 	});
@@ -27,10 +47,7 @@ exports.getActivities = function (callback){
 
 exports.getFiles = function (callback){
 	var method = "GET"
-	var path = "/files/basic/api/documents/feed?visibility=public"
-	return	exports.getJSON(method, path, "files", function(speech){
-		callback(speech)
-	});
+
 
 }
 

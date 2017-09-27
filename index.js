@@ -85,21 +85,27 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech, followUp)
 		});
 		break;
-	case "ibmCom":	
-		verseController.getCommunities(function(speech){
+	case "getFromIBM":
+		verseController.getFromIBM(request.body.result.parameters['type'],function(speech){
 			returnJson(speech);
 		});
 		break;		
-	case "ibmAct":	
-		verseController.getActivities(function(speech){
-			returnJson(speech);
-		});
-		break;		
-	case "ibmFiles":	
-		verseController.getFiles(function(speech){
-			returnJson(speech);
-		});
-		break;		
+		
+//	case "ibmCom":	
+//		verseController.getCommunities(function(speech){
+//			returnJson(speech);
+//		});
+//		break;		
+//	case "ibmAct":	
+//		verseController.getActivities(function(speech){
+//			returnJson(speech);
+//		});
+//		break;		
+//	case "ibmFiles":	
+//		verseController.getFiles(function(speech){
+//			returnJson(speech);
+//		});
+//		break;		
 	case "ibmPost":	
 		verseController.postActivityNodes(function(speech){
 			returnJson(speech);
