@@ -33,7 +33,7 @@ exports.postToIBM = function (callback, name, type){
 		switch(type) {
     case "communities":
 		path = "/communities/service/atom/communities/my"
-		body = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><title type="text">Day Care Community</title><content type="html">Share information about day care.</content><author><name>John Jordan</name><email>jjordan@example.com</email><snx:userid>22148957</snx:userid><snx:userState>active</snx:userState></author><contributor><name>John Jordan</name><email>jjordan@example.com</email><snx:userid>22148957</snx:userid><snx:userState>active</snx:userState></contributor><category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:communityType>public</snx:communityType></entry>'
+		body = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><title type="text">'+name+'</title><content type="html"></content><category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:communityType>public</snx:communityType></entry>'
         break;
     case "activities":
         path = "/activities/service/atom2/activities"
