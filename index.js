@@ -104,7 +104,7 @@ restService.post('/hook', function(req, res) {
 		break;		
 	case "ibmPost":	
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
-		verseController.postActivities(function(speech){
+		verseController.postActivityNodes(function(speech){
 			returnJson(speech);
 		},request.body.result.parameters['Content']);
 		break;				
