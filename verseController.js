@@ -46,30 +46,27 @@ exports.postActivities = function (callback){
 
 exports.getJSON = function(method, path, type, callback, body){
 	
-var http = require("http");
+var request = require('request');
+var headers = {
+    'User-Agent':       'Super Agent/0.0.1',
+    'Content-Type':     'application/x-www-form-urlencoded'
+}
+
+// Configure the request
 var options = {
-  hostname: 'requestb.in',
-  port: 80,
-  path: '/1mn0h171',
-  method: 'POST',
-  headers: {
-      'Content-Type': 'application/json',
-  }
-};
-var req = http.request(options, function(res) {
-  console.log('Status: ' + res.statusCode);
-  console.log('Headers: ' + JSON.stringify(res.headers));
-  res.setEncoding('utf8');
-  res.on('data', function (body) {
-    console.log('Body: ' + body);
-  });
-});
-req.on('error', function(e) {
-  console.log('problem with request: ' + e.message);
-});
-// write data to request body
-req.write('{"string": "Hello, World"}');
-req.end();
+    url: 'https://requestb.in/1mn0h171',
+    method: 'POST',
+    headers: headers,
+    form: {'key1': 'xxx', 'key2': 'yyy'}
+}
+
+// Start the request
+request(options, function (error, response, body) {
+    if (!error && response.statusCode == 200) {
+        // Print out the response body
+        console.log(body)
+    }
+})
 	
 
 const https = require('https');
