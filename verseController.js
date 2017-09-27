@@ -30,6 +30,8 @@ exports.getFromIBM = function (type, callback){
 exports.postToIBM = function (callback, name, type){
 	var path;
 	var body;
+	console.log("******************************************************TYPE******************************************************")
+	console.log(type)
 		switch(type) {
     case "communities":
 		path = "/communities/service/atom/communities/my"
@@ -40,7 +42,7 @@ exports.postToIBM = function (callback, name, type){
 		body
         break;
 	case "files":
-        var path = "/files/basic/api/documents/feed?visibility=public"
+        path = "/files/basic/api/documents/feed?visibility=public"
 		break;
 	case "activity nodes":
 		path = "/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8"
