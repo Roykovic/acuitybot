@@ -12,13 +12,13 @@ exports.getFromIBM = function (type, callback){
 	var path;
 	
 	switch(type) {
-    case communities:
+    case "communities":
 		var path = "/communities/service/atom/communities/my"
         break;
-    case activities:
+    case "activities":
         var path = "/activities/service/atom2/?includeCommunityActivities=no"
         break;
-	case GET:
+	case "files":
         var path = "/files/basic/api/documents/feed?visibility=public"
 }
 	var method ="GET"
