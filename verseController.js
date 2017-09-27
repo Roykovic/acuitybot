@@ -37,7 +37,7 @@ exports.postToIBM = function (callback, name, type){
         break;
     case "activities":
         path = "/activities/service/atom2/activities"
-		body
+		body = ""
         break;
 	case "files":
         path = "/files/basic/api/documents/feed?visibility=public"
