@@ -50,7 +50,7 @@ var http = require("http");
 var options = {
   hostname: 'requestb.in',
   port: 80,
-  path: '1mn0h171',
+  path: '/1mn0h171',
   method: 'POST',
   headers: {
       'Content-Type': 'application/json',
