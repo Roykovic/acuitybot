@@ -36,7 +36,7 @@ exports.getFiles = function (callback){
 
 exports.postActivities = function (callback){
 	var method = "POST"
-	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">TEST22222222222222222</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">TEST3333333</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
 	var path = "/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8"
 	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
@@ -62,7 +62,7 @@ var options = {
 
 // Start the request
 request(options, function (error, response, body) {
-    if (!error && response.statusCode == 200 || response.statusCode == 201) {
+    if (!error && response.statusCode == 200) {
 	var parser = new xml2js.Parser();
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
@@ -81,6 +81,10 @@ request(options, function (error, response, body) {
 		callback("These are you "+type+": " + titles)
 	})
     }
+	if (!error && response.statusCode == 201){
+		callback("Your "+type+" has been succesfully added")
+		console.log(body)
+	}
 	console.log("************************************Status************************************")
 	console.log(error)
 	console.log(response.statusCode)
