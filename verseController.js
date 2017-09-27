@@ -51,19 +51,16 @@ const https = require('https');
 var options = {
 	  "body" : body,
 	  "method": method,
-	  //"hostname": "apps.ce.collabserv.com",
-	  "hostname": "requestb.in",
+	  "hostname": "apps.ce.collabserv.com",
 	  "port": null,
-	 // "path": path,
-	 "path":"/16qzsm81",
+	 "path": path,
 	  "headers": {
 		  "Content-Type": 'application/atom+xml',
 		  "authorization": exports.auth
 		}
 	};
-	
 
-http.post(options, function(res){
+http.post("http://apps.ce.collabserv.com/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8", options, function(res){
 			console.log("************************************Callback************************************")
 			console.log(res)
 res.setEncoding('utf8');
