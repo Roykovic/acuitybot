@@ -25,6 +25,7 @@ var db = require('./db');
 var loginController = require('./loginController')
 var userController = require('./userController')
 var verseController = require('./verseController')
+verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var auth = false;
 var sessionId = "";
 const express = require('express');
@@ -85,25 +86,21 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "ibmCom":	
-		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getCommunities(function(speech){
 			returnJson(speech);
 		});
 		break;		
 	case "ibmAct":	
-		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getActivities(function(speech){
 			returnJson(speech);
 		});
 		break;		
 	case "ibmFiles":	
-		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.getFiles(function(speech){
 			returnJson(speech);
 		});
 		break;		
 	case "ibmPost":	
-		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.postActivityNodes(function(speech){
 			returnJson(speech);
 		},request.body.result.parameters['Content']);
