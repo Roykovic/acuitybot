@@ -82,8 +82,7 @@ request(options, function (error, response, body) {
 	})
     }
 	if (!error && response.statusCode == 201){
-		callback("Your "+type+" has been succesfully added")
-		console.log(body)
+		callback("Entry has been succesfully added to your "+type)
 	}
 	console.log("************************************Status************************************")
 	console.log(error)
