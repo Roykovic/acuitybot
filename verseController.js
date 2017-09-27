@@ -66,6 +66,9 @@ request(options, function (error, response, body) {
         // Print out the response body
         console.log(body)
     }
+	console.log("************************************Status************************************")
+	console.log(error)
+	console.log(response.statusCode)
 })
 	
 
