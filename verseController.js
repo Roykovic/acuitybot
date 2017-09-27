@@ -106,6 +106,7 @@ request(options, function (error, response, body) {
 	}
 	console.log("**ERROR**")
 	console.log(error)
+	console.log(response)
 	console.log(response.statusCode)
 })
 }
