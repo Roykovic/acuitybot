@@ -11,6 +11,8 @@ exports.auth = "";
 exports.getFromIBM = function (type, callback){
 	var path;
 	
+		console.log("**********************************type**********************************")
+	console.log(intent)
 	switch(type) {
     case "communities":
 		var path = "/communities/service/atom/communities/my"
