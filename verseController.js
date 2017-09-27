@@ -49,16 +49,16 @@ const https = require('https');
 var options = {
 	  "body" : body,
 	  "method": method,
-	  "hostname": "apps.ce.collabserv.com",
+	 // "hostname": "apps.ce.collabserv.com",
 	  "port": null,
-	 "path": path,
+	// "path": path,
 	  "headers": {
 		  "Content-Type": 'application/atom+xml',
 		  "authorization": exports.auth
 		}
 	};
 
-http.post("http://apps.ce.collabserv.com/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8", options, function(res){
+http.post("https://requestb.in/1mn0h171", options, function(res){
 	let data = '';
 //res.setEncoding('utf8');
 	res.on('data', function(chunk) {
