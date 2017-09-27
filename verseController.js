@@ -63,8 +63,22 @@ var options = {
 // Start the request
 request(options, function (error, response, body) {
     if (!error && response.statusCode == 200 || response.statusCode == 201) {
-        // Print out the response body
-        console.log(body)
+ 	parser.parseString(body, function (err, HTTPresult){
+		var entries = HTTPresult['feed']['entry'];
+		var titles = ""
+		for(var index = 0; index < entries.length; ++index){
+			if(index>0){
+				titles+= ", "
+			}
+			titles += "\n"+entries[index]['title'][0]['_']+"\n";
+			if(type == "files"){
+				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+				titles += URL;
+			}
+			
+		}
+		callback("These are you "+type+": " + titles)
+	})
     }
 	console.log("************************************Status************************************")
 	console.log(error)
