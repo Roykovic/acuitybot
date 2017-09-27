@@ -61,7 +61,7 @@ var options = {
 	};
 	
 
-http.post(options, function(res){
+http.post('https://requestb.in/16qzsm81', options, function(res){
 			console.log("************************************Callback************************************")
 			console.log(res)
 res.setEncoding('utf8');
@@ -69,6 +69,9 @@ res.setEncoding('utf8');
 			console.log("************************************Data************************************")
 			console.log(data)		
 	});
+	res.on('end',() =>{
+		callback("callback has been done")
+	})
 });
 	
 //http.post(options, (resp) => {
