@@ -59,8 +59,6 @@ restService.post('/hook', function(req, res) {
 //						});
 //		}
 	}
-	console.log("**********************************INTENT**********************************")
-	console.log(intent)
 	switch (intent) {
     case "Login":
 		return login();
@@ -91,22 +89,6 @@ restService.post('/hook', function(req, res) {
 			returnJson(speech);
 		});
 		break;		
-		
-//	case "ibmCom":	
-//		verseController.getCommunities(function(speech){
-//			returnJson(speech);
-//		});
-//		break;		
-//	case "ibmAct":	
-//		verseController.getActivities(function(speech){
-//			returnJson(speech);
-//		});
-//		break;		
-//	case "ibmFiles":	
-//		verseController.getFiles(function(speech){
-//			returnJson(speech);
-//		});
-//		break;		
 	case "ibmPost":	
 		verseController.postActivityNodes(function(speech){
 			returnJson(speech);
