@@ -48,16 +48,16 @@ exports.getJSON = function(method, path, type, callback, body){
 	
 var request = require('request');
 var headers = {
-    'User-Agent':       'Super Agent/0.0.1',
-    'Content-Type':     'application/x-www-form-urlencoded'
+	"Content-Type": 'application/atom+xml',
+	"authorization": exports.auth
 }
 
 // Configure the request
 var options = {
-    url: 'https://requestb.in/1mn0h171',
+    url: 'apps.ce.collabserv.com' + path,
     method: 'POST',
     headers: headers,
-    form: {'key1': 'xxx', 'key2': 'yyy'}
+    body: body
 }
 
 // Start the request
@@ -69,31 +69,7 @@ request(options, function (error, response, body) {
 })
 	
 
-const https = require('https');
-//				var options = {
-//					"body" : body,
-//					"method": method,
-//					// "hostname": "apps.ce.collabserv.com",
-//					"port": null,
-//					// "path": path,
-//					"headers": {
-//						"Content-Type": 'application/atom+xml',
-//						"authorization": exports.auth
-//						}
-//					};
-//				
-//				http.post("http://requestb.in/1mn0h171", options, function(res){
-//					let data = '';
-//				//res.setEncoding('utf8');
-//					res.on('data', function(chunk) {
-//					console.log("************************************Data************************************")
-//							data += chunk
-//					});
-//					res.on('end',() =>{
-//						callback("callback has been done")
-//					})
-//				});
-	
+//const https = require('https');
 //http.post(options, (resp) => {
 //  let data = '';
 //
