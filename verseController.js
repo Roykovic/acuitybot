@@ -54,7 +54,7 @@ var headers = {
 
 // Configure the request
 var options = {
-    url: 'apps.ce.collabserv.com' + path,
+    url: 'https://apps.ce.collabserv.com' + path,
     method: 'POST',
     headers: headers,
     body: body
