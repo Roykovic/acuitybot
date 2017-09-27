@@ -36,11 +36,11 @@ exports.getFiles = function (callback){
 
 exports.postActivities = function (callback){
 	var method = "POST"
-	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">TEST3333333</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">'+name+'</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
 	var path = "/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8"
 	return	exports.getJSON(method, path,"activities", function(speech){
 		callback(speech)
-	}, body);
+	},name, body);
 
 }
 
@@ -68,9 +68,6 @@ request(options, function (error, response, body) {
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
-			if(index>0){
-				titles+= ", "
-			}
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
 			if(type == "files"){
 				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
@@ -84,44 +81,5 @@ request(options, function (error, response, body) {
 	if (!error && response.statusCode == 201){
 		callback("Entry has been succesfully added to your "+type)
 	}
-	console.log("************************************Status************************************")
-	console.log(error)
-	console.log(response.statusCode)
 })
-	
-
-//const https = require('https');
-//http.post(options, (resp) => {
-//  let data = '';
-//
-//  resp.on('data', (chunk) => {
-//    data += chunk;
-//  });
-//  resp.on('end', () => {
-//	var parser = new xml2js.Parser();
-//		parser.parseString(data, function (err, HTTPresult){
-//		console.log("************************************Data************************************")
-//		console.log(data)		
-//		console.log("************************************Result************************************")
-//		console.log(HTTPresult);
-//		var entries = HTTPresult['feed']['entry'];
-//		var titles = ""
-//		for(var index = 0; index < entries.length; ++index){
-//			if(index>0){
-//				titles+= ", "
-//			}
-//			titles += "\n"+entries[index]['title'][0]['_']+"\n";
-//			if(type == "files"){
-//				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-//				titles += URL;
-//			}
-//			
-//		}
-//		callback("These are you "+type+": " + titles)
-//	})
-//  });
-//
-//}).on("error", (err) => {
-//  callback(err);
-//});
 }

@@ -106,7 +106,7 @@ restService.post('/hook', function(req, res) {
 		verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 		verseController.postActivities(function(speech){
 			returnJson(speech);
-		});
+		},request.body.result.parameters['Content']);
 		break;				
 	default:
        	return wakeUp();
