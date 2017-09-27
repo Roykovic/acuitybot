@@ -35,7 +35,6 @@ exports.getFiles = function (callback){
 }
 
 exports.postActivities = function (callback){
-	console.log("************************************Post************************************")
 	var method = "POST"
 	var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">TEST22222222222222222</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
 	var path = "/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8"
@@ -46,7 +45,6 @@ exports.postActivities = function (callback){
 }
 
 exports.getJSON = function(method, path, type, callback, body){
-console.log("************************************JSon************************************")
 const https = require('https');
 var options = {
 	  "body" : body,
@@ -61,11 +59,10 @@ var options = {
 	};
 
 http.post("http://apps.ce.collabserv.com/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8", options, function(res){
-			console.log("************************************Callback************************************")
-			console.log(res)
 	let data = '';
 res.setEncoding('utf8');
 	res.on('data', function(chunk) {
+	console.log("************************************Data************************************")
 			data += chunk
 	});
 	res.on('end',() =>{
