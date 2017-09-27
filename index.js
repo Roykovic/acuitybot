@@ -86,6 +86,7 @@ restService.post('/hook', function(req, res) {
 		});
 		break;
 	case "getFromIBM":
+		console.log("1st SWICH")
 		verseController.getFromIBM(request.body.result.parameters['type'],function(speech){
 			returnJson(speech);
 		});
