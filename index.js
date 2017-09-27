@@ -90,7 +90,7 @@ restService.post('/hook', function(req, res) {
 		});
 		break;		
 	case "ibmPost":	
-		verseController.postActivityNodes(function(speech){
+		verseController.postToIBM(function(speech){
 			returnJson(speech);
 		},request.body.result.parameters['Content']);
 		break;				
