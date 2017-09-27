@@ -67,12 +67,6 @@ exports.postActivityNodes = function (callback, name){
 }
 
 exports.getJSON = function(method, path, type, callback, body){
-	console.log("********************JSON DATA********************")
-	console.log(method)
-	console.log(path)
-	console.log(type)
-	console.log(body)
-	
 var request = require('request');
 var headers = {
 	"Content-Type": 'application/atom+xml',
@@ -91,6 +85,8 @@ var options = {
 request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 	var parser = new xml2js.Parser();
+		console.log("********************BODY********************")
+	console.log(body)
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
