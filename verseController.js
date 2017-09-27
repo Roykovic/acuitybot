@@ -45,30 +45,40 @@ exports.postActivities = function (callback){
 }
 
 exports.getJSON = function(method, path, type, callback, body){
-const https = require('https');
-var options = {
-	  "body" : body,
-	  "method": method,
-	 // "hostname": "apps.ce.collabserv.com",
-	  "port": null,
-	// "path": path,
-	  "headers": {
-		  "Content-Type": 'application/atom+xml',
-		  "authorization": exports.auth
-		}
-	};
+	
+var request = require('request');
+var url ='https://requestb.in/1mn0h171'
+request(url, function (error, response, body) {
+  if (!error) {
+    console.log(body);
+  }
+});	
+	
 
-http.post("http://requestb.in/1mn0h171", options, function(res){
-	let data = '';
-//res.setEncoding('utf8');
-	res.on('data', function(chunk) {
-	console.log("************************************Data************************************")
-			data += chunk
-	});
-	res.on('end',() =>{
-		callback("callback has been done")
-	})
-});
+const https = require('https');
+//				var options = {
+//					"body" : body,
+//					"method": method,
+//					// "hostname": "apps.ce.collabserv.com",
+//					"port": null,
+//					// "path": path,
+//					"headers": {
+//						"Content-Type": 'application/atom+xml',
+//						"authorization": exports.auth
+//						}
+//					};
+//				
+//				http.post("http://requestb.in/1mn0h171", options, function(res){
+//					let data = '';
+//				//res.setEncoding('utf8');
+//					res.on('data', function(chunk) {
+//					console.log("************************************Data************************************")
+//							data += chunk
+//					});
+//					res.on('end',() =>{
+//						callback("callback has been done")
+//					})
+//				});
 	
 //http.post(options, (resp) => {
 //  let data = '';
