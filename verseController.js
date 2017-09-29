@@ -122,18 +122,16 @@ exports.getActivityId = function(activityName){
 	request(options, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
-				console.log("****************************************BODYTHINGY****************************************")
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){			
 					if(entries[index]['title'][0]['_'] == activityName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
 						id = parts[parts.length-1]
+						return id;
 					}				
 				}
 			})
 		}
 })
-console.log("id " + id)
-return id;
 }
