@@ -134,6 +134,7 @@ exports.getActivityId = function(activityName){
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){
 					if(entries[index]['id'][0]['_'] == activityName){
+						console.log("****************************************SUCCES****************************************")
 						id = entries[index]['id'][0];	
 					}				
 				}
