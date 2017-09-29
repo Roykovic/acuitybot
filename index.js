@@ -92,7 +92,7 @@ restService.post('/hook', function(req, res) {
 	case "ibmPost":	
 	console.log(request.body.result.parameters)
 		verseController.postToIBM(function(speech){
-			returnJson(speech);
+			returnJson(speech, followUp);
 		},request.body.result.parameters['Content'],request.body.result.parameters['type']);
 		break;				
 	default:
