@@ -30,8 +30,6 @@ exports.getFromIBM = function (type, callback){
 }
 
 exports.postToIBM = function (callback, name, type, activity){
-		console.log("*****************************************Activity*****************************************")
-	console.log(activity)
 	var path;
 	var body;
 		switch(type) {
@@ -128,6 +126,7 @@ exports.getActivityId = function(activityName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
 						id = parts[parts.length-1]
+						console.log("ID: " + id)
 						return id;
 					}				
 				}
