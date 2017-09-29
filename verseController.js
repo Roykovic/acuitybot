@@ -121,7 +121,7 @@ exports.getActivityId = function(activityName){
 	}
 	
 	var options = {
-    url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities?title=' + activityName,
+    url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities?title=' + //activityName,
     method: "GET",
     headers: headers
 	}
