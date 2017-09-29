@@ -130,3 +130,4 @@ exports.getActivityId = function(activityName){
 	})	
 return id;
 }
+}
