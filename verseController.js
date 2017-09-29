@@ -132,6 +132,6 @@ exports.getActivityId = function(activityName){
 				id = HTTPresult['feed']['entry']['id'];
 			})
 		}
-	}	
+}}	
 return id;
 }
