@@ -123,22 +123,18 @@ exports.getActivityId = function(activityName){
 	var options = {
     url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities',
     method: "GET",
-    headers: headers
+    headers: headers,
+	activityName: activityName
 	}
 	
 	request(options, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
 				console.log("****************************************BODYTHINGY****************************************")
-				console.log(HTTPresult['feed']['entry'][0]['title'][0]['_'])
 				var entries = HTTPresult['feed']['entry'];
-				for(var index = 0; index < entries.length; ++index){
-					
-//					console.log(activityName)
-//					console.log(entries[index]['id'][0]['_'])
-//					console.log(id)
-					
-					if(entries[index]['title'][0]['_'] == activityName){
+				for(var index = 0; index < entries.length; ++index){			
+					console.log(options.activityName)
+					if(entries[index]['title'][0]['_'] == options.activityName){
 						id = entries[index]['id'][0];	
 					}				
 				}
