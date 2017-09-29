@@ -138,7 +138,7 @@ exports.getActivityId = function(activityName){
 					console.log(activityName)
 					console.log(entries[index]['title'][0]['_'] == activityName)
 					if(entries[index]['title'][0]['_'] == activityName){
-						id = entries[index]['id'][0];	
+						id = entries[index]['id'][0]['oa'];	
 					}				
 					console.log(id)
 				}
