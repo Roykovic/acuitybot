@@ -130,7 +130,7 @@ exports.getActivityId = function(activityName){
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
 				console.log("****************************************BODYTHINGY****************************************")
-				console.log(HTTPresult[feed][0])
+				console.log(HTTPresult['feed'][0])
 				id = HTTPresult['feed']['entry']['id'];
 			})
 		}
