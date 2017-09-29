@@ -128,10 +128,11 @@ exports.getActivityId = function(activityName){
 	
 	request(options, function (error, response, body) {
 		if (!error && response.statusCode == 200) {
-		parser.parseString(body, function (err, HTTPresult){
-			id = HTTPresult['feed']['entry']['id'];
+			parser.parseString(body, function (err, HTTPresult){
+				id = HTTPresult['feed']['entry']['id'];
+			})
 		})
-	})	
+	}	
 return id;
-}}
+}
 }
