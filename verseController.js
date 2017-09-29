@@ -130,7 +130,7 @@ exports.getActivityId = function(activityName){
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
 				console.log("****************************************BODYTHINGY****************************************")
-				console.log(HTTPresult['feed']['entry'][0]['id'][0])
+				console.log(HTTPresult['feed']['entry'][0]['title'][0])
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){
 					
@@ -138,7 +138,7 @@ exports.getActivityId = function(activityName){
 //					console.log(entries[index]['id'][0]['_'])
 //					console.log(id)
 					
-					if(entries[index]['id'][0]['_'] == activityName){
+					if(entries[index]['title'][0]['_'] == activityName){
 						id = entries[index]['id'][0];	
 					}				
 				}
