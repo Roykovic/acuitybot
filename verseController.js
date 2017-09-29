@@ -30,7 +30,7 @@ exports.getFromIBM = function (type, callback){
 }
 
 exports.postToIBM = function (callback, name, type, activity){
-	console.log("*****************************************Activity*****************************************")
+		console.log("*****************************************Activity*****************************************")
 	console.log(activity)
 	var path;
 	var body;
