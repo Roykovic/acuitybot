@@ -15,8 +15,7 @@ exports.getFromIBM = function (type, callback){
 		var path = "/communities/service/atom/communities/my"
         break;
     case "activities":
-		console.log("*************************AMK*************************")
-        var path = "/activities/service/atom2/?includeCommunityActivities=no"
+        var path = "/activities/service/atom2/activities?includeCommunityActivities=no"
         break;
 	case "files":
         var path = "/files/basic/api/documents/feed?visibility=public"
