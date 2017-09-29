@@ -111,7 +111,7 @@ request(options, function (error, response, body) {
 	console.log("**STATUS**")
 	if(error){console.log(error)}
 	console.log(response.statusCode)
-})
+})}
 
 exports.getActivityId = function(activityName){
 	var id = "";
@@ -134,5 +134,4 @@ exports.getActivityId = function(activityName){
 		})
 	}	
 return id;
-}
 }
