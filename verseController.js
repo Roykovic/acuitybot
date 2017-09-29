@@ -130,7 +130,7 @@ exports.getActivityId = function(activityName){
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
 				console.log("****************************************BODYTHINGY****************************************")
-				console.log(HTTPresult['feed']['entry'][0]['title'][0])
+				console.log(HTTPresult['feed']['entry'][0]['title'][0]['_'])
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){
 					
