@@ -131,16 +131,12 @@ exports.getActivityId = function(activityName){
 			parser.parseString(body, function (err, HTTPresult){
 				console.log("****************************************BODYTHINGY****************************************")
 				console.log(HTTPresult['feed']['entry'][0])
-				// var entries = HTTPresult['feed']['entry'];
-				// for(var index = 0; index < entries.length; ++index){
-					// titles += "\n"+entries[index]['title'][0]['_']+"\n";
-					// if(type == "files"){
-						// var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-						// titles += URL;
-				
-				// }
-					
-				// }
+				var entries = HTTPresult['feed']['entry'];
+				for(var index = 0; index < entries.length; ++index){
+					if(entries[index]['id'][0]['_'] == activityName){
+						id = entries[index]['id'][0];	
+					}				
+				}
 			})
 		}
 })
