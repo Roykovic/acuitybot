@@ -30,6 +30,8 @@ exports.getFromIBM = function (type, callback){
 }
 
 exports.postToIBM = function (callback, name, type, activity){
+	console.log("*****************************************Activity*****************************************")
+	console.log(activity)
 	var path;
 	var body;
 		switch(type) {
@@ -124,7 +126,6 @@ exports.getActivityId = function(activityName){
     url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities',
     method: "GET",
     headers: headers,
-	activityName: activityName
 	}
 	
 	request(options, function (error, response, body) {
@@ -134,7 +135,7 @@ exports.getActivityId = function(activityName){
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){			
 					console.log(options)
-					if(entries[index]['title'][0]['_'] == options.activityName){
+					if(entries[index]['title'][0]['_'] == activityName){
 						id = entries[index]['id'][0];	
 					}				
 				}
