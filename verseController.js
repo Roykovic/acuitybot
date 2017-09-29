@@ -121,7 +121,7 @@ exports.getActivityId = function(activityName){
 	}
 	
 	var options = {
-    url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities?title=', //+ activityName,
+    url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities',
     method: "GET",
     headers: headers
 	}
@@ -130,8 +130,17 @@ exports.getActivityId = function(activityName){
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
 				console.log("****************************************BODYTHINGY****************************************")
-				console.log(HTTPresult)
-				id = HTTPresult['feed']['id']['nullpointer'];
+				console.log(HTTPresult['feed']['entry'][0])
+				// var entries = HTTPresult['feed']['entry'];
+				// for(var index = 0; index < entries.length; ++index){
+					// titles += "\n"+entries[index]['title'][0]['_']+"\n";
+					// if(type == "files"){
+						// var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+						// titles += URL;
+				
+				// }
+					
+				// }
 			})
 		}
 })
