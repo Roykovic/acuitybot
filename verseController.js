@@ -27,7 +27,7 @@ exports.getFromIBM = function (type, callback){
 	});
 }
 
-exports.postToIBM = function (callback, name, type){
+exports.postToIBM = function (callback, name, type, activity){
 	var path;
 	var body;
 		switch(type) {
@@ -40,10 +40,8 @@ exports.postToIBM = function (callback, name, type){
 		body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0"  > <title type="text">'+name+'</title>    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>    <content type="html">             </content></entry>'
         break;
 	case "activity nodes":
-			console.log("DINGEN")
-			return callback(null,"addInfo")
-		//path = "/activities/service/atom2/activity?activityUuid=ac7081f8-417c-407c-a3bb-c13ddc541ea8"
-		//body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">'+name+'</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+		path = "/activities/service/atom2/activity?activityUuid="+activity
+		body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">'+name+'</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
 }
 
 	var method = "POST"
@@ -83,6 +81,7 @@ request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {														
 	var parser = new xml2js.Parser();
+	console.log(body)
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
