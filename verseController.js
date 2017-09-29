@@ -100,8 +100,10 @@ request(options, function (error, response, body) {
 	})
     }
 	if (!error && response.statusCode == 201){
-		console.log("SUCCES")
 		callback("Entry has been succesfully added to your "+type)
+	}
+	else{
+		callback("Something went wrong, please check if this record doesn't already exist. And if you have the appropriate rights to fulfill this action")
 	}
 	console.log("**STATUS**")
 	console.log(error)
