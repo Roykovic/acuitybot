@@ -37,7 +37,7 @@ exports.postToIBM = function (callback, name, type){
         break;
     case "activities":
         path = "/activities/service/atom2/activities"
-		body = ""
+		body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0"  > <title type="text">'+name+'</title>    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>    <category term="tag1" />    <category term="tag2" />    <content type="html">             </content></entry>'
         break;
 	case "files":
         path = "/files/basic/api/documents/feed?visibility=public"
@@ -81,10 +81,9 @@ var options = {
 
 // Start the request
 request(options, function (error, response, body) {
-    if (!error && response.statusCode == 200) {
+	//No error, and get was succesful
+    if (!error && response.statusCode == 200) {														
 	var parser = new xml2js.Parser();
-	console.log("********************BODY********************")
-	console.log(body)
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
@@ -99,14 +98,16 @@ request(options, function (error, response, body) {
 		callback("These are you "+type+": " + titles)
 	})
     }
+	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
 		callback("Entry has been succesfully added to your "+type)
 	}
+	//Either an error, or a statuscode for an insuccesful request
 	else{
-		callback("Something went wrong, please check if this record doesn't already exist. And if you have the appropriate rights to fulfill this action")
+		callback("Something went wrong, please check if this record doesn't already exist. And if you have the appropriate rights to fulfill this action (" + response.statuscode + ")")
 	}
 	console.log("**STATUS**")
-	console.log(error)
+	if(error){console.log(error)}
 	console.log(response.statusCode)
 })
 }
