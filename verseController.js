@@ -4,7 +4,9 @@ var exports = module.exports = {};
 var http = require("http");
 var https = require("https");
 http.post = require('http-post');
+var request = require('request');
 var xml2js = require('xml2js');
+var parser = new xml2js.Parser();
 
 exports.auth = "";
 
@@ -40,7 +42,7 @@ exports.postToIBM = function (callback, name, type, activity){
 		body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0"  > <title type="text">'+name+'</title>    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>    <content type="html">             </content></entry>'
         break;
 	case "activity nodes":
-		path = "/activities/service/atom2/activity?activityUuid="+activity
+		path = "/activities/service/atom2/activity?activityUuid="+exports.getActivityId(activity)
 		body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">'+name+'</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">TEST&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
 }
 
@@ -62,7 +64,6 @@ exports.postActivityNodes = function (callback, name){
 }
 
 exports.getJSON = function(method, path, type, callback, body){
-var request = require('request');
 var headers = {
 	"Content-Type": 'application/atom+xml',
 	"authorization": exports.auth
@@ -79,8 +80,7 @@ var options = {
 // Start the request
 request(options, function (error, response, body) {
 	//No error, and get was succesful
-    if (!error && response.statusCode == 200) {														
-	var parser = new xml2js.Parser();
+    if (!error && response.statusCode == 200) {													
 	console.log(body)
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
@@ -90,7 +90,8 @@ request(options, function (error, response, body) {
 			if(type == "files"){
 				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
 				titles += URL;
-			}
+		
+		}
 			
 		}
 		callback("These are you "+type+": " + titles)
@@ -108,4 +109,24 @@ request(options, function (error, response, body) {
 	if(error){console.log(error)}
 	console.log(response.statusCode)
 })
+
+exports.getActivityId = function(activityName){
+	var id = "";
+	var headers = {
+	"Content-Type": 'application/atom+xml',
+	"authorization": exports.auth
+	}
+	
+	var options = {
+    url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities?title=' + activityName,
+    method: "GET",
+    headers: headers
+	}
+	
+	request(options, function (error, response, body) {
+		parser.parseString(body, function (err, HTTPresult){
+			id = HTTPresult['feed']['entry']['id'];
+		}
+	}	
+return id;
 }
