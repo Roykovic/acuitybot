@@ -94,7 +94,7 @@ restService.post('/hook', function(req, res) {
 	console.log(request.body.result.parameters)
 		verseController.postToIBM(function(speech, followUp){
 			returnJson(speech, followUp);
-		},request.body.result.parameters['Content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
+		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
 		break;				
 	default:
        	return wakeUp();
