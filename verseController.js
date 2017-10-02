@@ -96,7 +96,7 @@ request(options, function (error, response, body) {
 	}
 	//Either an error, or a statuscode for an insuccesful request
 	else{
-		callback("Something went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action (" + response.statusCode + ")")
+		callback("Something went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action" if(response.statusCode("(" + response.statusCode + ")"))
 	}
 })}
 
