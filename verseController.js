@@ -62,6 +62,7 @@ exports.postToIBM = function (callback, name, type, activity){
 		})}
 
 exports.getJSON = function(method, path, type, callback, body){
+	console.log("GETJSON")
 var headers = {
 	"Content-Type": 'application/atom+xml',
 	"authorization": exports.auth
