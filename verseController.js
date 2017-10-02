@@ -99,9 +99,6 @@ request(options, function (error, response, body) {
 	else{
 		callback("Something went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action (" + response.statusCode + ")")
 	}
-	console.log("**STATUS**")
-	if(error){console.log(error)}
-	console.log(response.statusCode)
 })}
 
 exports.getActivityId = function(activityName, callback){
