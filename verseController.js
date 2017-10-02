@@ -37,7 +37,6 @@ exports.postToIBM = function (callback, name, type, activity){
 	var path;
 	var body;
 	exports.getActivityId(activity, function(activityID){
-			console.log(activity)
 			if(!activityID){
 				return callback("The activity doesn't exist")
 			}
@@ -60,7 +59,9 @@ exports.postToIBM = function (callback, name, type, activity){
 		callback(speech)
 	}, body);
 
-		})}
+		})
+					console.log(activity)
+		}
 
 exports.getJSON = function(method, path, type, callback, body){
 	console.log("GETJSON")
