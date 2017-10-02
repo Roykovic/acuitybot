@@ -97,7 +97,7 @@ request(options, function (error, response, body) {
 	//Either an error, or a statuscode for an insuccesful request
 	else{
 		var speech = "Something went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action"
-		if(response.statusCode){
+		if(response){
 		speech += "(" + response.statusCode + ")"
 			}
 		callback(speech)
