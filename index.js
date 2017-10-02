@@ -47,6 +47,8 @@ restService.post('/hook', function(req, res) {
 	request = req;
 	result = res;
 	var intent = req.body.result.metadata.intentName;
+			console.log("**********************METHOD************************")
+		console.log(intent)
 	if(intent != "Login"){
 //		if(!auth || request.body.sessionId != sessionId){
 //		return result.json({																				
@@ -60,8 +62,6 @@ restService.post('/hook', function(req, res) {
 //		}
 	}
 	switch (intent) {
-		console.log("**********************METHOD************************")
-		console.log(intent)
     case "Login":
 		return login();
         break;
