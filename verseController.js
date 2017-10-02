@@ -38,8 +38,8 @@ exports.postToIBM = function (callback, name, type, activity){
 	var path;
 	var body;
 	exports.getActivityId(activity, function(activityID){
+						console.log("callback")
 			if(!activityID){
-				console.log("callback")
 				return callback("The activity doesn't exist")
 			}
 		switch(type) {
