@@ -80,6 +80,7 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
+					console.log("**********************METHOD************************")
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
@@ -97,6 +98,7 @@ request(options, function (error, response, body) {
     }
 	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
+							console.log("**********************METHOD************************")
 		callback("Entry has been succesfully added to your "+type)
 	}
 	//Either an error, or a statuscode for an insuccesful request
