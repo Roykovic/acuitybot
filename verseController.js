@@ -74,8 +74,7 @@ var options = {
 // Start the request
 request(options, function (error, response, body) {
 	//No error, and get was succesful
-    if (!error && response.statusCode == 200) {													
-	console.log(body)
+    if (!error && response.statusCode == 200) {
  	parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		var titles = ""
@@ -123,7 +122,6 @@ exports.getActivityId = function(activityName, callback){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
 						id = parts[parts.length-1]
-						console.log("ID: " + id)
 						callback(id);
 					}				
 				}
