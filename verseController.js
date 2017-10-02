@@ -34,14 +34,13 @@ exports.getFromIBM = function (type, callback){
 }
 
 exports.postToIBM = function (callback, name, type, activity){
-	console.log(activity)
 	var path;
 	var body;
 	exports.getActivityId(activity, function(activityID){
+			console.log(activity)
 			if(!activityID){
 				return callback("The activity doesn't exist")
 			}
-								console.log(activityID)
 		switch(type) {
     case "communities":
 		path = "/communities/service/atom/communities/my"
