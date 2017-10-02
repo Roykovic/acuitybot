@@ -47,8 +47,6 @@ restService.post('/hook', function(req, res) {
 	request = req;
 	result = res;
 	var intent = req.body.result.metadata.intentName;
-			console.log("**********************METHOD************************")
-		console.log(intent)
 	if(intent != "Login"){
 //		if(!auth || request.body.sessionId != sessionId){
 //		return result.json({																				
@@ -93,6 +91,7 @@ restService.post('/hook', function(req, res) {
 		break;		
 	case "ibmPost":	
 	case "ibmPostNode":	
+				console.log("**********************METHOD************************")
 		verseController.postToIBM(function(speech, followUp){
 			returnJson(speech, followUp);
 		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
