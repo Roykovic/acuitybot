@@ -60,6 +60,8 @@ restService.post('/hook', function(req, res) {
 //		}
 	}
 	switch (intent) {
+		console.log("**********************METHOD************************")
+		console.log(intent)
     case "Login":
 		return login();
         break;
