@@ -34,6 +34,7 @@ exports.getFromIBM = function (type, callback){
 }
 
 exports.postToIBM = function (callback, name, type, activity){
+	console.log("postToIBM")
 	var path;
 	var body;
 	exports.getActivityId(activity, function(activityID){
