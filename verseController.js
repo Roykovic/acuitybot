@@ -81,7 +81,7 @@ request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
 					console.log("200")
- 	parser.parseString(body, function (err, HTTPresult){
+ 	return parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		if(!entries){
 			return callback("You don't have any "+type)
