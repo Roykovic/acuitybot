@@ -127,7 +127,6 @@ exports.getActivityId = function(activityName, callback){
 	}
 	
 	request(options, function (error, response, body) {
-		console.log("*********************************ENTERING IF*******************************")
 		if (!error && response.statusCode == 200) {
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
@@ -136,13 +135,11 @@ exports.getActivityId = function(activityName, callback){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
 						id = parts[parts.length-1]
-						console.log("*****************************THIS ONE FIRES TOO****************************")
 						return callback(id);
 					}				
 				}
 			})
 		}
-		console.log("***********************JUP, YOUVE BROKEN IT******************************")
 		return callback();
 })
 }
