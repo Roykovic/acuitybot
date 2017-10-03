@@ -63,11 +63,6 @@ exports.postToIBM = function (callback, name, type, activity){
 		}
 
 exports.getJSON = function(method, path, type, callback, body){
-	console.log("**************************GETJSON**************************")
-	console.log(method)
-	console.log(path)
-	console.log(type)
-	console.log(body)
 var headers = {
 	"Content-Type": 'application/atom+xml',
 	"authorization": exports.auth
@@ -98,13 +93,13 @@ request(options, function (error, response, body) {
 		}
 			
 		}
-		callback("These are you "+type+": " + titles)
+		return callback("These are you "+type+": " + titles)
 	})
     }
 	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
 							console.log("201")
-		callback("Entry has been succesfully added to your "+type)
+		return callback("Entry has been succesfully added to your "+type)
 	}
 	//Either an error, or a statuscode for an insuccesful request
 	else{
@@ -113,7 +108,7 @@ request(options, function (error, response, body) {
 		if(response){
 		speech += "(" + response.statusCode + ")"
 			}
-		callback(speech)
+		return callback(speech)
 	}
 })}
 
