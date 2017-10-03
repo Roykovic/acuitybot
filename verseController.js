@@ -132,9 +132,9 @@ exports.getActivityId = function(activityName, callback){
 		if (!error && response.statusCode == 200) {
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
-		if(!entries){
-			return callback("You don't have any "+type)
-		}
+			if(!entries){
+				return callback("You don't have any "+type)
+			}
 				for(var index = 0; index < entries.length; ++index){
 					if(entries[index]['title'][0]['_'] == activityName){
 						var unformattedId = entries[index]['id'][0];	
