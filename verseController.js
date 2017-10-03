@@ -12,6 +12,7 @@ exports.auth = "";
 
 exports.getFromIBM = function (type, callback){
 	var path;
+		console.log("******************TYPE********************")
 		console.log(type);
 	switch(type) {
     case "communities":
