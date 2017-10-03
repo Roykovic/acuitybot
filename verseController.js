@@ -23,7 +23,7 @@ exports.getFromIBM = function (type, callback){
         var path = "/files/basic/api/documents/feed?visibility=public"
 		break;
 	default:
-		callback("Cannot find " + type + " in system. Please check  your spelling or try again.");
+		return callback("Cannot find " + type + " in system. Please check  your spelling or try again.");
 	
 }
 	var method ="GET"
