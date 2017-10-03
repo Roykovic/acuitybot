@@ -133,7 +133,7 @@ exports.getActivityId = function(activityName, callback){
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
 			if(!entries){
-				return callback("You don't have any "+type)
+				return callback()
 			}
 				for(var index = 0; index < entries.length; ++index){
 					if(entries[index]['title'][0]['_'] == activityName){
