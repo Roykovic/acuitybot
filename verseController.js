@@ -129,7 +129,7 @@ exports.getActivityId = function(activityName, callback){
 	request(options, function (error, response, body) {
 		console.log("*********************************ENTERING IF*******************************")
 		if (!error && response.statusCode == 200) {
-			parser.parseString(body, function (err, HTTPresult){
+			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){			
 					if(entries[index]['title'][0]['_'] == activityName){
