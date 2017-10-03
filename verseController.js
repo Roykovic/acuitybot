@@ -60,7 +60,6 @@ exports.postToIBM = function (callback, name, type, activity){
 	}, body);
 
 		})
-					console.log(activity)
 		}
 
 exports.getJSON = function(method, path, type, callback, body){
@@ -141,5 +140,6 @@ exports.getActivityId = function(activityName, callback){
 				}
 			})
 		}
+		callback();
 })
 }
