@@ -130,7 +130,8 @@ exports.getActivityId = function(activityName, callback){
 		if (!error && response.statusCode == 200) {
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
-				for(var index = 0; index < entries.length; ++index){			
+				for(var index = 0; index < entries.length; ++index){
+					console.log("loop")
 					if(entries[index]['title'][0]['_'] == activityName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
