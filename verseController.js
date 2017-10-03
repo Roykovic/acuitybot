@@ -135,6 +135,7 @@ exports.getActivityId = function(activityName, callback){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
 						id = parts[parts.length-1]
+						console.log("*****************************THIS ONE FIRES TOO****************************")
 						return callback(id);
 					}				
 				}
