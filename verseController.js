@@ -127,6 +127,7 @@ exports.getActivityId = function(activityName, callback){
 	}
 	
 	request(options, function (error, response, body) {
+		console.log("*********************************ENTERING IF*******************************")
 		if (!error && response.statusCode == 200) {
 			parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
