@@ -82,8 +82,10 @@ request(options, function (error, response, body) {
     if (!error && response.statusCode == 200) {
 					console.log("200")
  	parser.parseString(body, function (err, HTTPresult){
-					console.log(HTTPresult)
 		var entries = HTTPresult['feed']['entry'];
+		if(!entries){
+			return callback("You don't have any "+type)
+		}
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
 			titles += "\n"+entries[index]['title'][0]['_']+"\n";
