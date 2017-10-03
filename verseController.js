@@ -131,7 +131,6 @@ exports.getActivityId = function(activityName, callback){
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
 				for(var index = 0; index < entries.length; ++index){
-					console.log("loop")
 					if(entries[index]['title'][0]['_'] == activityName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
@@ -139,6 +138,7 @@ exports.getActivityId = function(activityName, callback){
 						return callback(id);
 					}				
 				}
+				return callback();
 			})
 		}
 		return callback();
