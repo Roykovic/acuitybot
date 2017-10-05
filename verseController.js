@@ -41,7 +41,7 @@ exports.getFromIBM = function (type, callback){
 		else{
 			var speech = "You don't have any "+type
 		}
-		callback(speech, followUp)
+		callback(speech)
 	});
 }
 
