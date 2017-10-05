@@ -22,6 +22,9 @@ exports.getFromIBM = function (type, callback){
 	case "files":
         var path = "/files/basic/api/documents/feed?visibility=public"
 		break;
+	case "todos":
+        var path = "/activities/service/atom2/todos"
+		break;
 	default:
 		return callback("Cannot find " + type + " in system. Please check  your spelling or try again.");
 	

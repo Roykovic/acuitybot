@@ -84,6 +84,7 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech, followUp)
 		});
 		break;
+	case "getNodeFromIBM":	
 	case "getFromIBM":
 		verseController.getFromIBM(request.body.result.parameters['type'],function(speech){
 			returnJson(speech);
