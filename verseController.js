@@ -81,7 +81,7 @@ exports.postToIBM = function (callback, name, type, activity){
 		}
 
 exports.updateIBM = function (varName, varValue, callback){
-	exports.getIdByName(varName,'/activities/service/atom2/activitynode', function(id){
+	exports.getIdByName("testtodo",'/activities/service/atom2/activitynode', function(id){
 		console.log("*************TODO ID**********")
 		console.log(id)
 	})
