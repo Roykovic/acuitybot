@@ -81,7 +81,7 @@ exports.postToIBM = function (callback, name, type, activity){
 		}
 
 exports.updateIBM = function (varName, varValue, callback){
-	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
+	exports.getIdByName("NIEUWE TODO",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
 			var splittedString = body.split("<entry>")
 			splittedString[1] += '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
