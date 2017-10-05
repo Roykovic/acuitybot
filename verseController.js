@@ -83,7 +83,9 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "todo", function(body){
-				//console.log(body)
+				exports.getJSON("PUT", '/activities/service/atom2/activitynode', "todo" function(){
+					console.log("***********************SHITS DONE YO************************")
+				}, body)
 		
 	})
 	})
@@ -110,7 +112,7 @@ request(options, function (error, response, body) {
 		console.log(body)
  	return parser.parseString(body, function (err, HTTPresult){
 		if(HTTPresult['entry']){
-			return callback(HTTPresult['entry'])
+			return callback(body)
 		}
 		var entries = HTTPresult['feed']['entry'];
 		if(!entries){
