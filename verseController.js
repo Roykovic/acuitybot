@@ -160,6 +160,7 @@ exports.getIdByName = function(varName ,path ,callback){
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
 			if(!entries){
+				console.log("**********AT THIS MOMENT HE KNEW....************")
 				return callback()
 			}
 				for(var index = 0; index < entries.length; ++index){
