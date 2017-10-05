@@ -163,6 +163,8 @@ exports.getIdByName = function(varName ,path ,callback){
 				return callback()
 			}
 				for(var index = 0; index < entries.length; ++index){
+					console.log("************ENTRY*************")
+					console.log(entries[index]
 					if(entries[index]['title'][0]['_'] == varName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
