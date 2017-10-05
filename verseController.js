@@ -83,7 +83,7 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
-				body[entry] += '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>';
+				body['entry'] += '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>';
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
 				}, body)
 		
