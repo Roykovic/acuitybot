@@ -83,7 +83,7 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "todo", function(body){
-				exports.getJSON("PUT", '/activities/service/atom2/activitynode', "todo" function(){
+				exports.getJSON("PUT", '/activities/service/atom2/activitynode', "todo", function(){
 					console.log("***********************SHITS DONE YO************************")
 				}, body)
 		
