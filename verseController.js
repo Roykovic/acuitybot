@@ -81,14 +81,12 @@ exports.postToIBM = function (callback, name, type, activity){
 		}
 
 exports.updateIBM = function (varName, varValue, callback){
-	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
-		console.log("*************TODO ID**********")
-		console.log(id)
+	exports.getIdByName(varName,'/activities/service/atom2/todos', function(id){
+			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "todo", function(body){
+				console.log(body)
+		
 	})
-	
-//	exports.getJSON("GET", '/activities/service/atom2/activitynode', "todo", function(){
-//		
-//	})
+	})
 }
 
 exports.getJSON = function(method, path, type, callback, body){
@@ -163,8 +161,6 @@ exports.getIdByName = function(varName ,path ,callback){
 				return callback()
 			}
 				for(var index = 0; index < entries.length; ++index){
-					console.log("************ENTRY*************")
-					console.log(entries[index])
 					if(entries[index]['title'][0]['_'] == varName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
@@ -175,9 +171,6 @@ exports.getIdByName = function(varName ,path ,callback){
 				return callback();
 			})
 		}
-					console.log("*********************** AT THIS MOMENT HE KNEW... ***********************")
-					console.log(error)
-					console.log(response.statusCode)
 		return callback();
 })
 }
