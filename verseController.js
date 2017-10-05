@@ -48,7 +48,7 @@ exports.getFromIBM = function (type, callback){
 exports.postToIBM = function (callback, name, type, activity){
 	var path;
 	var body;
-	exports.getActivityId(activity, function(activityID){
+	exports.getIdByName(activity, '/activities/service/atom2/activities' , function(activityID){
 		switch(type) {
     case "communities":
 		path = "/communities/service/atom/communities/my"
@@ -81,7 +81,14 @@ exports.postToIBM = function (callback, name, type, activity){
 		}
 
 exports.updateIBM = function (varName, varValue, callback){
+	exports.getIdByName(varName,'/activities/service/atom2/activitynode', function(id){
+		console.log("*************TODO ID**********")
+		console.log(id)
+	})
 	
+//	exports.getJSON("GET", '/activities/service/atom2/activitynode', "todo", function(){
+//		
+//	})
 }
 
 exports.getJSON = function(method, path, type, callback, body){
@@ -135,7 +142,7 @@ request(options, function (error, response, body) {
 	}
 })}
 
-exports.getActivityId = function(activityName, callback){
+exports.getIdByName = function(varName ,path ,callback){
 	var id = "";
 	var headers = {
 	"Content-Type": 'application/atom+xml',
@@ -143,7 +150,7 @@ exports.getActivityId = function(activityName, callback){
 	}
 	
 	var options = {
-    url: 'https://apps.ce.collabserv.com/activities/service/atom2/activities',
+	url: 'https://apps.ce.collabserv.com' + path,
     method: "GET",
     headers: headers,
 	}
@@ -156,7 +163,7 @@ exports.getActivityId = function(activityName, callback){
 				return callback()
 			}
 				for(var index = 0; index < entries.length; ++index){
-					if(entries[index]['title'][0]['_'] == activityName){
+					if(entries[index]['title'][0]['_'] == varName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
 						id = parts[parts.length-1]
