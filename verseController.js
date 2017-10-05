@@ -82,13 +82,9 @@ exports.postToIBM = function (callback, name, type, activity){
 
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
-			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(){
-				var body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">'+"NIEUWE TODO"+'</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
+				
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
-					console.log("***********************SHITS DONE YO************************")
-					console.log(parameter)
-					
-					console.log(body)
 				}, body)
 		
 	})
@@ -113,8 +109,7 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
-		console.log(body)
-		if(type = "updateTodo"){
+		if(type == "updateTodo"){
 			return callback(body)
 		}
  	return parser.parseString(body, function (err, HTTPresult){
