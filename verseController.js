@@ -176,6 +176,8 @@ exports.getIdByName = function(varName ,path ,callback){
 			})
 		}
 					console.log("*********************** AT THIS MOMENT HE KNEW... ***********************")
+					console.log(error)
+					console.log(response.statusCode)
 		return callback();
 })
 }
