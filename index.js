@@ -95,7 +95,9 @@ restService.post('/hook', function(req, res) {
 		verseController.postToIBM(function(speech, followUp){
 			returnJson(speech, followUp);
 		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
-		break;				
+		break;	
+	case "markTodo":
+		verseController.updateIBM();
 	default:
        	return wakeUp();
         break;

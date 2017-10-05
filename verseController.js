@@ -31,7 +31,16 @@ exports.getFromIBM = function (type, callback){
 }
 	var method ="GET"
 	
-	return	exports.getJSON(method, path, type, function(speech, followUp){
+	return	exports.getJSON(method, path, type, function(entries, error){
+		if(error){
+		return callback(entries)
+		}
+		if(entries){
+			var speech = "These are you "+type+": " + entries
+		}
+		else{
+			var speech = "You don't have any "+type
+		}
 		callback(speech, followUp)
 	});
 }
@@ -58,12 +67,22 @@ exports.postToIBM = function (callback, name, type, activity){
 		}
 
 	var method = "POST"
-	return	exports.getJSON(method, path,type, function(speech){
+	return	exports.getJSON(method, path,type, function(error){
+		if(error){
+			var speech = error
+		}
+		else{
+			var speech = "Entry has been succesfully added to your " + type;
+		}
 		callback(speech)
 	}, body);
 
 		})
 		}
+
+exports.updateIBM = function (varName, varValue, callback){
+	
+}
 
 exports.getJSON = function(method, path, type, callback, body){
 var headers = {
@@ -83,11 +102,10 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
-					console.log("200")
  	return parser.parseString(body, function (err, HTTPresult){
 		var entries = HTTPresult['feed']['entry'];
 		if(!entries){
-			return callback("You don't have any "+type)
+			return callback()
 		}
 		var titles = ""
 		for(var index = 0; index < entries.length; ++index){
@@ -99,22 +117,21 @@ request(options, function (error, response, body) {
 		}
 			
 		}
-		return callback("These are you "+type+": " + titles)
+		return callback(titles)
 	})
     }
 	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
 							console.log("201")
-		return callback("Entry has been succesfully added to your "+type)
+		return callback()
 	}
 	//Either an error, or a statuscode for an insuccesful request
 	else{
-		console.log("ERROR")
 		var speech = "Something went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action"
 		if(response){
 		speech += "(" + response.statusCode + ")"
 			}
-		return callback(speech)
+		return callback(speech, true)
 	}
 })}
 
