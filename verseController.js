@@ -87,6 +87,8 @@ exports.updateIBM = function (varName, varValue, callback){
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode', "updateTodo", function(parameter){
 					console.log("***********************SHITS DONE YO************************")
 					console.log(parameter)
+					
+					console.log(body)
 				}, body)
 		
 	})
