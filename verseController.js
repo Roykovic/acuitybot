@@ -83,7 +83,7 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("testtodo",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "todo", function(body){
-				console.log(body)
+				//console.log(body)
 		
 	})
 	})
@@ -107,6 +107,7 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
+		console.log(body)
  	return parser.parseString(body, function (err, HTTPresult){
 		if(HTTPresult['entry']){
 			return callback(HTTPresult['entry'])
@@ -130,7 +131,6 @@ request(options, function (error, response, body) {
     }
 	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
-							console.log("201")
 		return callback()
 	}
 	//Either an error, or a statuscode for an insuccesful request
