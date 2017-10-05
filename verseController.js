@@ -108,8 +108,8 @@ request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
  	return parser.parseString(body, function (err, HTTPresult){
-		if(HTTPresult[entry]){
-			return callback(HTTPresult[entry])
+		if(HTTPresult['entry']){
+			return callback(HTTPresult['entry'])
 		}
 		var entries = HTTPresult['feed']['entry'];
 		if(!entries){
