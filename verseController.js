@@ -86,7 +86,7 @@ exports.updateIBM = function (varName, varValue, callback){
 			var splittedString = body.split("<entry")
 			var entryString = splittedString[1].split('>')
 			entryString[1] = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'.concat(entryString[1])
-			body = splittedString[0];
+			body = splittedString[0] + splittedString[1];
 			
 			for(var counter = 0; counter<entryString.length; ++counter){
 				body = body + entryString[counter]
