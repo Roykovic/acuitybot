@@ -89,7 +89,7 @@ exports.updateIBM = function (varName, varValue, callback){
 			body = "<entry"
 			
 			for(var counter = 0; counter<entryString.length; ++counter){
-				body = body + entryString[counter]
+				body = body + ">" + entryString[counter]
 			}
 			console.log("******************************BODY*****************************")
 			console.log(body)
