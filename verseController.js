@@ -85,8 +85,8 @@ exports.updateIBM = function (varName, varValue, callback){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
 			var splittedString = body.split("<entry")
 			var entryString = splittedString[1].split('>')
-			entryString[1] = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'.concat(entryString[1])
-			body = splittedString[0] + splittedString[1];
+			entryString[1] = '><category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'.concat(entryString[1])
+			body = "<entry"
 			
 			for(var counter = 0; counter<entryString.length; ++counter){
 				body = body + entryString[counter]
