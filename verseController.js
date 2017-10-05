@@ -88,7 +88,7 @@ exports.updateIBM = function (varName, varValue, callback){
 					console.log("***********************SHITS DONE YO************************")
 					console.log(parameter)
 					
-					console.log(body)
+					//console.log(body)
 				})
 		
 	})
