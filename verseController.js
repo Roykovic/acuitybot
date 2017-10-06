@@ -174,6 +174,9 @@ console.log(response)
 				return callback()
 			}
 				for(var index = 0; index < entries.length; ++index){
+					console.log(entries[index]['title'][0]['_'] == varName)
+					console.log(varName)
+					console.log(entries[index]['title'][0]['_'])
 					if(entries[index]['title'][0]['_'] == varName){
 						var unformattedId = entries[index]['id'][0];	
 						var parts = unformattedId.split(':')
