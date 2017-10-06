@@ -86,12 +86,7 @@ exports.updateIBM = function (varName, varValue, callback){
 				
 				var splittedString = body.split('</entry>')
 				var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
-				body = splittedString[0] + completed + splittedString[1]
-				console.log(splittedString.length)
-				console.log("***************************** NUL *****************************")
-				console.log(splittedString[0])
-				console.log("***************************** EEN *****************************")
-				console.log(splittedString[1])
+				body = splittedString[0] + completed + '</entry>'
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
 					console.log(parameter)
 				}, body)
