@@ -111,7 +111,8 @@ request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
  	return parser.parseString(body, function (err, HTTPresult){
-				if(type == "updateTodo"){
+		if(type == "updateTodo"){
+			console.log(err)
 			return callback(HTTPresult)
 		}
 		var entries = HTTPresult['feed']['entry'];
