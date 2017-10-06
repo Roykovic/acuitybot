@@ -165,9 +165,7 @@ exports.getIdByName = function(varName ,path ,callback){
     method: "GET",
     headers: headers,
 	}
-		console.log("********************************Get ID by Name************************")
 	request(options, function (error, response, body) {		
-		console.log("********************************request************************")
 		if (!error && response.statusCode == 200) {
 			return parser.parseString(body, function (err, HTTPresult){
 				var entries = HTTPresult['feed']['entry'];
