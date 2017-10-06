@@ -98,6 +98,8 @@ restService.post('/hook', function(req, res) {
 		break;	
 	case "markTodo":
 		verseController.updateIBM("1", "varValue", function(speech){
+			console.log("**********************CALLED****************************")
+			console.log(speech)
 			return returnJson(speech);
 		} );
 	default:
