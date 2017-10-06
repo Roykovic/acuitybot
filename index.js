@@ -109,6 +109,7 @@ restService.post('/hook', function(req, res) {
 			console.log(speech)
 			return returnJson(speech);
 		} );
+		break;
 	default:
 		console.log("Default intent: " + intent) 
        	return wakeUp();
