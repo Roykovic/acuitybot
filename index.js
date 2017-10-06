@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-'use strict';
+//'use strict';
 
 var username = 'r.tersluijsen@acuity.nl';
 var password = 'Jidok1839';
