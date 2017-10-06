@@ -83,7 +83,7 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("1",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
-				body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">1</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>               	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+				body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">1</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>               	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/> <content type="html"></entry>'
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
 					console.log(parameter)
 				}, body)
