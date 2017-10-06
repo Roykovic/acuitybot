@@ -97,7 +97,9 @@ restService.post('/hook', function(req, res) {
 		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
 		break;	
 	case "markTodo":
-		verseController.updateIBM();
+		verseController.updateIBM("1", "varValue", function(speech){
+			returnJson(speech);
+		} );
 	default:
        	return wakeUp();
         break;
