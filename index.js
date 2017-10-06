@@ -87,18 +87,18 @@ restService.post('/hook', function(req, res) {
 	case "getNodeFromIBM":	
 	case "getFromIBM":
 		verseController.getFromIBM(request.body.result.parameters['type'],function(speech){
-			returnJson(speech);
+			return returnJson(speech);
 		});
 		break;		
 	case "ibmPost":	
 	case "ibmPostNode":	
 		verseController.postToIBM(function(speech, followUp){
-			returnJson(speech, followUp);
+			return returnJson(speech, followUp);
 		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
 		break;	
 	case "markTodo":
 		verseController.updateIBM("1", "varValue", function(speech){
-			returnJson(speech);
+			return returnJson(speech);
 		} );
 	default:
        	return wakeUp();
