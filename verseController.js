@@ -113,10 +113,8 @@ request(options, function (error, response, body) {
 	console.log(response.statuscode)
     if (!error && response.statusCode == 200) {
  	return parser.parseString(body, function (err, HTTPresult){
-		console.log("***************************HTTPRESULT******************************")
-		console.log(HTTPresult)
 		if(type == "updateTodo"){
-			return callback(body)
+			return callback(HTTPresult)
 		}
 		var entries = HTTPresult['feed']['entry'];
 		if(!entries){
