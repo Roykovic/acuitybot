@@ -83,7 +83,7 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("1",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
-				//body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">1</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>               	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/> <content type="html"></entry>'
+				body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">1</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/>               	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> <category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/> <content type="html"></entry>'
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
 					console.log(parameter)
 				}, body)
@@ -110,29 +110,29 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
+		if(type == "updateTodo"){
+			return callback(body)
+		}
+ 	return parser.parseString(body, function (err, HTTPresult){
 
-		return parser.parseString(body, function (err, HTTPresult){
-			if(type == "updateTodo"){
-				return callback(HTTPresult)
-			}
-			console.log("***************************HTTPRESULT******************************")
-			console.log(HTTPresult)
-			var entries = HTTPresult['feed']['entry'];
-			if(!entries){
-				return callback()
-			}
-			var titles = ""
-			for(var index = 0; index < entries.length; ++index){
-				titles += "\n"+entries[index]['title'][0]['_']+"\n";
-				if(type == "files"){
-					var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-					titles += URL;
+		console.log("***************************HTTPRESULT******************************")
+		console.log(HTTPresult)
+		var entries = HTTPresult['feed']['entry'];
+		if(!entries){
+			return callback()
+		}
+		var titles = ""
+		for(var index = 0; index < entries.length; ++index){
+			titles += "\n"+entries[index]['title'][0]['_']+"\n";
+			if(type == "files"){
+				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+				titles += URL;
+		
+		}
 			
-				}
-				
-			}
-			return callback(titles)
-		})
+		}
+		return callback(titles)
+	})
     }
 	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
