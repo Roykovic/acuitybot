@@ -134,19 +134,19 @@ function login(){
 	})
 }
 
-function wakeUp(){
-	if (request.body) {
-		if (request.body.result) {
-			speech = '';
+// function wakeUp(){
+	// if (request.body) {
+		// if (request.body.result) {
+			// speech = '';
 
-			if (request.body.result.fulfillment) {
-				speech += request.body.result.fulfillment.speech;
-				speech += ' ';
-			}
-		}
-	}
-	return returnJson(speech);
-}
+			// if (request.body.result.fulfillment) {
+				// speech += request.body.result.fulfillment.speech;
+				// speech += ' ';
+			// }
+		// }
+	// }
+	// return returnJson(speech);
+// }
 
 function returnJson(speech, followUp){
 	console.log("*****************************************************JSON************************************************")
