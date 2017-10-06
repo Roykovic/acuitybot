@@ -103,15 +103,11 @@ restService.post('/hook', function(req, res) {
 		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
 		break;	
 	case "markTodo":
-	console.log("markTodo")
 		verseController.updateIBM("1", "varValue", function(speech){
-			console.log("**********************CALLED****************************")
-			console.log(speech)
 			return returnJson(speech);
 		} );
 		break;
 	default:
-		console.log("Default intent: " + intent) 
        	return wakeUp();
         break;
 	}
@@ -151,7 +147,7 @@ function wakeUp(){
 			}
 		}
 	}
-	//return returnJson(speech);
+	return returnJson(speech);
 }
 
 function returnJson(speech, followUp){
