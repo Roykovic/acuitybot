@@ -83,9 +83,9 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 	exports.getIdByName("NIEUWE TODO",'/activities/service/atom2/todos', function(id){
 			exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
-				//body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text"> completed todo 2</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
-				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
-					console.log(parameter)
+			console.log(body)
+			exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
+					//console.log(parameter)
 				}, body)
 		
 	})
@@ -110,10 +110,10 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
-		if(type == "updateTodo"){
-			return callback(body)
-		}
  	return parser.parseString(body, function (err, HTTPresult){
+				if(type == "updateTodo"){
+			return callback(HTTPresult)
+		}
 		var entries = HTTPresult['feed']['entry'];
 		if(!entries){
 			return callback()
