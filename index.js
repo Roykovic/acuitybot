@@ -145,6 +145,7 @@ function wakeUp(){
 
 function returnJson(speech, followUp){
 	console.log("**************************************JSON*************************************")
+	console.log(speech)
 	return result.json({																				
 						speech: speech,
 						displayText: speech,
