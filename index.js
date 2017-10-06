@@ -135,7 +135,8 @@ function login(){
 }
 
 function wakeUp(){
-	
+		console.log("*****************************************************wakeup************************************************")
+	console.log(arguments.callee.caller.toString())
 	if (request.body) {
 		if (request.body.result) {
 			speech = '';
@@ -150,8 +151,6 @@ function wakeUp(){
 }
 
 function returnJson(speech, followUp){
-	console.log("*****************************************************JSON************************************************")
-	console.log(arguments.callee.caller.toString())
 	return result.json({																				
 						speech: speech,
 						displayText: speech,
