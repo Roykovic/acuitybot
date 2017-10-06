@@ -110,28 +110,29 @@ var options = {
 request(options, function (error, response, body) {
 	//No error, and get was succesful
     if (!error && response.statusCode == 200) {
-		if(type == "updateTodo"){
-			return callback(body)
-		}
- 	return parser.parseString(body, function (err, HTTPresult){
-		console.log("***************************HTTPRESULT******************************")
-		console.log(HTTPresult)
-		var entries = HTTPresult['feed']['entry'];
-		if(!entries){
-			return callback()
-		}
-		var titles = ""
-		for(var index = 0; index < entries.length; ++index){
-			titles += "\n"+entries[index]['title'][0]['_']+"\n";
-			if(type == "files"){
-				var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
-				titles += URL;
-		
-		}
+
+		return parser.parseString(body, function (err, HTTPresult){
+			if(type == "updateTodo"){
+				return callback(HTTPresult)
+			}
+			console.log("***************************HTTPRESULT******************************")
+			console.log(HTTPresult)
+			var entries = HTTPresult['feed']['entry'];
+			if(!entries){
+				return callback()
+			}
+			var titles = ""
+			for(var index = 0; index < entries.length; ++index){
+				titles += "\n"+entries[index]['title'][0]['_']+"\n";
+				if(type == "files"){
+					var URL = entries[index]['link'][0]['$']['href'].replace(/entry/g, 'media')
+					titles += URL;
 			
-		}
-		return callback(titles)
-	})
+				}
+				
+			}
+			return callback(titles)
+		})
     }
 	//No error and creation was succesful
 	if (!error && response.statusCode == 201){
