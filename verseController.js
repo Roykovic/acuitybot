@@ -88,7 +88,7 @@ exports.updateIBM = function (varName, varValue, callback){
 				var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
 				body = splittedString[0] + completed + splittedString[1]
 				for ( key in splittedString ) {
-					console.log( property ); // Outputs: foo, fiz or fiz, foo
+					console.log( key ); // Outputs: foo, fiz or fiz, foo
 				}
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
 					console.log(parameter)
