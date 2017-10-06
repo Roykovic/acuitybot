@@ -83,15 +83,11 @@ exports.postToIBM = function (callback, name, type, activity){
 exports.updateIBM = function (varName, varValue, callback){
 		console.log("********************************UPDATE IBM*******************************")
 	exports.getIdByName(varName,'/activities/service/atom2/todos', function(id){
-			console.log("********************************UPDATE IBM*******************************")
 		exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(body){
-				console.log("********************************UPDATE IBM*******************************")
 				var splittedString = body.split('</entry>')
 				var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
 				body = splittedString[0] + completed + '</entry>'
-				
 				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid='+id, "updateTodo", function(parameter){
-						console.log("********************************UPDATE IBM*******************************")
 					return callback("Todo '" +varName+ "' has been marked as completed")
 				}, body)
 		
@@ -157,6 +153,7 @@ request(options, function (error, response, body) {
 })}
 
 exports.getIdByName = function(varName ,path ,callback){
+	console.log("********************************Get ID by Name************************")
 	var id = "";
 	var headers = {
 	"Content-Type": 'application/atom+xml',
