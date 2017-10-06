@@ -110,6 +110,7 @@ restService.post('/hook', function(req, res) {
 			return returnJson(speech);
 		} );
 	default:
+		console.log("Default intent: " + intent) 
        	return wakeUp();
         break;
 	}
