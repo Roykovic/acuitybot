@@ -146,7 +146,7 @@ function wakeUp(){
 			}
 		}
 	}
-	return returnJson(speech);
+	//return returnJson(speech);
 }
 
 function returnJson(speech, followUp){
