@@ -70,6 +70,7 @@ restService.post('/hook', function(req, res) {
         break;
 	case "update":	
     case "data for update":
+		console.log("update")
 		var context = req.body.result.contexts[0]
 		var column = context.parameters.Variable_row;
 		var variables = [context.parameters['variable'], context.parameters['sf-name']];
@@ -78,6 +79,7 @@ restService.post('/hook', function(req, res) {
 			})
 		break;
 	case "User-info":
+		console.log("user")
 		var fullName = request.body.result.parameters['sf-name']
 		var column = request.body.result.parameters['Variable_row']
 		userController.getUserInfo(fullName, column, function(speech, followUp){
@@ -86,17 +88,20 @@ restService.post('/hook', function(req, res) {
 		break;
 	case "getNodeFromIBM":	
 	case "getFromIBM":
+		console.log("get")
 		verseController.getFromIBM(request.body.result.parameters['type'],function(speech){
 			return returnJson(speech);
 		});
 		break;		
 	case "ibmPost":	
 	case "ibmPostNode":	
+		console.log("post")
 		verseController.postToIBM(function(speech, followUp){
 			return returnJson(speech, followUp);
 		},request.body.result.parameters['content'],request.body.result.parameters['type'], request.body.result.parameters['activity']);
 		break;	
 	case "markTodo":
+	console.log("markTodo")
 		verseController.updateIBM("1", "varValue", function(speech){
 			console.log("**********************CALLED****************************")
 			console.log(speech)
