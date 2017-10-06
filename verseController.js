@@ -110,6 +110,7 @@ var options = {
 // Start the request
 request(options, function (error, response, body) {
 	//No error, and get was succesful
+	console.log("response.statuscode")
     if (!error && response.statusCode == 200) {
  	return parser.parseString(body, function (err, HTTPresult){
 		console.log("***************************HTTPRESULT******************************")
