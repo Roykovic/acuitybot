@@ -22,7 +22,7 @@ exports.get = function(path, callback) {
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
-                return callback(body)
+                return callback(response)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
