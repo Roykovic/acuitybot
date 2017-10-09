@@ -106,7 +106,7 @@ restService.post('/hook', function(req, res) {
             break;
 		case "joke":
 			apiController.get('https://icanhazdadjoke.com/', function(param){
-				console.log("**********************************DAD JOKE**************************************"
+				console.log("**********************************DAD JOKE**************************************")
 				console.log(param)
 			})
 			break;		
