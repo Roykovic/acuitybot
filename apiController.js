@@ -9,7 +9,7 @@ var request = require('request');
 exports.get = function(path, callback) {
     // Configure the request
 	  var headers = {
-        "Accept": 'text/plain',
+        "Accept": 'text/plain'
     }
 	
     var options = {
@@ -26,12 +26,11 @@ exports.get = function(path, callback) {
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
-
-            var speech = error + "\nSomething went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action"
+            var speech = error + "\nSomething went wrong"
             if (response) {
                 speech += "(" + response.statusCode + ")"
             }
-            return callback(speech, true)
+            return callback(speech)
         }
     })
 }
