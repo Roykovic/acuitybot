@@ -107,6 +107,7 @@ restService.post('/hook', function(req, res) {
 		case "joke":
 			apiController.get('https://icanhazdadjoke.com/', function(JSON){
 				var speech = JSON['joke']
+				console.log(JSON)
 				console.log("********************SPEECH******************************")
 				console.log(speech)
 				return returnJson(JSON['joke'])
