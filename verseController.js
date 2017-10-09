@@ -36,7 +36,7 @@ exports.getFromIBM = function(type, callback) {
             return callback(entries)
         }
         if (entries) {
-            var speech = "These are you " + type + ": " + entries
+            var speech = "These are your " + type + ": " + entries
         } else {
             var speech = "You don't have any " + type
         }

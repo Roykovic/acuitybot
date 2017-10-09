@@ -22,6 +22,7 @@ var request;
 var result;
 var speech = 'empty speech';
 var db = require('./db');
+var apiController = require('./apiController')
 var loginController = require('./loginController')
 var userController = require('./userController')
 var verseController = require('./verseController')
@@ -103,6 +104,12 @@ restService.post('/hook', function(req, res) {
                 return returnJson(speech);
             });
             break;
+		case "joke":
+			apiController.get('https://icanhazdadjoke.com/', function(param){
+				console.log("**********************************DAD JOKE**************************************"
+				console.log(param)
+			})
+			break;		
         default:
             return wakeUp();
             break;
