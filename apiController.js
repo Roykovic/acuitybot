@@ -8,9 +8,14 @@ var request = require('request');
 
 exports.get = function(path, callback) {
     // Configure the request
+	  var headers = {
+        "Content-Type": 'application/json',
+    }
+	
     var options = {
         url: path,
         method: "GET",
+		headers: headers
     }
 
     // Start the request
