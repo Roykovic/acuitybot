@@ -9,7 +9,7 @@ var request = require('request');
 exports.get = function(path, callback) {
     // Configure the request
 	  var headers = {
-        "Content-Type": 'application/json',
+        "Accept": 'application/json',
     }
 	
     var options = {
