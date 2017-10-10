@@ -20,7 +20,7 @@ exports.getFromIBM = function(type, callback) {
             var path = "/activities/service/atom2/activities?includeCommunityActivities=no"
             break;
         case "files":
-            var path = "/files/basic/api/documents/feed?visibility=public"
+            var path = "/files/basic/api/documents/shared/feed?sK=created&sO=dsc&sC=docshare&direction=inbound"
             break;
         case "todos":
             var path = "/activities/service/atom2/todos"
