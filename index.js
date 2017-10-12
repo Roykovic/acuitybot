@@ -89,6 +89,7 @@ restService.post('/hook', function(req, res) {
 			userController.getServiceByName(fullName, function(serviceType){
 				if(serviceType){
 					if(serviceType == service.services.IBM){
+						console.log("YES")
 					}
 					if(serviceType == service.services.SalesForce){
 						userController.getUserInfo(fullName, column, function(speech, followUp) {
