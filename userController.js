@@ -1,12 +1,14 @@
 'use strict'
 
 var exports = module.exports = {};
-var db = require('./db');
+var salesForcedb = require('./db');
+var verseController = require('./verseController')
+var service = require('./service')
 
 exports.getUserInfo = function (fullName, Pcolumn, callback){
 	try {
-		db.checkColumn(Pcolumn , function(column){													//check if the column exists in the db (to prevent exploits)
-			db.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
+		salesForcedb.checkColumn(Pcolumn , function(column){													//check if the column exists in the db (to prevent exploits)
+			salesForcedb.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
 			if(result && result.rows[0]){															//If there is a result
 				var resultObject = result.rows[0]
 				var keys = Object.keys(resultObject);
@@ -34,4 +36,20 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
             }
         });
     }
+}
+
+exports.getServiceByName = function(fullname, callback){
+	salesForcedb.getUser(fullname, function(user){
+		if(user){
+			return callback(service.services.IBM)
+		}
+		else{
+			verseController.getUser(fullname, function(user){
+				if(user){
+					return callback(service.services.SalesForce)
+				}				
+			})		
+		}
+		return callback()
+	})
 }

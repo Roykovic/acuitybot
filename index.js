@@ -22,6 +22,7 @@ var request;
 var result;
 var speech = 'empty speech';
 var db = require('./db');
+var service = require('./service')
 var apiController = require('./apiController')
 var loginController = require('./loginController')
 var userController = require('./userController')
@@ -81,11 +82,20 @@ restService.post('/hook', function(req, res) {
             })
             break;
         case "User-info":
-            var fullName = request.body.result.parameters['sf-name']
+            var fullName = request.body.result.parameters['given-name'] +" "+ request.body.result.parameters['last-name']
             var column = request.body.result.parameters['Variable_row']
-            userController.getUserInfo(fullName, column, function(speech, followUp) {
-                return returnJson(speech, followUp)
-            });
+			userController.getServiceByName(given-name, function(serviceType){
+				if(serviceType){
+					if(serviceType == service.services.IBM){
+					}
+					if(serviceType == service.services.SalesForce){
+						userController.getUserInfo(fullName, column, function(speech, followUp) {
+							return returnJson(speech, followUp)
+						});						
+					}
+				}
+				return returnJson("Username does not exist")
+			})
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
