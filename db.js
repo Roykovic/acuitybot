@@ -63,7 +63,7 @@ exports.getUser = function(username, callBack){
 }
 
 exports.checkColumn = function (column, callBack){
-	exports.query("*", column, function(columns){
+	exports.query("*", "false", function(columns){
 		if(columns){
 			for (var i = 0, len = columns.fields.length; i < len; i++) {
 				var columnFromDB = columns.fields[i].name;
