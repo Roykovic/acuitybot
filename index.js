@@ -100,6 +100,8 @@ restService.post('/hook', function(req, res) {
 					}
 				}
 				else{
+					console.log("************************SERVICE TYPE********************************")
+					console.log(serviceType)
 					return returnJson("Username does not exist")
 				}
 			})
