@@ -96,7 +96,7 @@ restService.post('/hook', function(req, res) {
 							return returnJson(speech, followUp)
 						});						
 					}
-				}
+				})
 				}
 			})
             break;
