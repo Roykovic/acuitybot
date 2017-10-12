@@ -41,8 +41,7 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 exports.getServiceByName = function(fullname, callback){
 	salesForcedb.getUser(fullname, function(sfUser){	
 	console.log("#1")
-		if(sfUser['rows']){
-			console.log(sfUser['rows'].length > 0)
+		if(sfUser['rows'].length > 0){
 				console.log("if")
 			return callback(service.services.SalesForce)
 		}
