@@ -184,3 +184,26 @@ exports.getIdByName = function(varName, path, callback) {
         return callback();
     })
 }
+
+exports.getUser = function(name, callback) {
+
+    var id = "";
+    var headers = {
+        "authorization": exports.auth
+    }
+
+    var options = {
+        url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name='+name,
+        method: "GET",
+        headers: headers,
+    }
+    request(options, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            return parser.parseString(body, function(err, HTTPresult) {
+                var entries = HTTPresult['feed']['entry'];
+                return callback(entries)
+            })
+        }
+        return callback();
+    })
+}

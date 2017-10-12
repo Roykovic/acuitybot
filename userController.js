@@ -39,13 +39,13 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 }
 
 exports.getServiceByName = function(fullname, callback){
-	salesForcedb.getUser(fullname, function(user){	
-		if(user['rows']){
+	salesForcedb.getUser(fullname, function(sfUser){	
+		if(sfUser['rows']){
 			return callback(service.services.SalesForce)
 		}
 		else{
-			verseController.getUser(fullname, function(user){
-				if(user){
+			verseController.getUser(fullname, function(ibmUser){
+				if(ibmUser){
 					return callback(service.services.IBM)
 				}				
 			})		

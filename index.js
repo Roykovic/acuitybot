@@ -14,7 +14,7 @@
  * limitations under the License.
  */
  
-//'use strict';
+'use strict';
 
 var username = 'r.tersluijsen@acuity.nl';
 var password = 'Jidok1839';
@@ -164,8 +164,6 @@ function wakeUp() {
 }
 
 function returnJson(speech, followUp) {
-		console.log("******************************************JSON RETURNED BY******************************************")
-	console.log(arguments.callee.caller.toString())
     return result.json({
         speech: speech,
         displayText: speech,
