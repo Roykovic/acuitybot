@@ -96,7 +96,9 @@ restService.post('/hook', function(req, res) {
 						});						
 					}
 				}
-				return returnJson("Username does not exist")
+				else{
+					return returnJson("Username does not exist")
+				}
 			})
             break;
         case "getNodeFromIBM":
