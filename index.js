@@ -86,6 +86,7 @@ restService.post('/hook', function(req, res) {
             var column = request.body.result.parameters['Variable_row']
 			console.log("******************************COLUMN*****************************************")
 			console.log(column)
+			console.log(fullName)
 			userController.getServiceByName(fullName, function(serviceType){
 				if(serviceType){
 					if(serviceType == service.services.IBM){
