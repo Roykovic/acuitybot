@@ -75,6 +75,6 @@ exports.checkColumn = function (column, callBack){
 			}
 		}
 	})
-	callBack(null);
-	return;
+	return callBack(null);
+
 }
