@@ -44,7 +44,7 @@ exports.getServiceByName = function(fullname, callback){
 		console.log(user)
 		console.log(fullname)
 		
-		if(user[rows]){
+		if(user['rows']){
 			return callback(service.services.SalesForce)
 		}
 		else{
