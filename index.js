@@ -167,7 +167,7 @@ function wakeUp() {
 
 function returnJson(speech, followUp) {
 	console.log("*******************JSON Returned by:*******************")
-	console.log(arguments.callee.caller.name)
+	console.log(arguments.callee.caller.name.toString())
     return result.json({
         speech: speech,
         displayText: speech,
