@@ -89,6 +89,7 @@ restService.post('/hook', function(req, res) {
 			console.log(fullName)
 			userController.getServiceByName(fullName, function(serviceType){
 				if(serviceType){
+					console.log(serviceType)
 					if(serviceType == service.services.IBM){
 						return returnJson("User is found, function is not yet implemented tho")
 					}
