@@ -89,6 +89,7 @@ restService.post('/hook', function(req, res) {
 			console.log(fullName)
 			userController.getServiceByName(fullName, function(serviceType){
 				if(serviceType){
+					console.log("*****************SERVICETYPE*****************")
 					console.log(serviceType)
 					if(serviceType == service.services.IBM){
 						return returnJson("User is found, function is not yet implemented tho")
@@ -167,8 +168,8 @@ function wakeUp() {
 }
 
 function returnJson(speech, followUp) {
-	console.log("*******************JSON Returned by:*******************")
-	console.log(arguments.callee.caller.toString())
+//	console.log("*******************JSON Returned by:*******************")
+//	console.log(arguments.callee.caller.toString())
     return result.json({
         speech: speech,
         displayText: speech,
