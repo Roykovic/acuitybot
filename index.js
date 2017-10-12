@@ -87,15 +87,14 @@ restService.post('/hook', function(req, res) {
 			console.log("******************************COLUMN*****************************************")
 			console.log(column)
 			console.log(fullName)
-			userController.getServiceByName(fullName, function(serviceType){
+			return userController.getServiceByName(fullName, function(serviceType){
 				if(serviceType){
-					console.log("*****************SERVICETYPE*****************")
 					console.log(serviceType)
 					if(serviceType == service.services.IBM){
 						return returnJson("User is found, function is not yet implemented tho")
 					}
 					if(serviceType == service.services.SalesForce){
-						userController.getUserInfo(fullName, column, function(speech, followUp) {
+						return userController.getUserInfo(fullName, column, function(speech, followUp) {
 							return returnJson(speech, followUp)
 						});						
 					}
