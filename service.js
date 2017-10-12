@@ -1,3 +1,4 @@
 'use strict'
+var exports = module.exports = {};
 
-var services = Object.freeze({IBM:1, SalesForce:2})
+exports.services = Object.freeze({IBM:1, SalesForce:2})
