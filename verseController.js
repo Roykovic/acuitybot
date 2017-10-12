@@ -186,7 +186,7 @@ exports.getIdByName = function(varName, path, callback) {
 }
 
 exports.getUser = function(name, callback) {
-
+console.log("Verse, get user")
     var id = "";
     var headers = {
         "authorization": exports.auth
@@ -197,13 +197,16 @@ exports.getUser = function(name, callback) {
         method: "GET",
         headers: headers,
     }
-    request(options, function(error, response, body) {
+   return request(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
+				console.log(entries)
+				console.log("return")
                 return callback(entries)
             })
         }
+		console.log("Return null")
         return callback();
     })
 }
