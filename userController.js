@@ -39,11 +39,7 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 }
 
 exports.getServiceByName = function(fullname, callback){
-	salesForcedb.getUser(fullname, function(user){
-		console.log("*****************************NAME***********************************")
-		console.log(user)
-		console.log(fullname)
-		
+	salesForcedb.getUser(fullname, function(user){	
 		if(user['rows']){
 			return callback(service.services.SalesForce)
 		}
