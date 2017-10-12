@@ -96,6 +96,8 @@ exports.updateIBM = function(varName, callback) {
 }
 
 exports.getJSON = function(method, path, type, callback, body) {
+	console.log("******************************************JSON RETURNED BY******************************************")
+	console.log(arguments.callee.caller.name)
     var headers = {
         "Content-Type": 'application/atom+xml',
         "authorization": exports.auth
