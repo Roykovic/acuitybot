@@ -84,9 +84,6 @@ restService.post('/hook', function(req, res) {
         case "User-info":
             var fullName = request.body.result.parameters['given-name'] +" "+ request.body.result.parameters['last-name']
             var column = request.body.result.parameters['Variable_row']
-			console.log("******************************COLUMN*****************************************")
-			console.log(column)
-			console.log(fullName)
 			return userController.getServiceByName(fullName, function(serviceType){
 					if(serviceType == service.services.IBM){
 						return returnJson("User is found, function is not yet implemented tho")
@@ -97,8 +94,6 @@ restService.post('/hook', function(req, res) {
 						});						
 					}
 				})
-				}
-			})
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
