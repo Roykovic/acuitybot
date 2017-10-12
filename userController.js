@@ -46,6 +46,7 @@ exports.getServiceByName = function(fullname, callback){
 		else{
 			verseController.getUser(fullname, function(ibmUser){
 				if(ibmUser){
+					console.log("IBM IS TRUE")
 					return callback(service.services.IBM)
 				}				
 			})		
