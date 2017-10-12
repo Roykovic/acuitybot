@@ -44,13 +44,13 @@ exports.getServiceByName = function(fullname, callback){
 		console.log(user)
 		console.log(fullname)
 		
-		if(user){
-			return callback(service.services.IBM)
+		if(user[rows]){
+			return callback(service.services.SalesForce)
 		}
 		else{
 			verseController.getUser(fullname, function(user){
 				if(user){
-					return callback(service.services.SalesForce)
+					return callback(service.services.IBM)
 				}				
 			})		
 		}
