@@ -41,6 +41,7 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 exports.getServiceByName = function(fullname, callback){
 	salesForcedb.getUser(fullname, function(user){
 		console.log("*****************************NAME***********************************")
+		console.log(user)
 		console.log(fullname)
 		
 		if(user){
