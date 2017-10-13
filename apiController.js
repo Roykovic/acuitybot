@@ -1,4 +1,4 @@
-'use strict'
+//'use strict'
 
 var exports = module.exports = {};
 var http = require("http");
