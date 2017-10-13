@@ -39,7 +39,7 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 }
 
 exports.getAllNames = function(callback){
-	salesForcedb.getUser(%%, function(users){
+	salesForcedb.getUser('%%', function(users){
 		console.log("******************************USERS****************************")
 		console.log(users)
 		console.log("******************************END USERS****************************")
