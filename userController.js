@@ -7,8 +7,8 @@ var service = require('./service')
 
 exports.getUserInfo = function (fullName, Pcolumn, callback){
 	try {
-		salesForcedb.checkColumn(Pcolumn , function(column){													//check if the column exists in the db (to prevent exploits)
-			salesForcedb.query(column, fullName, function(result){											//Run 'query' function, and when finished run this function
+		salesForcedb.checkColumn(Pcolumn , function(column){										//check if the column exists in the db (to prevent exploits)
+			salesForcedb.query(column, fullName, function(result){									//Run 'query' function, and when finished run this function
 			if(result && result.rows[0]){															//If there is a result
 				var resultObject = result.rows[0]
 				var keys = Object.keys(resultObject);
@@ -36,6 +36,13 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
             }
         });
     }
+}
+
+exports.getAllNames(callback){
+	salesForcedb.getUser(true, function(users){
+		console.log(users)
+		callback();
+	})	
 }
 
 exports.getServiceByName = function(fullname, callback){

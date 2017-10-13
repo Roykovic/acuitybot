@@ -34,3 +34,33 @@ exports.get = function(path, callback) {
         }
     })
 }
+
+exports.post = function(path, accesToken, body, callback){
+	  var headers = {
+        "Content-Type": 'application/json',
+		"Authorization": 'Bearer ' + accesToken
+    }
+	
+    var options = {
+        url: path,
+        method: "POST",
+		body:body
+		headers: headers
+    }
+
+    // Start the request
+    request(options, function(error, response, body) {
+        //No error, and get was succesful
+        if (!error && response.statusCode == 200) {
+                return callback(body)
+        }
+        //Either an error, or a statuscode for an insuccesful request
+        else {
+            var speech = error + "\nSomething went wrong"
+            if (response) {
+                speech += "(" + response.statusCode + ")"
+            }
+            return callback(speech)
+        }
+    })
+}

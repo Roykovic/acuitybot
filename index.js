@@ -16,6 +16,7 @@
  
 //'use strict';
 
+var sessionId;
 var username = 'r.tersluijsen@acuity.nl';
 var password = 'Jidok1839';
 var request;
@@ -50,6 +51,7 @@ restService.post('/hook', function(req, res) {
     console.log('hook request');
     request = req;
     result = res;
+	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
     if (intent != "Login") {
         //		if(!auth || request.body.sessionId != sessionId){
@@ -118,6 +120,9 @@ restService.post('/hook', function(req, res) {
 			})
 			break;		
         default:
+		userController.getAllNames(function(){
+			 return wakeUp();
+		})
             return wakeUp();
             break;
     }
@@ -158,10 +163,10 @@ function wakeUp() {
 }
 
 function returnJson(speech, followUp) {
-	console.log("*******************JSON Returned by:*******************")
-	console.log(arguments.callee.caller.toString())
-	console.log("*******************Speech:*******************")
-	console.log(speech)
+	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
+	var accesToken = 5462b4a0987946ee967dbea809dd6676;
+	
+	apiController.post(postPath, accesToken, function(){
     return result.json({
         speech: speech,
         displayText: speech,
@@ -170,4 +175,4 @@ function returnJson(speech, followUp) {
             name: followUp
         }
     });
-}
+}})

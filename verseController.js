@@ -210,3 +210,25 @@ console.log("Verse, get user")
         return callback();
     })
 }
+
+exports.getAllNames(){
+	    var headers = {
+        "authorization": exports.auth
+    }
+    var options = {
+        url: 'https://apps.ce.collabserv.com/profiles/atom/connections.do?connectionType=colleague&userid=203079380',
+        method: "GET",
+        headers: headers,
+    }
+   return request(options, function(error, response, body) {
+        if (!error && response.statusCode == 200) {
+            return parser.parseString(body, function(err, HTTPresult) {
+                var entries = HTTPresult['feed']['entry'];
+				console.log(entries)
+                return callback(entries)
+            })
+        }
+		console.log("Return null")
+        return callback();
+    })
+}
