@@ -44,7 +44,7 @@ exports.post = function(path, accesToken, body, callback){
     var options = {
         url: path,
         method: "POST",
-		body:body
+		body:body,
 		headers: headers
     }
 
