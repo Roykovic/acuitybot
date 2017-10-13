@@ -36,8 +36,6 @@ exports.get = function(path, callback) {
 }
 
 exports.post = function(path, accesToken, body, callback){
-	console.log("******************************CALLER****************************")
-	console.log(arguments.callee.caller.toString())
 	  var headers = {
         "Content-Type": 'application/json',
 		"Authorization": 'Bearer ' + accesToken
