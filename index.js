@@ -120,7 +120,7 @@ restService.post('/hook', function(req, res) {
 			})
 			break;		
         default:
-		userController.getAllNames(function(){
+		verseController.getAllNames(function(){
 			 return wakeUp();
 		})
             return wakeUp();

@@ -46,8 +46,7 @@ exports.getAllNames = function(callback){
 			var name = users[i].name
 			names[i] = name
 		}
-		console.log(names)
-		callback();
+		callback(names);
 	})	
 }
 
