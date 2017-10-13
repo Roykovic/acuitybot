@@ -224,7 +224,7 @@ exports.getAllNames = function(callback){
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
-				var names;
+				var names = [];
 				for(var i = 0; i<entries.length; ++i){
 					var name = entries[i]['title'][0]['_']
 					console.log(name)
