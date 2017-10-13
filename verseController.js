@@ -211,7 +211,7 @@ console.log("Verse, get user")
     })
 }
 
-exports.getAllNames(){
+exports.getAllNames = function(callback){
 	    var headers = {
         "authorization": exports.auth
     }
