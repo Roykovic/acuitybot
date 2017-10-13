@@ -175,4 +175,4 @@ function returnJson(speech, followUp) {
             name: followUp
         }
     });
-}})
+})}
