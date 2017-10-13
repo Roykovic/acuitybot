@@ -38,7 +38,7 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
     }
 }
 
-exports.getAllNames(callback){
+exports.getAllNames = function(callback){
 	salesForcedb.getUser(true, function(users){
 		console.log(users)
 		callback();
