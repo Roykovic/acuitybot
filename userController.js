@@ -42,7 +42,7 @@ exports.getAllNames = function(callback){
 	salesForcedb.getUser('%%', function(result){
 		var users = result.rows
 		var names = [];
-		for(int i = 0; i<users.length; ++i){
+		for(var i = 0; i<users.length; ++i){
 			var name = users[i].name
 			names[i] = name
 		}
