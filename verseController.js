@@ -227,10 +227,8 @@ exports.getAllNames = function(callback){
 				var names = [];
 				for(var i = 0; i<entries.length; ++i){
 					var name = entries[i]['title'][0]['_']
-					console.log(name)
 					names[i] = name;
 				}
-				console.log(names)
                 return callback(entries)
             })
         }
