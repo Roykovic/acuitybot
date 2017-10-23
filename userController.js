@@ -52,7 +52,7 @@ exports.getAllNames = function(callback){
 
 exports.getServiceByName = function(fullname, callback){
 	salesForcedb.getUser(fullname, function(sfUser){	
-	console.log("#1")
+	console.log(sfUser)
 		if(sfUser['rows'].length > 0){
 				console.log("if")
 			return callback(service.services.SalesForce)

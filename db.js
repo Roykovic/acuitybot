@@ -43,6 +43,8 @@ exports.updateQuery = function(column, variables, callBack){
 }
 
 exports.getUser = function(username, callBack){
+	console.log("********************USERNAME*************************")
+	console.log(username)
 		if(username){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
