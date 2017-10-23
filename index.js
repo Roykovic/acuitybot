@@ -115,7 +115,7 @@ restService.post('/hook', function(req, res) {
             });
             break;
 		case "joke":
-			apiController.get('https://icanhazdadjoke.com/', null, null, function(joke){
+			apiController.get('https://icanhazdadjoke.com/', function(joke){
 				return returnJson(joke)
 			})
 			break;		
@@ -166,7 +166,7 @@ function returnJson(speech, followUp) {
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
-	apiController.post(postPath, accesToken, function(){
+	apiController.post(postPath, accesToken, null, function(){
     return result.json({
         speech: speech,
         displayText: speech,
