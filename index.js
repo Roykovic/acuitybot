@@ -121,9 +121,8 @@ restService.post('/hook', function(req, res) {
 			})
 			break;		
         default:
-		verseController.getAllNames(function(){
+		return verseController.getAllNames(function(){
 			 return wakeUp();
-			 break;
 		})
             return wakeUp();
             break;
