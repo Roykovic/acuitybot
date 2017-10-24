@@ -86,7 +86,7 @@ restService.post('/hook', function(req, res) {
         case "User-info":
             var fullName = request.body.result.parameters['fullName']
 							console.log("********************fullName****************************")
-			console.log(fullName)
+			console.log(fullName[0])
             var column = request.body.result.parameters['Variable_row']
 			return userController.getServiceByName(fullName, function(serviceType){
 					if(serviceType == service.services.IBM){
