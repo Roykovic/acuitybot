@@ -54,18 +54,13 @@ exports.getAllNames = function(callback){
 exports.getServiceByName = function(fullname, callback){
 	salesForcedb.getUser(fullname, function(sfUser){	
 		if(sfUser['rows'].length > 0){
-				console.log("if")
 			return callback(service.services.SalesForce)
 		}
 		else{
-				console.log("else")
 			verseController.getUser(fullname, function(ibmUser){
-					console.log("#2")
 				if(ibmUser){
-					console.log("IBM IS TRUE")
 					return callback(service.services.IBM)
 				}			
-					console.log("Past if")
 			})		
 		}
 		return callback()

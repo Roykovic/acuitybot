@@ -227,6 +227,8 @@ exports.getAllNames = function(callback){
 					var name = entries[i]['title'][0]['_']
 					names[i] = name;
 				}
+				console.log("All names")
+				console.log(entries)
                 return callback(entries)
             })
         }
