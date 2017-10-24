@@ -186,7 +186,6 @@ exports.getIdByName = function(varName, path, callback) {
 }
 
 exports.getUser = function(name, callback) {
-console.log("Verse, get user")
     var id = "";
     var headers = {
         "authorization": exports.auth
@@ -228,7 +227,7 @@ exports.getAllNames = function(callback){
 					names[i] = name;
 				}
 				console.log("All names")
-				console.log(entries)
+				console.log(names)
                 return callback(entries)
             })
         }
