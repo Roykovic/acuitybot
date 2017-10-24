@@ -122,8 +122,6 @@ restService.post('/hook', function(req, res) {
 			break;		
         default:
 		return userController.getAllNames(function(names){
-			console.log("ALL NAMES")
-			console.log(names)
 			 return wakeUp();
 		})
             return wakeUp();
