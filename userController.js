@@ -9,7 +9,8 @@ exports.getUserInfo = function (fullName, Pcolumn, callback){
 	try {
 		salesForcedb.checkColumn(Pcolumn , function(column){										//check if the column exists in the db (to prevent exploits)
 			salesForcedb.query(column, fullName, function(result){									//Run 'query' function, and when finished run this function
-			if(result && result.rows[0]){															//If there is a result
+			if(result && result.rows[0]){			
+			//If there is a result
 				var resultObject = result.rows[0]
 				var keys = Object.keys(resultObject);
 				var resultKey = keys[0]
@@ -52,7 +53,6 @@ exports.getAllNames = function(callback){
 
 exports.getServiceByName = function(fullname, callback){
 	salesForcedb.getUser(fullname, function(sfUser){	
-	console.log(sfUser)
 		if(sfUser['rows'].length > 0){
 				console.log("if")
 			return callback(service.services.SalesForce)
