@@ -169,7 +169,7 @@ function returnJson(speech, followUp) {
 	
 	apiController.post(postPath, accesToken, null, function(){
 		console.log("*****************************Result*****************************")
-		console.log(result)
+		console.log(result.json)
     return result.json({
         speech: speech,
         displayText: speech,
