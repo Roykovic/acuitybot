@@ -160,6 +160,7 @@ function wakeUp() {
             }
         }
     }
+			console.log("*****************************Result*****************************")
 	var returnVal = returnJson(speech)
 	console.log(returnVal)
     return returnVal
@@ -170,8 +171,6 @@ function returnJson(speech, followUp) {
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	apiController.post(postPath, accesToken, null, function(){
-		console.log("*****************************Result*****************************")
-		console.log(result.json)
     return result.json({
         speech: speech,
         displayText: speech,
