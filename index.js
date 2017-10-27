@@ -160,7 +160,9 @@ function wakeUp() {
             }
         }
     }
-    return returnJson(speech);
+	var returnVal = returnJson(speech)
+	console.log(returnVal)
+    return returnVal
 }
 
 function returnJson(speech, followUp) {
