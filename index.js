@@ -163,20 +163,33 @@ function wakeUp() {
     return returnJson(speech);
 }
 
+function log(reqIn, resIn, callback){
+	var fs = require('fs');
+	fs.writeFile("/files/logs", "Hey there!", function(err) {
+		if(err) {
+			return console.log(err);
+		}
+
+		console.log("The file was saved!");
+	}); 
+	
+}
+	
+}
+
 function returnJson(speech, followUp) {
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
-	apiController.post(postPath, accesToken, null, function(){
-		console.log("*****************************request*****************************")
-		console.log(request.body.result.resolvedQuery)
-		console.log(speech)
-    return result.json({
-        speech: speech,
-        displayText: speech,
-        source: 'apiai-webhook-sample',
-        followupEvent: {
-            name: followUp
-        }
-    });
+	return apiController.post(postPath, accesToken, null, function(){
+		log(request.body.result.resolvedQuery, speech, function(){
+			return result.json({
+				speech: speech,
+				displayText: speech,
+				source: 'apiai-webhook-sample',
+				followupEvent: {
+					name: followUp
+				}
+			});			
+		})
 })}
