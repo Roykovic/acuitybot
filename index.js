@@ -167,7 +167,9 @@ function log(reqIn, resIn, callback){
 	var fs = require('fs');
 	fs.writeFile("/files/log", "Hey there!", function(err) {
 		if(err) {
+			console.log("****************************START LOG*************************************")
 			console.log(process.cwd());
+			console.log("****************************END LOG*************************************")
 			return console.log(err);
 		}
 
