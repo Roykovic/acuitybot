@@ -163,10 +163,9 @@ function wakeUp() {
     return returnJson(speech);
 }
 
-function log(reqIn, resIn, callback){
+function log(reqIn, resIn, score, callback){
 	console.log("**************************************LOG**************************************")
-	console.log(request)
-	console.log(result)
+	console.log(reqIn +", "+ resIn +", "+score)
 }
 
 function returnJson(speech, followUp) {
@@ -174,7 +173,7 @@ function returnJson(speech, followUp) {
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	return apiController.post(postPath, accesToken, null, function(){
-		log(request.body.result.resolvedQuery, speech, function(){
+		log(request.body.result.resolvedQuery, speech,request.body.result.score ,function(){
 			return result.json({
 				speech: speech,
 				displayText: speech,
