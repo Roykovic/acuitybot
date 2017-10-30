@@ -164,21 +164,9 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, callback){
-	var fs = require('fs');
-	fs.writeFile("/app/files/logs.csv", "Hey there!", function(err) {
-		if(err) {
-			const dirTree = require('directory-tree');
-			var path = process.cwd()
-			const tree = dirTree(path);
-				console.log("****************************START LOG*************************************")
-				console.log(tree);
-				console.log("****************************END LOG*************************************")
-			return console.log(err);
-		}
-
-		console.log("The file was saved!");
-	}); 
-	callback();
+	console.log("**************************************LOG**************************************")
+	console.log(request)
+	console.log(result)
 }
 
 function returnJson(speech, followUp) {
