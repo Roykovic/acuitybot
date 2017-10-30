@@ -174,8 +174,6 @@ function log(reqIn, resIn, callback){
 	}); 
 	
 }
-	
-}
 
 function returnJson(speech, followUp) {
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
