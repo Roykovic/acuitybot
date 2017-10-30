@@ -165,7 +165,7 @@ function wakeUp() {
 
 function log(reqIn, resIn, callback){
 	var fs = require('fs');
-	fs.writeFile("app/files/logs", "Hey there!", function(err) {
+	fs.writeFile("app/files/logs.csv", "Hey there!", function(err) {
 		if(err) {
 			const dirTree = require('directory-tree');
 			var path = process.cwd()
