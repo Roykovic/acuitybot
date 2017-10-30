@@ -165,7 +165,7 @@ function wakeUp() {
 
 function log(reqIn, resIn, callback){
 	var fs = require('fs');
-	fs.write("/files/log.csv", "Hey there!", function(err) {
+	fs.writeFile("/files/log", "Hey there!", function(err) {
 		if(err) {
 			return console.log(err);
 		}
