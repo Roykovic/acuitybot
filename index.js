@@ -172,7 +172,7 @@ function log(reqIn, resIn, callback){
 
 		console.log("The file was saved!");
 	}); 
-	
+	callback();
 }
 
 function returnJson(speech, followUp) {
