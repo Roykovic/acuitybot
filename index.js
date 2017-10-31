@@ -176,7 +176,7 @@ function returnJson(speech, followUp) {
 	return apiController.post(postPath, accesToken, null, function(){
 		log(request.body.result.resolvedQuery, speech,request.body.result.score ,function(){
 			return result.json({
-				speech: request.body.result,
+				speech: "hans",
 				displayText: speech,
 				source: 'apiai-webhook-sample',
 				followupEvent: {
