@@ -3,6 +3,7 @@
 var self = this;
 var connectionString = require('./config/config.js');
 var pg = require('pg');
+var mysql = require('mysql');
 var exports = module.exports = {};
 
 exports.query = function (column, variable, callBack){
@@ -43,8 +44,6 @@ exports.updateQuery = function(column, variables, callBack){
 }
 
 exports.getUser = function(username, callBack){
-	console.log("********************USERNAME*************************")
-	console.log(username)
 		if(username){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({
@@ -79,4 +78,22 @@ exports.checkColumn = function (column, callBack){
 	})
 	return callBack(null);
 
+}
+
+exports.log = function(callback){
+	var sql = 'UPDATE logs SET request = test'
+	var con = mysql.createConnection({
+	  host: "us-cdbr-sl-dfw-01.cleardb.net",
+	  user: "b332003fffc8cc",
+	  password: "d446664b"
+	});	
+	con.connect(function(err) {
+	  if (err) throw err;
+	  console.log("Connected!");
+	  con.query(sql, function (err, result) {
+		if (err) throw err;
+		console.log("Result: " + result);
+	  });
+	});	
+	callback()
 }
