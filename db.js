@@ -98,5 +98,6 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 		console.log("Result: " + result);
 	  });
 	});	
+	con.close()
 	callback()
 }
