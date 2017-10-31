@@ -81,6 +81,7 @@ exports.checkColumn = function (column, callBack){
 }
 
 exports.log = function(reqIn, resIn, score, intent,callback){
+	console.log(score)
 	var sql = 'INSERT INTO logs (request, result, score, intent) VALUES ("reqIn", "resIn", "score", "intent");'
 	var con = mysql.createConnection({
   database: "ibmx_a6f1d89267096f1",
