@@ -163,7 +163,9 @@ function wakeUp() {
     return returnJson(speech);
 }
 
-function log(reqIn, resIn, score, callback){
+function log(reqIn, resIn, score, intent callback){
+			console.log("**************************************LOG**************************************")
+			console.log(reqIn+", "+resIn+", "+score+", "+intent)
 	callback();
 }
 
@@ -172,7 +174,10 @@ function returnJson(speech, followUp) {
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	return apiController.post(postPath, accesToken, null, function(){
-		log(request.body.result.resolvedQuery, speech,request.body.result.score ,function(){
+		var reqIn = request.body.result.resolvedQuery
+		var intent = request.body.result.metadata.intentName
+		var score =  request.body.result.score
+		log(reqIn,speech,score, intent ,function(){
 			console.log("**************************************LOG**************************************")
 			console.log(request.body.result)
 			return result.json({
