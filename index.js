@@ -166,6 +166,7 @@ function wakeUp() {
 function log(reqIn, resIn, score, callback){
 	console.log("**************************************LOG**************************************")
 	console.log(reqIn +", "+ resIn +", "+score)
+	callback();
 }
 
 function returnJson(speech, followUp) {
@@ -175,7 +176,7 @@ function returnJson(speech, followUp) {
 	return apiController.post(postPath, accesToken, null, function(){
 		log(request.body.result.resolvedQuery, speech,request.body.result.score ,function(){
 			return result.json({
-				speech: speech,
+				speech: request.body.result,
 				displayText: speech,
 				source: 'apiai-webhook-sample',
 				followupEvent: {
