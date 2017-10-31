@@ -163,7 +163,7 @@ function wakeUp() {
     return returnJson(speech);
 }
 
-function log(reqIn, resIn, score, intent callback){
+function log(reqIn, resIn, score, intent, callback){
 			console.log("**************************************LOG**************************************")
 			console.log(reqIn+", "+resIn+", "+score+", "+intent)
 	callback();
@@ -178,8 +178,6 @@ function returnJson(speech, followUp) {
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
 		log(reqIn,speech,score, intent ,function(){
-			console.log("**************************************LOG**************************************")
-			console.log(request.body.result)
 			return result.json({
 				speech: speech,
 				displayText: speech,
