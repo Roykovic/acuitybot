@@ -80,8 +80,8 @@ exports.checkColumn = function (column, callBack){
 
 }
 
-exports.log = function(callback){
-	var sql = 'UPDATE logs SET request = "test"'
+exports.log = function(reqIn, resIn, score, intent,callback){
+	var sql = 'INSERT INTO logs (request, result, score, intent) VALUES ("reqIn", "resIn", "score", "intent");'
 	var con = mysql.createConnection({
   database: "ibmx_a6f1d89267096f1",
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
