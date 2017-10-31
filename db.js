@@ -83,6 +83,7 @@ exports.checkColumn = function (column, callBack){
 exports.log = function(callback){
 	var sql = 'UPDATE logs SET request = test'
 	var con = mysql.createConnection({
+		db: "ibmx_a6f1d89267096f1"
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
 	  user: "b332003fffc8cc",
 	  password: "d446664b"
