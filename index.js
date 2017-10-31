@@ -174,7 +174,7 @@ function returnJson(speech, followUp) {
 	return apiController.post(postPath, accesToken, null, function(){
 		log(request.body.result.resolvedQuery, speech,request.body.result.score ,function(){
 			console.log("**************************************LOG**************************************")
-			console.log(request.body.result.fulfillment)
+			console.log(request.body.result)
 			return result.json({
 				speech: speech,
 				displayText: speech,
