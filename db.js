@@ -96,8 +96,8 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	  con.query(sql, function (err, result) {
 		if (err) throw err;
 		console.log("Result: " + result);
+		con.end()
 	  });
 	});	
-	con.end()
 	callback()
 }
