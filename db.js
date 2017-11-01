@@ -83,8 +83,7 @@ exports.checkColumn = function (column, callBack){
 exports.log = function(reqIn, resIn, score, intent,callback){
 	console.log(score)
 	//var sql = 'INSERT INTO logs (request, result, score, intent) VALUES ("'+reqIn+'", "' + resIn+'", ' + score+', "' + intent+'");'
-	var sql = 'INSERT INTO logs (request, result, score, intent) VALUES ($1, $2, $3, $4)', [reqIn, resIn, score, intent];'
-	console.log(sql)
+	//console.log(sql)
 	var con = mysql.createConnection({
   database: "ibmx_a6f1d89267096f1",
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
@@ -94,7 +93,7 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	con.connect(function(err) {
 	  if (err) throw err;
 	  console.log("Connected!");
-	  con.query(sql, function (err, result) {
+	  con.query('INSERT INTO logs (request, result, score, intent) VALUES ?', [reqIn, resIn, score, intent],  function (err, result) {
 		if (err) throw err;
 		console.log("Result: " + result);
 		con.end()
