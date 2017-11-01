@@ -93,7 +93,7 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	con.connect(function(err) {
 	  if (err) throw err;
 	  console.log("Connected!");
-	  con.query('INSERT INTO logs (request, result, score, intent) VALUES ?', [reqIn, resIn, score, intent],  function (err, result) {
+	  con.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],  function (err, result) {
 		if (err) throw err;
 		console.log("Result: " + result);
 		con.end()
