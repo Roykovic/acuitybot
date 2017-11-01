@@ -165,7 +165,7 @@ function wakeUp() {
 
 function log(reqIn, resIn, score, intent, callback){
 			console.log("**************************************LOG**************************************")
-			console.log(reqIn+", "+resIn+", "+score+", "+intent)
+			console.log(request.body.result)
 			db.log(reqIn, resIn, score, intent,callback)
 	
 }
