@@ -88,6 +88,8 @@ restService.post('/hook', function(req, res) {
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
 			return userController.getServiceByName(fullName, function(serviceType){
+				console.log("********************************SERVICE*******************************")
+				console.log(serviceType)
 					if(serviceType == service.services.IBM){
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
@@ -164,8 +166,6 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, score, intent, callback){
-			console.log("**************************************LOG**************************************")
-			console.log(request.body.result)
 			db.log(reqIn, resIn, score, intent, function(){
 				callback();
 			})
