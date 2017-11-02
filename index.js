@@ -85,9 +85,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "User-info":
             var nameObj = request.body.result.parameters['fullName']
-			console.log(nameObj)
 			var fullName = nameObj[Object.keys(nameObj)[0]]
-			console.log(fullName)
             var column = request.body.result.parameters['Variable_row']
 			return userController.getServiceByName(fullName, function(serviceType){
 				console.log("********************************SERVICE*******************************")
