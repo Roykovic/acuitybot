@@ -102,5 +102,4 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 		  });
 		  callback(con.end())
 		});	
-	});
 }
