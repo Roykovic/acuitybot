@@ -88,7 +88,7 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	  password: "d446664b"
 	});
 
-	pool.getConnection(function(err, con) {	
+	pool.connect(function(err, con) {	
 		console.log(err)
 		console.log(con)
 		  con
