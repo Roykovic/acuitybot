@@ -97,6 +97,5 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 		if (err) throw err;
 	  });
 	});	
-con.end()
 	callback()
 }
