@@ -88,12 +88,23 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	  password: "d446664b"
 	});
 
-	pool.connect(function(err, con) {	
-		console.log(err)
-		console.log(con)
-		  con
-			.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent])
-			.then(res => callback())
-			.catch(e => console.error("Error while executing query\n" +e.stack));
-		});	
+   pool.getConnection(function(err,connection){
+        if (err) {
+          callback();
+          return;
+        }
+        connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],function(err,results){
+            connection.release();
+            if(!err) {
+                callback();
+            }
+            // check null for results here
+        });
+        connection.on('error', function(err) {
+              callback();
+              return;
+        });
+    });
 }
+
+ 
