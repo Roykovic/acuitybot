@@ -96,7 +96,4 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 			.then(res => callback())
 			.catch(e => console.error("Error while executing query\n" +e.stack));
 		});	
-	pool.end(function(err){
-			callback()
-	})	
 }
