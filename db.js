@@ -81,17 +81,26 @@ exports.checkColumn = function (column, callBack){
 }
 
 exports.log = function(reqIn, resIn, score, intent,callback){
-	var con = mysql.createConnection({
-  database: "ibmx_a6f1d89267096f1",
-	  host: "us-cdbr-sl-dfw-01.cleardb.net",
-	  user: "b332003fffc8cc",
-	  password: "d446664b"
-	});	
-	con.connect(function(err) {
-	  if (err) throw err;
-	  con.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],  function (err, result) {
-		if (err) throw err;
-	  });
-	  callback(con.end())
-	});	
+	// var con = mysql.createConnection({
+  // database: "ibmx_a6f1d89267096f1",
+	  // host: "us-cdbr-sl-dfw-01.cleardb.net",
+	  // user: "b332003fffc8cc",
+	  // password: "d446664b"
+	// });	
+	var pool  = mysql.createPool({
+	  connectionLimit : 5,
+	  host            : 'the_host',
+	  user            : 'username',
+	  password        : 'pass'
+	});
+
+	pool.getConnection(function(err, con) {	
+		con.connect(function(err) {
+		  if (err) throw err;
+		  con.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],  function (err, result) {
+			if (err) throw err;
+		  });
+		  callback(con.end())
+		});	
+	});
 }
