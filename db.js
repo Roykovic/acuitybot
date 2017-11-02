@@ -81,12 +81,6 @@ exports.checkColumn = function (column, callBack){
 }
 
 exports.log = function(reqIn, resIn, score, intent,callback){
-	// var con = mysql.createConnection({
-  // database: "ibmx_a6f1d89267096f1",
-	  // host: "us-cdbr-sl-dfw-01.cleardb.net",
-	  // user: "b332003fffc8cc",
-	  // password: "d446664b"
-	// });	
 	var pool  = mysql.createPool({
 	  database: "ibmx_a6f1d89267096f1",
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
@@ -95,9 +89,12 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	});
 
 	pool.getConnection(function(err, con) {	
-		  con.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],  function (err, result) {
-			if (err) throw err;
-		  });
+		console.log(err)
+		console.log(con)
+		  con
+			.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent])
+			.then(res => callback())
+			.catch(e => console.error("Error while executing query\n" +e.stack));
 		});	
 	pool.end(function(err){
 			callback()
