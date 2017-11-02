@@ -166,7 +166,8 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, score, intent, callback){
-			db.log(reqIn, resIn, score, intent, function(){
+	var resOut = resIn.split(':')[0];	
+			db.log(reqIn, resOut, score, intent, function(){
 				callback();
 			})
 	
