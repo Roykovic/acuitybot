@@ -96,10 +96,9 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	});
 
 	pool.getConnection(function(err, con) {	
-		con.connect(function(err) {
-		  if (err) throw err;
 		  con.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],  function (err, result) {
 			if (err) throw err;
+			connection.release();
 		  });
 		  callback(con.end())
 		});	
