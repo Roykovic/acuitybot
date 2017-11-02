@@ -165,7 +165,9 @@ function wakeUp() {
 
 function log(reqIn, resIn, score, intent, callback){
 	var resOut = resIn.split(':')[0];	
-			db.log(reqIn, resOut, score, intent, function(){
+			db.log(reqIn, resOut, score, intent, function(var connectionEnd){
+				console.log("**********************************CONNECTION END******************************************"
+				coonsole.log(connectionEnd)
 				callback();
 			})
 	
