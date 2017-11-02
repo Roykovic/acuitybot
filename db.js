@@ -88,7 +88,6 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 	  // password: "d446664b"
 	// });	
 	var pool  = mysql.createPool({
-	  connectionLimit : 5,
 	  database: "ibmx_a6f1d89267096f1",
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
 	  user: "b332003fffc8cc",
