@@ -62,7 +62,7 @@ restService.get('/auth', function(req, res) {
 		callback_uri = "https%3A%2F%2Fsafe-ocean-30268.herokuapp.com%2Fauth"
 	
 	var options = {
-        url: "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+grant_type+"&client_id="+client_id+"&client_secret="+client_secret+"&callback_uri="+callback_uri,
+        url: "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+grant_type+"&client_id="+client_id+"&client_secret="+client_secret
         method: "GET"
     }
 
