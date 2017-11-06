@@ -70,8 +70,8 @@ restService.get('/auth', function(req, res) {
 
     // Start the request
     httpRequest(options, function(error, response, body) {
-		JSON.parse(body)
-		console.log(typeof JSON.parse(body))
+		body = JSON.parse(body)
+		console.log(body.access_token)
 		res.sendFile(__dirname + '/OAuth/loginSucces.html');
 	})
 })
