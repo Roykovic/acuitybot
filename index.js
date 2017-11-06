@@ -71,7 +71,7 @@ restService.get('/auth', function(req, res) {
 
     // Start the request
     httpRequest(options, function(error, response, body) {
-		res.sendFile(__dirname + '/OAuth/index.html');
+		res.sendFile(__dirname + '/OAuth/loginSucces.html');
 	})
 })
 
