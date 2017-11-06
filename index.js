@@ -70,7 +70,7 @@ restService.get('/auth', function(req, res) {
 
     // Start the request
     httpRequest(options, function(error, response, body) {
-		console.log(body0
+		console.log(body)
 		body = JSON.parse(body)
 		console.log(body.access_token)
 		console.log(body.refresh_token)
