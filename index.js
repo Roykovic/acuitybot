@@ -58,7 +58,7 @@ restService.get('/connections', function(req, res) {
 
 restService.get('/auth', function(req, res) {
         code = req.query.code,
-		grant_type = "authorization_code"
+		grant_type = "refresh_token"
 		client_id = "3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1"
 		client_secret = "236296553525088968"
 		callback_uri = "https%3A%2F%2Fsafe-ocean-30268.herokuapp.com%2Fauth"
