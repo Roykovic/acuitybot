@@ -55,16 +55,14 @@ restService.get('/connections', function(req, res) {
 })
 
 restService.get('/auth', function(req, res) {
-	var headers = {
-        "code": req.query.code,
-		"grant_type": "authorization_code",
-		"client_id": "3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1",
-		"client_secret": "236296553525088968",
-		"callback_uri": "callback_uri"
-    }
+        code = req.query.code,
+		grant_type = "authorization_code"
+		client_id = 3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1
+		client_secret = 236296553525088968
+		callback_uri = "/auth"
 	
 	var options = {
-        url: "https://login.salesforce.com/services/oauth2/token",
+        url: "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+grant_type+"&client_id="+client_id+"&client_secret="+client_secret+"callback_uri="+callback_uri,
         method: "GET",
 		headers: headers
     }
