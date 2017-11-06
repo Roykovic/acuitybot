@@ -71,7 +71,7 @@ restService.get('/auth', function(req, res) {
     // Start the request
     request(options, function(error, response, body) {
 		res.sendFile(__dirname + '/OAuth/index.html');
-	}
+	})
 })
 
 restService.post('/hook', function(req, res) {
