@@ -31,6 +31,7 @@ var verseController = require('./verseController')
 verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var auth = false;
 var sessionId = "";
+var httpRequest = require('request');
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -69,7 +70,7 @@ restService.get('/auth', function(req, res) {
     }
 
     // Start the request
-    request(options, function(error, response, body) {
+    httpRequest(options, function(error, response, body) {
 		res.sendFile(__dirname + '/OAuth/index.html');
 	})
 })
