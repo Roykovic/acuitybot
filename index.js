@@ -42,6 +42,8 @@ restService.use(function(req, res, next) { //Method to allow http request from l
     res.setHeader('Access-Control-Allow-Credentials', false);
     next();
 });
+restService.use(express.static('public'))
+
 restService.use(bodyParser.urlencoded({
     extended: true
 }));
