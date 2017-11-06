@@ -53,6 +53,10 @@ restService.get('/connections', function(req, res) {
 	res.sendFile(__dirname + '/OAuth/index.html');
 })
 
+restService.post('/auth', function(req, res) {
+	res.sendFile(__dirname + '/OAuth/index.html');
+})
+
 restService.post('/hook', function(req, res) {
     console.log('hook request');
     request = req;
