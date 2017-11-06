@@ -65,7 +65,7 @@ restService.get('/auth', function(req, res) {
 	
 	var options = {
         url: "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+grant_type+"&client_id="+client_id+"&client_secret="+client_secret+"&redirect_uri="+callback_uri,
-        method: "GET"
+        method: "POST"
     }
 
     // Start the request
