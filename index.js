@@ -59,16 +59,17 @@ restService.get('/auth', function(req, res) {
 		grant_type = "authorization_code"
 		client_id = "3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1"
 		client_secret = "236296553525088968"
-		callback_uri = "/auth"
+		callback_uri = "https://safe-ocean-30268.herokuapp.com/auth"
 	
 	var options = {
-        url: "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+grant_type+"&client_id="+client_id+"&client_secret="+client_secret+"callback_uri="+callback_uri,
+        url: "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+grant_type+"&client_id="+client_id+"&client_secret="+client_secret+"&callback_uri="+callback_uri,
         method: "GET"
     }
 
     // Start the request
     httpRequest(options, function(error, response, body) {
-		console.log(response)
+		console.log(error)
+		console.log(response.statusCode)
 		res.sendFile(__dirname + '/OAuth/loginSucces.html');
 	})
 })
