@@ -68,7 +68,7 @@ restService.get('/auth', function(req, res) {
 
     // Start the request
     httpRequest(options, function(error, response, body) {
-		console.log(error)
+		console.log(response.body.error)
 		console.log(response.statusCode)
 		res.sendFile(__dirname + '/OAuth/loginSucces.html');
 	})
