@@ -48,8 +48,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/connections', function(req, res) {
-	var string = '<p> hello world </p>'
-	return res.send(string)
+	res.sendFile('./index.html');
 })
 
 restService.post('/hook', function(req, res) {
