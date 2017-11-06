@@ -57,8 +57,8 @@ restService.get('/connections', function(req, res) {
 restService.get('/auth', function(req, res) {
         code = req.query.code,
 		grant_type = "authorization_code"
-		client_id = 3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1
-		client_secret = 236296553525088968
+		client_id = "3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1"
+		client_secret = "236296553525088968"
 		callback_uri = "/auth"
 	
 	var options = {
