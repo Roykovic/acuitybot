@@ -46,6 +46,9 @@ restService.use(bodyParser.urlencoded({
     extended: true
 }));
 restService.use(bodyParser.json());
+restService.get('/conneciton', function(req, res) {
+	return '<p> hello world </p>'
+}
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
