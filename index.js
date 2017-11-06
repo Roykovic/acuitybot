@@ -71,6 +71,11 @@ restService.get('/auth', function(req, res) {
     // Start the request
     httpRequest(options, function(error, response, body) {
 		return parser.parseString(body, function(err, HTTPresult) {
+			console.log("********************************************1******************************************")
+				console.log(body)
+							console.log("********************************************2******************************************")
+				console.log(HTTPresult)
+							console.log("********************************************3******************************************")
                 console.log(HTTPresult['acces_token'])
             })
 		res.sendFile(__dirname + '/OAuth/loginSucces.html');
