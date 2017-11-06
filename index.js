@@ -48,7 +48,7 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/connections', function(req, res) {
-	res.sendFile(__dirname + '/index.html');
+	res.sendFile(__dirname + '/OAuth/index.html');
 })
 
 restService.post('/hook', function(req, res) {
