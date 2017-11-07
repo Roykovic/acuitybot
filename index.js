@@ -33,19 +33,11 @@ var auth = false;
 var sessionId = "";
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
-var httpRequest = require('request');
 var OAuthController = require('./oauth')
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 
-restService.use(function(req, res, next) { //Method to allow http request from login site, this is a WIP, as there is no login site yet...
-    res.setHeader('Access-Control-Allow-Origin', 'http://html-login.herokuapp.com');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', false);
-    next();
-});
 restService.use(express.static('public'))
 
 restService.use(bodyParser.urlencoded({
@@ -59,6 +51,8 @@ restService.get('/login/:service', function(req, res) {
 })
 
 restService.get('/auth/:service', function(req, res) {
+	console.log(req.params.service)
+	console.log(req.query.code)
     OAuthController.getTokens(req.params.service, req.query.code)
 })
 
@@ -68,18 +62,6 @@ restService.post('/hook', function(req, res) {
     result = res;
 	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
-    if (intent != "Login") {
-        //		if(!auth || request.body.sessionId != sessionId){
-        //		return result.json({																				
-        //							name: "Login",
-        //							displayText: speech,
-        //							source: 'apiai-webhook-sample',
-        //							followupEvent: {
-        //								name:"login"
-        //							}
-        //						});
-        //		}
-    }
     switch (intent) {
         case "Login":
             return login();
