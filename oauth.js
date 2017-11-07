@@ -37,6 +37,7 @@ exports.getTokens = function(service, code){
 
     // Start the request
     httpRequest(options, function(error, response, body) {
+		console.log(body)
 		body = JSON.parse(body)
 		console.log(body.access_token)
 		res.sendFile(__dirname + '/OAuth/loginSucces.html');
