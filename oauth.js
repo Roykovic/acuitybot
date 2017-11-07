@@ -37,7 +37,7 @@ exports.getTokens = function(service, code){
     // Start the request
     httpRequest(options, function(error, response, body) {
 		console.log("*****************************************RESPONSE**************************************")
-		console.log(response)
+		console.log(error)
 		console.log("********************************************BODY******************************************")
 		console.log(body)
 		body = JSON.parse(body)
