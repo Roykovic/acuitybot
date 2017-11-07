@@ -74,7 +74,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "update":
         case "data for update":
-            var context = req.body.resul
+            var context = req.body.result
             var column = context.parameters.Variable_row;
             var variables = [context.parameters['variable'], context.parameters['sf-name']];
             db.updateQuery(column, variables, function() {
