@@ -34,10 +34,10 @@ exports.getTokens = function(service, code){
         url: url,
         method: "GET"
     }
-
+		console.log("********************************************DINGEN?******************************************")
     // Start the request
     httpRequest(options, function(error, response, body) {
-		console.log(body)
+		console.log("********************************************DINGEN?******************************************")
 		body = JSON.parse(body)
 		console.log(body.access_token)
 		res.sendFile(__dirname + '/OAuth/loginSucces.html');
