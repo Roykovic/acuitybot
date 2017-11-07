@@ -36,6 +36,8 @@ exports.getTokens = function(service, code){
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
+		console.log("*****************************************RESPONSE**************************************")
+		console.log(error)
 		body = JSON.parse(body)
 				console.log("********************************************TOKEN******************************************")
 		console.log(body.access_token)
