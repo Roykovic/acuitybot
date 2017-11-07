@@ -20,7 +20,7 @@ exports.getTokens = function(service, code){
 	var url;
 	 switch (service) {
         case "salesforce":
-            webpage = "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+oauthCfg.grant_type+"&client_id="+oauthCfg.client_id+"&client_secret="+oauthCfg.client_secret+"&redirect_uri="+oauthCfg.callback_uri
+            webpage = "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+config.grant_type+"&client_id="+config.client_id+"&client_secret="+config.client_secret+"&redirect_uri="+config.callback_uri
             break;
 		 case "connections":
             webpage = "connectionsIndex"
