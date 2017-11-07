@@ -36,11 +36,7 @@ exports.getTokens = function(service, code){
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
-		console.log("*****************************************RESPONSE**************************************")
-		console.log(body)
 		body = JSON.parse(body)
-				console.log("********************************************TOKEN******************************************")
-		console.log(body.access_token)
-		res.sendFile(__dirname + '/OAuth/loginSucces.html');
+		var acess_token = body.access_token)
 	})	
 }

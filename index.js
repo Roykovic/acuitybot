@@ -51,9 +51,8 @@ restService.get('/login/:service', function(req, res) {
 })
 
 restService.get('/auth/:service', function(req, res) {
-	console.log(req.params.service)
-	console.log(req.query.code)
     OAuthController.getTokens(req.params.service, req.query.code)
+	res.sendFile(__dirname + '/OAuth/loginSucces.html');
 })
 
 restService.post('/hook', function(req, res) {
