@@ -37,6 +37,6 @@ exports.getTokens = function(service, code){
     // Start the request
     httpRequest(options, function(error, response, body) {
 		body = JSON.parse(body)
-		var acess_token = body.access_token)
+		var acess_token = body.access_token
 	})	
 }
