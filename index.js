@@ -57,6 +57,8 @@ restService.get('/auth/:service', function(req, res) {
 
 restService.post('/hook', function(req, res) {
     console.log('hook request');
+	console.log("***************************request*****************************")
+	console.log(req)
     request = req;
     result = res;
 	sessionId = req.body.sessionId;
@@ -72,7 +74,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "update":
         case "data for update":
-            var context = req.body.result.contexts[0]
+            var context = req.body.resul
             var column = context.parameters.Variable_row;
             var variables = [context.parameters['variable'], context.parameters['sf-name']];
             db.updateQuery(column, variables, function() {
@@ -162,8 +164,6 @@ function wakeUp() {
 function log(reqIn, resIn, score, intent, callback){
 	var resOut = resIn.split(':')[0];	
 			db.log(reqIn, resOut, score, intent, function(connectionEnd){
-				console.log("**********************************CONNECTION END******************************************")
-				console.log(connectionEnd)
 				callback();
 			})
 	
