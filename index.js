@@ -47,12 +47,12 @@ restService.use(bodyParser.json());
 
 restService.get('/login/:service', function(req, res) {
 	if(request){
-	var userID = request.body.originalRequest.data.data.personId
-	var fileName = OAuthController.getWebpage(req.params.service)
-	res.cookie('id_token' ,userID);
-	res.sendFile(__dirname + '/OAuth/' + fileName + '.html');}
+		var userID = request.body.originalRequest.data.data.personId
+		var fileName = OAuthController.getWebpage(req.params.service)
+		res.cookie('id_token' ,userID);
+		res.sendFile(__dirname + '/OAuth/' + fileName + '.html');}
 	else{
-		res.sendFile __dirname + '/OAuth/404.html'
+		res.sendFile(__dirname + '/OAuth/404.html)'
 	}
 })
 
