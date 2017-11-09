@@ -72,7 +72,7 @@ exports.registerToken = function(userID, accces_token){
 
 exports.getAccessCode = function(userID){
 	db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
-		console.log("*******************************"RESULT*******************************"
+		console.log("*******************************RESULT*******************************")
 		console.log(result)
 	})
 }
