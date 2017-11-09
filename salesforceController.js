@@ -11,7 +11,6 @@ exports.query = function (column, variable, callBack){
 					// url: url,
 					// method: "GET"
 				// }
-				Start the request
 				// httpRequest(options, function(error, response, body) {
 					// body = JSON.parse(body)
 					// var acess_token = body.access_token
