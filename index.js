@@ -46,15 +46,15 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/login/:service', function(req, res) {
+	var userID = req.body.originalRequest.data.data.personId
 	var fileName = OAuthController.getWebpage(req.params.service)
-	res.cookie('id_token' ,"test");
+	res.cookie('id_token' ,userID);
 	res.sendFile(__dirname + '/OAuth/' + fileName + '.html');
 })
 
 restService.get('/auth/:service', function(req, res) {
-	var userID = req.body.originalRequest.data.data.personId
     OAuthController.getTokens(req.params.service, req.query.code)
-	res.cookie('id_token' ,userID, {expires: s});	res.sendFile(__dirname + '/OAuth/loginSucces.html');
+	res.sendFile(__dirname + '/OAuth/loginSucces.html');
 })
 
 restService.post('/hook', function(req, res) {
