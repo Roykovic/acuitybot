@@ -38,18 +38,20 @@ exports.query = function (column, variable, callBack){
 }
 
 exports.getContacts = function(fullName, userID){
-	var headers = {
-        "'Authorization": "Bearer " + oauth.getAccessCode(userID) //todo add code 
-    }
-	var options = {
-		url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
-		method: "GET",
-		headers: headers
-	}
-	// Start the request
-	httpRequest(options, function(error, response, body) {
-		console.log(body)
-	})		
+	oauth.getAccessCode(userID, callback(access_token){
+		var headers = {
+			"'Authorization": "Bearer " +  access_token//todo add code 
+		}
+		var options = {
+			url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
+			method: "GET",
+			headers: headers
+		}
+		// Start the request
+		httpRequest(options, function(error, response, body) {
+			console.log(body)
+		})		
+	})
 }
 
 exports.updateQuery = function(column, variables, callBack){

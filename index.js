@@ -45,15 +45,11 @@ restService.use(bodyParser.urlencoded({
 }));
 restService.use(bodyParser.json());
 
-restService.get('/login/:service', function(req, res) {
-	if(request){
-		var userID = request.body.originalRequest.data.data.personId
+restService.get('/login/:service/:userID', function(req, res) {
+		var userID = req.params.userID
 		var fileName = OAuthController.getWebpage(req.params.service)
 		res.cookie('id_token' ,userID);
-		res.sendFile(__dirname + '/OAuth/' + fileName + '.html');}
-	else{
-		res.sendFile(__dirname + '/OAuth/404.html')
-	}
+		res.sendFile(__dirname + '/OAuth/' + fileName + '.html');
 })
 
 restService.get('/auth/:service', function(req, res) {
@@ -90,7 +86,7 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
-			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType){
+			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType, url){
 					if(serviceType == service.services.IBM){
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
@@ -98,6 +94,9 @@ restService.post('/hook', function(req, res) {
 						return userController.getUserInfo(fullName, column, function(speech, followUp) {
 							return returnJson(speech, followUp)
 						});						
+					}
+					else{
+						return returnJson("Please login to use this service: " + url)
 					}
 				})
             break;
