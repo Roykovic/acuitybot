@@ -169,6 +169,7 @@ function log(reqIn, resIn, score, intent, callback){
 }
 
 function returnJson(speech, followUp) {
+	console.log("ReturnJson")
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
@@ -192,6 +193,5 @@ function returnJson(speech, followUp) {
 var exports = module.exports = {};
 
 exports.returnURL = function(speech){
-	console.log("returnurl")
 	returnJson(speech);
 } 
