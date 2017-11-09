@@ -37,7 +37,7 @@ exports.query = function (column, variable, callBack){
 			});
 }
 
-exports.getContact(){
+exports.getContacts(){
 	var headers = {
         "'Authorization": "Bearer " + CODE //todo add code 
     }
@@ -48,8 +48,9 @@ exports.getContact(){
 	}
 	// Start the request
 	httpRequest(options, function(error, response, body) {
-		body = JSON.parse(body)
-		var acess_token = body.access_token
+		console.log("HTTP REQUEST BODY @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+		console.log(body)
+		console.log("END HTTP REQUEST BODY @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
 	})		
 }
 
@@ -72,6 +73,7 @@ exports.updateQuery = function(column, variables, callBack){
 }
 
 exports.getUser = function(username, callBack){
+	exports.getContacts
 		if(username){
 			pg.defaults.ssl = true;
 			var pool = new pg.Pool({

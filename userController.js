@@ -2,6 +2,7 @@
 
 var exports = module.exports = {};
 var salesForcedb = require('./db');
+var salesforceController = require('./salesforceController')
 var verseController = require('./verseController')
 var service = require('./service')
 
@@ -52,7 +53,7 @@ exports.getAllNames = function(callback){
 }
 
 exports.getServiceByName = function(fullname, callback){
-	salesForcedb.getUser(fullname, function(sfUser){	
+	salesforceController.getContacts(fullname, function(sfUser){	
 		if(sfUser['rows'].length > 0){
 			return callback(service.services.SalesForce)
 		}
