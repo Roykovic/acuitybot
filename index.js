@@ -34,6 +34,7 @@ var sessionId = "";
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 var OAuthController = require('./oauth')
+var exports = module.exports = {};
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -60,6 +61,7 @@ restService.get('/auth/:service', function(req, res) {
 restService.post('/hook', function(req, res) {
     request = req;
     result = res;
+exports.result = result;
 	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
@@ -189,6 +191,3 @@ function returnJson(speech, followUp) {
 	})
 }
 
-var exports = module.exports = {};
-
-exports.request = request;
