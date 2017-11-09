@@ -56,7 +56,7 @@ exports.registerToken = function(userID, accces_token){
           callback();
           return;
         }
-        connection.query('INSERT INTO auth (userID, access_token) VALUES (?,?,?,?)', [userID, acces_token],function(err,results){
+        connection.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, acces_token],function(err,results){
             connection.release();
             if(!err) {
                 callback();
@@ -71,11 +71,10 @@ exports.registerToken = function(userID, accces_token){
 }
 
 exports.getAccessCode = function(userID, callback){
-	db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
+	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
 		if(!result[0]){
-			var url = __dirname + '/login/salesforce/' + userID
-			callback(null, url)
-			return
+			var index = require('./index');
+			return index.returnURL("Please login at: "+__dirname+"/login/salesforce/userID"
 		}
 		callback(result[0].access_token)
 		return

@@ -2,6 +2,7 @@
 
 var self = this;
 var oauth = require('./oauth')
+var httpRequest = require('./index');
 var httpRequest = require('request');
 var exports = module.exports = {};
 
@@ -49,7 +50,7 @@ exports.getContacts = function(fullName, userID, callback){
 		}
 		// Start the request
 		httpRequest(options, function(error, response, body) {
-			console.log(body)
+			console.log(+++++++++++++++)
 		})		
 	})
 }

@@ -86,7 +86,7 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
-			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType, url){
+			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType){
 					if(serviceType == service.services.IBM){
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
@@ -94,9 +94,6 @@ restService.post('/hook', function(req, res) {
 						return userController.getUserInfo(fullName, column, function(speech, followUp) {
 							return returnJson(speech, followUp)
 						});						
-					}
-					else{
-						return returnJson("Please login to use this service: " + url)
 					}
 				})
             break;
@@ -193,3 +190,9 @@ function returnJson(speech, followUp) {
 		})
 	})
 }
+
+var exports = module.exports = {};
+
+exports.returnURL = function(speech){
+	returnJson(speech);
+} 
