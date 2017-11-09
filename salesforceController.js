@@ -38,7 +38,6 @@ exports.query = function (column, variable, callBack){
 }
 
 exports.getContacts = function(fullName, userID, callback){
-	console.log("*******************GETCONTACTS**********************")
 	oauth.getAccessCode(userID, function(access_token, url){
 		var headers = {
 			"'Authorization": "Bearer " +  access_token//todo add code 
@@ -48,9 +47,9 @@ exports.getContacts = function(fullName, userID, callback){
 			method: "GET",
 			headers: headers
 		}
-		// Start the request
+		console.log("Before")
 		httpRequest(options, function(error, response, body) {
-			console.log("DINGEN")
+			console.log(error)
 		})		
 	})
 }
