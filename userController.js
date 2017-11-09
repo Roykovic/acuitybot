@@ -53,6 +53,7 @@ exports.getAllNames = function(callback){
 }
 
 exports.getServiceByName = function(fullname, userID, callback){
+	console.log("****************GETSERVICEBYNAME********************")
 	salesforceController.getContacts(fullname, userID, function(sfUser){	
 		if(sfUser['rows'].length > 0){
 			return callback(service.services.SalesForce, url)
