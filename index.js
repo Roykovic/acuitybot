@@ -47,7 +47,7 @@ restService.use(bodyParser.json());
 
 restService.get('/login/:service', function(req, res) {
 	var fileName = OAuthController.getWebpage(req.params.service)
-	res.cookie('id_token' ,body.id_token);
+	res.cookie('id_token' ,"test");
 	res.sendFile(__dirname + '/OAuth/' + fileName + '.html');
 })
 
