@@ -17,6 +17,7 @@ exports.query = function (column, variable, callBack){
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
 				.query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
+				.then(client.release())
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 				return;
@@ -36,7 +37,8 @@ exports.updateQuery = function(column, variables, callBack){
 			  console.log('Connected to postgres! Getting schemas for update...');
 			  client
 				.query('UPDATE salesforce.contact SET '+column+'=$1 WHERE name =$2', variables)
-				.then(callBack())
+				.then(client.release())
+				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 				return;
 			})
@@ -54,6 +56,7 @@ exports.getUser = function(username, callBack){
 			  console.log('Connected to postgres! Getting schemas...');
 			  client
 				.query('SELECT * FROM salesforce.contact WHERE name LIKE $1', [username])
+				.then(client.release())				
 				.then(res => callBack(res))
 				.catch(e => console.error("Error while executing query\n" +e.stack));
 
