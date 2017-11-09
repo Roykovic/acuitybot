@@ -75,6 +75,7 @@ exports.getAccessCode = function(userID, callback){
 		if(!result){
 			var url = __dirname + '/login/salesforce/' + userID
 			callback(null, url)
+			return
 		}
 		callback(result[0].access_token)
 		return
