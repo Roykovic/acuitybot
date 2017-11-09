@@ -101,13 +101,13 @@ exports.log = function(reqIn, resIn, score, intent,callback){
             if(!err) {
                 callback();
             }
-            // check null for results here
         });
         connection.on('error', function(err) {
               callback();
               return;
         });
     });
+	pool.end();
 }
 
  
