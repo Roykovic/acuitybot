@@ -6,24 +6,49 @@ var pg = require('pg');
 var mysql = require('mysql');
 var exports = module.exports = {};
 
-exports.query = function (column, variable, callBack){
-		if(column && variable){
-			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
-			pool.connect(function(err, client) {
-			  if (err) throw err;
-			  console.log('Connected to postgres! Getting schemas...');
-			  client
-				.query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
-				.then(client.release())
-				.then(res => callBack(res))
-				.catch(e => console.error("Error while executing query\n" +e.stack));
-				return;
-			})
-		}
-		callBack(null)
+exports.query = function (query, params, callback){
+	var pool  = mysql.createPool({
+	  database: "ibmx_a6f1d89267096f1",
+	  host: "us-cdbr-sl-dfw-01.cleardb.net",
+	  user: "b332003fffc8cc",
+	  password: "d446664b"
+	});
+
+   pool.getConnection(function(err,connection){
+        if (err) {
+          callback();
+          return;
+        }
+        connection.query(query, params,function(err,results){
+            connection.release();
+            if(!err) {
+                callback(results);
+				return
+            }
+        });
+        connection.on('error', function(err) {
+              callback();
+              return;
+        });
+    });
+	
+		// if(column && variable){
+			// pg.defaults.ssl = true;
+			// var pool = new pg.Pool({
+			  // connectionString: connectionString,
+			// })
+			// pool.connect(function(err, client) {
+			  // if (err) throw err;
+			  // console.log('Connected to postgres! Getting schemas...');
+			  // client
+				// .query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
+				// .then(client.release())
+				// .then(res => callBack(res))
+				// .catch(e => console.error("Error while executing query\n" +e.stack));
+				// return;
+			// })
+		// }
+		// callBack(null)
 }
 
 exports.updateQuery = function(column, variables, callBack){

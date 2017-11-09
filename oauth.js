@@ -1,4 +1,5 @@
 var config = require('./config/oauthConfig.js');
+var db = require('./db');
 var httpRequest = require('request');
 var exports = module.exports = {};
 
@@ -38,7 +39,7 @@ exports.getTokens = function(service, code){
     httpRequest(options, function(error, response, body) {
 		body = JSON.parse(body)
 		var acess_token = body.access_token
-		exports.registerToken(userID, acces_token)
+		exports.registerToken(userID, access_token)
 	})	
 }
 
@@ -55,7 +56,7 @@ exports.registerToken = function(userID, accces_token){
           callback();
           return;
         }
-        connection.query('INSERT INTO auth (userID, acces_token) VALUES (?,?,?,?)', [userID, acces_token],function(err,results){
+        connection.query('INSERT INTO auth (userID, access_token) VALUES (?,?,?,?)', [userID, acces_token],function(err,results){
             connection.release();
             if(!err) {
                 callback();
@@ -67,4 +68,8 @@ exports.registerToken = function(userID, accces_token){
         });
     });
 	pool.end();
+}
+
+exports.getAccessCode(userID){
+	db.query('SELECT access_token FROM auth WHERE userID = ?', userID)
 }

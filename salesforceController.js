@@ -1,6 +1,7 @@
 'use strict'
 
 var self = this;
+var oauth = require('./oauth')
 var httpRequest = require('request');
 var exports = module.exports = {};
 
@@ -36,9 +37,9 @@ exports.query = function (column, variable, callBack){
 			// });
 }
 
-exports.getContacts = function(){
+exports.getContacts = function(fullName, userID){
 	var headers = {
-        "'Authorization": "Bearer " + CODE //todo add code 
+        "'Authorization": "Bearer " + oauth.getAccesCode(userID) //todo add code 
     }
 	var options = {
 		url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
@@ -47,9 +48,7 @@ exports.getContacts = function(){
 	}
 	// Start the request
 	httpRequest(options, function(error, response, body) {
-		console.log("HTTP REQUEST BODY @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
-		console.log(body)
-		console.log("END HTTP REQUEST BODY @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+
 	})		
 }
 

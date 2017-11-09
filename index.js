@@ -90,7 +90,7 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
-			return userController.getServiceByName(fullName, function(serviceType){
+			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType){
 					if(serviceType == service.services.IBM){
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
