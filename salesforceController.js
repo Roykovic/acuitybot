@@ -36,7 +36,7 @@ exports.query = function (column, variable, callBack){
 			// });
 }
 
-exports.getContacts(){
+exports.getContacts = function(){
 	var headers = {
         "'Authorization": "Bearer " + CODE //todo add code 
     }
