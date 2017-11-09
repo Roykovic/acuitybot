@@ -5,17 +5,17 @@ var httpRequest = require('request');
 var exports = module.exports = {};
 
 exports.query = function (column, variable, callBack){
-		if(column && variable){
-			exports.getContacts(function(){
-				var options = {
-					url: url,
-					method: "GET"
-				}
-				// Start the request
-				httpRequest(options, function(error, response, body) {
-					body = JSON.parse(body)
-					var acess_token = body.access_token
-				})				
+		// if(column && variable){
+			// exports.getContacts(function(){
+				// var options = {
+					// url: url,
+					// method: "GET"
+				// }
+				Start the request
+				// httpRequest(options, function(error, response, body) {
+					// body = JSON.parse(body)
+					// var acess_token = body.access_token
+				// })				
 						
 						
 						
@@ -23,18 +23,18 @@ exports.query = function (column, variable, callBack){
 						
 						
 						
-						pool.connect(function(err, client) {
-						if (err) throw err;
-						console.log('Connected to postgres! Getting schemas...');
-						client
-							.query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
-							.then(res => callBack(res))
-							.catch(e => console.error("Error while executing query\n" +e.stack));
-							return;
-						})
-					}
-					callBack(null)				
-			});
+						// pool.connect(function(err, client) {
+						// if (err) throw err;
+						// console.log('Connected to postgres! Getting schemas...');
+						// client
+							// .query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
+							// .then(res => callBack(res))
+							// .catch(e => console.error("Error while executing query\n" +e.stack));
+							// return;
+						// })
+					// }
+					// callBack(null)				
+			// });
 }
 
 exports.getContacts(){
