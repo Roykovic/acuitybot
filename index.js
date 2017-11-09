@@ -61,6 +61,8 @@ restService.get('/auth/:service', function(req, res) {
 restService.post('/hook', function(req, res) {
     request = req;
     result = res;
+	console.log("*********************************res******************************")
+	console.log(res)
 exports.result = res;
 	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
