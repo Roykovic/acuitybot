@@ -52,8 +52,9 @@ restService.get('/login/:service', function(req, res) {
 })
 
 restService.get('/auth/:service', function(req, res) {
+	var userID = req.body.originalRequest.data.data.personId
     OAuthController.getTokens(req.params.service, req.query.code)
-	res.cookie('id_token' ,"test", {expires: s});	res.sendFile(__dirname + '/OAuth/loginSucces.html');
+	res.cookie('id_token' ,userID, {expires: s});	res.sendFile(__dirname + '/OAuth/loginSucces.html');
 })
 
 restService.post('/hook', function(req, res) {
