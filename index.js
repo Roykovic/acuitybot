@@ -47,12 +47,13 @@ restService.use(bodyParser.json());
 
 restService.get('/login/:service', function(req, res) {
 	var fileName = OAuthController.getWebpage(req.params.service)
+	res.cookie('id_token' ,body.id_token);
 	res.sendFile(__dirname + '/OAuth/' + fileName + '.html');
 })
 
 restService.get('/auth/:service', function(req, res) {
     OAuthController.getTokens(req.params.service, req.query.code)
-	res.sendFile(__dirname + '/OAuth/loginSucces.html');
+	res.cookie('id_token' ,"test", {expires: s});	res.sendFile(__dirname + '/OAuth/loginSucces.html');
 })
 
 restService.post('/hook', function(req, res) {
