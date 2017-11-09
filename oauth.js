@@ -74,7 +74,7 @@ exports.getAccessCode = function(userID, callback){
 	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
 		if(!result[0]){
 			var index = require('./index');
-			return index.returnURL("Please login at: "+__dirname+"/login/salesforce/userID"
+			return index.returnURL("Please login at: "+__dirname+"/login/salesforce/userID")
 		}
 		callback(result[0].access_token)
 		return
