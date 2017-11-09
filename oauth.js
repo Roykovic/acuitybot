@@ -37,6 +37,7 @@ exports.getTokens = function(service, code){
     // Start the request
     httpRequest(options, function(error, response, body) {
 		body = JSON.parse(body)
+		console.log("************BODY*****************")
 		console.log(body)
 		var acess_token = body.access_token
 		var userID = req.body.originalRequest.data.data.personId
