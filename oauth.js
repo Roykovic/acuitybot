@@ -1,7 +1,7 @@
 var config = require('./config/oauthConfig.js');
 var db = require('./db');
 var httpRequest = require('request');
-var opn = require('opn');
+var index = require('./index');
 var exports = module.exports = {};
 
 exports.getWebpage = function (service){
