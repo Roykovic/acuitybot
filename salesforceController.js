@@ -39,7 +39,7 @@ exports.query = function (column, variable, callBack){
 
 exports.getContacts = function(fullName, userID){
 	var headers = {
-        "'Authorization": "Bearer " + oauth.getAccesCode(userID) //todo add code 
+        "'Authorization": "Bearer " + oauth.getAccessCode(userID) //todo add code 
     }
 	var options = {
 		url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
