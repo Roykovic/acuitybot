@@ -70,6 +70,8 @@ exports.registerToken = function(userID, accces_token){
 	pool.end();
 }
 
-exports.getAccessCode(userID){
-	db.query('SELECT access_token FROM auth WHERE userID = ?', userID)
+exports.getAccessCode = function(userID){
+	db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(){
+		
+	})
 }
