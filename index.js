@@ -52,7 +52,7 @@ restService.get('/login/:service', function(req, res) {
 		res.cookie('id_token' ,userID);
 		res.sendFile(__dirname + '/OAuth/' + fileName + '.html');}
 	else{
-		res.sendFile(__dirname + '/OAuth/404.html)'
+		res.sendFile(__dirname + '/OAuth/404.html')
 	}
 })
 
