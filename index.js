@@ -191,6 +191,4 @@ function returnJson(speech, followUp) {
 
 var exports = module.exports = {};
 
-exports.returnURL = function(speech){
-	return returnJson(speech);
-} 
+exports.request = request;

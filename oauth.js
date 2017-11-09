@@ -74,9 +74,11 @@ exports.registerToken = function(userID, accces_token){
 exports.getAccessCode = function(userID, callback){
 	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
 		if(!result[0]){
-			console.log("VOOR")
-			opn('www.test.nl');
-			console.log("NA")
+			index.result..json({
+				speech: "HALLO, DINGEN ENZO",
+				displayText: "HALLO, DINGEN ENZO",
+				source: 'apiai-webhook-sample',
+			});	
 		}
 		return callback(result[0].access_token)
 	})
