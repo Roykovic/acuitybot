@@ -37,8 +37,8 @@ exports.query = function (column, variable, callBack){
 			// });
 }
 
-exports.getContacts = function(fullName, userID){
-	oauth.getAccessCode(userID, function(access_token){
+exports.getContacts = function(fullName, userID, callback){
+	oauth.getAccessCode(userID, function(access_token, url){
 		var headers = {
 			"'Authorization": "Bearer " +  access_token//todo add code 
 		}
