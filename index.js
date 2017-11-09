@@ -62,8 +62,8 @@ restService.post('/hook', function(req, res) {
     request = req;
     result = res;
 	console.log("*********************************res******************************")
-	console.log(res)
 exports.result = res;
+	console.log(exports.result)
 	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
