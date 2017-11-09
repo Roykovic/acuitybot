@@ -58,8 +58,6 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-    console.log('hook request');
-	console.log(req.body.originalRequest.data.data.personId)
     request = req;
     result = res;
 	sessionId = req.body.sessionId;
@@ -194,5 +192,6 @@ function returnJson(speech, followUp) {
 var exports = module.exports = {};
 
 exports.returnURL = function(speech){
+	console.log("returnurl")
 	returnJson(speech);
 } 
