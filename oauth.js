@@ -1,6 +1,7 @@
 var config = require('./config/oauthConfig.js');
 var db = require('./db');
 var httpRequest = require('request');
+var opn = require('opn');
 var exports = module.exports = {};
 
 exports.getWebpage = function (service){
@@ -73,10 +74,8 @@ exports.registerToken = function(userID, accces_token){
 exports.getAccessCode = function(userID, callback){
 	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
 		if(!result[0]){
-			var index = require('./index');
-			return index.returnURL("Please login at: "+__dirname+"/login/salesforce/userID")
+			opn('www.test.nl');
 		}
-		callback(result[0].access_token)
-		return
+		return callback(result[0].access_token)
 	})
 }

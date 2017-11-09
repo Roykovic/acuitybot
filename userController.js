@@ -57,6 +57,10 @@ exports.getServiceByName = function(fullname, userID, callback){
 		if(sfUser['rows'].length > 0){
 			return callback(service.services.SalesForce, url)
 		}
+		var accesToken = oauth.getAccessCode(userID, function(result){
+			
+		});
+
 		else{
 			verseController.getUser(fullname, function(ibmUser){
 				if(ibmUser){
