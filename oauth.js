@@ -74,7 +74,7 @@ exports.getAccessCode = function(userID, callback){
 	db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
 		if(!result){
 			var url = __dirname + '/login/salesforce/' + userID
-			callback(url)
+			callback(null, url)
 		}
 		callback(result[0].access_token)
 		return
