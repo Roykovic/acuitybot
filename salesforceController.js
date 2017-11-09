@@ -48,7 +48,6 @@ exports.getContacts = function(fullName, userID, callback){
 			method: "GET",
 			headers: headers
 		}
-		console.log("after")
 		httpRequest(options, function(error, response, body) {
 			console.log(error)
 		})		
