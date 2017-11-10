@@ -28,6 +28,7 @@ var apiController = require('./apiController')
 var loginController = require('./loginController')
 var userController = require('./userController')
 var ibmController = require('./ibmController')
+var salesforceController = require('./salesforceController')
 ibmController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var auth = false;
 var sessionId = "";
@@ -94,10 +95,9 @@ restService.post('/hook', function(req, res) {
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
 					if(serviceType == service.services.SalesForce){
-						//return userController.getUserInfo(fullName, column, function(speech, followUp) {
-						//	return returnJson(speech, followUp)
-						//});
-						return returnJson("Salesforce search has been identified!")		
+						return salesforceController.getUserInfo(access_token, fullName, column, function(speech, followUp) {
+							return returnJson(speech, followUp)
+						});
 					}
 					return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
 				})

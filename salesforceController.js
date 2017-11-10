@@ -73,25 +73,13 @@ exports.updateQuery = function(column, variables, callBack){
 		}
 }
 
-exports.getUser = function(username, callBack){
-	exports.getContacts
-		if(username){
-			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
-			pool.connect(function(err, client) {
-			  if (err) throw err;
-			  console.log('Connected to postgres! Getting schemas...');
-			  client
-				.query('SELECT * FROM salesforce.contact WHERE name LIKE $1', [username])
-				.then(res => callBack(res))
-				.catch(e => console.error("Error while executing query\n" +e.stack));
-
-
-			})
-			return;
-		}
+exports.getUserInfo = function(acces_token, fullname, column, callBack){
+	exports.getContacts(acces_token, function(contacts){
+		console.log(contacts)
+	//	for (var i = 0, len = contacts.length; i < len; i++) {
+	//		if(contacts[i].)
+	//	}
+	})
 }
 
 exports.checkColumn = function (column, callBack){
