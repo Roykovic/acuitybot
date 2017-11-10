@@ -71,7 +71,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 				}				
 				
 				httpRequest(options, function(error, response, body) {
-					console.log("BODY: " +body)
+					console.log(error)
 					body = JSON.parse(body)
 					callBack()
 				})						
