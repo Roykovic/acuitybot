@@ -36,7 +36,7 @@ exports.getColumns = function(userID, callback){
 		
 		httpRequest(options, function(error, response, body) {
 			body = JSON.parse(body)
-			console.log(body)
+			console.log(body.fields)
 			//callback(body.records)
 		})	
 	})			
