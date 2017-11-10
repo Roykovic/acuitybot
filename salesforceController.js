@@ -37,11 +37,9 @@ exports.query = function (column, variable, callBack){
 			// });
 }
 
-exports.getContacts = function(fullName, userID, callback){
-	console.log("before")	
-	oauth.getAccessToken(userID, function(access_token, url){
+exports.getContacts = function(access_token, callback){
 		var headers = {
-			"'Authorization": "Bearer " +  access_token//todo add code 
+			"'Authorization": "Bearer " +  access_token
 		}
 		var options = {
 			url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
@@ -51,7 +49,6 @@ exports.getContacts = function(fullName, userID, callback){
 		httpRequest(options, function(error, response, body) {
 			console.log(error)
 		})		
-	})
 }
 
 exports.updateQuery = function(column, variables, callBack){
