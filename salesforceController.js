@@ -74,8 +74,8 @@ exports.updateQuery = function(column, variables, callBack){
 }
 
 exports.getUserInfo = function(userID, fullname, column, callBack){
-	oauth.getAccesToken(userID, function(){
-		exports.getContacts(, function(contacts){
+	oauth.getAccesToken(userID, function(access_token){
+		exports.getContacts(access_token, function(contacts){
 			console.log(contacts)
 		//	for (var i = 0, len = contacts.length; i < len; i++) {
 		//		if(contacts[i].)
