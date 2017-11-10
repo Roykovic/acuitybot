@@ -179,6 +179,7 @@ function returnJson(speech, followUp) {
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
 		return log(reqIn,speech,score, intent ,function(){
+			console.log("Return 2")
 			return result.json({
 				speech: speech,
 				displayText: speech,
