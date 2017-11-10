@@ -6,10 +6,9 @@ var pg = require('pg');
 var mysql = require('mysql');
 var config = require('./config/dbConfig')
 var exports = module.exports = {};
+	var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
-	var pool  = mysql.createPool(
-	config.connection);
 
    pool.getConnection(function(err,connection){
         if (err) {
@@ -51,9 +50,6 @@ exports.query = function (query, params, callback){
 exports.updateQuery = function(column, variables, callBack){
 	if(column && variables){
 			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
 			pool.connect(function(err, client) {
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas for update...');
@@ -70,9 +66,6 @@ exports.updateQuery = function(column, variables, callBack){
 exports.getUser = function(username, callBack){
 		if(username){
 			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
 			pool.connect(function(err, client) {
 			  if (err) throw err;
 			  console.log('Connected to postgres! Getting schemas...');
@@ -107,10 +100,9 @@ exports.checkColumn = function (column, callBack){
 
 exports.log = function(reqIn, resIn, score, intent,callback){
 	try{
-	var pool  = mysql.createPool(config.connection);
-
    pool.getConnection(function(err,connection){
         if (err) {
+			connection.release();
 			console.log("ERROR " + err)
           callback();
           return;
@@ -123,6 +115,7 @@ exports.log = function(reqIn, resIn, score, intent,callback){
             }
         });
         connection.on('error', function(err) {
+			connection.release();
 			console.log("CONNECTION ERROR")
               callback();
               return;
