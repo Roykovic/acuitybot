@@ -3,8 +3,9 @@
 var exports = module.exports = {};
 var salesForcedb = require('./db');
 var salesforceController = require('./salesforceController')
-var verseController = require('./verseController')
+var ibmController = require('./ibmController')
 var service = require('./service')
+var oauth = require('./oauth')
 
 exports.getUserInfo = function (fullName, Pcolumn, callback){
 	try {
@@ -53,17 +54,22 @@ exports.getAllNames = function(callback){
 }
 
 exports.getServiceByName = function(fullname, userID, callback){
-	return salesforceController.getContacts(fullname, userID, function(sfUser){	
-		if(sfUser['rows'].length > 0){
-			return callback(service.services.SalesForce, url)
+	return oauth.getAccessToken(userID, function(access_token){
+		if(access_token){
+			return salesforceController.getContacts(fullname, userID, function(sfUser){	
+						if(sfUser['rows'].length > 0){
+							return callback(service.services.SalesForce, url)
+						}	
+				})
+				return ibmController.getUser(fullname, function(ibmUser){
+							if(ibmUser){
+								return callback(service.services.IBM)
+							}			
+				})	
 		}
-		else{
-			verseController.getUser(fullname, function(ibmUser){
-				if(ibmUser){
-					return callback(service.services.IBM)
-				}			
-			})		
-		}
-		return callback()
-	})
+	else{
+		return callback();
+	}
+	})					
 }
+

@@ -40,11 +40,13 @@ exports.getTokens = function(service, code){
     httpRequest(options, function(error, response, body) {
 		body = JSON.parse(body)
 		var acess_token = body.access_token
-		exports.registerToken(userID, access_token)
+		return exports.registerToken(userID, access_token, function(access_token){
+			return access_token
+		})
 	})	
 }
 
-exports.registerToken = function(userID, accces_token){
+exports.registerToken = function(userID, acccess_token, callback){
 	var pool  = mysql.createPool({
 	  database: "ibmx_a6f1d89267096f1",
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
@@ -69,17 +71,14 @@ exports.registerToken = function(userID, accces_token){
         });
     });
 	pool.end();
+	
+	callback(access_token)
 }
 
 exports.getAccessCode = function(userID, callback){
 	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
 		if(!result[0]){
-			console.log(index)
-			index.result.json({
-				speech: "HALLO, DINGEN ENZO",
-				displayText: "HALLO, DINGEN ENZO",
-				source: 'apiai-webhook-sample',
-			});	
+			return callback()
 		}
 		return callback(result[0].access_token)
 	})

@@ -4,15 +4,12 @@ var self = this;
 var connectionString = require('./config/config.js');
 var pg = require('pg');
 var mysql = require('mysql');
+var config = require('./config/dbConfig')
 var exports = module.exports = {};
 
 exports.query = function (query, params, callback){
-	var pool  = mysql.createPool({
-	  database: "ibmx_a6f1d89267096f1",
-	  host: "us-cdbr-sl-dfw-01.cleardb.net",
-	  user: "b332003fffc8cc",
-	  password: "d446664b"
-	});
+	var pool  = mysql.createPool(
+	config.connection);
 
    pool.getConnection(function(err,connection){
         if (err) {

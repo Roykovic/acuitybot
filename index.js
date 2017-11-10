@@ -27,14 +27,13 @@ var service = require('./service')
 var apiController = require('./apiController')
 var loginController = require('./loginController')
 var userController = require('./userController')
-var verseController = require('./verseController')
-verseController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
+var ibmController = require('./ibmController')
+ibmController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var auth = false;
 var sessionId = "";
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 var OAuthController = require('./oauth')
-var exports = module.exports = {};
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
@@ -61,7 +60,6 @@ restService.get('/auth/:service', function(req, res) {
 restService.post('/hook', function(req, res) {
     request = req;
     result = res;
-exports.result = res;
 	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
@@ -95,22 +93,24 @@ exports.result = res;
 							return returnJson(speech, followUp)
 						});						
 					}
+					
+					return returJson("click this link")
 				})
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
-            verseController.getFromIBM(request.body.result.parameters['type'], function(speech) {
+            ibmController.getFromIBM(request.body.result.parameters['type'], function(speech) {
                 return returnJson(speech);
             });
             break;
         case "ibmPost":
         case "ibmPostNode":
-            verseController.postToIBM(function(speech, followUp) {
+            ibmController.postToIBM(function(speech, followUp) {
                 return returnJson(speech, followUp);
             }, request.body.result.parameters['content'], request.body.result.parameters['type'], request.body.result.parameters['activity']);
             break;
         case "markTodo":
-            verseController.updateIBM(request.body.result.parameters['todoName'], function(speech) {
+            ibmController.updateIBM(request.body.result.parameters['todoName'], function(speech) {
                 return returnJson(speech);
             });
             break;
