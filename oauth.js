@@ -19,7 +19,7 @@ exports.getWebpage = function (service){
 	return webpage	
 }
 
-exports.getTokens = function(service, code){
+exports.getTokens = function(service, code, userID){
 	var url;
 	 switch (service) {
         case "salesforce":
