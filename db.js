@@ -112,7 +112,7 @@ exports.log = function(reqIn, resIn, score, intent,callback){
    pool.getConnection(function(err,connection){
         if (err) {
 			console.log("ERROR " + err)
-				pool.end();
+				connection.end();
           callback();
           return;
         }
@@ -120,13 +120,13 @@ exports.log = function(reqIn, resIn, score, intent,callback){
             connection.release();
             if(!err) {
 				console.log("SUCCESFUL")
-					pool.end();
+					connection.end();
                 callback();
             }
         });
         connection.on('error', function(err) {
 			console.log("CONNECTION ERROR")
-				pool.end();
+				connection.end();
               callback();
               return;
         });
