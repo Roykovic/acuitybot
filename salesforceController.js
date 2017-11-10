@@ -76,12 +76,13 @@ exports.updateQuery = function(column, variables, callBack){
 exports.getUserInfo = function(userID, fullname, column, callBack){
 	oauth.getAccessToken(userID, function(access_token){
 		exports.getContacts(access_token, function(contacts){
-			//for (var i = 0, len = contacts.length; i < len; i++) {
-			console.log(contacts[i].Name)
-			console.log(fullname)
+			for (var i = 0, len = contacts.length; i < len; i++) {
+				console.log(contacts[i].Name)
+				console.log(fullname)
 				if(contacts[i].Name == fullname){
 					console.log("fullname")
 				}
+			}
 		})
 	})
 }
