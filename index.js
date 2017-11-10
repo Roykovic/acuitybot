@@ -86,16 +86,13 @@ restService.post('/hook', function(req, res) {
             var column = request.body.result.parameters['Variable_row']
 			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType){
 					if(serviceType == service.services.IBM){
-						console.log("IBM")
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
 					if(serviceType == service.services.SalesForce){
-						onsole.log("salesforce")
 						return userController.getUserInfo(fullName, column, function(speech, followUp) {
 							return returnJson(speech, followUp)
 						});						
 					}
-						console.log("none existent")
 					return returnJson("click this link")
 				})
             break;
@@ -173,6 +170,7 @@ function log(reqIn, resIn, score, intent, callback){
 }
 
 function returnJson(speech, followUp) {
+	console.log("Return")
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
