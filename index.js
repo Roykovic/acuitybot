@@ -85,17 +85,17 @@ restService.post('/hook', function(req, res) {
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
 			return userController.getServiceByName(fullName, request.body.originalRequest.data.data.personId, function(serviceType){
-				console.log("*************************************")
-				console.log(serviceType)
 					if(serviceType == service.services.IBM){
+						console.log("IBM")
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
 					if(serviceType == service.services.SalesForce){
+						onsole.log("salesforce")
 						return userController.getUserInfo(fullName, column, function(speech, followUp) {
 							return returnJson(speech, followUp)
 						});						
 					}
-					
+						console.log("none existent")
 					return returnJson("click this link")
 				})
             break;
