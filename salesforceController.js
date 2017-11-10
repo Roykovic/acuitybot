@@ -47,6 +47,8 @@ exports.getContacts = function(access_token, callback){
 			method: "GET",
 			headers: headers
 		}
+		
+		console.log(options)
 		httpRequest(options, function(error, response, body) {
 			console.log(body)
 		})		
