@@ -94,7 +94,7 @@ restService.post('/hook', function(req, res) {
 							return returnJson(speech, followUp)
 						});						
 					}
-					return returnJson("You must login for this action, please use this links: " + 'https://safe-ocean-30268.herokuapp.com/' + "/login/salesforce/" + userID)
+					return returnJson("You must login for this action, please use this links: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
 				})
             break;
         case "getNodeFromIBM":
