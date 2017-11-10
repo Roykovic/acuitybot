@@ -170,15 +170,16 @@ function log(reqIn, resIn, score, intent, callback){
 }
 
 function returnJson(speech, followUp) {
-	console.log("Return")
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	return apiController.post(postPath, accesToken, null, function(){
+			console.log("Return 1")
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
 		log(reqIn,speech,score, intent ,function(){
+				console.log("Return 2")
 			return result.json({
 				speech: speech,
 				displayText: speech,
