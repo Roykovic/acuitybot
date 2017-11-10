@@ -60,11 +60,9 @@ exports.getIdByName = function(userID, fullname, callBack){
 		exports.getContacts(access_token, function(contacts){
 			for (var i = 0, len = contacts.length; i < len; i++) {
 				if(contacts[i].Name == fullname){
-					console.log("*********************************ID*************************************")
-					console.log(contacts[i].id)
-					console.log("*********************************KEYS*************************************")
-					console.log(Object.keys(contacts[i]))
-					//return callback(var id = contact[i].id)
+					var ding = contact[i].attributes
+					console.log("*************************DING************************")
+					console.log(ding)
 				}
 			}
 		})
