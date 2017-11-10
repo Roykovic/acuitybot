@@ -24,8 +24,8 @@ exports.getContacts = function(access_token, callback){
 
 exports.getURLByName = function(access_token, fullname, callBack){
 		return exports.getContacts(access_token, function(contacts){
-				console.log("HANS")
 			for (var i = 0, len = contacts.length; i < len; i++) {
+				console.log(fullname)
 				if(contacts[i].Name == fullname){
 					var url = contacts[i].attributes.url
 					return callBack(url)
@@ -55,9 +55,7 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 	oauth.getAccessToken(userID, function(access_token){
-		exports.getContacts(access_token, function(contacts){
 			exports.getURLByName(access_token, fullname, function(url){
-									console.log("1")
 				var headers = {
 					"Authorization": "Bearer " +  access_token
 				}
@@ -73,7 +71,6 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 					callback()
 				})						
 			})
-		})
 	})	
 }
 
