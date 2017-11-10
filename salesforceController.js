@@ -23,8 +23,8 @@ exports.getContacts = function(access_token, callback){
 }
 
 exports.getURLByName = function(access_token, fullname, callBack){
-	console.log("HANS")
 		return exports.getContacts(access_token, function(contacts){
+				console.log("HANS")
 			for (var i = 0, len = contacts.length; i < len; i++) {
 				if(contacts[i].Name == fullname){
 					var url = contacts[i].attributes.url
