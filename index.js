@@ -70,8 +70,7 @@ restService.post('/hook', function(req, res) {
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
         case "Login":
-		salesforceController.getColumns('Y2lzY29zcGFyazovL3VzL1BFT1BMRS84ZGFhMThkZi0yZDVjLTRmZDktYTY4MS04ZDg2OWRhYzYxYTA', '00D0Y000001XpJR!AQUAQBuj5ciZgv7Y0J0AYLqQAnKVL8e9CFFYpc6GJ.ude7LYQt2NtraJ.gvLkjdMV9wqLJ9xVKsdE_oLyS_pz.N7gidC2_U_'
-)
+		salesforceController.getColumns(userID)
            // return login();
             break;
         case "Logout":

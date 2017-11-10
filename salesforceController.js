@@ -22,7 +22,8 @@ exports.getContacts = function(access_token, callback){
 		})		
 }
 
-exports.getColumns = function(access_token, callback){
+exports.getColumns = function(userID, callback){
+	oauth.getAccessToken(userID, function(access_token){
 		var headers = {
 			"Authorization": "Bearer " +  access_token
 		}
@@ -37,7 +38,8 @@ exports.getColumns = function(access_token, callback){
 			body = JSON.parse(body)
 			console.log(body)
 			//callback(body.records)
-		})		
+		})	
+	})			
 }
 
 exports.getURLByName = function(access_token, fullname, callBack){
