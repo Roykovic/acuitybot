@@ -77,11 +77,12 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 	oauth.getAccessToken(userID, function(access_token){
 		exports.getContacts(access_token, function(contacts){
 			//for (var i = 0, len = contacts.length; i < len; i++) {
-				console.log(Object.keys(contacts[2]))
-			//	if(contacts[i].name == fullname){
-			//		console.log("fullname")
-			//	}
-			//}
+			console.log(contacts[i].Name)
+			console.log(fullname)
+				if(contacts[i].Name == fullname){
+					console.log("fullname")
+				}
+			}
 		})
 	})
 }
