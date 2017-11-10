@@ -55,12 +55,12 @@ exports.getContacts = function(access_token, callback){
 		})		
 }
 
-exports.getIdByName = function(userID, fullname, callBack){
+exports.getURLByName = function(userID, fullname, callBack){
 	oauth.getAccessToken(userID, function(access_token){
 		exports.getContacts(access_token, function(contacts){
 			for (var i = 0, len = contacts.length; i < len; i++) {
 				if(contacts[i].Name == fullname){
-					var ding = contacts[i].attributes
+					var ding = contacts[i].attributes.url
 					console.log("*************************DING************************")
 					console.log(ding)
 				}
