@@ -132,6 +132,8 @@ exports.log = function(reqIn, resIn, score, intent,callback){
     });
 	pool.end();
 	}
-	catch(e){console.log("**************ERROR*********************" +e}}
+	catch(e){console.log("**************ERROR*********************" +e)}
+	
+}
 
  
