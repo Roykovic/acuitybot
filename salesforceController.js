@@ -65,6 +65,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 					'method': "PATCH",
 					'headers': headers
 				}
+				console.log(options)
 				httpRequest(options, function(error, response, body) {
 					body = JSON.parse(body)
 					callBack()

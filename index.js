@@ -86,9 +86,6 @@ restService.post('/hook', function(req, res) {
 			salesforceController.updateUserInfo(userID, fullname, column, variable, function(){
 				return returnJson(fullname + "\'s " + column + " changed to " + context.parameters['variable']);
 			})
-           // db.updateQuery(column, variables, function() {
-           //     return returnJson(context.parameters['sf-name'] + "\'s " + column + " changed to " + context.parameters['variable']);
-           // })
             break;
         case "User-info":
             var nameObj = request.body.result.parameters['fullName']
