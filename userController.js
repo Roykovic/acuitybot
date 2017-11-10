@@ -57,9 +57,8 @@ exports.getServiceByName = function(fullname, userID, callback){
 	return oauth.getAccessToken(userID, function(access_token){
 		if(access_token){
 			return salesforceController.getContacts(access_token, function(sfUser){	
-			console.log(sfUser)
 						if(sfUser['rows'].length > 0){
-							return callback(service.services.SalesForce, url)
+							return callback(service.services.SalesForce)
 						}	
 				})
 				return ibmController.getUser(fullname, function(ibmUser){
