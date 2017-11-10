@@ -56,7 +56,7 @@ restService.get('/login/:service/:userID', function(req, res) {
 })
 
 restService.get('/auth/:service', function(req, res) {
-	console.log(req.cookies);
+	console.log(req.cookies.id_token);
     OAuthController.getTokens(req.params.service, req.query.code, userID)
 	res.sendFile(__dirname + '/OAuth/loginSucces.html');
 })
