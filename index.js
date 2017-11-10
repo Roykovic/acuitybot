@@ -37,6 +37,9 @@ var OAuthController = require('./oauth')
 const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
+var cookieParser = require('cookie-parser')
+
+restService.use(cookieParser())
 
 restService.use(express.static('public'))
 
@@ -53,7 +56,7 @@ restService.get('/login/:service/:userID', function(req, res) {
 })
 
 restService.get('/auth/:service', function(req, res) {
-	console.log(req.headers['cookie']);
+	console.log(req.cookie);
     OAuthController.getTokens(req.params.service, req.query.code, userID)
 	res.sendFile(__dirname + '/OAuth/loginSucces.html');
 })
