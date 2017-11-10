@@ -61,10 +61,10 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 		
 				var options = {
 					'url': 'https://eu11.salesforce.com/'+url,
-					""column: variable,
 					'method': "PATCH",
 					'headers': headers
 				}
+				options[column] = variable;
 				console.log(options)
 				httpRequest(options, function(error, response, body) {
 					body = JSON.parse(body)
