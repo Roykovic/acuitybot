@@ -6,7 +6,7 @@ var pg = require('pg');
 var mysql = require('mysql');
 var config = require('./config/dbConfig')
 var exports = module.exports = {};
-	var pool  = mysql.createPool(config.connection);
+var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
 
