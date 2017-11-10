@@ -61,7 +61,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 		
 				var options = {
 					'url': 'https://eu11.salesforce.com/'+url,
-					''+column: variable,
+					""+column+"": variable,
 					'method': "PATCH",
 					'headers': headers
 				}
