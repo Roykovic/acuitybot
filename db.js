@@ -9,8 +9,6 @@ var exports = module.exports = {};
 var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
-console.log(query)
-console.log(params)
    pool.getConnection(function(err,connection){
         if (err) {
           callback(err, false);
@@ -100,30 +98,24 @@ exports.checkColumn = function (column, callBack){
 }
 
 exports.log = function(reqIn, resIn, score, intent,callback){
-	try{
    pool.getConnection(function(err,connection){
         if (err) {
 			connection.release();
-			console.log("ERROR " + err)
           callback();
           return;
         }
         connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],function(err,results){
             connection.release();
             if(!err) {
-				console.log("SUCCESFUL")
                 callback();
             }
         });
         connection.on('error', function(err) {
 			connection.release();
-			console.log("CONNECTION ERROR")
               callback();
               return;
         });
     });
-	}
-	catch(e){console.log("**************ERROR*********************" +e)}
 	
 }
 

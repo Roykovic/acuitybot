@@ -167,11 +167,8 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, score, intent, callback){
-	console.log("log 1")
 	var resOut = resIn.split(':')[0];
-console.log("log 2")	
 			db.log(reqIn, resOut, score, intent, function(connectionEnd){
-				console.log("log 3")
 				callback();
 			})
 }
@@ -181,12 +178,10 @@ function returnJson(speech, followUp) {
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	return apiController.post(postPath, accesToken, null, function(){
-			console.log("Return 1")
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
 		return log(reqIn,speech,score, intent ,function(){
-			console.log("Return 2")
 			return result.json({
 				speech: speech,
 				displayText: speech,

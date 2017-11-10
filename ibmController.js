@@ -203,7 +203,6 @@ exports.getUser = function(name, callback) {
                 return callback(entries)
             })
         }
-		console.log("Return null")
         return callback();
     })
 }
@@ -229,7 +228,6 @@ exports.getAllNames = function(callback){
                 return callback(names)
             })
         }
-		console.log("Return null")
         return callback();
     })
 }
