@@ -78,10 +78,10 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 		exports.getContacts(access_token, function(contacts){
 			for (var i = 0, len = contacts.length; i < len; i++) {
 				if(contacts[i].Name == fullname){
-					column = column.charAt(0).toUpperCase() + column.slice(1);
-					console.log("#$#$^(&)#^&*(^%()$()&*()&*($*())(&")
-					console.log(column)
-					var speech = fullname+"'s " + column + " is " + contacts[i].column
+					//column = column.charAt(0).toUpperCase() + column.slice(1);
+					//console.log("#$#$^(&)#^&*(^%()$()&*()&*($*())(&")
+					//console.log(column)
+					var speech = fullname+"'s " + column + " is " + contacts[i][column]
 					callBack(speech)
 				}
 			}
