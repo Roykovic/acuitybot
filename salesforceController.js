@@ -56,6 +56,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 	oauth.getAccessToken(userID, function(access_token){
 			exports.getURLByName(access_token, fullname, function(url){
 				var headers = {
+					"Content-Type": application/json,
 					"Authorization": "Bearer " +  access_token
 				}
 		
