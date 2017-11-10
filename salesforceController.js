@@ -54,10 +54,11 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 	oauth.getAccessToken(userID, function(access_token){
-							console.log("1")
+		console.log(access_token)
 		exports.getContacts(access_token, function(contacts){
-								console.log("1")
+			console.log(contacts)
 			exports.getURLByName(access_token, fullname, function(url){
+				console.log(url)
 									console.log("1")
 				var headers = {
 					"Authorization": "Bearer " +  access_token
