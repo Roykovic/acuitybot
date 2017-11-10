@@ -5,38 +5,6 @@ var oauth = require('./oauth')
 var httpRequest = require('request');
 var exports = module.exports = {};
 
-exports.query = function (column, variable, callBack){
-		// if(column && variable){
-			// exports.getContacts(function(){
-				// var options = {
-					// url: url,
-					// method: "GET"
-				// }
-				// httpRequest(options, function(error, response, body) {
-					// body = JSON.parse(body)
-					// var acess_token = body.access_token
-				// })				
-						
-						
-						
-						
-						
-						
-						
-						// pool.connect(function(err, client) {
-						// if (err) throw err;
-						// console.log('Connected to postgres! Getting schemas...');
-						// client
-							// .query('SELECT '+ column +' FROM salesforce.contact WHERE name=$1', [variable])
-							// .then(res => callBack(res))
-							// .catch(e => console.error("Error while executing query\n" +e.stack));
-							// return;
-						// })
-					// }
-					// callBack(null)				
-			// });
-}
-
 exports.getContacts = function(access_token, callback){
 		var headers = {
 			"Authorization": "Bearer " +  access_token
@@ -55,18 +23,15 @@ exports.getContacts = function(access_token, callback){
 		})		
 }
 
-exports.getURLByName = function(userID, fullname, callBack){
-	oauth.getAccessToken(userID, function(access_token){
+exports.getURLByName = function(access_token, fullname, callBack){
 		exports.getContacts(access_token, function(contacts){
 			for (var i = 0, len = contacts.length; i < len; i++) {
 				if(contacts[i].Name == fullname){
-					var ding = contacts[i].attributes.url
-					console.log("*************************DING************************")
-					console.log(ding)
+					var url = contacts[i].attributes.url
+					return callback(url)
 				}
 			}
 		})
-	})
 }
 
 exports.getUserInfo = function(userID, fullname, column, callBack){
@@ -86,6 +51,31 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 			}
 		})
 	})
+}
+
+exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
+	oauth.getAccessToken(userID, function(access_token){
+		exports.getContacts(access_token, function(contacts){
+			exports.getURLByName(access_token, fullname, function(url){
+				var headers = {
+					"Authorization": "Bearer " +  access_token
+				}
+		
+				var options = {
+					'url': 'https://eu11.salesforce.com/'+url,
+					column: variable,
+					'method': "PATCH",
+					'headers': headers
+				}
+				
+				console.log(options)
+				httpRequest(options, function(error, response, body) {
+					body = JSON.parse(body)
+					callback()
+				})						
+			})
+		})
+	})	
 }
 
 exports.checkColumn = function (column, callBack){

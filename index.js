@@ -79,13 +79,16 @@ restService.post('/hook', function(req, res) {
             break;
         case "update":
         case "data for update":
-		salesforceController.getURLByName(userID, "John Bond")
             var context = req.body.result
             var column = context.parameters.Variable_row;
-            var variables = [context.parameters['variable'], context.parameters['sf-name']];
-            db.updateQuery(column, variables, function() {
-                return returnJson(context.parameters['sf-name'] + "\'s " + column + " changed to " + context.parameters['variable']);
-            })
+            var variable = context.parameters['variable']
+			var fullname = context.parameters['sf-name']
+			salesforceController.updateUserInfo(userID, fullname, column, variable, function(){
+				return returnJson(context.parameters['sf-name'] + "\'s " + column + " changed to " + context.parameters['variable']);
+			})
+           // db.updateQuery(column, variables, function() {
+           //     return returnJson(context.parameters['sf-name'] + "\'s " + column + " changed to " + context.parameters['variable']);
+           // })
             break;
         case "User-info":
             var nameObj = request.body.result.parameters['fullName']
