@@ -40,7 +40,7 @@ exports.getTokens = function(service, code, userID){
     httpRequest(options, function(error, response, body) {
 		body = JSON.parse(body)
 		console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
-		console.log(response)
+		console.log(body)
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, function(access_token){
 			return access_token
