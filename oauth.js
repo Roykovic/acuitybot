@@ -51,7 +51,6 @@ exports.getTokens = function(service, code, userID){
 exports.registerToken = function(userID, access_token, callback){
 	return db.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, access_token], function(){
 		return callback()
-		}
 	})
 }
 
