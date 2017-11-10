@@ -60,12 +60,16 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 					"Authorization": "Bearer " +  access_token
 				}
 		
+				var body = {}
+				body[column] = variable;
+				
 				var options = {
 					'url': 'https://eu11.salesforce.com/'+url,
 					'method': "PATCH",
-					'headers': headers
-				}
-				options[column] = variable;
+					'headers': headers,
+					'body': body
+				}				
+				
 				httpRequest(options, function(error, response, body) {
 					body = JSON.parse(body)
 					console.log(body)
