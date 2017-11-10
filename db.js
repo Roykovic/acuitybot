@@ -100,7 +100,7 @@ exports.checkColumn = function (column, callBack){
 exports.log = function(reqIn, resIn, score, intent,callback){
    pool.getConnection(function(err,connection){
         if (err) {
-			connection.release();
+		console.log(err)
           callback();
           return;
         }
