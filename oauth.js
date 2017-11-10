@@ -39,6 +39,8 @@ exports.getTokens = function(service, code, userID){
     // Start the request
     httpRequest(options, function(error, response, body) {
 		body = JSON.parse(body)
+		console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+		console.log(body.access_token)
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, function(access_token){
 			return access_token
@@ -47,11 +49,9 @@ exports.getTokens = function(service, code, userID){
 }
 
 exports.registerToken = function(userID, access_token, callback){
-	return db.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, access_token], function(result, succes){
-		console.log(succes)
-		console.log(result)
-		if(succes){
-		return callback(result[0])}
+	return db.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, access_token], function(){
+		return callback()
+		}
 	})
 }
 
