@@ -79,7 +79,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "update":
         case "data for update":
-		salesforceController.getIdByName(userId, "John Bond")
+		salesforceController.getIdByName(userID, "John Bond")
             var context = req.body.result
             var column = context.parameters.Variable_row;
             var variables = [context.parameters['variable'], context.parameters['sf-name']];
