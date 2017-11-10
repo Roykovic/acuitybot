@@ -77,7 +77,7 @@ exports.registerToken = function(userID, acccess_token, callback){
 
 exports.getAccessToken = function(userID, callback){
 	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
-		console.log(!result)
+		console.log(result.length)
 		console.log(result[0])
 		if(!result){
 			return callback()
