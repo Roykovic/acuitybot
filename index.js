@@ -162,11 +162,13 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, score, intent, callback){
+	try{
 	var resOut = resIn.split(':')[0];	
 			db.log(reqIn, resOut, score, intent, function(connectionEnd){
 				callback();
 			})
-	
+	}
+	catch(e){console.log(e)}
 }
 
 function returnJson(speech, followUp) {
