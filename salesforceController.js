@@ -67,7 +67,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 					'url': 'https://eu11.salesforce.com/'+url,
 					'method': "PATCH",
 					'headers': headers,
-					'form': JSON.stringify(body)
+					'body': JSON.stringify(body)
 				}				
 				
 				httpRequest(options, function(error, response, body) {
