@@ -47,32 +47,9 @@ exports.getTokens = function(service, code, userID){
 }
 
 exports.registerToken = function(userID, acccess_token, callback){
-	var pool  = mysql.createPool({
-	  database: "ibmx_a6f1d89267096f1",
-	  host: "us-cdbr-sl-dfw-01.cleardb.net",
-	  user: "b332003fffc8cc",
-	  password: "d446664b"
-	});
-
-   pool.getConnection(function(err,connection){
-        if (err) {
-          callback();
-          return;
-        }
-        connection.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, acces_token],function(err,results){
-            connection.release();
-            if(!err) {
-                callback();
-            }
-        });
-        connection.on('error', function(err) {
-              callback();
-              return;
-        });
-    });
-	pool.end();
-	
-	callback(access_token)
+	return db.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, acces_token], function(result){
+		return callback(result[0])
+	})
 }
 
 exports.getAccessToken = function(userID, callback){
