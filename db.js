@@ -12,18 +12,18 @@ exports.query = function (query, params, callback){
 
    pool.getConnection(function(err,connection){
         if (err) {
-          callback();
+          callback(err, false);
           return;
         }
         connection.query(query, params,function(err,results){
             connection.release();
             if(!err) {
-                callback(results);
+                callback(results, true);
 				return
             }
         });
         connection.on('error', function(err) {
-              callback();
+              callback(err, false);
               return;
         });
     });
