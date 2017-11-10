@@ -95,7 +95,7 @@ restService.post('/hook', function(req, res) {
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
 					}
 					if(serviceType == service.services.SalesForce){
-						return salesforceController.getUserInfo(access_token, fullName, column, function(speech, followUp) {
+						return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
 							return returnJson(speech, followUp)
 						});
 					}

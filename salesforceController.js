@@ -73,12 +73,14 @@ exports.updateQuery = function(column, variables, callBack){
 		}
 }
 
-exports.getUserInfo = function(acces_token, fullname, column, callBack){
-	exports.getContacts(acces_token, function(contacts){
-		console.log(contacts)
-	//	for (var i = 0, len = contacts.length; i < len; i++) {
-	//		if(contacts[i].)
-	//	}
+exports.getUserInfo = function(userID, fullname, column, callBack){
+	oauth.getAccesToken(userID, function(){
+		exports.getContacts(, function(contacts){
+			console.log(contacts)
+		//	for (var i = 0, len = contacts.length; i < len; i++) {
+		//		if(contacts[i].)
+		//	}
+		})
 	})
 }
 
