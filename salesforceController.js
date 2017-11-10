@@ -16,7 +16,6 @@ exports.getContacts = function(access_token, callback){
 			headers: headers
 		}
 		
-		console.log(options)
 		httpRequest(options, function(error, response, body) {
 			body = JSON.parse(body)
 			callback(body.records)
@@ -67,9 +66,9 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 					'method': "PATCH",
 					'headers': headers
 				}
-				
-				console.log(options)
+				console.log("1")
 				httpRequest(options, function(error, response, body) {
+					console.log("2")
 					body = JSON.parse(body)
 					callback()
 				})						
