@@ -63,6 +63,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
+	var userID = request.body.originalRequest.data.data.personId
     request = req;
     result = res;
 	sessionId = req.body.sessionId;
@@ -78,6 +79,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "update":
         case "data for update":
+		salesforceController.getIdByName(userId, "John Bond")
             var context = req.body.result
             var column = context.parameters.Variable_row;
             var variables = [context.parameters['variable'], context.parameters['sf-name']];
@@ -89,7 +91,6 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
-			var userID = request.body.originalRequest.data.data.personId
 			return userController.getServiceByName(fullName, userID, function(serviceType){
 					if(serviceType == service.services.IBM){
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")

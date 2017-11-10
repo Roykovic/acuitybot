@@ -55,22 +55,18 @@ exports.getContacts = function(access_token, callback){
 		})		
 }
 
-exports.updateQuery = function(column, variables, callBack){
-	if(column && variables){
-			pg.defaults.ssl = true;
-			var pool = new pg.Pool({
-			  connectionString: connectionString,
-			})
-			pool.connect(function(err, client) {
-			  if (err) throw err;
-			  console.log('Connected to postgres! Getting schemas for update...');
-			  client
-				.query('UPDATE salesforce.contact SET '+column+'=$1 WHERE name =$2', variables)
-				.then(callBack())
-				.catch(e => console.error("Error while executing query\n" +e.stack));
-				return;
-			})
-		}
+exports.getIdByName = function(userID, fullname, callBack){
+	oauth.getAccessToken(userID, function(access_token){
+		exports.getContacts(access_token, function(contacts){
+			for (var i = 0, len = contacts.length; i < len; i++) {
+				if(contacts[i].Name == fullname){
+					console.log(contact[i].id)
+					console.log(Object.keys(contact[i]))
+					//return callback(var id = contact[i].id)
+				}
+			}
+		})
+	})
 }
 
 exports.getUserInfo = function(userID, fullname, column, callBack){
