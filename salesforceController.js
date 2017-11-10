@@ -22,6 +22,24 @@ exports.getContacts = function(access_token, callback){
 		})		
 }
 
+exports.getColumns = function(access_token, callback){
+		var headers = {
+			"Authorization": "Bearer " +  access_token
+		}
+
+		var options = {
+			url: 'https://eu11.salesforce.com/services/data/v20.0/contact/describe',
+			method: "GET",
+			headers: headers
+		}
+		
+		httpRequest(options, function(error, response, body) {
+			body = JSON.parse(body)
+			console.log(body)
+			//callback(body.records)
+		})		
+}
+
 exports.getURLByName = function(access_token, fullname, callBack){
 		return exports.getContacts(access_token, function(contacts){
 			for (var i = 0, len = contacts.length; i < len; i++) {
@@ -92,33 +110,6 @@ exports.checkColumn = function (column, callBack){
 	})
 	return callBack(null);
 
-}
-
-exports.log = function(reqIn, resIn, score, intent,callback){
-	var pool  = mysql.createPool({
-	  database: "ibmx_a6f1d89267096f1",
-	  host: "us-cdbr-sl-dfw-01.cleardb.net",
-	  user: "b332003fffc8cc",
-	  password: "d446664b"
-	});
-
-   pool.getConnection(function(err,connection){
-        if (err) {
-          callback();
-          return;
-        }
-        connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],function(err,results){
-            connection.release();
-            if(!err) {
-                callback();
-            }
-            // check null for results here
-        });
-        connection.on('error', function(err) {
-              callback();
-              return;
-        });
-    });
 }
 
  
