@@ -106,6 +106,7 @@ exports.checkColumn = function (column, callBack){
 }
 
 exports.log = function(reqIn, resIn, score, intent,callback){
+	try{
 	var pool  = mysql.createPool({
 	  database: "ibmx_a6f1d89267096f1",
 	  host: "us-cdbr-sl-dfw-01.cleardb.net",
@@ -130,6 +131,7 @@ exports.log = function(reqIn, resIn, score, intent,callback){
         });
     });
 	pool.end();
-}
+	}
+	catch(e){console.log("**************ERROR*********************" +e}}
 
  
