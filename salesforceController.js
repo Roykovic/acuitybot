@@ -54,8 +54,11 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 	oauth.getAccessToken(userID, function(access_token){
+							console.log("1")
 		exports.getContacts(access_token, function(contacts){
+								console.log("1")
 			exports.getURLByName(access_token, fullname, function(url){
+									console.log("1")
 				var headers = {
 					"Authorization": "Bearer " +  access_token
 				}
@@ -66,9 +69,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 					'method': "PATCH",
 					'headers': headers
 				}
-				console.log("1")
 				httpRequest(options, function(error, response, body) {
-					console.log("2")
 					body = JSON.parse(body)
 					callback()
 				})						
