@@ -39,7 +39,7 @@ exports.query = function (column, variable, callBack){
 
 exports.getContacts = function(access_token, callback){
 		var headers = {
-			"'Authorization": "Bearer " +  access_token
+			"Authorization": "Bearer " +  access_token
 		}
 
 		var options = {
