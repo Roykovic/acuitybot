@@ -41,6 +41,7 @@ exports.getContacts = function(access_token, callback){
 		var headers = {
 			"'Authorization": "Bearer " +  access_token
 		}
+
 		var options = {
 			url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
 			method: "GET",
