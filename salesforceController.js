@@ -82,7 +82,6 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 				if(contacts[i].Name == fullname){
 					console.log("fullname")
 				}
-			}
 		})
 	})
 }
