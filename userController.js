@@ -57,7 +57,7 @@ exports.getServiceByName = function(fullname, userID, callback){
 	return oauth.getAccessToken(userID, function(access_token){
 		if(access_token){
 			return salesforceController.getContacts(access_token, function(sfUser){	
-						if(sfUser['rows'].length > 0){
+						if(sfUser.length > 0){
 							return callback(service.services.SalesForce)
 						}	
 				})
