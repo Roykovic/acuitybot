@@ -77,9 +77,9 @@ exports.getUserInfo = function(userID, fullname, column, callBack){
 	oauth.getAccessToken(userID, function(access_token){
 		exports.getContacts(access_token, function(contacts){
 			for (var i = 0, len = contacts.length; i < len; i++) {
-				console.log(column)
 				if(contacts[i].Name == fullname){
-					console.log("fullname")
+					var speech = fullname+"'s " + column + " is " + contacts[i].column
+					callBack(speech)
 				}
 			}
 		})
