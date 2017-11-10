@@ -82,7 +82,7 @@ restService.post('/hook', function(req, res) {
             var context = req.body.result.contexts[1]
 			console.log(context)
             var column = context.parameters.Variable_row;
-            var variable = context.parameters['variable']
+            var variable = context.parameters['variable.original']
 			var fullname = context.parameters['fullName']['sf-name']
 			salesforceController.updateUserInfo(userID, fullname, column, variable, function(){
 				return returnJson(fullname + "\'s " + column + " changed to " + context.parameters['variable']);
