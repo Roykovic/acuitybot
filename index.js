@@ -94,7 +94,7 @@ restService.post('/hook', function(req, res) {
 						});						
 					}
 					
-					return returJson("click this link")
+					return returnJson("click this link")
 				})
             break;
         case "getNodeFromIBM":
