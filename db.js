@@ -116,16 +116,19 @@ exports.log = function(reqIn, resIn, score, intent,callback){
 
    pool.getConnection(function(err,connection){
         if (err) {
+			console.log("ERROR")
           callback();
           return;
         }
         connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],function(err,results){
             connection.release();
             if(!err) {
+				console.log("SUCCESFUL")
                 callback();
             }
         });
         connection.on('error', function(err) {
+			console.log("CONNECTION ERROR")
               callback();
               return;
         });
