@@ -46,10 +46,11 @@ exports.getColumns = function(userID, callback){
 		
 		httpRequest(options, function(error, response, body) {
 			body = JSON.parse(body)
+			var columns = [];
 			for (var i = 0, len = body.fields.length; i < len; i++) {
-				console.log(body.fields[i].name)
+				columns[i] = body.fields[i].name
 			}			
-			//callback(body.records)
+			callback(columns)
 		})	
 	})			
 }
@@ -67,18 +68,25 @@ exports.getURLByName = function(access_token, fullname, callBack){
 
 exports.getUserInfo = function(userID, fullname, column, callBack){
 	oauth.getAccessToken(userID, function(access_token){
-		exports.getContacts(access_token, function(contacts){
-			for (var i = 0, len = contacts.length; i < len; i++) {
-				if(contacts[i].Name == fullname){
-					var answer = contacts[i][column]
-					if(answer){
-						var speech = fullname+"'s " + column + " is " + answer
-						return callBack(speech)
+		exports.checkColumn(column, userID, function(returnColumn){
+			if(returnColumn){	
+				exports.getContacts(access_token, function(contacts){
+					for (var i = 0, len = contacts.length; i < len; i++) {
+						if(contacts[i].Name == fullname){
+							var answer = contacts[i][returnColumn]
+							if(answer){
+								var speech = fullname+"'s " + returnColumn + " is " + answer
+								return callBack(speech)
+							}
+							else{
+								return callBack("", "update")	
+							}
+						}
 					}
-					else{
-						return callBack("", "update")	
-					}
-				}
+				})
+			}
+			else{
+				return callBack(column + " does not exist, please check your spelling.")	
 			}
 		})
 	})
@@ -109,11 +117,11 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 	})	
 }
 
-exports.checkColumn = function (column, callBack){
-	exports.query("*", "false", function(columns){
+exports.checkColumn = function (column, userID, callBack){
+	getColumns(userID, function(columns){
 		if(columns){
-			for (var i = 0, len = columns.fields.length; i < len; i++) {
-				var columnFromDB = columns.fields[i].name;
+			for (var i = 0, len = columns.length; i < len; i++) {
+				var columnFromDB = column[i];
 				var lowerCaseColumn = columnFromDB.toLowerCase();
 				if(lowerCaseColumn == column.toLowerCase()){
 					callBack(column);
