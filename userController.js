@@ -69,9 +69,9 @@ exports.getServiceByName = function(fullname, userID, callback){
 				//				return callback(service.services.IBM)
 				//			}			
 				//})	
+			return callback(service.services.None)	
 		}
 	else{
-		console.log("3")
 		return callback();
 	}
 	})					
