@@ -59,7 +59,6 @@ exports.getServiceByName = function(fullname, userID, callback){
 			salesforceController.getUser(access_token, fullname, function(sfUser){	
 				ibmController.getUser(fullname, function(ibmUser){
 						if(sfUser){
-							console.log("true")
 							return callback(service.services.SalesForce)
 						}	
 						if(ibmUser){
