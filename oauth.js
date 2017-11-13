@@ -46,6 +46,8 @@ exports.getTokens = function(service, code, userID){
 		var d = new Date(0);
 		d.setUTCSeconds(expiresAtSeconds)
 		console.log("************************Auth Body**********************************")
+		console.log(issued_at);
+		console.log(validity);
 		console.log(expiresAtSeconds)
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, function(access_token){
