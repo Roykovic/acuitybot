@@ -46,8 +46,6 @@ exports.getTokens = function(service, code, userID){
 		var d = new Date(expiresAtSeconds);
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, d, function(access_token, succes){
-			console.log(succes)
-			console.log(access_token)
 			return access_token
 		})
 	})	
@@ -60,8 +58,9 @@ exports.registerToken = function(userID, access_token, expiresAt, callback){
 }
 
 exports.getAccessToken = function(userID, callback){
-	return db.query('SELECT access_token FROM auth WHERE userID = ?', userID, function(result){
+	return db.query('SELECT access_token, expires_at FROM auth WHERE userID = ?', userID, function(result){
 		if(result && result.length > 0){
+			if(result[0].expires_at < new Date()){return callback()}
 			return callback(result[0].access_token)
 		}
 		return callback()
