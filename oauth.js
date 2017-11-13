@@ -45,7 +45,9 @@ exports.getTokens = function(service, code, userID){
 		var expiresAtSeconds = +issued_at + +validity;
 		var d = new Date(expiresAtSeconds);
 		var access_token = body.access_token
-		return exports.registerToken(userID, access_token, d, function(access_token){
+		return exports.registerToken(userID, access_token, d, function(access_token, succes){
+			console.log(succes)
+			console.log(access_token)
 			return access_token
 		})
 	})	
