@@ -129,9 +129,8 @@ exports.checkColumn = function (column, userID, callBack){
 				}
 			}
 		}
+		return callBack(null);
 	})
-	return callBack(null);
-
 }
 
  
