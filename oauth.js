@@ -44,18 +44,15 @@ exports.getTokens = function(service, code, userID){
 		var validity = 12*3600000;
 		var expiresAtSeconds = +issued_at + +validity;
 		var d = new Date(expiresAtSeconds);
-		console.log("************************Auth Body**********************************")
-		console.log(new Date())
-		console.log(d);
 		var access_token = body.access_token
-		return exports.registerToken(userID, access_token, function(access_token){
+		return exports.registerToken(userID, access_token, expiresAt, function(access_token){
 			return access_token
 		})
 	})	
 }
 
-exports.registerToken = function(userID, access_token, callback){
-	return db.query('INSERT INTO auth (userID, access_token) VALUES (?,?)', [userID, access_token], function(result){
+exports.registerToken = function(userID, access_token, expiresAt, callback){
+	return db.query('INSERT INTO auth (userID, access_token, expires_at) VALUES (?,?,?)', [userID, access_token, expiresAt], function(result){
 		return callback()
 	})
 }
