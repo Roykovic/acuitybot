@@ -98,6 +98,9 @@ restService.post('/hook', function(req, res) {
 							return returnJson(speech, followUp)
 						});
 					}
+					if(serviceType == service.services.None){
+						return returnJson("This user could not be found in your any of the connected systems")
+					}
 					return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
 				})
             break;
