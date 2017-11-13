@@ -121,7 +121,7 @@ exports.checkColumn = function (column, userID, callBack){
 	exports.getColumns(userID, function(columns){
 		if(columns){
 			for (var i = 0, len = columns.length; i < len; i++) {
-				var columnFromDB = column[i];
+				var columnFromDB = columns[i];
 				var lowerCaseColumn = columnFromDB.toLowerCase();
 				if(lowerCaseColumn == column.toLowerCase()){
 					callBack(column);
