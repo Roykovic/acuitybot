@@ -52,7 +52,7 @@ exports.getTokens = function(service, code, userID){
 }
 
 exports.registerToken = function(userID, access_token, expiresAt, callback){
-	return db.query('INSERT INTO auth (userID, access_token, expires_at) VALUES (?,?,?)', [userID, access_token, expiresAt], function(result){
+	return db.query('REPLACE INTO auth (userID, access_token, expires_at) VALUES (?,?,?)', [userID, access_token, expiresAt], function(result){
 		return callback()
 	})
 }
