@@ -24,10 +24,10 @@ exports.getContacts = function(access_token, callback){
 
 exports.getUser = function(access_token, fullname, callback){
 	exports.getContacts(access_token, function(contacts){
+		console.log(fullname)
 		for(var i = 0; i<contacts.length; ++i){
-			console.log(fullname)
+			onsole.log(contacts.name)
 			if(contacts.name == fullname){
-				console.log(contacts.name)
 				return callback(true)
 			}
 		}
