@@ -60,6 +60,7 @@ exports.getServiceByName = function(fullname, userID, callback){
 			return salesforceController.getUser(access_token, fullname, function(sfUser){	
 			console.log("2")
 						if(sfUser){
+							console.log("true")
 							return callback(service.services.SalesForce)
 						}	
 				})
