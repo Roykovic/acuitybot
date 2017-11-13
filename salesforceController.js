@@ -26,7 +26,6 @@ exports.getUser = function(access_token, fullname, callback){
 	exports.getContacts(access_token, function(contacts){
 		console.log(fullname)
 		for(var i = 0; i<contacts.length; ++i){
-			console.log(Object.keys(contacts[i]))
 			if(contacts[i].name == fullname){
 				return callback(true)
 			}
