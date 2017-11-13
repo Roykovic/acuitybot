@@ -27,7 +27,6 @@ var loginController = require('./loginController')
 var userController = require('./userController')
 var ibmController = require('./ibmController')
 var salesforceController = require('./salesforceController')
-ibmController['auth'] = 'Basic ' + new Buffer(username + ':' + password).toString('base64');
 var auth = false;
 var sessionId = "";
 var xml2js = require('xml2js');
