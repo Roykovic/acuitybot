@@ -17,8 +17,6 @@
 //'use strict';
 
 var sessionId;
-var username = 'r.tersluijsen@acuity.nl';
-var password = 'Jidok1839';
 var request;
 var result;
 var speech = 'empty speech';
