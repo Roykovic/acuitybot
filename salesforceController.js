@@ -118,7 +118,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack){
 }
 
 exports.checkColumn = function (column, userID, callBack){
-	getColumns(userID, function(columns){
+	exports.getColumns(userID, function(columns){
 		if(columns){
 			for (var i = 0, len = columns.length; i < len; i++) {
 				var columnFromDB = column[i];
