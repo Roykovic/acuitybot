@@ -41,7 +41,7 @@ exports.getTokens = function(service, code, userID){
 		body = JSON.parse(body)
 
 		var issued_at = body.issued_at;
-		var validity = 12*3 600 000;
+		var validity = 12*3600000;
 		var expiresAtSeconds = +issued_at + +validity;
 		var d = new Date(expiresAtSeconds);
 		console.log("************************Auth Body**********************************")
