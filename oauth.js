@@ -41,12 +41,11 @@ exports.getTokens = function(service, code, userID){
 		body = JSON.parse(body)
 
 		var issued_at = body.issued_at;
-		var validity = 12*3600;
+		var validity = 12*3 600 000;
 		var expiresAtSeconds = +issued_at + +validity;
 		var d = new Date(expiresAtSeconds);
-		//d.setUTCSeconds(expiresAtSeconds)
 		console.log("************************Auth Body**********************************")
-		console.log(issued_at)
+		console.log(new Date())
 		console.log(d);
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, function(access_token){
