@@ -61,11 +61,11 @@ exports.getServiceByName = function(fullname, userID, callback){
 							return callback(service.services.SalesForce)
 						}	
 				})
-				return ibmController.getUser(fullname, function(ibmUser){
-							if(ibmUser){
-								return callback(service.services.IBM)
-							}			
-				})	
+				//return ibmController.getUser(fullname, function(ibmUser){
+				//			if(ibmUser){
+				//				return callback(service.services.IBM)
+				//			}			
+				//})	
 		}
 	else{
 		return callback();
