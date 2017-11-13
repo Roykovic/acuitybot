@@ -22,6 +22,16 @@ exports.getContacts = function(access_token, callback){
 		})		
 }
 
+exports.getUser = function(access_token, fullname, callback){
+	exports.getContacts(access_token, function(contacts){
+		for(var i = 0; i<contacts.length; ++i){
+			if(contacts.name = fullname){
+				return callback(true)
+			}
+		}
+		return callback(false)
+	})
+}
 exports.getColumns = function(userID, callback){
 	oauth.getAccessToken(userID, function(access_token){
 		var headers = {
@@ -36,10 +46,10 @@ exports.getColumns = function(userID, callback){
 		
 		httpRequest(options, function(error, response, body) {
 			body = JSON.parse(body)
-			console.log(body)
-			for (var i = 0, len = body.fields.length; i < len; i++) {
-				console.log(body.fields[i].name)
-			}			
+			console.log(Object.keys(body))
+			//for (var i = 0, len = body.fields.length; i < len; i++) {
+			//	console.log(body.fields[i])
+			//}			
 			//callback(body.records)
 		})	
 	})			
