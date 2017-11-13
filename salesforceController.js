@@ -39,7 +39,7 @@ exports.getColumns = function(userID, callback){
 		}
 
 		var options = {
-			url: 'https://eu11.salesforce.com/services/data/v20.0/sobjects/Account/0010Y00000cenLQQAY',
+			url: 'https://eu11.salesforce.com/services/data/v20.0/sobjects/contact/describe',
 			method: "GET",
 			headers: headers
 		}
