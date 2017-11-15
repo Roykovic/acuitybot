@@ -56,7 +56,7 @@ exports.post = function(path, accesToken, body, callback){
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
-            var speech = error + "\nSomething went wrong"
+            var speech = response + "\nSomething went wrong"
             if (response) {
                 speech += "(" + response.statusCode + ")"
             }
