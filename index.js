@@ -178,11 +178,8 @@ function log(reqIn, resIn, score, intent, callback){
 }
 
 function returnJson(speech, followUp) {
-	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
-	var accesToken = "5462b4a0987946ee967dbea809dd6676";
-	var body = '{ "entities": [ { "entries": [ {           "synonyms": ["Gradje Hendriks"],"value": "Gradje Hendriks" } ], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
-	
-	return userController.addUserEntities(sessionId, userID, function(){
+	return userController.addUserEntities(sessionId, userID, function(succes){
+		if(!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
