@@ -36,6 +36,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 var cookieParser = require('cookie-parser')
+var userID;
 
 restService.use(cookieParser())
 
@@ -60,7 +61,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-	var userID = req.body.originalRequest.data.data.personId
+	userID = req.body.originalRequest.data.data.personId
     request = req;
     result = res;
 	sessionId = req.body.sessionId;
@@ -181,8 +182,6 @@ function returnJson(speech, followUp) {
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	var body = '{ "entities": [ { "entries": [ {           "synonyms": ["Gradje Hendriks"],"value": "Gradje Hendriks" } ], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 	
-			console.log("**************************USERID**************************")
-		console.log(userID)
 	return userController.addUserEntities(sessionId, userID, function(){
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
