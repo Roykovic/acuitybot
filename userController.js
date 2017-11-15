@@ -3,6 +3,7 @@
 var exports = module.exports = {};
 var salesForcedb = require('./db');
 var salesforceController = require('./salesforceController')
+var apiController = require('./apiController')
 var ibmController = require('./ibmController')
 var service = require('./service')
 var oauth = require('./oauth')
@@ -82,12 +83,12 @@ exports.addUserEntities = function(sessionId,userId){
 	var body = '{ "entities": [ { "entries": ['
 	var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 	return oauth.getAccessToken(userId, function(access_token){
-		salesforceController.getContacts(access_token, function(contacts){
+		salesforceController.post(access_token, function(contacts){
 			for(var i = 0; i<contacts.length; ++i){
 				body+= ' { "value": '+contacts[i].Name+' }, { "synonyms": [ '+contacts[i].Name+' ], "value": '+contacts[i].Name+' }'
 			}
 			body += bodyEnd;
-			return userController.addUserEntities(postPath, accesToken, body, function(dingen){
+			return apiController.addUserEntities(postPath, accesToken, body, function(dingen){
 				console.log("**************************************result**************************************")
 				console.log(dingen)
 				console.log("**************************************Body****************************************")
