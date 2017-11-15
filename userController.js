@@ -80,7 +80,7 @@ exports.addUserEntities = function(sessionId,userId){
 	
 	
 	var body = '{ "entities": [ { "entries": ['
-	var bodyEnd = ], '"name": "sf-name" } ], "sessionId":' +sessionId+ '}'
+	var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 	return oauth.getAccessToken(userID, function(access_token){
 		salesforceController.getContacts(access_token, function(contacts){
 			for(var i = 0; i<contacts.length; ++i){
