@@ -179,11 +179,9 @@ function log(reqIn, resIn, score, intent, callback){
 function returnJson(speech, followUp) {
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
-	var body = '{ "entities": [ { "entries": [ {           "synonyms": ["Gradje Hendriks"],"value": "Gradje Hendriks" }, ], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
+	var body = '{ "entities": [ { "entries": [ {           "synonyms": ["Gradje Hendriks"],"value": "Gradje Hendriks" } ], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 	
-	return apiController.post(postPath, accesToken, body, function(dingen){
-		console.log("**********************************************************************")
-		console.log(sessionId)
+	return userController.addUserEntities(postPath, accesToken, body, function(dingen){
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score

@@ -74,3 +74,24 @@ exports.getServiceByName = function(fullname, userID, callback){
 	})					
 }
 
+exports.addUserEntities = function(sessionId,userId){
+	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
+	var accesToken = "5462b4a0987946ee967dbea809dd6676";
+	
+	
+	var body = '{ "entities": [ { "entries": ['
+	var bodyEnd = ], '"name": "sf-name" } ], "sessionId":' +sessionId+ '}'
+	return oauth.getAccessToken(userID, function(access_token){
+		salesforceController.getContacts(access_token, function(contacts){
+			for(var i = 0; i<contacts.length; ++i){
+				body+= ' { "value": '+contacts[i].Name+' }, { "synonyms": [ '+contacts[i].Name+' ], "value": '+contacts[i].Name+' }'
+			}
+			var body += bodyEnd;
+			return userController.addUserEntities(postPath, accesToken, body, function(dingen){
+				console.log("**************************************result**************************************")
+				console.log(dingen)
+			}	
+		})
+	}
+}
+

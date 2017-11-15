@@ -40,7 +40,6 @@ exports.post = function(path, accesToken, body, callback){
         "Content-Type": 'application/json',
 		"Authorization": 'Bearer ' + accesToken
     }
-	
     var options = {
         url: path,
         method: "POST",
