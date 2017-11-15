@@ -183,7 +183,7 @@ function returnJson(speech, followUp) {
 	
 	return apiController.post(postPath, accesToken, body, function(dingen){
 		console.log("**********************************************************************")
-		console.log(dingen)
+		console.log(sessionId)
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
