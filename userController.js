@@ -88,7 +88,7 @@ exports.addUserEntities = function(sessionId,userId){
 				body+= ' { "value": '+contacts[i].Name+' }, { "synonyms": [ '+contacts[i].Name+' ], "value": '+contacts[i].Name+' }'
 			}
 			body += bodyEnd;
-			return apiController.addUserEntities(postPath, accesToken, body, function(dingen){
+			return apiController.post(postPath, accesToken, body, function(dingen){
 				console.log("**************************************result**************************************")
 				console.log(dingen)
 				console.log("**************************************Body****************************************")
