@@ -92,6 +92,7 @@ exports.addUserEntities = function(sessionId,userId){
 				console.log("**************************************result**************************************")
 				console.log(dingen)
 				console.log("**************************************Body****************************************")
+				console.log(body)
 			})
 		})
 	})
