@@ -86,7 +86,7 @@ exports.addUserEntities = function(sessionId,userId){
 			for(var i = 0; i<contacts.length; ++i){
 				body+= ' { "value": '+contacts[i].Name+' }, { "synonyms": [ '+contacts[i].Name+' ], "value": '+contacts[i].Name+' }'
 			}
-			var body += bodyEnd;
+			body += bodyEnd;
 			return userController.addUserEntities(postPath, accesToken, body, function(dingen){
 				console.log("**************************************result**************************************")
 				console.log(dingen)
