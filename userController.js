@@ -90,7 +90,7 @@ exports.addUserEntities = function(sessionId,userId){
 			return userController.addUserEntities(postPath, accesToken, body, function(dingen){
 				console.log("**************************************result**************************************")
 				console.log(dingen)
-			}	
+			})
 		})
 	}
 }
