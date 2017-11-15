@@ -92,6 +92,6 @@ exports.addUserEntities = function(sessionId,userId){
 				console.log(dingen)
 			})
 		})
-	}
+	})
 }
 
