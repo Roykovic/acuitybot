@@ -60,7 +60,7 @@ exports.post = function(path, accesToken, body, callback){
             if (response) {
                 speech += "(" + response.statusCode + ")\n"
             }
-			speech+=response
+			speech+=body
             return callback(speech)
         }
     })
