@@ -75,7 +75,7 @@ exports.getServiceByName = function(fullname, userID, callback){
 	})					
 }
 
-exports.addUserEntities = function(sessionId,userId){
+exports.addUserEntities = function(sessionId,userId, callback){
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
@@ -90,10 +90,7 @@ exports.addUserEntities = function(sessionId,userId){
 			}
 			body += bodyEnd;
 			return apiController.post(postPath, accesToken, body, function(dingen){
-				console.log("**************************************result**************************************")
-				console.log(dingen)
-				console.log("**************************************Body****************************************")
-				console.log(body)
+				callback()
 			})
 		})
 	})
