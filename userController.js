@@ -85,7 +85,8 @@ exports.addUserEntities = function(sessionId,userId){
 	return oauth.getAccessToken(userId, function(access_token){
 		salesforceController.getContacts(access_token, function(contacts){
 			for(var i = 0; i<contacts.length; ++i){
-				body+= ' { "value": '+contacts[i].Name+' }, { "synonyms": [ '+contacts[i].Name+' ], "value": '+contacts[i].Name+' }'
+				if(i>0) body+=','
+				body+= '{ "synonyms": [ '+contacts[i].Name+' ], "value": '+contacts[i].Name+' }'
 			}
 			body += bodyEnd;
 			return apiController.post(postPath, accesToken, body, function(dingen){
