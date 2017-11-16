@@ -9,17 +9,18 @@ var request = require('request');
 exports.get = function(path, callback, auth, contentType) {
     // Configure the request
 	  var headers = {
-		  if(auth){
-			  Authorization: "Bearer " + auth,
-		  }
-		  if(contentType){
-			  Content-Type: contentType
-		  }
-		  else{
-			Accept: 'text/plain'
-		  }
 		  
     }
+	
+	if(auth){
+			  headers['Authorization']: "Bearer " + auth
+		  }
+		  if(contentType){
+		  headers['Content-Type'}: contentType
+		  }
+		  else{
+		  headers['Accept'}: 'text/plain'
+		  }
 	
 	
     var options = {
