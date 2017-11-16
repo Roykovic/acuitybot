@@ -179,7 +179,9 @@ function log(reqIn, resIn, score, intent, callback){
 
 function returnJson(speech, followUp) {
 	return userController.addUserEntities(sessionId, userID, function(succes){
-		//if(!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
+		if(!succes){
+			speech = "You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID
+		}
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
