@@ -13,13 +13,13 @@ exports.get = function(path, callback, auth, contentType) {
     }
 	
 	if(auth){
-			  headers['Authorization']: "Bearer " + auth
+			  headers['Authorization'] = "Bearer " + auth
 		  }
 		  if(contentType){
-		  headers['Content-Type'}: contentType
+		  headers['Content-Type']= contentType
 		  }
 		  else{
-		  headers['Accept'}: 'text/plain'
+		  headers['Accept']= 'text/plain'
 		  }
 	
 	
