@@ -81,26 +81,26 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	apiController.get(getPath,function(body){
-		console.log("************************BODY A NIFFAUW*****************************")
-		console.log(body.entries)
-	}, accesToken, "application/json")
-	
-	var body = '{ "entities": [ { "entries": ['
-	var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
-	return oauth.getAccessToken(userId, function(access_token){
-		if(!access_token){
-			return callback(false)
-		}
-		salesforceController.getContacts(access_token, function(contacts){
-			for(var i = 0; i<contacts.length; ++i){
-				if(i>0) body+=','
-				body+= '{ "synonyms": [ "'+contacts[i].Name+'" ], "value": "'+contacts[i].Name+'" }'
-			}
-			body += bodyEnd;
-			return apiController.post(postPath, accesToken, body, function(dingen){
-				callback(true)
+		if(body.entries < 0){
+			var body = '{ "entities": [ { "entries": ['
+			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
+			return oauth.getAccessToken(userId, function(access_token){
+				if(!access_token){
+					return callback(false)
+				}
+				salesforceController.getContacts(access_token, function(contacts){
+					for(var i = 0; i<contacts.length; ++i){
+						if(i>0) body+=','
+						body+= '{ "synonyms": [ "'+contacts[i].Name+'" ], "value": "'+contacts[i].Name+'" }'
+					}
+					body += bodyEnd;
+					return apiController.post(postPath, accesToken, body, function(dingen){
+						callback(true)
+					})
+				})
 			})
-		})
-	})
+		}
+		callback();
+	}, accesToken, "application/json")
 }
 
