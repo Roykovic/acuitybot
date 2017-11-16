@@ -75,7 +75,7 @@ exports.getServiceByName = function(fullname, userID, callback){
 	})					
 }
 
-exports.addUserEntities = function(sessionId,userId, callback){
+exports.addUserEntities = function(sessionId,userId){
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
@@ -86,7 +86,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
 				if(!access_token){
-					return callback(false)
+					return 
 				}
 				salesforceController.getContacts(access_token, function(contacts){
 					for(var i = 0; i<contacts.length; ++i){
@@ -95,12 +95,12 @@ exports.addUserEntities = function(sessionId,userId, callback){
 					}
 					body += bodyEnd;
 					return apiController.post(postPath, accesToken, body, function(dingen){
-						callback(true)
+						return
 					})
 				})
 			})
 		}
-		callback();
+		return
 	}, accesToken, "application/json")
 }
 
