@@ -17,6 +17,8 @@ exports.getContacts = function(access_token, callback){
 		}
 		
 		httpRequest(options, function(error, response, body) {
+			console.log(body)
+			console.log(error)
 			body = JSON.parse(body)		
 			callback(body.records)
 		})		
