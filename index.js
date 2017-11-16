@@ -61,7 +61,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-	userController.addUserEntities(sessionId, userID)
+	userController.addUserEntities(sessionId, userID, function(){
 	userID = req.body.originalRequest.data.data.personId
     request = req;
     result = res;
@@ -135,6 +135,7 @@ restService.post('/hook', function(req, res) {
             return wakeUp();
             break;
     }
+		})
 })
 
 restService.listen((process.env.PORT || 5000), function() {
