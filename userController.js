@@ -82,7 +82,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	
 	apiController.get(getPath,function(body){
 		console.log("************************BODY A NIFFAUW*****************************")
-		console.log(body)
+		console.log(body.entries)
 	}, accesToken, "application/json")
 	
 	var body = '{ "entities": [ { "entries": ['
