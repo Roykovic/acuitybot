@@ -9,15 +9,14 @@ var request = require('request');
 exports.get = function(path, callback, auth, contentType) {
     // Configure the request
 	  var headers = {
+		  if(auth){
+			  "Authorization": "Bearer " + auth + ","
+		  }
 		  if(contentType){
 			  "Content-Type": contentType
 		  }
 		  else{
 			"Accept": 'text/plain'
-		  }
-		  
-		  if(aut){
-			  "Authorization": "Bearer " + auth
 		  }
 		  
     }
