@@ -75,7 +75,7 @@ exports.getServiceByName = function(fullname, userID, callback){
 	})					
 }
 
-exports.addUserEntities = function(sessionId,userId){
+exports.addUserEntities = function(sessionId,userId, callback){
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
