@@ -6,10 +6,20 @@ var https = require("https");
 http.post = require('http-post');
 var request = require('request');
 
-exports.get = function(path, accesToken, callback) {
+exports.get = function(path, callback, auth, content-type) {
     // Configure the request
 	  var headers = {
-        "Accept": 'text/plain'
+		  if(content-type){
+			  "Content-Type": application/json
+		  }
+		  else{
+			"Accept": 'text/plain'
+		  }
+		  
+		  if(aut){
+			  "Authorization": "Bearer " + auth
+		  }
+		  
     }
 	
 	
