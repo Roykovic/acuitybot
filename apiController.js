@@ -6,11 +6,12 @@ var https = require("https");
 http.post = require('http-post');
 var request = require('request');
 
-exports.get = function(path, callback) {
+exports.get = function(path, accesToken, callback) {
     // Configure the request
 	  var headers = {
         "Accept": 'text/plain'
     }
+	
 	
     var options = {
         url: path,
