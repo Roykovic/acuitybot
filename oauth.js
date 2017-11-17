@@ -19,7 +19,7 @@ exports.getWebpage = function (service){
 	return webpage	
 }
 
-exports.getTokens = function(service, code, userID){
+exports.getTokens = function(service, code, userID, callback){
 	var url;
 	 switch (service) {
         case "salesforce":
@@ -46,7 +46,7 @@ exports.getTokens = function(service, code, userID){
 		var d = new Date(expiresAtSeconds);
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, d, function(access_token, succes){
-			return access_token
+			callback(access_token)
 		})
 	})	
 }
