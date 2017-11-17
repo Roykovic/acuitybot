@@ -85,10 +85,8 @@ exports.addUserEntities = function(sessionId,userId, callback){
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
-				console.log("*********************TOKEN*********************")
-				console.log(access_token)
 				if(!access_token){
-					callback(false) 
+					return callback(false) 
 				}
 				salesforceController.getContacts(access_token, function(contacts){
 					for(var i = 0; i<contacts.length; ++i){
