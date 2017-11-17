@@ -63,6 +63,7 @@ exports.post = function(path, accesToken, body, callback){
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
+			console.log(body)
                 return callback(body)
         }
         //Either an error, or a statuscode for an insuccesful request
@@ -72,6 +73,7 @@ exports.post = function(path, accesToken, body, callback){
                 speech += "(" + response.statusCode + ")\n"
             }
 			speech+=body
+			console.log(speech)
             return callback(speech)
         }
     })
