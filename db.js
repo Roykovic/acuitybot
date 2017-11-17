@@ -9,7 +9,6 @@ var exports = module.exports = {};
 var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
-	console.log(pool)
    pool.getConnection(function(err,connection){
         if (err) {
 			console.log("query")
@@ -30,6 +29,7 @@ exports.query = function (query, params, callback){
               return;
         });
     });
+	console.log("timeout?"
 }
 
 exports.updateQuery = function(column, variables, callBack){
