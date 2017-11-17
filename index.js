@@ -47,15 +47,18 @@ restService.use(bodyParser.urlencoded({
 }));
 restService.use(bodyParser.json());
 
-restService.get('/login/:service/:userID', function(req, res) {
+restService.get('/login/:service/:userID/:sessionId', function(req, res) {
 		var userID = req.params.userID
+		var sessionId = req.params.sessionId
 		var fileName = OAuthController.getWebpage(req.params.service)
 		res.cookie('id_token' ,userID);
+		res.cookie('session_token' ,sessionId);
 		res.sendFile(__dirname + '/OAuth/' + fileName + '.html');
 })
 
 restService.get('/auth/:service', function(req, res) {
 	var userID = req.cookies.id_token;
+	var sessionId = req.cookies.session_token;
     OAuthController.getTokens(req.params.service, req.query.code, userID)
 	userController.addUserEntities(sessionId, userID, function(succes){
 	res.sendFile(__dirname + '/OAuth/loginSucces.html');})
@@ -67,7 +70,7 @@ restService.post('/hook', function(req, res) {
     result = res;
 	sessionId = req.body.sessionId;
 	userController.addUserEntities(sessionId, userID, function(succes){
-		if(!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID);
+		if(!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
         case "update":
