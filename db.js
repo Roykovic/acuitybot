@@ -29,7 +29,7 @@ exports.query = function (query, params, callback){
               return;
         });
     });
-	console.log("timeout?"
+	console.log("timeout?")
 }
 
 exports.updateQuery = function(column, variables, callBack){
