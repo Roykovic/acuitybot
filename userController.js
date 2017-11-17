@@ -79,6 +79,8 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
+	console.log("*************************SESSION*****************")
+	console.log(sessionId)
 	
 	apiController.get(getPath,function(response){
 		if(!response.entries || response.entries < 0){
@@ -95,7 +97,6 @@ exports.addUserEntities = function(sessionId,userId, callback){
 					}
 					body += bodyEnd;
 					return apiController.post(postPath, accesToken, body, function(response){
-						console.log(response)
 						callback(true)
 					})
 				})
