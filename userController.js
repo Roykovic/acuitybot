@@ -81,8 +81,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	apiController.get(getPath,function(response){
-		console.log(response.status.code)
-		if(response.status.code != '404'){
+		if(!response.entries || response.entries < 0{
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
