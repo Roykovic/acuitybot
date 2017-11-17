@@ -61,7 +61,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-	console.log("HANS)"
+	console.log("HANS")
 	userController.addUserEntities(sessionId, userID, function(succes){
 		console.log("HANS 2")
 		if(!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID);
