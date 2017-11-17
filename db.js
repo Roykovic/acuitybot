@@ -9,6 +9,7 @@ var exports = module.exports = {};
 var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
+	console.log(pool)
    pool.getConnection(function(err,connection){
         if (err) {
 			console.log("query")
