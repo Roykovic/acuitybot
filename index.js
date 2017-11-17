@@ -61,22 +61,14 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-	userController.addUserEntities(sessionId, userID, function(){
+	userController.addUserEntities(sessionId, userID, function(succes){
+		if(!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID);
 	userID = req.body.originalRequest.data.data.personId
     request = req;
     result = res;
 	sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
-        case "Login":
-		salesforceController.getColumns(userID)
-           // return login();
-            break;
-        case "Logout":
-            sessionId = "";
-            auth = false;
-            return returnJson("User logged out succesfully, see you later!");
-            break;
         case "update":
         case "data for update":
             var context = req.body.result.contexts[1]
@@ -129,9 +121,6 @@ restService.post('/hook', function(req, res) {
 			})
 			break;		
         default:
-		//return userController.getAllNames(function(names){
-		//	 return wakeUp();
-		//})
             return wakeUp();
             break;
     }

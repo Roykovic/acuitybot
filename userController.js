@@ -86,7 +86,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
 				if(!access_token){
-					callback() 
+					callback(false) 
 				}
 				salesforceController.getContacts(access_token, function(contacts){
 					for(var i = 0; i<contacts.length; ++i){
@@ -95,12 +95,12 @@ exports.addUserEntities = function(sessionId,userId, callback){
 					}
 					body += bodyEnd;
 					return apiController.post(postPath, accesToken, body, function(dingen){
-						callback()
+						callback(true)
 					})
 				})
 			})
 		}
-		callback()
+		callback(true)
 	}, accesToken, "application/json")
 }
 
