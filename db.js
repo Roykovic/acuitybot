@@ -16,7 +16,6 @@ exports.query = function (query, params, callback){
         }
         connection.query(query, params,function(err,results){
             if(!err) {
-				console.log(results)
 				connection.release();
                 callback(results, true);
 				return

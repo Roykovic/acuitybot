@@ -61,8 +61,6 @@ restService.get('/auth/:service', function(req, res) {
 	var sessionId = req.cookies.session_token;
     OAuthController.getTokens(req.params.service, req.query.code, userID, function(){
 	userController.addUserEntities(sessionId, userID, function(succes){
-		console.log("****************SUCCES**********************")
-		console.log(succes)
 	res.sendFile(__dirname + '/OAuth/loginSucces.html');})
 })})
 
