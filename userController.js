@@ -82,7 +82,6 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	
 	apiController.get(getPath,function(response){
 		if(!response.entries || response.entries < 0){
-			console.log("DINGEN")
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
@@ -97,7 +96,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 						body+= '{ "synonyms": [ "'+contacts[i].Name+'" ], "value": "'+contacts[i].Name+'" }'
 					}
 					body += bodyEnd;
-					return apiController.post(postPath, accesToken, body, function(dingen){
+					return apiController.post(postPath, accesToken, body, function(){
 						callback(true)
 					})
 				})
