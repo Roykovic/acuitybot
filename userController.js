@@ -89,6 +89,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 					return callback(false) 
 				}
 				salesforceController.getContacts(access_token, function(contacts){
+					console.log(contacts)
 					for(var i = 0; i<contacts.length; ++i){
 						if(i>0) body+=','
 						body+= '{ "synonyms": [ "'+contacts[i].Name+'" ], "value": "'+contacts[i].Name+'" }'
