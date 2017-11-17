@@ -81,7 +81,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
 	apiController.get(getPath,function(body){
-		console.log(body.entries)
+		console.log(body)
 		if(body.entries < 0){
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
