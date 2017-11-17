@@ -9,20 +9,22 @@ var exports = module.exports = {};
 var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
-	console.log("query")
    pool.getConnection(function(err,connection){
         if (err) {
+			console.log("query")
           callback(err, false);
           return;
         }
         connection.query(query, params,function(err,results){
             connection.release();
             if(!err) {
+				console.log("query2")
                 callback(results, true);
 				return
             }
         });
         connection.on('error', function(err) {
+			console.log("query3")
               callback(err, false);
               return;
         });
