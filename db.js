@@ -15,10 +15,10 @@ exports.query = function (query, params, callback){
           return;
         }
         connection.query(query, params,function(err,results){
-           // connection.release();
             if(!err) {
 				console.log("query2")
                 callback(results, true);
+				           connection.release();
 				return
             }
         });
