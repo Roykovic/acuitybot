@@ -10,9 +10,10 @@ var pool  = mysql.createPool(config.connection);
 
 exports.query = function (query, params, callback){
    pool.getConnection(function(err,connection){
-	   console.log("connection denk")
+	   console.log("connection")
+	   console.log(err)
+	   console.log(connection)
         if (err) {
-			console.log("query")
           callback(err, false);
           return;
         }
