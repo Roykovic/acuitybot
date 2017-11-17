@@ -48,6 +48,7 @@ exports.get = function(path, callback, auth, contentType) {
 }
 
 exports.post = function(path, accesToken, body, callback){
+	console.log("hans")
 	  var headers = {
         "Content-Type": 'application/json',
 		"Authorization": 'Bearer ' + accesToken
