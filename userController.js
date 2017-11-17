@@ -80,8 +80,9 @@ exports.addUserEntities = function(sessionId,userId, callback){
 	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
 	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
-	apiController.get(getPath,function(body){
-		if(body.status.code != '404'){
+	apiController.get(getPath,function(response){
+		console.log(response.status.code)
+		if(response.status.code != '404'){
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
