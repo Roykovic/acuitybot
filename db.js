@@ -1,7 +1,7 @@
 'use strict'
 
 var mysql = require('mysql');
-var config = require('./config/dbConfig')
+var config = require('./config/config')
 var exports = module.exports = {};
 var pool  = mysql.createPool(config.connection);
 

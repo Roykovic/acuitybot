@@ -1,4 +1,4 @@
-var config = require('./config/oauthConfig.js');
+var config = require('./config/config.js');
 var db = require('./db');
 var httpRequest = require('request');
 var exports = module.exports = {};
