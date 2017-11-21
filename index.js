@@ -22,7 +22,6 @@ var speech = 'empty speech';
 var db = require('./db');
 var service = require('./service')
 var apiController = require('./apiController')
-var loginController = require('./loginController')
 var userController = require('./userController')
 var ibmController = require('./ibmController')
 var salesforceController = require('./salesforceController')
