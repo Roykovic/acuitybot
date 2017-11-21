@@ -1,5 +1,6 @@
 'use strict'
 
+var accesToken = "5462b4a0987946ee967dbea809dd6676";
 var exports = module.exports = {};
 var salesForcedb = require('./db');
 var salesforceController = require('./salesforceController')
@@ -77,11 +78,9 @@ exports.getServiceByName = function(fullname, userID, callback){
 
 exports.addUserEntities = function(sessionId,userId, callback){
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
-	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
-	var accesToken = "5462b4a0987946ee967dbea809dd6676";
 	
-	apiController.get(getPath,function(response){
-		if(!response.entries || response.entries < 0){
+	exports.getUserEntities(sessionId, accesToken, function(response){
+		if(!response || response < 0){
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
 			return oauth.getAccessToken(userId, function(access_token){
@@ -101,6 +100,12 @@ exports.addUserEntities = function(sessionId,userId, callback){
 			})
 		}
 		callback(true)
-	}, accesToken, "application/json")
+	})
 }
 
+exports.getUserEntities = function(sessionId, callback){
+	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
+	apiController.get(getPath,function(response){
+		callback(response.entities)
+	}, accesToken, "application/json")
+}

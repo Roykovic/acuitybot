@@ -87,6 +87,16 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
+			if(!fullName){
+				userController.getUserEntities(sessionId, function(userEntities){
+					if(userEntities){
+						return returnJson("This user could not be found in any of your connected apps")
+					}
+					else{
+						return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
+					}
+				})
+			}
 			return userController.getServiceByName(fullName, userID, function(serviceType){
 					if(serviceType == service.services.IBM){
 						return returnJson("Getting info from IBM is still a work in progress. "+fullName+" has been found. However, no further functionality is implemented yet")
