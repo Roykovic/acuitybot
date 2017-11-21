@@ -29,8 +29,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const restService = express();
 var cookieParser = require('cookie-parser')
-var userID;
-var sessionId;
 restService.use(cookieParser())
 
 restService.use(express.static('public'))
@@ -41,8 +39,8 @@ restService.use(bodyParser.urlencoded({
 restService.use(bodyParser.json());
 
 restService.get('/login/:service/:userID/:sessionId', function(req, res) {
-    userID = req.params.userID
-    sessionId = req.params.sessionId
+    var userID = req.params.userID
+    var sessionId = req.params.sessionId
     var fileName = OAuthController.getWebpage(req.params.service)
     res.cookie('id_token', userID);
     res.cookie('session_token', sessionId);
@@ -86,10 +84,10 @@ restService.post('/hook', function(req, res) {
                 if (!fullName) {
                     return userController.getUserEntities(sessionId, function(userEntities) {
                         if (userEntities) {
-							console.log("Fullname:  " + fullName)
-							console.log(userEntities)
+							console.log("if")
                             return returnJson("This user could not be found in any of your connected apps")
                         } else {
+							console.log("else")
                             return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
                         }
                     })
@@ -164,7 +162,7 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(speech, followUp) {
-    console.log("caller is " + arguments.callee.caller.toString())
+    //console.log("caller is " + arguments.callee.caller.toString())
 	console.log("****************************SPEECH********************************")
 	console.log(speech)
     var reqIn = request.body.result.resolvedQuery
