@@ -31,7 +31,8 @@ exports.get = function(path, callBack, auth, contentType) {
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
-			body = JSON.parse(body);
+			if(headers['Content-Type']){
+			body = JSON.parse(body);}
                 return callBack(body)
         }
         //Either an error, or a statuscode for an insuccesful request
