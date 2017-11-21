@@ -1,5 +1,4 @@
 //'use strict'
-
 var exports = module.exports = {};
 var http = require("http");
 http.post = require('http-post');
@@ -7,32 +6,32 @@ var request = require('request');
 
 exports.get = function(path, callBack, auth, contentType) {
     // Configure the request
-	var headers = {}
-	
-	if(auth){
-		headers['Authorization'] = "Bearer " + auth
-	}
-	if(contentType){
-		headers['Content-Type']= contentType
-	}
-	else{
-		headers['Accept']= 'text/plain'
-	}
-	
-	
+    var headers = {}
+
+    if (auth) {
+        headers['Authorization'] = "Bearer " + auth
+    }
+    if (contentType) {
+        headers['Content-Type'] = contentType
+    } else {
+        headers['Accept'] = 'text/plain'
+    }
+
+
     var options = {
         url: path,
         method: "GET",
-		headers: headers
+        headers: headers
     }
 
     // Start the request
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
-			if(headers['Content-Type']){
-			body = JSON.parse(body);}
-                return callBack(body)
+            if (headers['Content-Type']) {
+                body = JSON.parse(body);
+            }
+            return callBack(body)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -45,23 +44,23 @@ exports.get = function(path, callBack, auth, contentType) {
     })
 }
 
-exports.post = function(path, accesToken, body, callBack){
-	  var headers = {
+exports.post = function(path, accesToken, body, callBack) {
+    var headers = {
         "Content-Type": 'application/json',
-		"Authorization": 'Bearer ' + accesToken
+        "Authorization": 'Bearer ' + accesToken
     }
     var options = {
         url: path,
         method: "POST",
-		body:body,
-		headers: headers
+        body: body,
+        headers: headers
     }
 
     // Start the request
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
-                return callBack(body)
+            return callBack(body)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -69,7 +68,7 @@ exports.post = function(path, accesToken, body, callBack){
             if (response) {
                 speech += "(" + response.statusCode + ")\n"
             }
-			speech+=body
+            speech += body
             return callBack(speech)
         }
     })

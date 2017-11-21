@@ -191,11 +191,11 @@ exports.getUser = function(name, callBack) {
     }
 
     var options = {
-        url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name='+name,
+        url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name=' + name,
         method: "GET",
         headers: headers
     }
-   return request(options, function(error, response, body) {
+    return request(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
@@ -206,8 +206,8 @@ exports.getUser = function(name, callBack) {
     })
 }
 
-exports.getAllNames = function(callBack){
-	    var headers = {
+exports.getAllNames = function(callBack) {
+    var headers = {
         "authorization": exports.auth
     }
     var options = {
@@ -215,15 +215,15 @@ exports.getAllNames = function(callBack){
         method: "GET",
         headers: headers,
     }
-   return request(options, function(error, response, body) {
+    return request(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
-				var names = [];
-				for(var i = 0; i<entries.length; ++i){
-					var name = entries[i]['title'][0]['_']
-					names[i] = name;
-				}
+                var names = [];
+                for (var i = 0; i < entries.length; ++i) {
+                    var name = entries[i]['title'][0]['_']
+                    names[i] = name;
+                }
                 return callBack(names)
             })
         }
