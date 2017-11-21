@@ -60,7 +60,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-    console.log(sessionId)
+    console.log("Session ID : " + sessionId)
     userID = req.body.originalRequest.data.data.personId
     request = req;
     result = res;
