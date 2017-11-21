@@ -79,7 +79,7 @@ exports.getServiceByName = function(fullname, userID, callback){
 exports.addUserEntities = function(sessionId,userId, callback){
 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 	
-	exports.getUserEntities(sessionId, accesToken, function(response){
+	exports.getUserEntities(sessionId, function(response){
 		if(!response || response < 0){
 			var body = '{ "entities": [ { "entries": ['
 			var bodyEnd = '], "name": "sf-name" } ], "sessionId":' +sessionId+ '}'
