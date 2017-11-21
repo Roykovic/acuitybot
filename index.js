@@ -42,7 +42,7 @@ restService.use(bodyParser.json());
 
 restService.get('/login/:service/:userID/:sessionId', function(req, res) {
     userID = req.params.userID
-    var sessionId = req.params.sessionId
+    sessionId = req.params.sessionId
     var fileName = OAuthController.getWebpage(req.params.service)
     res.cookie('id_token', userID);
     res.cookie('session_token', sessionId);
@@ -86,6 +86,7 @@ restService.post('/hook', function(req, res) {
                 if (!fullName) {
                     return userController.getUserEntities(sessionId, function(userEntities) {
                         if (userEntities) {
+							console.log(fullName)
 							console.log(userEntities)
                             return returnJson("This user could not be found in any of your connected apps")
                         } else {
