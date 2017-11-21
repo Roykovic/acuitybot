@@ -42,7 +42,7 @@ restService.use(bodyParser.json());
 
 restService.get('/login/:service/:userID/:sessionId', function(req, res) {
     userID = req.params.userID
-    sessionId = req.params.sessionId
+    var sessionId = req.params.sessionId
     var fileName = OAuthController.getWebpage(req.params.service)
     res.cookie('id_token', userID);
     res.cookie('session_token', sessionId);
