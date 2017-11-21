@@ -2,7 +2,6 @@
 
 var exports = module.exports = {};
 var http = require("http");
-var https = require("https");
 http.post = require('http-post');
 var request = require('request');
 var xml2js = require('xml2js');
@@ -194,7 +193,7 @@ exports.getUser = function(name, callBack) {
     var options = {
         url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name='+name,
         method: "GET",
-        headers: headers,
+        headers: headers
     }
    return request(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {

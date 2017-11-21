@@ -1,6 +1,5 @@
 'use strict'
 
-var self = this;
 var oauth = require('./oauth')
 var httpRequest = require('request');
 var exports = module.exports = {};

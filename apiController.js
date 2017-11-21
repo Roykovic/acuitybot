@@ -2,7 +2,6 @@
 
 var exports = module.exports = {};
 var http = require("http");
-var https = require("https");
 http.post = require('http-post');
 var request = require('request');
 
