@@ -20,7 +20,7 @@ exports.getWebpage = function(service) {
     return webpage
 }
 
-exports.getTokens = function(service, code, userID, callBack) {
+exports.getTokens = function(service, code, userID, callback) {
     var url;
     switch (service) {
         case "salesforce":
@@ -47,25 +47,25 @@ exports.getTokens = function(service, code, userID, callBack) {
         var d = new Date(expiresAtSeconds);
         var access_token = body.access_token
         return exports.registerToken(userID, access_token, d, function(access_token, succes) {
-            callBack(access_token)
+            callback(access_token)
         })
     })
 }
 
-exports.registerToken = function(userID, access_token, expiresAt, callBack) {
+exports.registerToken = function(userID, access_token, expiresAt, callback) {
     return db.query('REPLACE INTO auth (userID, access_token, expires_at) VALUES (?,?,?)', [userID, access_token, expiresAt], function(result) {
-        return callBack()
+        return callback()
     })
 }
 
-exports.getAccessToken = function(userID, callBack) {
+exports.getAccessToken = function(userID, callback) {
     return db.query('SELECT access_token, expires_at FROM auth WHERE userID = ?', userID, function(result) {
         if (result && result.length > 0) {
             if (result[0].expires_at < new Date()) {
-                return callBack()
+                return callback()
             }
-            return callBack(result[0].access_token)
+            return callback(result[0].access_token)
         }
-        return callBack()
+        return callback()
     })
 }

@@ -1,10 +1,10 @@
-//'use strict'
+'use strict'
 var exports = module.exports = {};
 var http = require("http");
 http.post = require('http-post');
 var request = require('request');
 
-exports.get = function(path, callBack, auth, contentType) {
+exports.get = function(path, callback, auth, contentType) {
     // Configure the request
     var headers = {}
 
@@ -31,7 +31,7 @@ exports.get = function(path, callBack, auth, contentType) {
             if (headers['Content-Type']) {
                 body = JSON.parse(body);
             }
-            return callBack(body)
+            return callback(body)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -39,12 +39,12 @@ exports.get = function(path, callBack, auth, contentType) {
             if (response) {
                 speech += "(" + response.statusCode + ")"
             }
-            return callBack(speech)
+            return callback(speech)
         }
     })
 }
 
-exports.post = function(path, accesToken, body, callBack) {
+exports.post = function(path, accesToken, body, callback) {
     var headers = {
         "Content-Type": 'application/json',
         "Authorization": 'Bearer ' + accesToken
@@ -60,7 +60,7 @@ exports.post = function(path, accesToken, body, callBack) {
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
-            return callBack(body)
+            return callback(body)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -69,7 +69,7 @@ exports.post = function(path, accesToken, body, callBack) {
                 speech += "(" + response.statusCode + ")\n"
             }
             speech += body
-            return callBack(speech)
+            return callback(speech)
         }
     })
 }

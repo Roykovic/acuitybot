@@ -86,12 +86,14 @@ restService.post('/hook', function(req, res) {
                 if (!fullName) {
                     return userController.getUserEntities(sessionId, function(userEntities) {
                         if (userEntities) {
+							console.log(userEntities)
                             return returnJson("This user could not be found in any of your connected apps")
                         } else {
                             return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
                         }
                     })
                 }
+				console.log("Doorgaande")
                 return userController.getServiceByName(fullName, userID, function(serviceType) {
                     if (serviceType == service.services.IBM) {
                         return returnJson("Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
@@ -153,10 +155,10 @@ function wakeUp() {
     return returnJson(speech);
 }
 
-function log(reqIn, resIn, score, intent, callBack) {
+function log(reqIn, resIn, score, intent, callback) {
     var resOut = resIn.split(':')[0];
     db.log(reqIn, resOut, score, intent, function(connectionEnd) {
-        callBack();
+        callback();
     })
 }
 

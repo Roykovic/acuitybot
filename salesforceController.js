@@ -4,7 +4,7 @@ var oauth = require('./oauth')
 var httpRequest = require('request');
 var exports = module.exports = {};
 
-exports.getContacts = function(access_token, callBack) {
+exports.getContacts = function(access_token, callback) {
     var headers = {
         "Authorization": "Bearer " + access_token
     }
@@ -17,21 +17,21 @@ exports.getContacts = function(access_token, callBack) {
 
     httpRequest(options, function(error, response, body) {
         body = JSON.parse(body)
-        callBack(body.records)
+        callback(body.records)
     })
 }
 
-exports.getUser = function(access_token, fullname, callBack) {
+exports.getUser = function(access_token, fullname, callback) {
     exports.getContacts(access_token, function(contacts) {
         for (var i = 0; i < contacts.length; ++i) {
             if (contacts[i].Name == fullname) {
-                return callBack(true)
+                return callback(true)
             }
         }
-        return callBack(false)
+        return callback(false)
     })
 }
-exports.getColumns = function(userID, callBack) {
+exports.getColumns = function(userID, callback) {
     oauth.getAccessToken(userID, function(access_token) {
         var headers = {
             "Authorization": "Bearer " + access_token
@@ -49,23 +49,23 @@ exports.getColumns = function(userID, callBack) {
             for (var i = 0, len = body.fields.length; i < len; i++) {
                 columns[i] = body.fields[i].name
             }
-            callBack(columns)
+            callback(columns)
         })
     })
 }
 
-exports.getURLByName = function(access_token, fullname, callBack) {
+exports.getURLByName = function(access_token, fullname, callback) {
     return exports.getContacts(access_token, function(contacts) {
         for (var i = 0, len = contacts.length; i < len; i++) {
             if (contacts[i].Name == fullname) {
                 var url = contacts[i].attributes.url
-                return callBack(url)
+                return callback(url)
             }
         }
     })
 }
 
-exports.getUserInfo = function(userID, fullname, column, callBack) {
+exports.getUserInfo = function(userID, fullname, column, callback) {
     oauth.getAccessToken(userID, function(access_token) {
         exports.checkColumn(column, userID, function(returnColumn) {
             if (returnColumn) {
@@ -75,21 +75,21 @@ exports.getUserInfo = function(userID, fullname, column, callBack) {
                             var answer = contacts[i][returnColumn]
                             if (answer) {
                                 var speech = fullname + "'s " + returnColumn + " is " + answer
-                                return callBack(speech)
+                                return callback(speech)
                             } else {
-                                return callBack("", "update")
+                                return callback("", "update")
                             }
                         }
                     }
                 })
             } else {
-                return callBack(column + " does not exist, please check your spelling.")
+                return callback(column + " does not exist, please check your spelling.")
             }
         })
     })
 }
 
-exports.updateUserInfo = function(userID, fullname, column, variable, callBack) {
+exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
     oauth.getAccessToken(userID, function(access_token) {
         exports.getURLByName(access_token, fullname, function(url) {
             var headers = {
@@ -108,24 +108,24 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callBack) 
             }
 
             httpRequest(options, function(error, response, body) {
-                callBack()
+                callback()
             })
         })
     })
 }
 
-exports.checkColumn = function(column, userID, callBack) {
+exports.checkColumn = function(column, userID, callback) {
     exports.getColumns(userID, function(columns) {
         if (columns) {
             for (var i = 0, len = columns.length; i < len; i++) {
                 var columnFromDB = columns[i];
                 var lowerCaseColumn = columnFromDB.toLowerCase();
                 if (lowerCaseColumn == column.toLowerCase()) {
-                    callBack(column);
+                    callback(column);
                     return
                 }
             }
         }
-        return callBack(null);
+        return callback(null);
     })
 }
