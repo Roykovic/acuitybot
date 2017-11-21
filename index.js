@@ -88,10 +88,8 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
-			console.log(fullName)
 			if(!fullName){
 				return userController.getUserEntities(sessionId, function(userEntities){
-					console.log(userEntities)
 					if(userEntities){
 						return returnJson("This user could not be found in any of your connected apps")
 					}
@@ -185,7 +183,7 @@ function log(reqIn, resIn, score, intent, callback){
 }
 
 function returnJson(speech, followUp) {
-	console.log("caller is " + arguments.callee.caller.toString())
+	//console.log("caller is " + arguments.callee.caller.toString())
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score

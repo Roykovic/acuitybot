@@ -106,6 +106,7 @@ exports.addUserEntities = function(sessionId,userId, callback){
 exports.getUserEntities = function(sessionId, callback){
 	var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
 	apiController.get(getPath,function(response){
+		console.log(response)
 		callback(response.entities)
 	}, accesToken, "application/json")
 }
