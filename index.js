@@ -84,6 +84,7 @@ restService.post('/hook', function(req, res) {
                 if (!fullName) {
                     return userController.getUserEntities(sessionId, function(userEntities) {
                         if (userEntities) {
+							console.log(userEntities)
 							console.log("if")
                             return returnJson("This user could not be found in any of your connected apps")
                         } else {
