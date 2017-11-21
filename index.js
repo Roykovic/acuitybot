@@ -94,7 +94,7 @@ restService.post('/hook', function(req, res) {
 						return returnJson("This user could not be found in any of your connected apps")
 					}
 					else{
-						return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
+						return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
 					}
 				})
 			}
@@ -110,7 +110,6 @@ restService.post('/hook', function(req, res) {
 					if(serviceType == service.services.None){
 						return returnJson("This user could not be found in any of your connected apps")
 					}
-					return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID)
 				})
             break;
         case "getNodeFromIBM":
