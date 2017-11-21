@@ -10,7 +10,7 @@ var parser = new xml2js.Parser();
 
 exports.auth = "";
 
-exports.getFromIBM = function(type, callback) {
+exports.getFromIBM = function(type, callBack) {
     var path;
     switch (type) {
         case "communities":
@@ -26,25 +26,25 @@ exports.getFromIBM = function(type, callback) {
             var path = "/activities/service/atom2/todos"
             break;
         default:
-            return callback("Cannot find " + type + " in system. Please check  your spelling or try again.");
+            return callBack("Cannot find " + type + " in system. Please check  your spelling or try again.");
 
     }
     var method = "GET"
 
     return exports.getJSON(method, path, type, function(entries, error) {
         if (error) {
-            return callback(entries)
+            return callBack(entries)
         }
         if (entries) {
             var speech = "These are your " + type + ": " + entries
         } else {
             var speech = "You don't have any " + type
         }
-        callback(speech)
+        callBack(speech)
     });
 }
 
-exports.postToIBM = function(callback, name, type, activity) {
+exports.postToIBM = function(callBack, name, type, activity) {
     var path;
     var body;
     exports.getIdByName(activity, '/activities/service/atom2/activities', function(activityID) {
@@ -59,7 +59,7 @@ exports.postToIBM = function(callback, name, type, activity) {
                 break;
             case "activity nodes":
                 if (!activityID) {
-                    return callback("The activity doesn't exist")
+                    return callBack("The activity doesn't exist")
                 }
                 path = "/activities/service/atom2/activity?activityUuid=" + activityID
                 body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
@@ -72,30 +72,30 @@ exports.postToIBM = function(callback, name, type, activity) {
             } else {
                 var speech = "Entry has been succesfully added to your " + type;
             }
-            callback(speech)
+            callBack(speech)
         }, body);
 
     })
 }
 
-exports.updateIBM = function(varName, callback) {
+exports.updateIBM = function(varName, callBack) {
     exports.getIdByName(varName, '/activities/service/atom2/todos', function(id) {
         if (!id) {
-            return callback("Todo doesn't exist")
+            return callBack("Todo doesn't exist")
         }
         exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(body) {
             var splittedString = body.split('</entry>')
             var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
             body = splittedString[0] + completed + '</entry>'
             exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
-                return callback("Todo '" + varName + "' has been marked as completed")
+                return callBack("Todo '" + varName + "' has been marked as completed")
             }, body)
 
         })
     })
 }
 
-exports.getJSON = function(method, path, type, callback, body) {
+exports.getJSON = function(method, path, type, callBack, body) {
     var headers = {
         "Content-Type": 'application/atom+xml',
         "authorization": exports.auth
@@ -114,12 +114,12 @@ exports.getJSON = function(method, path, type, callback, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
             if (type == "updateTodo") {
-                return callback(body)
+                return callBack(body)
             }
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
                 if (!entries) {
-                    return callback()
+                    return callBack()
                 }
                 var titles = ""
                 for (var index = 0; index < entries.length; ++index) {
@@ -131,12 +131,12 @@ exports.getJSON = function(method, path, type, callback, body) {
                     }
 
                 }
-                return callback(titles)
+                return callBack(titles)
             })
         }
         //No error and creation was succesful
         if (!error && response.statusCode == 201) {
-            return callback()
+            return callBack()
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -145,12 +145,12 @@ exports.getJSON = function(method, path, type, callback, body) {
             if (response) {
                 speech += "(" + response.statusCode + ")"
             }
-            return callback(speech, true)
+            return callBack(speech, true)
         }
     })
 }
 
-exports.getIdByName = function(varName, path, callback) {
+exports.getIdByName = function(varName, path, callBack) {
 
     var id = "";
     var headers = {
@@ -168,24 +168,24 @@ exports.getIdByName = function(varName, path, callback) {
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
                 if (!entries) {
-                    return callback()
+                    return callBack()
                 }
                 for (var index = 0; index < entries.length; ++index) {
                     if (entries[index]['title'][0]['_'].trim() == varName.trim()) {
                         var unformattedId = entries[index]['id'][0];
                         var parts = unformattedId.split(':')
                         id = parts[parts.length - 1]
-                        return callback(id);
+                        return callBack(id);
                     }
                 }
-                return callback();
+                return callBack();
             })
         }
-        return callback();
+        return callBack();
     })
 }
 
-exports.getUser = function(name, callback) {
+exports.getUser = function(name, callBack) {
     var id = "";
     var headers = {
         "authorization": exports.auth
@@ -200,14 +200,14 @@ exports.getUser = function(name, callback) {
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
-                return callback(entries)
+                return callBack(entries)
             })
         }
-        return callback();
+        return callBack();
     })
 }
 
-exports.getAllNames = function(callback){
+exports.getAllNames = function(callBack){
 	    var headers = {
         "authorization": exports.auth
     }
@@ -225,9 +225,9 @@ exports.getAllNames = function(callback){
 					var name = entries[i]['title'][0]['_']
 					names[i] = name;
 				}
-                return callback(names)
+                return callBack(names)
             })
         }
-        return callback();
+        return callBack();
     })
 }

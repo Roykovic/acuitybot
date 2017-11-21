@@ -19,11 +19,11 @@ exports.getWebpage = function (service){
 	return webpage	
 }
 
-exports.getTokens = function(service, code, userID, callback){
+exports.getTokens = function(service, code, userID, callBack){
 	var url;
 	 switch (service) {
         case "salesforce":
-            url = "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+config.grant_type+"&client_id="+config.client_id+"&client_secret="+config.client_secret+"&redirect_uri="+config.callback_uri
+            url = "https://login.salesforce.com/services/oauth2/token?code="+code+"&grant_type="+config.grant_type+"&client_id="+config.client_id+"&client_secret="+config.client_secret+"&redirect_uri="+config.callBack_uri
             break;
 		 case "connections":
             url = "connectionsIndex"
@@ -46,23 +46,23 @@ exports.getTokens = function(service, code, userID, callback){
 		var d = new Date(expiresAtSeconds);
 		var access_token = body.access_token
 		return exports.registerToken(userID, access_token, d, function(access_token, succes){
-			callback(access_token)
+			callBack(access_token)
 		})
 	})	
 }
 
-exports.registerToken = function(userID, access_token, expiresAt, callback){
+exports.registerToken = function(userID, access_token, expiresAt, callBack){
 	return db.query('REPLACE INTO auth (userID, access_token, expires_at) VALUES (?,?,?)', [userID, access_token, expiresAt], function(result){
-		return callback()
+		return callBack()
 	})
 }
 
-exports.getAccessToken = function(userID, callback){
+exports.getAccessToken = function(userID, callBack){
 	return db.query('SELECT access_token, expires_at FROM auth WHERE userID = ?', userID, function(result){
 		if(result && result.length > 0){
-			if(result[0].expires_at < new Date()){return callback()}
-			return callback(result[0].access_token)
+			if(result[0].expires_at < new Date()){return callBack()}
+			return callBack(result[0].access_token)
 		}
-		return callback()
+		return callBack()
 	})
 }

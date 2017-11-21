@@ -5,7 +5,7 @@ var oauth = require('./oauth')
 var httpRequest = require('request');
 var exports = module.exports = {};
 
-exports.getContacts = function(access_token, callback){
+exports.getContacts = function(access_token, callBack){
 		var headers = {
 			"Authorization": "Bearer " +  access_token
 		}
@@ -18,21 +18,21 @@ exports.getContacts = function(access_token, callback){
 		
 		httpRequest(options, function(error, response, body) {
 			body = JSON.parse(body)		
-			callback(body.records)
+			callBack(body.records)
 		})		
 }
 
-exports.getUser = function(access_token, fullname, callback){
+exports.getUser = function(access_token, fullname, callBack){
 	exports.getContacts(access_token, function(contacts){
 		for(var i = 0; i<contacts.length; ++i){
 			if(contacts[i].Name == fullname){
-				return callback(true)
+				return callBack(true)
 			}
 		}
-		return callback(false)
+		return callBack(false)
 	})
 }
-exports.getColumns = function(userID, callback){
+exports.getColumns = function(userID, callBack){
 	oauth.getAccessToken(userID, function(access_token){
 		var headers = {
 			"Authorization": "Bearer " +  access_token
@@ -50,7 +50,7 @@ exports.getColumns = function(userID, callback){
 			for (var i = 0, len = body.fields.length; i < len; i++) {
 				columns[i] = body.fields[i].name
 			}			
-			callback(columns)
+			callBack(columns)
 		})	
 	})			
 }

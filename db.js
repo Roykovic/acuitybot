@@ -8,22 +8,22 @@ var config = require('./config/dbConfig')
 var exports = module.exports = {};
 var pool  = mysql.createPool(config.connection);
 
-exports.query = function (query, params, callback){
+exports.query = function (query, params, callBack){
    pool.getConnection(function(err,connection){
         if (err) {
-          callback(err, false);
+          callBack(err, false);
           return;
         }
         connection.query(query, params,function(err,results){
             if(!err) {
 				connection.release();
-                callback(results, true);
+                callBack(results, true);
 				return
             }
         });
         connection.on('error', function(err) {
 			console.log(err)
-              callback(err, false);
+              callBack(err, false);
               return;
         });
     });
@@ -80,22 +80,22 @@ exports.checkColumn = function (column, callBack){
 
 }
 
-exports.log = function(reqIn, resIn, score, intent,callback){
+exports.log = function(reqIn, resIn, score, intent,callBack){
    pool.getConnection(function(err,connection){
         if (err) {
 		console.log(err)
-          callback();
+          callBack();
           return;
         }
         connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent],function(err,results){
             connection.release();
             if(!err) {
-                callback();
+                callBack();
             }
         });
         connection.on('error', function(err) {
 			connection.release();
-              callback();
+              callBack();
               return;
         });
     });

@@ -6,7 +6,7 @@ var https = require("https");
 http.post = require('http-post');
 var request = require('request');
 
-exports.get = function(path, callback, auth, contentType) {
+exports.get = function(path, callBack, auth, contentType) {
     // Configure the request
 	var headers = {}
 	
@@ -32,7 +32,7 @@ exports.get = function(path, callback, auth, contentType) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
 			body = JSON.parse(body);
-                return callback(body)
+                return callBack(body)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -40,12 +40,12 @@ exports.get = function(path, callback, auth, contentType) {
             if (response) {
                 speech += "(" + response.statusCode + ")"
             }
-            return callback(speech)
+            return callBack(speech)
         }
     })
 }
 
-exports.post = function(path, accesToken, body, callback){
+exports.post = function(path, accesToken, body, callBack){
 	  var headers = {
         "Content-Type": 'application/json',
 		"Authorization": 'Bearer ' + accesToken
@@ -61,7 +61,7 @@ exports.post = function(path, accesToken, body, callback){
     request(options, function(error, response, body) {
         //No error, and get was succesful
         if (!error && response.statusCode == 200) {
-                return callback(body)
+                return callBack(body)
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
@@ -70,7 +70,7 @@ exports.post = function(path, accesToken, body, callback){
                 speech += "(" + response.statusCode + ")\n"
             }
 			speech+=body
-            return callback(speech)
+            return callBack(speech)
         }
     })
 }

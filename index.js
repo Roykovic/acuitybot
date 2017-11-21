@@ -16,7 +16,6 @@
  
 //'use strict';
 
-var sessionId;
 var request;
 var result;
 var speech = 'empty speech';
@@ -145,22 +144,6 @@ restService.listen((process.env.PORT || 5000), function() {
     console.log("Server listening");
 });
 
-function login() {
-    login = false;
-    var user = request.body.result.parameters['Username']
-    var pass = request.body.result.parameters['Password']
-    return loginController.login(user, pass, function(succes) {
-        if (succes) {
-            sessionId = request.body.sessionId;
-            auth = true;
-            speech = "Login succesful, welcome back!"
-        } else {
-            speech = "Login failed, please check username and password"
-        }
-        return returnJson(speech)
-    })
-}
-
 function wakeUp() {
     if (request.body) {
         if (request.body.result) {
@@ -175,15 +158,15 @@ function wakeUp() {
     return returnJson(speech);
 }
 
-function log(reqIn, resIn, score, intent, callback){
+function log(reqIn, resIn, score, intent, callBack){
 	var resOut = resIn.split(':')[0];
 			db.log(reqIn, resOut, score, intent, function(connectionEnd){
-				callback();
+				callBack();
 			})
 }
 
 function returnJson(speech, followUp) {
-	//console.log("caller is " + arguments.callee.caller.toString())
+	console.log("caller is " + arguments.callee.caller.toString())
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score =  request.body.result.score
