@@ -88,8 +88,10 @@ restService.post('/hook', function(req, res) {
             var nameObj = request.body.result.parameters['fullName']
 			var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = request.body.result.parameters['Variable_row']
+			console.log(fullName)
 			if(!fullName){
 				return userController.getUserEntities(sessionId, function(userEntities){
+					console.log(userEntities)
 					if(userEntities){
 						return returnJson("This user could not be found in any of your connected apps")
 					}
