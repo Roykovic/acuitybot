@@ -159,9 +159,9 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(speech, followUp) {
-    console.log("caller is " + arguments.callee.caller.toString())
-	console.log("****************************SPEECH********************************")
-	console.log(speech)
+//    console.log("caller is " + arguments.callee.caller.toString())
+//	console.log("****************************SPEECH********************************")
+//	console.log(speech)
     var reqIn = request.body.result.resolvedQuery
     var intent = request.body.result.metadata.intentName
     var score = request.body.result.score
