@@ -1,4 +1,4 @@
-'use strict'
+//'use strict'
 
 var accesToken = "5462b4a0987946ee967dbea809dd6676";
 var exports = module.exports = {};
