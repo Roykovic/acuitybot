@@ -19,7 +19,7 @@ exports.query = function(query, params, callback) {
             }
         });
         connection.on('error', function(err) {
-            console.log(err)
+            console.log("AN ERROR OCCURRED: " + err)
             callback(err, false);
             return;
         });
@@ -46,7 +46,7 @@ exports.checkColumn = function(column, callback) {
 exports.log = function(reqIn, resIn, score, intent, callback) {
     pool.getConnection(function(err, connection) {
         if (err) {
-            console.log(err)
+            console.log("ANOTHER ERROR OCCURRED: "+err)
             callback();
             return;
         }
