@@ -1,4 +1,4 @@
-'use strict'
+//'use strict'
 
 var config = require('./config/config.js');
 var db = require('./db');
