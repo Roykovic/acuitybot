@@ -77,11 +77,15 @@ exports.addUserEntities = function(sessionId, userId, callback) {
     var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 
     exports.getUserEntities(sessionId, function(response) {
+		console.log("*********Response**********************")
+		console.log(response)		
         if (!response || response < 0) {
             var body = '{ "entities": [ { "entries": ['
             var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
             return oauth.getAccessToken(userId, function(access_token) {
                 if (!access_token) {
+		console.log("*********Response**********************")
+		console.log(false)							
                     return callback(false)
                 }
                 salesforceController.getContacts(access_token, function(contacts) {
@@ -91,11 +95,15 @@ exports.addUserEntities = function(sessionId, userId, callback) {
                     }
                     body += bodyEnd;
                     return apiController.post(postPath, accesToken, body, function(response) {
+		console.log("*********Response**********************")
+		console.log(true)								
                         callback(true)
                     })
                 })
             })
         }
+		console.log("*********Response**********************")
+		console.log(true)		
         callback(true)
     })
 }
