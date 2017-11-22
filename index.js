@@ -84,16 +84,12 @@ restService.post('/hook', function(req, res) {
                 if (!fullName) {
                     return userController.getUserEntities(sessionId, function(userEntities) {
                         if (userEntities) {
-							console.log(userEntities)
-							console.log("if")
                             return returnJson("This user could not be found in any of your connected apps")
                         } else {
-							console.log("else")
                             return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
                         }
                     })
                 }
-				console.log("Doorgaande")
                 return userController.getServiceByName(fullName, userID, function(serviceType) {
                     if (serviceType == service.services.IBM) {
                         return returnJson("Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
@@ -163,9 +159,9 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(speech, followUp) {
-    //console.log("caller is " + arguments.callee.caller.toString())
-//	console.log("****************************SPEECH********************************")
-	//console.log(speech)
+    console.log("caller is " + arguments.callee.caller.toString())
+	console.log("****************************SPEECH********************************")
+	console.log(speech)
     var reqIn = request.body.result.resolvedQuery
     var intent = request.body.result.metadata.intentName
     var score = request.body.result.score

@@ -77,8 +77,6 @@ exports.addUserEntities = function(sessionId, userId, callback) {
     var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 
     exports.getUserEntities(sessionId, function(response) {
-		console.log("*********Response**********************")
-		console.log(response)		
         if (!response || response < 0) {
             var body = '{ "entities": [ { "entries": ['
             var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
@@ -92,16 +90,12 @@ exports.addUserEntities = function(sessionId, userId, callback) {
                         body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
                     }
                     body += bodyEnd;
-                    return apiController.post(postPath, accesToken, body, function(response) {
-		console.log("*********Response**********************")
-		console.log(true)								
+                    return apiController.post(postPath, accesToken, body, function(response) {								
                         callback(true)
                     })
                 })
             })
-        }
-		console.log("*********Response**********************")
-		console.log(true)		
+        }	
         callback(true)
     })
 }
@@ -109,8 +103,6 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 exports.getUserEntities = function(sessionId, callback) {
     var getPath = "https://api.dialogflow.com/v1/userEntities/sf-name?v=20150910&sessionId=" + sessionId
     apiController.get(getPath, function(response) {
-		console.log("***************INITIAL RESPONSE*****************")
-		console.log(response)
         callback(response.entries)
     }, accesToken, "application/json")
 }
