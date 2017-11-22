@@ -25,7 +25,9 @@ exports.getTokens = function(service, code, userID, callback) {
     switch (service) {
         case "salesforce":
             url = "https://login.salesforce.com/services/oauth2/token?code=" + code + "&grant_type=" + config.grant_type + "&client_id=" + config.client_id + "&client_secret=" + config.client_secret + "&redirect_uri=" + config.callBack_uri
-            break;
+            console.log("******************************URL****************************")
+			console.log(url)
+			break;
         case "connections":
             url = "connectionsIndex"
             break;
