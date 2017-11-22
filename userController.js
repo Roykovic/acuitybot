@@ -74,11 +74,7 @@ exports.getServiceByName = function(fullname, userID, callback) {
 }
 
 exports.addUserEntities = function(sessionId, userId, callback) {
- 	
-    console.log("caller is " + arguments.callee.caller.toString())
-	
-	
-    var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
+ 	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
 
     exports.getUserEntities(sessionId, function(response) {
         if (!response || response < 0) {

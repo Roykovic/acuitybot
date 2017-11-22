@@ -19,7 +19,7 @@ exports.query = function(query, params, callback) {
             }
         });
         connection.on('error', function(err) {
-            console.log("AN ERROR OCCURRED: " + query)
+            console.log(err)
             callback(err, false);
             return;
         });
