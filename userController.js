@@ -75,13 +75,14 @@ exports.getServiceByName = function(fullname, userID, callback) {
 
 exports.addUserEntities = function(sessionId, userId, callback) {
  	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
-console.log("Add User Entities")
     return exports.getUserEntities(sessionId, function(response) {
+		console.log("GET User Entities")
         if (!response || response < 0) {
             var body = '{ "entities": [ { "entries": ['
             var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
             return oauth.getAccessToken(userId, function(access_token) {
-                if (!access_token) {					
+                if (!access_token) {		
+console.log("false")				
                     return callback(false)
                 }
                 return salesforceController.getContacts(access_token, function(contacts) {
@@ -90,12 +91,14 @@ console.log("Add User Entities")
                         body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
                     }
                     body += bodyEnd;
-                    return apiController.post(postPath, accesToken, body, function(response) {								
+                    return apiController.post(postPath, accesToken, body, function(response) {				
+console.log("true")							
                         return callback(true)
                     })
                 })
             })
         }	
+		console.log("true")							
         return callback(true)
     })
 }
