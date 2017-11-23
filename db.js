@@ -8,20 +8,20 @@ var pool = mysql.createPool(config.connection);
 exports.query = function(query, params, callback) {
     pool.getConnection(function(err, connection) {
         if (err) {
-            callback(err, false);
-            return;
+            return callback(err, false);
+            
         }
         connection.query(query, params, function(err, results) {
             if (!err) {
                 connection.release();
-                callback(results, true);
-                return
+                return callback(results, true);
+                
             }
         });
         connection.on('error', function(err) {
             console.log("Error thrown: " + err)
-           // callback(err, false);
-           // return;
+            return callback(err, false);
+
         });
     });
 }
