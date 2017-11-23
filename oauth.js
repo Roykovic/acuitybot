@@ -58,7 +58,6 @@ exports.registerToken = function(userID, access_token, expiresAt, callback) {
 }
 
 exports.getAccessToken = function(userID, callback) {
-	    console.log("caller a niffauw")
     return db.query('SELECT access_token, expires_at FROM auth WHERE userID = ?', userID, function(result) {
         if (result && result.length > 0) {
             if (result[0].expires_at < new Date()) {
