@@ -178,7 +178,6 @@ function returnJson(speech, followUp) {
 			console.log("-----------------------------Buiten");
 			
 			return result.json({
-				console.log("----------------------------Binnen");
 				speech: speech,
 				displayText: speech,
 				source: 'apiai-webhook-sample',
