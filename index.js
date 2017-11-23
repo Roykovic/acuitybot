@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 //'use strict';
+var sent;
 var request;
 var result;
 var db = require('./db');
@@ -58,6 +59,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
+	sent = false;
     userID = req.body.originalRequest.data.data.personId
     request = req;
     result = res;
@@ -162,6 +164,7 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(speech, followUp) {
+	if(sent) return;
   console.log("caller is ")
   console.log(arguments.callee.caller.toString())
 	console.log("****************************SPEECH********************************")
@@ -170,6 +173,7 @@ function returnJson(speech, followUp) {
     var intent = request.body.result.metadata.intentName
     var score = request.body.result.score
     return log(reqIn, speech, score, intent, function() {
+		sent = true;
         return result.json({
             speech: speech,
             displayText: speech,
