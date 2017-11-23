@@ -157,6 +157,8 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, score, intent, callback) {
+		console.log("caller is ")
+	console.log(arguments.callee.caller.toString())
     var resOut = resIn.split(':')[0];
     return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
         callback();
@@ -167,8 +169,6 @@ function returnJson(speech, followUp) {
 	console.log("*******************************SENT*****************************")
 	console.log(sent)
 	if(!sent){
-	//  console.log("caller is ")
-	//  console.log(arguments.callee.caller.toString())
 	//	console.log("****************************SPEECH********************************")
 	//	console.log(speech)
 		var reqIn = request.body.result.resolvedQuery
