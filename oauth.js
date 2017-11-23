@@ -61,10 +61,13 @@ exports.getAccessToken = function(userID, callback) {
     return db.query('SELECT access_token, expires_at FROM auth WHERE userID = ?', userID, function(result) {
         if (result && result.length > 0) {
             if (result[0].expires_at < new Date()) {
+				console.log("********************************************* 1 ***************************************")
                 return callback()
             }
+				console.log("********************************************* 2 ***************************************")
             return callback(result[0].access_token)
         }
+				console.log("********************************************* 3 ***************************************")
         return callback()
     })
 }
