@@ -175,7 +175,10 @@ function returnJson(speech, followUp) {
 		var score = request.body.result.score
 		return log(reqIn, speech, score, intent, function() {
 			sent = true;
+			console.log("-----------------------------Buiten");
+			
 			return result.json({
+				console.log("----------------------------Binnen");
 				speech: speech,
 				displayText: speech,
 				source: 'apiai-webhook-sample',
