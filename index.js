@@ -158,7 +158,7 @@ function wakeUp() {
 
 function log(reqIn, resIn, score, intent, callback) {
     var resOut = resIn.split(':')[0];
-    db.log(reqIn, resOut, score, intent, function(connectionEnd) {
+    return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
         callback();
     })
 }
@@ -174,8 +174,6 @@ function returnJson(speech, followUp) {
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score = request.body.result.score
-					console.log("***************************REACHED*************************")
-
 		return log(reqIn, speech, score, intent, function() {
 			sent = true;
 			return result.json({
