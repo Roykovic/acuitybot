@@ -44,19 +44,17 @@ exports.log = function(reqIn, resIn, score, intent, callback) {
     pool.getConnection(function(err, connection) {
         if (err) {
             console.log(err)
-            callback();
-            return;
+            return callback();
         }
         connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(err, results) {
             connection.release();
             if (!err) {
-                callback();
+            return callback();
             }
         });
         connection.on('error', function(err) {
             connection.release();
-            callback();
-            return;
+            return callback();
         });
     });
 
