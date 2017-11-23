@@ -68,6 +68,7 @@ exports.getAccessToken = function(userID, callback) {
             return callback(result[0].access_token)
         }
 				console.log("********************************************* 3 ***************************************")
+				console.log(callback)
         return callback()
     })
 }
