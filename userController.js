@@ -75,7 +75,7 @@ exports.getServiceByName = function(fullname, userID, callback) {
 
 exports.addUserEntities = function(sessionId, userId, callback) {
  	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
-console.log("Add User Entities)
+console.log("Add User Entities")
     return exports.getUserEntities(sessionId, function(response) {
         if (!response || response < 0) {
             var body = '{ "entities": [ { "entries": ['
