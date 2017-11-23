@@ -64,7 +64,7 @@ restService.post('/hook', function(req, res) {
     sessionId = req.body.sessionId;
 	    console.log("Session ID : " + sessionId)
    return userController.addUserEntities(sessionId, userID, function(succes) {
-        if (!succes) return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
+        if (!succes) return returnJson("You must login for this action, to do so please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
         var intent = req.body.result.metadata.intentName;
         switch (intent) {
             case "update":
@@ -73,7 +73,7 @@ restService.post('/hook', function(req, res) {
                 var column = context.parameters.Variable_row;
                 var variable = context.parameters['variable.original']
                 var fullname = context.parameters['fullName']['sf-name']
-                salesforceController.updateUserInfo(userID, fullname, column, variable, function() {
+                return salesforceController.updateUserInfo(userID, fullname, column, variable, function() {
                     return returnJson(fullname + "\'s " + column + " changed to " + variable);
                 })
                 break;
