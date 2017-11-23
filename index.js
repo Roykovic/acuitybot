@@ -166,23 +166,24 @@ function log(reqIn, resIn, score, intent, callback) {
 function returnJson(speech, followUp) {
 	console.log("*******************************SENT*****************************")
 	console.log(sent)
-	if(sent) return;
-//  console.log("caller is ")
-//  console.log(arguments.callee.caller.toString())
-//	console.log("****************************SPEECH********************************")
-//	console.log(speech)
-    var reqIn = request.body.result.resolvedQuery
-    var intent = request.body.result.metadata.intentName
-    var score = request.body.result.score
-    return log(reqIn, speech, score, intent, function() {
-		sent = true;
-        return result.json({
-            speech: speech,
-            displayText: speech,
-            source: 'apiai-webhook-sample',
-            followupEvent: {
-                name: followUp
-            }
-        });
-    })
+	if(!sent){
+	//  console.log("caller is ")
+	//  console.log(arguments.callee.caller.toString())
+	//	console.log("****************************SPEECH********************************")
+	//	console.log(speech)
+		var reqIn = request.body.result.resolvedQuery
+		var intent = request.body.result.metadata.intentName
+		var score = request.body.result.score
+		return log(reqIn, speech, score, intent, function() {
+			sent = true;
+			return result.json({
+				speech: speech,
+				displayText: speech,
+				source: 'apiai-webhook-sample',
+				followupEvent: {
+					name: followUp
+				}
+			});
+		})
+	}
 }
