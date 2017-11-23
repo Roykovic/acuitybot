@@ -165,7 +165,7 @@ function returnJson(speech, followUp) {
   console.log("caller is ")
   console.log(arguments.callee.caller.toString())
 	console.log("****************************SPEECH********************************")
-	console.log(speech)
+//	console.log(speech)
     var reqIn = request.body.result.resolvedQuery
     var intent = request.body.result.metadata.intentName
     var score = request.body.result.score
