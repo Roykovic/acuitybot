@@ -20,8 +20,8 @@ exports.query = function(query, params, callback) {
         });
         connection.on('error', function(err) {
             console.log("Error thrown: " + err)
-            //callback(err, false);
-            return;
+           // callback(err, false);
+           // return;
         });
     });
 }
