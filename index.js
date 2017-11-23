@@ -157,10 +157,9 @@ function wakeUp() {
 }
 
 function log(reqIn, resIn, score, intent, callback) {
-		console.log("caller is ")
-	console.log(arguments.callee.caller.toString())
     var resOut = resIn.split(':')[0];
     return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
+		console.log("**********************DINGEN***********************")
         callback();
     })
 }
