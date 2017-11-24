@@ -68,7 +68,7 @@ exports.getAccessToken = function(service, userID, callback) {
             if (result[0].expires_at < new Date()) {
                 return callback()
             }
-            return callback(result[0].access_token)
+            return callback(result[0][service + "_access_token"])
         }
         return callback()
     })
