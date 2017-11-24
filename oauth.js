@@ -52,7 +52,6 @@ exports.getTokens = function(service, code, userID, callback) {
 }
 
 exports.registerToken = function(service, userID, access_token, expiresAt, callback) {
-	INSERT INTO ThisTable (id, rate3) VALUES (99, 2) ON DUPLICATE KEY UPDATE rate3=VALUES(rate3);
 	var query = 'INSERT INTO auth (userID, '+service+'_access_token, '+service+'_expires_at) VALUES (?,?,?) ON DUPLICATE KEY UPDATE  `userID`=VALUES(`userID`), `'+service+'_access_token`=VALUES(`'service+'_access_token`), `'+service+'_expires_at`=VALUES(`'+service+'_expires_at`)'
     return db.query(query, [userID, access_token, expiresAt], function(result) {
         return callback()
