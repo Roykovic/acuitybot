@@ -53,7 +53,7 @@ exports.getAllNames = function(callback) {
     })
 }
 
-exports.getServiceByName = function(fullname, userID, callback) {
+exports.getServiceByName = function('salesforce', fullname, userID, callback) {
     return oauth.getAccessToken(userID, function(access_token) {
         if (access_token) {
             salesforceController.getUser(access_token, fullname, function(sfUser) {
@@ -79,7 +79,7 @@ exports.addUserEntities = function(sessionId, userId, callback) {
         if (!response || response < 0) {
             var body = '{ "entities": [ { "entries": ['
             var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
-            return oauth.getAccessToken(userId, function(access_token) {
+            return oauth.getAccessToken('salesforce', userId, function(access_token) {
                 if (!access_token) {					
                     return callback(false)
                 }
