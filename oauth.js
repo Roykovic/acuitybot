@@ -42,7 +42,7 @@ exports.getTokens = function(service, code, userID, callback) {
 		console.log("***************************ERROR***********************************")
 		console.log(error)
 		console.log("***************************BODY***********************************")
-		console.log(body)
+		console.log(typeof body)
 		console.log("***************************END BODY***********************************")			
         body = JSON.parse(body)
         var issued_at = body.issued_at;
