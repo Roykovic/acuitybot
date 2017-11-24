@@ -61,7 +61,7 @@ restService.post('/hook', function(req, res) {
     var userID = req.body.originalRequest.data.data.personId
     request = req;
     result = res;
-    sessionId = req.body.sessionId;
+    var sessionId = req.body.sessionId;
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
         case "update":
