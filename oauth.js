@@ -11,7 +11,7 @@ exports.getWebpage = function(service) {
         case "salesforce":
             webpage = "salesforceIndex"
             break;
-        case "connections":
+        case "ibm":
             webpage = "connectionsIndex"
             break;
         default:
