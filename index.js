@@ -67,7 +67,6 @@ restService.post('/hook', function(req, res) {
 	    console.log("Session ID : " + sessionId)
    return userController.addUserEntities(sessionId, userID, function(succes) {
         if (!succes){
-			console.log("HANS")
 			return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
 		}
         var intent = req.body.result.metadata.intentName;
@@ -159,24 +158,17 @@ function wakeUp() {
 function log(reqIn, resIn, score, intent, callback) {
     var resOut = resIn.split(':')[0];
     return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
-		console.log("**********************DINGEN***********************")
         callback();
     })
 }
 
 function returnJson(speech, followUp) {
-	console.log("*******************************SENT*****************************")
-	console.log(sent)
-	if(!sent){
 	//	console.log("****************************SPEECH********************************")
 	//	console.log(speech)
 		var reqIn = request.body.result.resolvedQuery
 		var intent = request.body.result.metadata.intentName
 		var score = request.body.result.score
 		return log(reqIn, speech, score, intent, function() {
-			sent = true;
-			console.log("-----------------------------Buiten");
-			
 			return result.json({
 				speech: speech,
 				displayText: speech,
@@ -186,5 +178,4 @@ function returnJson(speech, followUp) {
 				}
 			});
 		})
-	}
 }
