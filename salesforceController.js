@@ -33,6 +33,7 @@ exports.getUser = function(access_token, fullname, callback) {
 }
 exports.getColumns = function(userID, callback) {
     oauth.getAccessToken('salesforce', userID, function(access_token) {
+		console.log(acces_token)
         var headers = {
             "Authorization": "Bearer " + access_token
         }
@@ -44,6 +45,7 @@ exports.getColumns = function(userID, callback) {
         }
 
         httpRequest(options, function(error, response, body) {
+			console.log(body)
             body = JSON.parse(body)
             var columns = [];
             for (var i = 0, len = body.fields.length; i < len; i++) {
