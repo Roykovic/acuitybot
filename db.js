@@ -31,24 +31,10 @@ exports.checkColumn = function(column, callback) {
 }
 
 exports.log = function(reqIn, resIn, score, intent, callback) {
-    pool.getConnection(function(err, connection) {
-        if (err) {
-            console.log("Return 1")
-            return callback();
-        }
-        connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(err, results) {
-            if (!err) {
-			connection.release();
-            console.log("Return 2")
-            return callback();
-            }
-        });
-        connection.on('error', function(err) {
-            connection.release();
-            console.log("Return 3")
-			console.log(err)
-            return callback();
-        });
+	exports.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(err, results) {
+		if(err) throw err;
+		
+        console.log("Return 2")
+        return callback();
     });
-
 }
