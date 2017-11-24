@@ -17,5 +17,7 @@ exports.parseBody = function(body, service){
             break;
     }
 	var date = new Date(expiresAtSeconds);
+	console.log(expiresAtSeconds)
+	console.log(date)
 	return [body, date]
 }
