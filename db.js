@@ -41,8 +41,8 @@ exports.checkColumn = function(column, callback) {
 }
 
 exports.log = function(reqIn, resIn, score, intent, callback) {
-	console.log("********************************HIT**********************************************")
     pool.getConnection(function(err, connection) {
+			console.log("********************************HIT**********************************************")
         if (err) {
             console.log("Return 1")
             return callback();
