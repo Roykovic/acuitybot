@@ -56,6 +56,7 @@ exports.log = function(reqIn, resIn, score, intent, callback) {
         connection.on('error', function(err) {
             connection.release();
             console.log("Return 3")
+			console.log(err)
             return callback();
         });
     });
