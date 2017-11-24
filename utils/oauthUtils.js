@@ -1,5 +1,5 @@
 'use strict'
-var httpUtils = require('./utils/httpUtils')
+var httpUtils = require('./httpUtils')
 var exports = module.exports = {};
 
 exports.parseBody = function(body, service){
