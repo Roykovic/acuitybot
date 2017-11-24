@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 'use strict';
-var request;
-var result;
+//var request;
+//var result;
 var db = require('./db');
 var service = require('./service')
 var apiController = require('./apiController')
@@ -59,8 +59,8 @@ restService.get('/auth/:service', function(req, res) {
 
 restService.post('/hook', function(req, res) {
     var userID = req.body.originalRequest.data.data.personId
-    request = req;
-    result = res;
+   // request = req;
+   // result = res;
     var sessionId = req.body.sessionId;
 	console.log(sessionId)
     var intent = req.body.result.metadata.intentName;
@@ -72,55 +72,55 @@ restService.post('/hook', function(req, res) {
             var variable = context.parameters['variable.original']
             var fullname = context.parameters['fullName']['sf-name']
             return salesforceController.updateUserInfo(userID, fullname, column, variable, function() {
-                return returnJson(fullname + "\'s " + column + " changed to " + variable);
+                return returnJson(res, fullname + "\'s " + column + " changed to " + variable);
             })
             break;
         case "User-info":
-            var nameObj = request.body.result.parameters['fullName']
+            var nameObj = req.body.result.parameters['fullName']
             var fullName = nameObj[Object.keys(nameObj)[0]]
-            var column = request.body.result.parameters['Variable_row']
+            var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
                 return userController.getUserEntities(sessionId, function(userEntities) {
                     if (userEntities) {
-                        return returnJson("This user could not be found in any of your connected apps")
+                        return returnJson(res, "This user could not be found in any of your connected apps")
                     } else {
-                        return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
+                        return returnJson(res, "You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
                     }
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
                 if (serviceType == service.services.IBM) {
-                    return returnJson("Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
+                    return returnJson(res, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
                 }
                 if (serviceType == service.services.SalesForce) {
                     return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
-                        return returnJson(speech, followUp)
+                        return returnJson(res, speech, followUp)
                     });
                 }
                 if (serviceType == service.services.None) {
-                    return returnJson("This user could not be found in any of your connected apps")
+                    return returnJson(res, "This user could not be found in any of your connected apps")
                 }
             })
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
-            ibmController.getFromIBM(request.body.result.parameters['type'], function(speech) {
-                return returnJson(speech);
+            ibmController.getFromIBM(req.body.result.parameters['type'], function(speech) {
+                return returnJson(res, speech);
             });
             break;
         case "ibmPost":
         case "ibmPostNode":
-            ibmController.postToIBM(function(speech, followUp) {
+            ibmController.postToIBM(function(res, speech, followUp) {
                 return returnJson(speech, followUp);
-            }, request.body.result.parameters['content'], request.body.result.parameters['type'], request.body.result.parameters['activity']);
+            }, req.body.result.parameters['content'], req.body.result.parameters['type'], req.body.result.parameters['activity']);
             break;
         case "markTodo":
-            ibmController.updateIBM(request.body.result.parameters['todoName'], function(speech) {
+            ibmController.updateIBM(req.body.result.parameters['todoName'], function(res, speech) {
                 return returnJson(speech);
             });
             break;
         case "joke":
-            apiController.get('https://icanhazdadjoke.com/', function(joke) {
+            apiController.get('https://icanhazdadjoke.com/', function(res, joke) {
                 return returnJson(joke)
             })
             break;
@@ -134,18 +134,18 @@ restService.listen((process.env.PORT || 5000), function() {
     console.log("Server listening");
 });
 
-function wakeUp() {
-    if (request.body) {
-        if (request.body.result) {
+function wakeUp(res, req) {
+    if (req.body) {
+        if (req.body.result) {
             speech = '';
 
-            if (request.body.result.fulfillment) {
-                speech += request.body.result.fulfillment.speech;
+            if (req.body.result.fulfillment) {
+                speech += req.body.result.fulfillment.speech;
                 speech += ' ';
             }
         }
     }
-    return returnJson(speech);
+    return returnJson(res, speech);
 }
 
 function log(reqIn, resIn, score, intent, callback) {
@@ -155,12 +155,12 @@ function log(reqIn, resIn, score, intent, callback) {
     })
 }
 
-function returnJson(speech, followUp) {
+function returnJson(result, request, speech, followUp) {
 	//	console.log("****************************SPEECH********************************")
 	//	console.log(speech)
-		var reqIn = request.body.result.resolvedQuery
-		var intent = request.body.result.metadata.intentName
-		var score = request.body.result.score
+		var reqIn = req.body.result.resolvedQuery
+		var intent = req.body.result.metadata.intentName
+		var score = req.body.result.score
 		return log(reqIn, speech, score, intent, function() {
 			return result.json({
 				speech: speech,
