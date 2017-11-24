@@ -72,7 +72,7 @@ restService.post('/hook', function(req, res) {
             var variable = context.parameters['variable.original']
             var fullname = context.parameters['fullName']['sf-name']
             return salesforceController.updateUserInfo(userID, fullname, column, variable, function() {
-                return returnJson(res, fullname + "\'s " + column + " changed to " + variable);
+                return returnJson(res, req, fullname + "\'s " + column + " changed to " + variable);
             })
             break;
         case "User-info":
@@ -82,30 +82,30 @@ restService.post('/hook', function(req, res) {
             if (!fullName) {
                 return userController.getUserEntities(sessionId, function(userEntities) {
                     if (userEntities) {
-                        return returnJson(res, "This user could not be found in any of your connected apps")
+                        return returnJson(res, req, "This user could not be found in any of your connected apps")
                     } else {
-                        return returnJson(res, "You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
+                        return returnJson(res, req, "You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
                     }
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
                 if (serviceType == service.services.IBM) {
-                    return returnJson(res, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
+                    return returnJson(res, req, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
                 }
                 if (serviceType == service.services.SalesForce) {
                     return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
-                        return returnJson(res, speech, followUp)
+                        return returnJson(res, req, speech, followUp)
                     });
                 }
                 if (serviceType == service.services.None) {
-                    return returnJson(res, "This user could not be found in any of your connected apps")
+                    return returnJson(res, req, "This user could not be found in any of your connected apps")
                 }
             })
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
             ibmController.getFromIBM(req.body.result.parameters['type'], function(speech) {
-                return returnJson(res, speech);
+                return returnJson(res, req, speech);
             });
             break;
         case "ibmPost":
@@ -125,7 +125,7 @@ restService.post('/hook', function(req, res) {
             })
             break;
         default:
-            return wakeUp();
+            return wakeUp(res, req);
             break;
     }
 })
@@ -145,7 +145,7 @@ function wakeUp(res, req) {
             }
         }
     }
-    return returnJson(res, speech);
+    return returnJson(res, req, speech);
 }
 
 function log(reqIn, resIn, score, intent, callback) {
