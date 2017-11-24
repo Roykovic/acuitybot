@@ -4,6 +4,7 @@ var config = require('./config/config.js');
 var db = require('./db');
 var httpRequest = require('request');
 var exports = module.exports = {};
+var httpUtils = require('./utils/httpUtils')
 
 exports.getWebpage = function(service) {
     var webpage;
@@ -39,20 +40,21 @@ exports.getTokens = function(service, code, userID, callback) {
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
-		console.log("***************************ERROR***********************************")
-		console.log(error)
-		console.log("***************************BODY***********************************")
-		console.log(typeof body)
-		console.log("***************************END BODY***********************************")			
-        body = JSON.parse(body)
-        var issued_at = body.issued_at;
-        var validity = 12 * 3600000;
-        var expiresAtSeconds = +issued_at + +validity;
-        var d = new Date(expiresAtSeconds);
-        var access_token = body.access_token
-        return exports.registerToken(userID, access_token, d, function(access_token, succes) {
-            callback(access_token)
-        })
+		httpUtils.parseFormData(body)
+//		console.log("***************************ERROR***********************************")
+//		console.log(error)
+//		console.log("***************************BODY***********************************")
+//		console.log(typeof body)
+//		console.log("***************************END BODY***********************************")			
+//        body = JSON.parse(body)
+//        var issued_at = body.issued_at;
+//        var validity = 12 * 3600000;
+//        var expiresAtSeconds = +issued_at + +validity;
+//        var d = new Date(expiresAtSeconds);
+//        var access_token = body.access_token
+//        return exports.registerToken(userID, access_token, d, function(access_token, succes) {
+//            callback(access_token)
+//        })
     })
 }
 
