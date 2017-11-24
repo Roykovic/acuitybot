@@ -6,22 +6,11 @@ var exports = module.exports = {};
 var pool = mysql.createPool(config.connection);
 
 exports.query = function(query, params, callback) {
-	console.log("********************************HIT**********************************************")
-    pool.getConnection(function(err, connection) {
-        if (err) {
-            return callback(err, false);          
-        }
-        connection.query(query, params, function(err, results) {
-            if (!err) {
-                connection.release();
-                return callback(results, true);    
-            }
+	pool.query(query, params, function(err, results) {
+		if(err) throw err;
+		
+        return callback(results, true);    
         });
-        connection.on('error', function(err) {
-            console.log("Error thrown: " + err)
-            return callback(err, false);
-        });
-    });
 }
 
 exports.checkColumn = function(column, callback) {
