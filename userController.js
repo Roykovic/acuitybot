@@ -55,7 +55,6 @@ exports.getAllNames = function(callback) {
 
 exports.getServiceByName = function(fullname, userID, callback) {
     return oauth.getAccessToken('salesforce', userID, function(access_token) {
-		console.log("Acces token "+access_token)
         if (access_token) {
             salesforceController.getUser(access_token, fullname, function(sfUser) {
                 if (sfUser) {
