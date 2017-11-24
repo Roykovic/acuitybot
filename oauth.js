@@ -39,7 +39,9 @@ exports.getTokens = function(service, code, userID, callback) {
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
+		console.log("***************************ERROR***********************************")
 		console.log(error)
+		console.log("***************************BODY***********************************")		
 		console.log(body)
         body = JSON.parse(body)
         var issued_at = body.issued_at;
