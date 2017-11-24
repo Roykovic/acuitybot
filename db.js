@@ -7,8 +7,10 @@ var pool = mysql.createPool(config.connection);
 
 exports.query = function(query, params, callback) {
 	pool.query(query, params, function(err, results) {
-		if(err) console.log("****************************************************************Error"+err);
-		
+		console.log("********************************************************************")
+		console.log(query)
+		console.log(results)
+		console.log("********************************************************************")
         return callback(results, true);    
         });
 }
