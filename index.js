@@ -80,6 +80,7 @@ restService.post('/hook', function(req, res) {
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
                 return userController.getUserEntities(sessionId, function(userEntities) {
+					console.log(userEntities)
                     if (userEntities) {
                         return returnJson(res, req, "This user could not be found in any of your connected apps")
                     } else {
@@ -88,6 +89,7 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
+				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
                     return returnJson(res, req, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
                 }
@@ -136,7 +138,7 @@ restService.listen((process.env.PORT || 5000), function() {
 function wakeUp(res, req) {
     if (req.body) {
         if (req.body.result) {
-            speech = '';
+            var speech = '';
 
             if (req.body.result.fulfillment) {
                 speech += req.body.result.fulfillment.speech;
