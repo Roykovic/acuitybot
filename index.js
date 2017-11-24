@@ -14,8 +14,7 @@
  * limitations under the License.
  */
 'use strict';
-//var request;
-//var result;
+
 var db = require('./db');
 var service = require('./service')
 var apiController = require('./apiController')

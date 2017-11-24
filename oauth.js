@@ -45,16 +45,22 @@ exports.getTokens = function(service, code, userID, callback) {
 		body = parsedBody[0];
 		var expireDate = parsedBody[1]
         var access_token = body.access_token
-        return exports.registerToken(service, userID, access_token, expireDate, function(access_token, succes) {
+		var refresh_token = body.refresh_token
+        return exports.registerToken(service, userID, access_token, refresh_token, expireDate, function(access_token, succes) {
             callback(access_token)
         })
     })
 }
 
-exports.registerToken = function(service, userID, access_token, expiresAt, callback) {
-	var query = 'INSERT INTO auth (userID, '+service+'_access_token, '+service+'_expires_at) VALUES (?,?,?) ON DUPLICATE KEY UPDATE  `userID`=VALUES(`userID`), `'+service+'_access_token`=VALUES(`'+service+'_access_token`), `'+service+'_expires_at`=VALUES(`'+service+'_expires_at`)'
+exports.registerToken = function(service, userID, access_token, refresh_token, expiresAt, callback) {
+	if(!refresh_token){
+		var query = 'INSERT INTO auth (userID, '+service+'_access_token, '+service+'_expires_at) VALUES (?,?,?) ON DUPLICATE KEY UPDATE  `userID`=VALUES(`userID`), `'+service+'_access_token`=VALUES(`'+service+'_access_token`), `'+service+'_expires_at`=VALUES(`'+service+'_expires_at`)'
+	}
+	else{
+		var query = 'INSERT INTO auth (userID, '+service+'_access_token, '+service+'_expires_at,  '+service+'_refresh_token) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE  `userID`=VALUES(`userID`), `'+service+'_access_token`=VALUES(`'+service+'_access_token`), `'+service+'_expires_at`=VALUES(`'+service+'_expires_at`), `'+service+'_refresh_token`=VALUES(`'+service+'_refresh_token`)'
+	}
 	
-	return db.query(query, [userID, access_token, expiresAt], function(result) {
+	return db.query(query, [userID, access_token, expiresAt, refresh_token], function(result) {
         return callback()
     })
 }
