@@ -10,5 +10,5 @@ exports.parseFormData = function(formData){
 		var element = splitString[i].split("=")
 		returnBody[element[0]] = element[1]
 	}
-	console.log(returnBody);
+	return returnBody;
 }

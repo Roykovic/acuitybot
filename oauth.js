@@ -5,6 +5,7 @@ var db = require('./db');
 var httpRequest = require('request');
 var exports = module.exports = {};
 var httpUtils = require('./utils/httpUtils')
+var oauthUtils = require('./utils/oauthUtils')
 
 exports.getWebpage = function(service) {
     var webpage;
@@ -40,21 +41,13 @@ exports.getTokens = function(service, code, userID, callback) {
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
-		httpUtils.parseFormData(body)
-//		console.log("***************************ERROR***********************************")
-//		console.log(error)
-//		console.log("***************************BODY***********************************")
-//		console.log(typeof body)
-//		console.log("***************************END BODY***********************************")			
-//        body = JSON.parse(body)
-//        var issued_at = body.issued_at;
-//        var validity = 12 * 3600000;
-//        var expiresAtSeconds = +issued_at + +validity;
-//        var d = new Date(expiresAtSeconds);
-//        var access_token = body.access_token
-//        return exports.registerToken(userID, access_token, d, function(access_token, succes) {
-//            callback(access_token)
-//        })
+		var parsedBody = oauthUtils.parseBody(body)
+		body = parsedBody[0];
+		var expireDate = parsedBody[1]
+        var access_token = body.access_token
+        return exports.registerToken(userID, access_token, expireDate, function(access_token, succes) {
+            callback(access_token)
+        })
     })
 }
 
