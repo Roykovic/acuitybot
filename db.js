@@ -48,13 +48,14 @@ exports.log = function(reqIn, resIn, score, intent, callback) {
             return callback();
         }
         connection.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(err, results) {
-            connection.release();
             if (!err) {
+			connection.release();
             console.log("Return 2")
             return callback();
             }
         });
         connection.on('error', function(err) {
+            connection.release();
             console.log("Return 3")
 			console.log(err)
             return callback();
