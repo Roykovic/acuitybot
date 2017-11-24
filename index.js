@@ -65,10 +65,10 @@ restService.post('/hook', function(req, res) {
     result = res;
     sessionId = req.body.sessionId;
 	    console.log("Session ID : " + sessionId)
-   return userController.addUserEntities(sessionId, userID, function(succes) {
-        if (!succes){
-			return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
-		}
+   //return userController.addUserEntities(sessionId, userID, function(succes) {
+   //    if (!succes){
+	//		return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
+	//	}
         var intent = req.body.result.metadata.intentName;
         switch (intent) {
             case "update":
@@ -135,7 +135,7 @@ restService.post('/hook', function(req, res) {
                 break;
         }
     })
-})
+//})
 
 restService.listen((process.env.PORT || 5000), function() {
     console.log("Server listening");
