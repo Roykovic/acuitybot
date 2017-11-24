@@ -12,7 +12,9 @@ exports.parseBody = function(body, service){
 			expiresAtSeconds = +issued_at + +validity;
 			break;
         case "ibm":
+		console.log("IBM")
 			body = httpUtils.parseFormData(body)
+			console.log(+body.issued_on + +body.expires_in)
 			expiresAtSeconds = +body.issued_on + +body.expires_in
             break;
     }
