@@ -32,8 +32,6 @@ exports.checkColumn = function(column, callback) {
 
 exports.log = function(reqIn, resIn, score, intent, callback) {
 	exports.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(results, err) {
-        console.log("Results")
-		console.log(results)
         return callback();
     });
 }
