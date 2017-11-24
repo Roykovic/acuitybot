@@ -39,6 +39,8 @@ exports.getTokens = function(service, code, userID, callback) {
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
+		console.log(error)
+		console.log(body)
         body = JSON.parse(body)
         var issued_at = body.issued_at;
         var validity = 12 * 3600000;
