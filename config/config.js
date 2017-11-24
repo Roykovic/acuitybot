@@ -1,10 +1,19 @@
 var exports = module.exports = {};
 
-//Salesforce OAUTH
+//General OAUTH
 exports.grant_type = "authorization_code"
-exports.client_id = "3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1"
-exports.client_secret = "236296553525088968"
-exports.callback_uri = "https://safe-ocean-30268.herokuapp.com/auth/salesforce"
+
+//Salesforce OAUTH
+exports.salesforce = {}
+exports.salesforce.client_id = "3MVG9HxRZv05HarTorx5Mf0IjDgnpJGwNuO0DCiL0y070i3yFQiLuVegdzZ9oupv5F2AWU1rRT5fv9EpGGfb1"
+exports.salesforce.client_secret = "236296553525088968"
+exports.salesforce.callback_uri = "https://safe-ocean-30268.herokuapp.com/auth/salesforce"
+
+//IBM OAUTH
+exports.ibm = {}
+exports.ibm.client_id = "app_200049189_1511514432405"
+exports.ibm.client_secret = "ad137be1630841a8ceba6f2928cae4bcc317887b2db3b9279c29e8974f586e9a2c1c2012a1b7a264d6bdf52bd6fd794fce0a397ad57878cd8a5ad4abdc0010a46643dfa9f7f2a3fbf1b20d8d13eb0bcb0860d3ed9c8aa60e6ea369a1445e75ca0af6b3944a0f876a7897f4ec69fe9101e8bde62bea3c4b498bc76d7bb824"
+exports.ibm.callback_uri = "https://safe-ocean-30268.herokuapp.com/auth/ibm"
 
 //MYSQL connection
 exports.connection = {

@@ -24,10 +24,10 @@ exports.getTokens = function(service, code, userID, callback) {
     var url;
     switch (service) {
         case "salesforce":
-            url = "https://login.salesforce.com/services/oauth2/token?code=" + code + "&grant_type=" + config.grant_type + "&client_id=" + config.client_id + "&client_secret=" + config.client_secret + "&redirect_uri=" + config.callback_uri
+            url = "https://login.salesforce.com/services/oauth2/token?code=" + code + "&grant_type=" + config.grant_type + "&client_id=" + config.salesforce.client_id + "&client_secret=" + config.salesforce.client_secret + "&redirect_uri=" + config.salesforce.callback_uri
 			break;
         case "connections":
-            url = "connectionsIndex"
+            url = "https://apps.ce.collabserv.com/manage/oauth2/token?code=" + code + "&grant_type=" + config.grant_type + "&client_id=" + config.ibm.client_id + "&client_secret=" + config.ibm.client_secret + "&callback_uri=" + config.ibm.callback_uri
             break;
         default:
             webpage = "404"
