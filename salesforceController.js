@@ -44,7 +44,7 @@ exports.getColumns = function(userID, callback) {
         }
 
         httpRequest(options, function(error, response, body) {
-			console.log(error)
+			console.log(access_token)
 			console.log(body)
             body = JSON.parse(body)
             var columns = [];
