@@ -45,13 +45,13 @@ exports.getTokens = function(service, code, userID, callback) {
 		body = parsedBody[0];
 		var expireDate = parsedBody[1]
         var access_token = body.access_token
-        return exports.registerToken(userID, access_token, expireDate, function(access_token, succes) {
+        return exports.registerToken(service, userID, access_token, expireDate, function(access_token, succes) {
             callback(access_token)
         })
     })
 }
 
-exports.registerToken = function(userID, access_token, expiresAt, callback) {
+exports.registerToken = function(service, userID, access_token, expiresAt, callback) {
 	var query = 'REPLACE INTO auth (userID, '+service+'_access_token, '+service+'_expires_at) VALUES (?,?,?)'
     return db.query(query, [userID, access_token, expiresAt], function(result) {
         return callback()
