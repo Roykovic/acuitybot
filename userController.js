@@ -80,8 +80,7 @@ exports.addUserEntities = function(sessionId, userId, callback) {
             var body = '{ "entities": [ { "entries": ['
             var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
             return oauth.getAccessToken('salesforce', userId, function(access_token) {
-                if (!access_token) {
-console.log("No acces token")					
+                if (!access_token) {			
                     return callback(false)
                 }
                 return salesforceController.getContacts(access_token, function(contacts) {
@@ -89,17 +88,13 @@ console.log("No acces token")
                         if (i > 0) body += ','
                         body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
                     }
-                    body += bodyEnd;
-console.log("Body:")		
-					console.log(body)						
+                    body += bodyEnd;					
                     return apiController.post(postPath, accesToken, body, function(response) {										
                         return callback(true)
                     })
                 })
             })
-        }	
-console.log("Response:")		
-console.log(response)			
+        }			
         return callback(true)
     })
 }
