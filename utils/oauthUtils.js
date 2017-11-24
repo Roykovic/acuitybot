@@ -15,8 +15,6 @@ exports.parseBody = function(body, service){
 			body = httpUtils.parseFormData(body)
 			expiresAtSeconds = +body.issued_on + +body.expires_in
             break;
-        default:
-            webpage = "404"
     }
 	var date = new Date(expiresAtSeconds);
 	return [body, date]
