@@ -41,7 +41,7 @@ exports.getTokens = function(service, code, userID, callback) {
     }
     // Start the request
     httpRequest(options, function(error, response, body) {
-		var parsedBody = oauthUtils.parseBody(body)
+		var parsedBody = oauthUtils.parseBody(body, service)
 		body = parsedBody[0];
 		var expireDate = parsedBody[1]
         var access_token = body.access_token
