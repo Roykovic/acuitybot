@@ -33,7 +33,7 @@ exports.getUser = function(access_token, fullname, callback) {
 }
 exports.getColumns = function(userID, callback) {
     oauth.getAccessToken('salesforce', userID, function(access_token) {
-		console.log(acces_token)
+		console.log(access_token)
         var headers = {
             "Authorization": "Bearer " + access_token
         }
