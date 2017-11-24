@@ -78,7 +78,6 @@ restService.post('/hook', function(req, res) {
             var nameObj = req.body.result.parameters['fullName']
             var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = req.body.result.parameters['Variable_row']
-			console.log("fullname "+fullName)
             if (!fullName) {
                 return userController.getUserEntities(sessionId, function(userEntities) {
                     if (userEntities) {
