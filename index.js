@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//'use strict';
-var sent;
+'use strict';
 var request;
 var result;
 var db = require('./db');
@@ -64,78 +63,72 @@ restService.post('/hook', function(req, res) {
     request = req;
     result = res;
     sessionId = req.body.sessionId;
-	    console.log("Session ID : " + sessionId)
-   //return userController.addUserEntities(sessionId, userID, function(succes) {
-   //    if (!succes){
-	//		return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + '/' + sessionId);
-	//	}
-        var intent = req.body.result.metadata.intentName;
-        switch (intent) {
-            case "update":
-            case "data for update":
-                var context = req.body.result.contexts[1]
-                var column = context.parameters.Variable_row;
-                var variable = context.parameters['variable.original']
-                var fullname = context.parameters['fullName']['sf-name']
-                return salesforceController.updateUserInfo(userID, fullname, column, variable, function() {
-                    return returnJson(fullname + "\'s " + column + " changed to " + variable);
-                })
-                break;
-            case "User-info":
-                var nameObj = request.body.result.parameters['fullName']
-                var fullName = nameObj[Object.keys(nameObj)[0]]
-                var column = request.body.result.parameters['Variable_row']
-                if (!fullName) {
-                    return userController.getUserEntities(sessionId, function(userEntities) {
-                        if (userEntities) {
-                            return returnJson("This user could not be found in any of your connected apps")
-                        } else {
-                            return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
-                        }
-                    })
-                }
-                return userController.getServiceByName(fullName, userID, function(serviceType) {
-                    if (serviceType == service.services.IBM) {
-                        return returnJson("Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
-                    }
-                    if (serviceType == service.services.SalesForce) {
-                        return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
-                            return returnJson(speech, followUp)
-                        });
-                    }
-                    if (serviceType == service.services.None) {
+    var intent = req.body.result.metadata.intentName;
+    switch (intent) {
+        case "update":
+        case "data for update":
+            var context = req.body.result.contexts[1]
+            var column = context.parameters.Variable_row;
+            var variable = context.parameters['variable.original']
+            var fullname = context.parameters['fullName']['sf-name']
+            return salesforceController.updateUserInfo(userID, fullname, column, variable, function() {
+                return returnJson(fullname + "\'s " + column + " changed to " + variable);
+            })
+            break;
+        case "User-info":
+            var nameObj = request.body.result.parameters['fullName']
+            var fullName = nameObj[Object.keys(nameObj)[0]]
+            var column = request.body.result.parameters['Variable_row']
+            if (!fullName) {
+                return userController.getUserEntities(sessionId, function(userEntities) {
+                    if (userEntities) {
                         return returnJson("This user could not be found in any of your connected apps")
+                    } else {
+                        return returnJson("You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
                     }
                 })
-                break;
-            case "getNodeFromIBM":
-            case "getFromIBM":
-                ibmController.getFromIBM(request.body.result.parameters['type'], function(speech) {
-                    return returnJson(speech);
-                });
-                break;
-            case "ibmPost":
-            case "ibmPostNode":
-                ibmController.postToIBM(function(speech, followUp) {
-                    return returnJson(speech, followUp);
-                }, request.body.result.parameters['content'], request.body.result.parameters['type'], request.body.result.parameters['activity']);
-                break;
-            case "markTodo":
-                ibmController.updateIBM(request.body.result.parameters['todoName'], function(speech) {
-                    return returnJson(speech);
-                });
-                break;
-            case "joke":
-                apiController.get('https://icanhazdadjoke.com/', function(joke) {
-                    return returnJson(joke)
-                })
-                break;
-            default:
-                return wakeUp();
-                break;
-        }
-    })
-//})
+            }
+            return userController.getServiceByName(fullName, userID, function(serviceType) {
+                if (serviceType == service.services.IBM) {
+                    return returnJson("Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
+                }
+                if (serviceType == service.services.SalesForce) {
+                    return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
+                        return returnJson(speech, followUp)
+                    });
+                }
+                if (serviceType == service.services.None) {
+                    return returnJson("This user could not be found in any of your connected apps")
+                }
+            })
+            break;
+        case "getNodeFromIBM":
+        case "getFromIBM":
+            ibmController.getFromIBM(request.body.result.parameters['type'], function(speech) {
+                return returnJson(speech);
+            });
+            break;
+        case "ibmPost":
+        case "ibmPostNode":
+            ibmController.postToIBM(function(speech, followUp) {
+                return returnJson(speech, followUp);
+            }, request.body.result.parameters['content'], request.body.result.parameters['type'], request.body.result.parameters['activity']);
+            break;
+        case "markTodo":
+            ibmController.updateIBM(request.body.result.parameters['todoName'], function(speech) {
+                return returnJson(speech);
+            });
+            break;
+        case "joke":
+            apiController.get('https://icanhazdadjoke.com/', function(joke) {
+                return returnJson(joke)
+            })
+            break;
+        default:
+            return wakeUp();
+            break;
+    }
+})
 
 restService.listen((process.env.PORT || 5000), function() {
     console.log("Server listening");
