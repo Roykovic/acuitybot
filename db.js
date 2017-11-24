@@ -7,7 +7,7 @@ var pool = mysql.createPool(config.connection);
 
 exports.query = function(query, params, callback) {
 	pool.query(query, params, function(err, results) {
-		if(err) throw err;
+		if(err) console.log(err);
 		
         return callback(results, true);    
         });
@@ -31,10 +31,9 @@ exports.checkColumn = function(column, callback) {
 }
 
 exports.log = function(reqIn, resIn, score, intent, callback) {
-	exports.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(err, results) {
-		if(err) throw err;
-		
-        console.log("Return 2")
+	exports.query('INSERT INTO logs (request, result, score, intent) VALUES (?,?,?,?)', [reqIn, resIn, score, intent], function(results, err) {
+        console.log("Results")
+		console.log(results)
         return callback();
     });
 }
