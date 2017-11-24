@@ -6,6 +6,7 @@ var exports = module.exports = {};
 var pool = mysql.createPool(config.connection);
 
 exports.query = function(query, params, callback) {
+	console.log("********************************HIT**********************************************")
     pool.getConnection(function(err, connection) {
         if (err) {
             return callback(err, false);          
@@ -42,7 +43,6 @@ exports.checkColumn = function(column, callback) {
 
 exports.log = function(reqIn, resIn, score, intent, callback) {
     pool.getConnection(function(err, connection) {
-			console.log("********************************HIT**********************************************")
         if (err) {
             console.log("Return 1")
             return callback();
