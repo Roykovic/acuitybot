@@ -121,11 +121,12 @@ exports.refreshAccesToken = function(service, refreshToken, userID, callback){
 	}
 	
 	httpRequest(options, function(error, response, body) {
+		if(err) callback()
 		returnBody = oauthUtils.parseBody(body, service)
 		body = returnBody[0]
 		var expiresAt = returnBody[1]
 		exports.registerToken(service, userID, body.access_token, body.refresh_token, expiresAt, function(){
-			callback();
+			callback(true);
 		})
 	})	
 }	
