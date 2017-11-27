@@ -61,8 +61,6 @@ exports.getServiceByName = function(fullname, userID, callback) {
                     return callback(service.services.SalesForce)
                 }
                 ibmController.getUser(fullname, function(ibmUser) {
-					console.log("IBM USER")
-					console.log(ibmUser)
                     if (ibmUser) {
                         return callback(service.services.IBM)
                     }
@@ -90,7 +88,7 @@ exports.addUserEntities = function(sessionId, userId, callback) {
                         if (i > 0) body += ','
                         body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
                     }
-                    body += bodyEnd;					
+                    body += bodyEnd;		
                     return apiController.post(postPath, accesToken, body, function(response) {										
                         return callback(true)
                     })

@@ -3,6 +3,7 @@
 var config = require('./config/config.js');
 var db = require('./db');
 var httpRequest = require('request');
+var service = require('./service');
 var exports = module.exports = {};
 
 var oauthUtils = require('./utils/oauthUtils')
@@ -76,4 +77,9 @@ exports.getAccessToken = function(service, userID, callback) {
         }
         return callback()
     })
+}
+
+exports.checkExpiration(){
+	console.log("SERVICES")
+	console.log(service.services)
 }

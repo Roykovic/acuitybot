@@ -88,7 +88,6 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
-				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
                     return returnJson(res, req, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
                 }
@@ -124,6 +123,8 @@ restService.post('/hook', function(req, res) {
                 return returnJson(joke)
             })
             break;
+		case "test":
+			OAuthController.checkExpiration
         default:
             return wakeUp(res, req);
             break;
