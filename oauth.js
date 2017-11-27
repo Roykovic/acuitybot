@@ -89,7 +89,7 @@ exports.checkExpiration = function(userID, callback){
 		return db.query(query, userID, function(result){
 			i++;
 			serviceResult = result[0];
-			console.log(serviceResult[service+"_expires_at"])
+			console.log(serviceResult)
 			console.log(new Date())
 			console.log(serviceResult[service+"_expires_at"] > new Date() || serviceResult[service+"_expires_at"] < new Date() || serviceResult[service+"_expires_at"] == new Date())
 			if (result.length < 1 || serviceResult[service+"_expires_at"] < new Date()) {
