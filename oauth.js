@@ -90,6 +90,7 @@ exports.checkExpiration = function(userID, callback){
 			listCount++
 			console.log("Result")
 			console.log(result)
+			console.log(service+"_expires_at")
 			console.log(result[0][service+"_expires_at"])
 			if (result[0][service+"_expires_at"] < new Date()) {
                 expired.push(service);
