@@ -89,8 +89,8 @@ exports.checkExpiration = function(userID, callback){
 		return db.query(query, userID, function(result){
 			i++;
 			serviceResult = result[0];
-			console.log(serviceResult)
-			if (result.length < 1 || result[0][service+"_expires_at"] < new Date()) {
+			
+			if (result.length < 1 || serviceResult[service+"_expires_at"] < new Date()) {
 				if(serviceResult[service+"_refresh_token"]){
 					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
 				}
