@@ -79,7 +79,7 @@ exports.getAccessToken = function(service, userID, callback) {
     })
 }
 
-exports.checkExpiration(){
+exports.checkExpiration = function(){
 	console.log("SERVICES")
 	console.log(service.services)
 }
