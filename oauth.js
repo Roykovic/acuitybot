@@ -84,7 +84,7 @@ exports.checkExpiration = function(userID, callback){
 	var services = Object.keys(serviceEnum.services);
 	var listCount = 0;
 	for(var i = 1; i<services.length; ++i){
-		listcount++
+		listCount++
 		var service = services[i];
 		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
 		db.query(query, userID, function(result){
