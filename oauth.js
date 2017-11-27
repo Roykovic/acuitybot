@@ -79,13 +79,12 @@ exports.getAccessToken = function(service, userID, callback) {
     })
 }
 
-exports.checkExpiration = function(userID){
+exports.checkExpiration = function(userID, callback){
 	var expired = [];
 	var services = Object.keys(serviceEnum.services);
-	console.log("Services")
-	console.log(services)
-	console.log(services.length)
+	var listCount = 0;
 	for(var i = 1; i<services.length; ++i){
+		listcount++
 		var service = services[i];
 		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
 		db.query(query, userID, function(result){
@@ -95,8 +94,8 @@ exports.checkExpiration = function(userID){
                 expired.push(service);
             }
 		})
+		if(listCount == services.length){
+			return callback(expired)
+		}
 	}
-	console.log("Expired")
-	console.log(expired)
-	return expired;
 }
