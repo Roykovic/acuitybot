@@ -84,11 +84,11 @@ exports.checkExpiration = function(userID, callback){
 	var services = Object.keys(serviceEnum.services);
 	var listCount = 1;
 	for(var i = 1; i<services.length; ++i){
-		listCount++
 		var service = services[i];
 		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
 		console.log(query)
 		db.query(query, userID, function(result){
+			listCount++
 			console.log("Result")
 			console.log(result)
 			if (result[0][service+"_expires_at"] < new Date()) {
