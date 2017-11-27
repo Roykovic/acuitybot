@@ -122,6 +122,6 @@ exports.refreshAccesToken = function(service, refreshToken, userID, callback){
 		body = httpUtils.parseFormData(body)
 		exports.registerToken(service, userID, body.access_token, body.refresh_token, body.expiresAt, function(){
 			callback();
-		}) {
+		})
 	})	
 }	
