@@ -5,7 +5,7 @@ var db = require('./db');
 var httpRequest = require('request');
 var serviceEnum = require('./service');
 var exports = module.exports = {};
-
+var httpUtils = require('./utils/httpUtils')
 var oauthUtils = require('./utils/oauthUtils')
 
 exports.getWebpage = function(service) {
@@ -92,9 +92,12 @@ exports.checkExpiration = function(userID, callback){
 			service = service.toLowerCase();
 			if (result.length < 1 || serviceResult[service+"_expires_at"] < new Date()) {
 				if(serviceResult[service+"_refresh_token"]){
-					exports.refreshAccesToken(service, serviceResult[service, service+"_refresh_token"])
+					exports.refreshAccesToken(service, serviceResult[service, service+"_refresh_token"], userID, function(succes){
+						if(!succes){
+							expired.push(service);
+						}
+					})
 				}
-                expired.push(service);
             }
 			if(i == services.length){
 				return callback(expired)
@@ -105,7 +108,7 @@ exports.checkExpiration = function(userID, callback){
 	return loop(services);
 }
 
-exports.refreshAccesToken = function(service, refreshToken){
+exports.refreshAccesToken = function(service, refreshToken, userID, callback){
 	if(service == "ibm"){
 		var url = "https://apps.ce.collabserv.com/manage/oauth2/token?grant_type=refresh_token&client_id=" + config.ibm.client_id + "&client_secret=" + config.ibm.client_secret + "&refresh_token=" + refreshToken
 	}
@@ -116,8 +119,9 @@ exports.refreshAccesToken = function(service, refreshToken){
 	}
 	
 	httpRequest(options, function(error, response, body) {
-		console.log("BODY")
-		console.log(body)
-		console.log("ENDBODY")
+		body = httpUtils.parseFormData(body)
+		exports.registerToken(service, userID, body.access_token, body.refresh_token, body.expiresAt, function(){
+			callback();
+		}) {
 	})	
 }	
