@@ -91,5 +91,7 @@ exports.checkExpiration = function(userID){
             }
 		})
 	}
+	console.log("Expired")
+	console.log(expired)
 	return expired;
 }
