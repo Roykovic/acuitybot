@@ -124,7 +124,7 @@ restService.post('/hook', function(req, res) {
             })
             break;
 		case "test":
-			OAuthController.checkExpiration
+			return returnJson(service.services)
         default:
             return wakeUp(res, req);
             break;
