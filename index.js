@@ -79,7 +79,7 @@ restService.post('/hook', function(req, res) {
             var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
-                return OauthController.checkExpiration(userID, function(expired) {
+                return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired) {
 						var speech = "Please make sure you are logged in to all services first. Please use this link/these links: "
 						for(var i = 0; i<expired.length; ++i){
