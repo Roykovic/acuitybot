@@ -87,6 +87,8 @@ exports.checkExpiration = function(userID, callback){
 		var service = services[i];
 		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
 		db.query(query, userID, function(result){
+			console.log"RESULT")
+			console.log(result)
 			i++;
 			if (!result || result[0][service+"_expires_at"] < new Date()) {
                 expired.push(service.toLowerCase());
