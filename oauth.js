@@ -81,8 +81,9 @@ exports.getAccessToken = function(service, userID, callback) {
 
 exports.checkExpiration = function(userID){
 	var expired;
-	var services = serviceEnum.services;
+	var services = Object.keys(serviceEnum.services);
 	console.log("Services")
+	console.log(services)
 	console.log(services.length)
 	for(var i = 1; i<services.length; ++i){
 		var service = services[i];
