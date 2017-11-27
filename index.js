@@ -84,6 +84,8 @@ restService.post('/hook', function(req, res) {
 						var speech = "Please make sure you are logged in to all services first. Please use this link/these links: "
 						for(var i = 0; i<expired.length; ++i){
 							speech += "\n"
+							speech += expired[i]
+							speech += "\n"							
 							speech += 'https://safe-ocean-30268.herokuapp.com' + "/login/"+expired[i]+"/" + userID + "/" + sessionId
 						}
                     return returnJson(res, req, speech)
