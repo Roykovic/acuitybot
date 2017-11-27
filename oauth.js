@@ -94,7 +94,11 @@ exports.checkExpiration = function(userID, callback){
                 expired.push(service);
             }
 		})
+		console.log(services.length)
+		console.log(listCount)
 		if(listCount == services.length){
+			console.log("Expired")
+			console.log(expired)
 			return callback(expired)
 		}
 	}
