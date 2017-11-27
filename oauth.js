@@ -85,10 +85,14 @@ exports.checkExpiration = function(userID, callback){
 	var i = 1;
 	var loop = function(services){
 		var service = services[i];
-		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
+		var query ='SELECT '+service+'_expires_at, '+service+'_refresh_token FROM auth WHERE userID = ?'
 		return db.query(query, userID, function(result){
 			i++;
+			serviceResult = result[0];
 			if (result.length < 1 || result[0][service+"_expires_at"] < new Date()) {
+				if(serviceResult[service+"_refresh_token"]){
+					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
+				}
                 expired.push(service.toLowerCase());
             }
 			if(i == services.length){
@@ -97,5 +101,22 @@ exports.checkExpiration = function(userID, callback){
 			else{loop(services)}
 		})
 	}
-	loop(services);
+	return loop(services);
 }
+
+exports.refreshAccesToken = function(service, refreshToken){
+	if(service == "IBM"){
+		url = "https://apps.ce.collabserv.com/manage/oauth2/token?grant_type=refresh_token&client_id=" + config.ibm.client_id + "&client_secret=" + config.ibm.client_secret + "&refresh_token=" + refreshToken
+	}
+	
+	var options = {
+		url: url,
+		method: "GET"
+	}
+	
+	httpRequest(options, function(error, response, body) {
+		console.log("BODY")
+		console.log(body)
+		console.log("ENDBODY")
+	})	
+	
