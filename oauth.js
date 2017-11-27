@@ -91,4 +91,5 @@ exports.checkExpiration = function(userID){
             }
 		})
 	}
+	return expired;
 }
