@@ -89,6 +89,7 @@ exports.checkExpiration = function(userID, callback){
 		return db.query(query, userID, function(result){
 			i++;
 			serviceResult = result[0];
+			console.log(serviceResult)
 			if (result.length < 1 || result[0][service+"_expires_at"] < new Date()) {
 				if(serviceResult[service+"_refresh_token"]){
 					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
@@ -105,6 +106,7 @@ exports.checkExpiration = function(userID, callback){
 }
 
 exports.refreshAccesToken = function(service, refreshToken){
+	console.log("HANS")
 	if(service == "IBM"){
 		url = "https://apps.ce.collabserv.com/manage/oauth2/token?grant_type=refresh_token&client_id=" + config.ibm.client_id + "&client_secret=" + config.ibm.client_secret + "&refresh_token=" + refreshToken
 	}
