@@ -3,7 +3,7 @@
 var config = require('./config/config.js');
 var db = require('./db');
 var httpRequest = require('request');
-var service = require('./service');
+var serviceEnum = require('./service');
 var exports = module.exports = {};
 
 var oauthUtils = require('./utils/oauthUtils')
@@ -79,8 +79,16 @@ exports.getAccessToken = function(service, userID, callback) {
     })
 }
 
-exports.checkExpiration = function(){
-	console.log("SERVICES")
-	console.log(service.services)
-	return;
+exports.checkExpiration = function(userID){
+	var expired;
+	var services = serviceEnum.services;
+	for(var i = 1; i<services.length; ++i){
+		var service = services[i];
+		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
+		db.query(query, userID, function(result){
+			if (result[0].expires_at < new Date()) {
+                expired[i-1] = service;
+            }
+		})
+	}
 }

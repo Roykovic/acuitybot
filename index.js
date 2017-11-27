@@ -79,11 +79,15 @@ restService.post('/hook', function(req, res) {
             var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
-                return userController.getUserEntities(sessionId, function(userEntities) {
-                    if (userEntities) {
-                        return returnJson(res, req, "This user could not be found in any of your connected apps")
-                    } else {
-                        return returnJson(res, req, "You must login for this action, please use this link: " + 'https://safe-ocean-30268.herokuapp.com' + "/login/salesforce/" + userID + "/" + sessionId)
+                return OauthController.checkExpiration(userID, function(expired) {
+                    if (expired) {
+						var speech = "Please make sure you are logged in to all services first. Please use this link/these links: "
+						for(var i = 0; i<expired.length; ++i){
+							speech += 'https://safe-ocean-30268.herokuapp.com' + "/login/"+expired[i]+"/" + userID + "/" + sessionId)
+						}
+                    return returnJson(res, req, speech)
+					} else {
+						return returnJson(res, req, "This user could not be found in any of your connected apps")
                     }
                 })
             }
