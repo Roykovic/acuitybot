@@ -82,6 +82,8 @@ exports.getAccessToken = function(service, userID, callback) {
 exports.checkExpiration = function(userID){
 	var expired;
 	var services = serviceEnum.services;
+	console.log("Services")
+	console.log(services)
 	for(var i = 1; i<services.length; ++i){
 		var service = services[i];
 		var query ='SELECT '+service+'_expires_at FROM auth WHERE userID = ?'
