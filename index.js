@@ -75,6 +75,7 @@ restService.post('/hook', function(req, res) {
             })
             break;
         case "User-info":
+		 userController.addUserEntities(sessionId, userID, function(succes) {
             var nameObj = req.body.result.parameters['fullName']
             var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = req.body.result.parameters['Variable_row']
@@ -107,6 +108,7 @@ restService.post('/hook', function(req, res) {
                     return returnJson(res, req, "This user could not be found in any of your connected apps")
                 }
             })
+			})
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
