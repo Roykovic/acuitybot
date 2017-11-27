@@ -90,7 +90,7 @@ exports.checkExpiration = function(userID, callback){
 			i++;
 			serviceResult = result[0];
 			if (result.length < 1 || serviceResult['ibm'+"_expires_at"] < new Date()) {
-				if(serviceResult[service+"_refresh_token"]){
+				if(serviceResult['ibm'+"_refresh_token"]){
 					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
 				}
                 expired.push(service.toLowerCase());
