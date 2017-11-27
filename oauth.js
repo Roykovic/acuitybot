@@ -97,6 +97,9 @@ exports.checkExpiration = function(userID, callback){
 						}
 					})
 				}
+				else{
+					expired.push(service);
+				}
             }
 			if(i == services.length){
 				return callback(expired)
