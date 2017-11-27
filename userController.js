@@ -61,6 +61,8 @@ exports.getServiceByName = function(fullname, userID, callback) {
                     return callback(service.services.SalesForce)
                 }
                 ibmController.getUser(fullname, function(ibmUser) {
+					console.log("IBM USER")
+					console.log(ibmUser)
                     if (ibmUser) {
                         return callback(service.services.IBM)
                     }
