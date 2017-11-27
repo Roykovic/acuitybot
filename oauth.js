@@ -5,7 +5,6 @@ var db = require('./db');
 var httpRequest = require('request');
 var serviceEnum = require('./service');
 var exports = module.exports = {};
-var httpUtils = require('./utils/httpUtils')
 var oauthUtils = require('./utils/oauthUtils')
 
 exports.getWebpage = function(service) {
@@ -119,8 +118,10 @@ exports.refreshAccesToken = function(service, refreshToken, userID, callback){
 	}
 	
 	httpRequest(options, function(error, response, body) {
-		body = httpUtils.parseFormData(body)
-		exports.registerToken(service, userID, body.access_token, body.refresh_token, body.expiresAt, function(){
+		returnBody = oauthUtils.parseBody(body)
+		var body = returnBody[0]
+		var expiresAt = returnBody[1]
+		exports.registerToken(service, userID, body.access_token, body.refresh_token, expiresAt, function(){
 			callback();
 		})
 	})	
