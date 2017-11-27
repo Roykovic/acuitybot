@@ -89,11 +89,12 @@ exports.checkExpiration = function(userID, callback){
 		return db.query(query, userID, function(result){
 			i++;
 			serviceResult = result[0];
-			if (result.length < 1 || serviceResult['ibm'+"_expires_at"] < new Date()) {
-				if(serviceResult['ibm'+"_refresh_token"]){
+			service = service.toLowerCase();
+			if (result.length < 1 || serviceResult[service+"_expires_at"] < new Date()) {
+				if(serviceResult[service+"_refresh_token"]){
 					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
 				}
-                expired.push(service.toLowerCase());
+                expired.push(service);
             }
 			if(i == services.length){
 				return callback(expired)
