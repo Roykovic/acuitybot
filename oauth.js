@@ -80,7 +80,7 @@ exports.getAccessToken = function(service, userID, callback) {
 }
 
 exports.checkExpiration = function(userID){
-	var expired;
+	var expired = [];
 	var services = Object.keys(serviceEnum.services);
 	console.log("Services")
 	console.log(services)
