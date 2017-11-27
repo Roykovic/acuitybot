@@ -92,7 +92,7 @@ exports.checkExpiration = function(userID, callback){
 			service = service.toLowerCase();
 			if (result.length < 1 || serviceResult[service+"_expires_at"] < new Date()) {
 				if(serviceResult[service+"_refresh_token"]){
-					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
+					exports.refreshAccesToken(service, serviceResult[service, service+"_refresh_token"])
 				}
                 expired.push(service);
             }
