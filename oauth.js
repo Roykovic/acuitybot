@@ -90,6 +90,8 @@ exports.checkExpiration = function(userID, callback){
 			i++;
 			serviceResult = result[0];
 			console.log(serviceResult['ibm_expires_at'])
+			console.log(new Date())
+			console.log(serviceResult[service+"_expires_at"] < new Date())
 			if (result.length < 1 || serviceResult[service+"_expires_at"] < new Date()) {
 				if(serviceResult[service+"_refresh_token"]){
 					exports.refreshAccesToken(serviceResult[service, service+"_refresh_token"])
