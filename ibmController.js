@@ -248,7 +248,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
 					console.log(entries[0]['contributor'][0])
-					return callback(entries[0]['contributor'][0][column])
+					return callback(entries[0]['contributor'][0]['email'])
 				})
 			}
 			return callback();
