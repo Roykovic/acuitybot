@@ -236,7 +236,7 @@ exports.getContacts = function(access_token, callback) {
 
 exports.getUserInfo = function(userID, fullname, column, callback) {
 	column = column.toLowerCase()
-	if(Object.keys(config.ibm.columns).indexOf(column) > 1){
+	if(Object.keys(config.ibm.columns).indexOf(column) > -1){
 		console.log("FOUND A NIFFO")
 	}
 	else{console.log(column)
