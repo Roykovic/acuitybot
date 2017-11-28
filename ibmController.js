@@ -4,6 +4,7 @@ var exports = module.exports = {};
 var http = require("http");
 http.post = require('http-post');
 var request = require('request');
+var oauth = require('./oauth')
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 
