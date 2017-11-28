@@ -5,7 +5,7 @@ var http = require("http");
 http.post = require('http-post');
 var request = require('request');
 var oauth = require('./oauth')
-var config = require('config/config');
+var config = require('./config/config');
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 
