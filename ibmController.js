@@ -229,7 +229,7 @@ exports.getContacts = function(access_token, callback) {
                 //return callback(names)
             })
         }
-		console.log(error)
+		console.log(body)
 		console.log(response.statusCode)
         return callback();
     })
