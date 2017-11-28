@@ -66,16 +66,19 @@ exports.registerToken = function(service, userID, access_token, refresh_token, e
 }
 
 exports.getAccessToken = function(service, userID, callback) {
-	var query ='SELECT '+service+'_access_token, '+service+'_expires_at FROM auth WHERE userID = ?'
-    return db.query(query, userID, function(result) {
-        if (result && result.length > 0) {
-            if (result[0].expires_at < new Date()) {
-                return callback()
-            }
-            return callback(result[0][service + "_access_token"])
-        }
-        return callback()
-    })
+	return exports.checkExpiration(userID, function(expired){
+		if(expired.indexOf(service) > -1){
+			return callback(false())
+		}
+		else{
+			var query ='SELECT '+service+'_access_token, '+service+'_expires_at FROM auth WHERE userID = ?'
+			return db.query(query, userID, function(result) {
+				if (result && result.length > 0) {
+					return callback(result[0][service + "_access_token"])
+				}
+			})
+		}
+	})
 }
 
 exports.checkExpiration = function(userID, callback){
