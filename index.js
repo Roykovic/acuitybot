@@ -105,6 +105,7 @@ restService.post('/hook', function(req, res) {
                     });
                 }
                 if (serviceType == service.services.None) {
+					console.log("HANS")
                     return returnJson(res, req, "This user could not be found in any of your connected apps")
                 }
             })
