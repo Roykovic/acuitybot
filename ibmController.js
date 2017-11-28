@@ -9,7 +9,7 @@ var parser = new xml2js.Parser();
 
 exports.auth = "";
 
-exports.getFromIBM = function(type, callback) {
+exports.getFromIBM = function(access_token, type, callback) {
     var path;
     switch (type) {
         case "communities":
@@ -94,10 +94,10 @@ exports.updateIBM = function(varName, callback) {
     })
 }
 
-exports.getJSON = function(method, path, type, callback, body) {
+exports.getJSON = function(access_token, method, path, type, callback, body) {
     var headers = {
         "Content-Type": 'application/atom+xml',
-        "authorization": exports.auth
+        "authorization": "Bearer " + access_token
     }
 
     // Configure the request
@@ -149,12 +149,12 @@ exports.getJSON = function(method, path, type, callback, body) {
     })
 }
 
-exports.getIdByName = function(varName, path, callback) {
+exports.getIdByName = function(access_token, varName, path, callback) {
 
     var id = "";
     var headers = {
         "Content-Type": 'application/atom+xml',
-        "authorization": exports.auth
+        "authorization": "Bearer " + access_token
     }
 
     var options = {
