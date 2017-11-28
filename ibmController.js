@@ -223,7 +223,7 @@ exports.getContacts = function(access_token, callback) {
                 for (var i = 0; i < entries.length; ++i) {
                     var name = entries[i]['title'][0]['_']
                     names[i] = {};
-					names[i].name = name;
+					names[i].Name = name;
                 }
                 return callback(names)
             })
