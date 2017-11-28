@@ -68,7 +68,7 @@ exports.registerToken = function(service, userID, access_token, refresh_token, e
 exports.getAccessToken = function(service, userID, callback) {
 	return exports.checkExpiration(userID, function(expired){
 		if(expired.indexOf(service) > -1){
-			return callback(false())
+			return callback(false)
 		}
 		else{
 			var query ='SELECT '+service+'_access_token, '+service+'_expires_at FROM auth WHERE userID = ?'
