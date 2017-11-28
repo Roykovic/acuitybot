@@ -247,8 +247,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			if (!error && response.statusCode == 200) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
-					console.log(Object.keys(entries[0]['contributor'][0]['email']))
-					return callback(entries[0]['contributor'][0]['email'])
+					return callback(entries[0]['contributor'][0]['email'][0])
 				})
 			}
 			return callback();
