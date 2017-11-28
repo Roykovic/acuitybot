@@ -237,29 +237,27 @@ exports.getContacts = function(access_token, callback) {
 exports.getUserInfo = function(userID, fullname, column, callback) {
 	column = column.toLowerCase()
 	if(Object.keys(config.ibm.columns).indexOf(column) > -1){
-		console.log("FOUND A NIFFO")
-	}
-	else{console.log(column)
-		console.log(Object.keys(config.ibm.columns)[0])}
-	oauth.getAccessToken('ibm', userID, function(access_token) {
-		var headers = {
-			"authorization": "Bearer " + access_token
-		}
-		var options = {
-			url: config.ibm.url+'profiles/atom/search.do?name='+fullname,
-			method: "GET",
-			headers: headers,
-		}
-		return request(options, function(error, response, body) {
-			if (!error && response.statusCode == 200) {
-				return parser.parseString(body, function(err, HTTPresult) {
-					var entries = HTTPresult['feed']['entry'];
-					var answer = entries[0]['contributor'][0][column][0]
-					return callback(fullname + ' \'s ' + column + ' is ' + answer)
-					return callback(fullname + ' \'s ' + column + ' could not be found');
-				})
+		oauth.getAccessToken('ibm', userID, function(access_token) {
+			var headers = {
+				"authorization": "Bearer " + access_token
 			}
-			return callback(fullname + ' \'s ' + column + ' could not be found');
+			var options = {
+				url: config.ibm.url+'profiles/atom/search.do?name='+fullname,
+				method: "GET",
+				headers: headers,
+			}
+			return request(options, function(error, response, body) {
+				if (!error && response.statusCode == 200) {
+					return parser.parseString(body, function(err, HTTPresult) {
+						var entries = HTTPresult['feed']['entry'];
+						var answer = entries[0]['contributor'][0][column][0]
+						return callback(fullname + ' \'s ' + column + ' is ' + answer)
+						return callback(fullname + ' \'s ' + column + ' could not be found');
+					})
+				}
+				return callback(fullname + ' \'s ' + column + ' could not be found');
+			})
 		})
-	})	
+	}	
+	return callback(fullname + ' \'s ' + column + ' could not be found');
 }
