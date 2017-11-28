@@ -224,13 +224,9 @@ exports.getContacts = function(access_token, callback) {
                     var name = entries[i]['title'][0]['_']
                     names[i] = name;
                 }
-				console.log("NAMES")
-				console.log(names)
-                //return callback(names)
+                return callback(names)
             })
         }
-		console.log(body)
-		console.log(response.statusCode)
         return callback();
     })
 }
