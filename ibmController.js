@@ -206,9 +206,9 @@ exports.getUser = function(name, callback) {
     })
 }
 
-exports.getContacts = function(userID, callback) {
+exports.getContacts = function(access_token, callback) {
     var headers = {
-        "authorization": exports.auth
+        "authorization": "Bearer " + access_token
     }
     var options = {
         url: 'https://apps.ce.collabserv.com/profiles/atom/connections.do?connectionType=colleague&userid=203079380',
@@ -229,6 +229,8 @@ exports.getContacts = function(userID, callback) {
                 //return callback(names)
             })
         }
+		console.log(error)
+		console.log(response.statusCode)
         return callback();
     })
 }
