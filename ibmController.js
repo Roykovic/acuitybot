@@ -206,7 +206,7 @@ exports.getUser = function(name, callback) {
     })
 }
 
-exports.getContacts = function(callback) {
+exports.getContacts = function(userID, callback) {
     var headers = {
         "authorization": exports.auth
     }
