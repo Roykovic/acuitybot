@@ -251,13 +251,12 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 					return parser.parseString(body, function(err, HTTPresult) {
 						var entries = HTTPresult['feed']['entry'];
 						var answer = entries[0]['contributor'][0][column][0]
-						return callback(fullname + ' \'s ' + column + ' is ' + answer)
-						return callback(fullname + ' \'s ' + column + ' could not be found');
+						return callback(fullname + '\'s ' + column + ' is ' + answer)
 					})
 				}
-				return callback(fullname + ' \'s ' + column + ' could not be found');
+				return callback(fullname + '\'s ' + column + ' could not be found');
 			})
 		})
 	}	
-	return callback(fullname + ' \'s ' + column + ' could not be found');
+	return callback(fullname + '\'s ' + column + ' could not be found');
 }
