@@ -206,7 +206,7 @@ exports.getUser = function(name, callback) {
     })
 }
 
-exports.getAllNames = function(callback) {
+exports.getContacts = function(callback) {
     var headers = {
         "authorization": exports.auth
     }
@@ -224,7 +224,9 @@ exports.getAllNames = function(callback) {
                     var name = entries[i]['title'][0]['_']
                     names[i] = name;
                 }
-                return callback(names)
+				console.log("NAMES")
+				console.log(names)
+                //return callback(names)
             })
         }
         return callback();
