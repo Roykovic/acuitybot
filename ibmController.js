@@ -222,7 +222,8 @@ exports.getContacts = function(access_token, callback) {
                 var names = [];
                 for (var i = 0; i < entries.length; ++i) {
                     var name = entries[i]['title'][0]['_']
-                    names[i] = name;
+                    names[i] = {};
+					names[i].name = name;
                 }
                 return callback(names)
             })
