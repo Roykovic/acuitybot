@@ -248,7 +248,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
 					console.log("HANS")
-					console.log(column.toLowerCase())
+					console.log(column.toLowerCase() == 'email')
 					return callback(entries[0]['contributor'][0]['email'][0])
 				})
 			}
