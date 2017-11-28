@@ -81,7 +81,7 @@ exports.addUserEntities = function(sessionId, userId, callback) {
             var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
             return oauth.getAccessToken('salesforce', userId, function(sf_access_token) {
 				 return oauth.getAccessToken('ibm', userId, function(ibm_access_token) {
-					if (!access_token) {			
+					if (!sf_access_token || ! ibm_access_token) {			
 						return callback(false)
 					}
 					return salesforceController.getContacts(sf_access_token, function(sfContacts) {
