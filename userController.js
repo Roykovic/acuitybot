@@ -74,7 +74,6 @@ exports.getServiceByName = function(fullname, userID, callback) {
 }
 
 exports.addUserEntities = function(sessionId, userId, callback) {
-	console.log("ADD USER ENTITIES")
  	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
     return exports.getUserEntities(sessionId, function(response) {
         if (!response || response < 0) {
@@ -85,7 +84,7 @@ exports.addUserEntities = function(sessionId, userId, callback) {
                     return callback(false)
                 }
                 return salesforceController.getContacts(access_token, function(sfContacts) {
-					return ibmController.getContacts(acces_token, function(ibmContacts){
+					return ibmController.getContacts(access_token, function(ibmContacts){
 						var contacts = sfContacts.concat(ibmContacts);
 						for (var i = 0; i < contacts.length; ++i) {
 							if (i > 0) body += ','
