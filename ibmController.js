@@ -258,5 +258,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			})
 		})
 	}	
-	return callback(fullname + '\'s ' + column + ' could not be found');
+	else{
+		return callback(fullname + '\'s ' + column + ' could not be found');
+	}
 }
