@@ -247,12 +247,9 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			if (!error && response.statusCode == 200) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
-					console.log("SPEECH")
-					console.log(Object.keys(entries[0]))
+					return callback(entries[0]['contributor'][column])
 				})
 			}
-			console.log("ERROR")
-			console.log(error)
 			return callback();
 		})
 	})	
