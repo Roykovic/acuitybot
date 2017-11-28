@@ -238,7 +238,8 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 	if(Object.keys(config.ibm.columns).indexOf(column) > 1){
 		console.log("FOUND A NIFFO")
 	}
-	else{console.log("NOT FOUND A DRARIE")}
+	else{console.log("NOT FOUND A DRARIE")
+		console.log(Object.keys(config.ibm.columns))}
 	oauth.getAccessToken('ibm', userID, function(access_token) {
 		var headers = {
 			"authorization": "Bearer " + access_token
