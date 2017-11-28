@@ -234,9 +234,6 @@ exports.getContacts = function(access_token, callback) {
 }
 
 exports.getUserInfo = function(userID, fullname, column, callback) {
-	
-	console.log("COLUMN")
-	console.log(column)
 	oauth.getAccessToken('ibm', userID, function(access_token) {
 		var headers = {
 			"authorization": "Bearer " + access_token
@@ -250,7 +247,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			if (!error && response.statusCode == 200) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
-					return callback(entries[0]['contributor'][0]['email'][0])
+					return callback(entries[0]['contributor'][0][column.toLowerCase()][0])
 				})
 			}
 			return callback();
