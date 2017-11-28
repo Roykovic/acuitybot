@@ -248,7 +248,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
 					console.log("SPEECH")
-					console.log(entries[0][column])
+					console.log(Object.keys(entries[0]))
 				})
 			}
 			console.log("ERROR")
