@@ -97,7 +97,10 @@ restService.post('/hook', function(req, res) {
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
                 if (serviceType == service.services.IBM) {
-                    return returnJson(res, req, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
+					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
+                        return returnJson(res, req, speech, followUp)
+                    });
+                   // return returnJson(res, req, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
                 }
                 if (serviceType == service.services.SalesForce) {
                     return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {

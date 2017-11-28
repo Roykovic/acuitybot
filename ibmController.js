@@ -231,3 +231,24 @@ exports.getContacts = function(access_token, callback) {
         return callback();
     })
 }
+
+exports.getUserInfo = function(userID, fullname, column, callback) {
+	oauth.getAccessToken('ibm', userID, function(access_token) {
+		var headers = {
+			"authorization": "Bearer " + access_token
+		}
+		var options = {
+			url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name='+fullname,
+			method: "GET",
+			headers: headers,
+		}
+		return request(options, function(error, response, body) {
+			if (!error && response.statusCode == 200) {
+				return parser.parseString(body, function(err, HTTPresult) {
+					console.log(HTTPresult)
+				})
+			}
+			return callback();
+		})
+	})	
+}
