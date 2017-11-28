@@ -184,10 +184,10 @@ exports.getIdByName = function(varName, path, callback) {
     })
 }
 
-exports.getUser = function(name, callback) {
+exports.getUser = function(access_token, name, callback) {
     var id = "";
     var headers = {
-        "authorization": exports.auth
+        "authorization": "Bearer "+access_token
     }
 
     var options = {

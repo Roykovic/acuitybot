@@ -54,23 +54,25 @@ exports.getAllNames = function(callback) {
 }
 
 exports.getServiceByName = function(fullname, userID, callback) {
-    return oauth.getAccessToken('salesforce', userID, function(access_token) {
-        if (access_token) {
-            salesforceController.getUser(access_token, fullname, function(sfUser) {
-                if (sfUser) {
-                    return callback(service.services.SalesForce)
-                }
-                ibmController.getUser(fullname, function(ibmUser) {
-                    if (ibmUser) {
-                        return callback(service.services.IBM)
-                    }
-                    return callback(service.services.None)
-                })
-            })
-        } else {
-            return callback();
-        }
-    })
+    return oauth.getAccessToken('salesforce', userID, function(sf_access_token) {
+		return oauth.getAccessToken('ibm', userID, function(ibm_access_token) {
+			if (sf_access_token && ibm_access_token) {
+				salesforceController.getUser(sf_access_token, fullname, function(sfUser) {
+					if (sfUser) {
+						return callback(service.services.SalesForce)
+					}
+					ibmController.getUser(ibm_access_token, fullname, function(ibmUser) {
+						if (ibmUser) {
+							return callback(service.services.IBM)
+						}
+						return callback(service.services.None)
+					})
+				})
+			} else {
+				return callback();
+			}
+		})
+   })
 }
 
 exports.addUserEntities = function(sessionId, userId, callback) {
