@@ -234,6 +234,9 @@ exports.getContacts = function(access_token, callback) {
 }
 
 exports.getUserInfo = function(userID, fullname, column, callback) {
+	
+	console.log("COLUMN")
+	console.log(column)
 	oauth.getAccessToken('ibm', userID, function(access_token) {
 		var headers = {
 			"authorization": "Bearer " + access_token
