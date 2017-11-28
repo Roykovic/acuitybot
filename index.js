@@ -92,6 +92,7 @@ restService.post('/hook', function(req, res) {
 						}
                     return returnJson(res, req, speech)
 					} else {
+						console.log("NON EXPIRED")
 						return returnJson(res, req, "This user could not be found in any of your connected apps")
                     }
                 })
@@ -109,6 +110,7 @@ restService.post('/hook', function(req, res) {
                     });
                 }
                 if (serviceType == service.services.None) {
+					console.log("NONE")
                     return returnJson(res, req, "This user could not be found in any of your connected apps")
                 }
             })
