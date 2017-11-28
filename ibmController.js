@@ -14,16 +14,16 @@ exports.getFromIBM = function(access_token, type, callback) {
     var path;
     switch (type) {
         case "communities":
-            var path = "/communities/service/atom/communities/my"
+            var path = "communities/service/atom/communities/my"
             break;
         case "activities":
-            var path = "/activities/service/atom2/activities?includeCommunityActivities=no"
+            var path = "activities/service/atom2/activities?includeCommunityActivities=no"
             break;
         case "files":
-            var path = "/files/basic/api/documents/shared/feed?sK=created&sO=dsc&sC=docshare&direction=inbound"
+            var path = "files/basic/api/documents/shared/feed?sK=created&sO=dsc&sC=docshare&direction=inbound"
             break;
         case "todos":
-            var path = "/activities/service/atom2/todos"
+            var path = "activities/service/atom2/todos"
             break;
         default:
             return callback("Cannot find " + type + " in system. Please check  your spelling or try again.");
@@ -50,18 +50,18 @@ exports.postToIBM = function(callback, name, type, activity) {
     exports.getIdByName(activity, '/activities/service/atom2/activities', function(activityID) {
         switch (type) {
             case "communities":
-                path = "/communities/service/atom/communities/my"
+                path = "communities/service/atom/communities/my"
                 body = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><title type="text">' + name + '</title><content type="html"></content><category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:communityType>public</snx:communityType></entry>'
                 break;
             case "activities":
-                path = "/activities/service/atom2/activities"
+                path = "activities/service/atom2/activities"
                 body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0"  > <title type="text">' + name + '</title>    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>    <content type="html">             </content></entry>'
                 break;
             case "activity nodes":
                 if (!activityID) {
                     return callback("The activity doesn't exist")
                 }
-                path = "/activities/service/atom2/activity?activityUuid=" + activityID
+                path = "activities/service/atom2/activity?activityUuid=" + activityID
                 body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
         }
 
@@ -103,7 +103,7 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
 
     // Configure the request
     var options = {
-        url: 'https://apps.ce.collabserv.com' + path,
+        url: config.ibm.url + path,
         method: method,
         headers: headers,
         body: body
@@ -159,7 +159,7 @@ exports.getIdByName = function(access_token, varName, path, callback) {
     }
 
     var options = {
-        url: 'https://apps.ce.collabserv.com' + path,
+        url: config.ibm.url+ + path,
         method: "GET",
         headers: headers,
     }
@@ -192,7 +192,7 @@ exports.getUser = function(access_token, name, callback) {
     }
 
     var options = {
-        url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name=' + name,
+        url: config.ibm.url+'profiles/atom/search.do?name=' + name,
         method: "GET",
         headers: headers
     }
@@ -212,7 +212,7 @@ exports.getContacts = function(access_token, callback) {
         "authorization": "Bearer " + access_token
     }
     var options = {
-        url: 'https://apps.ce.collabserv.com/profiles/atom/connections.do?connectionType=colleague&userid=203079380',
+        url: config.ibm.url+'profiles/atom/connections.do?connectionType=colleague&userid=203079380',
         method: "GET",
         headers: headers,
     }
@@ -239,7 +239,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			"authorization": "Bearer " + access_token
 		}
 		var options = {
-			url: 'https://apps.ce.collabserv.com/profiles/atom/search.do?name='+fullname,
+			url: config.ibm.url+'profiles/atom/search.do?name='+fullname,
 			method: "GET",
 			headers: headers,
 		}
@@ -247,12 +247,11 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			if (!error && response.statusCode == 200) {
 				return parser.parseString(body, function(err, HTTPresult) {
 					var entries = HTTPresult['feed']['entry'];
-					console.log("HANS")
-					console.log(column.toLowerCase() == 'email')
-					return callback(entries[0]['contributor'][0][column.toLowerCase()][0])
+					var answer = entries[0]['contributor'][0][column.toLowerCase()][0]
+					return callback(fullname + '\'s' + column + 'is' + answer)
 				})
 			}
-			return callback();
+			return callback(fullname + '\'s' + column + 'could not be found');
 		})
 	})	
 }

@@ -2,6 +2,7 @@
 
 var oauth = require('./oauth')
 var httpRequest = require('request');
+var config = require('./config/config');
 var exports = module.exports = {};
 
 exports.getContacts = function(access_token, callback) {
@@ -10,7 +11,7 @@ exports.getContacts = function(access_token, callback) {
     }
 
     var options = {
-        url: 'https://eu11.salesforce.com/services/data/v20.0/query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
+        url: config.salesforce.url+'query?q=SELECT+Name,MailingStreet,Phone,email,birthdate,department,HomePhone,Fax,MobilePhone,Title,Mailingcity+from+contact',
         method: "GET",
         headers: headers
     }
@@ -40,7 +41,7 @@ exports.getColumns = function(userID, callback) {
         }
 
         var options = {
-            url: 'https://eu11.salesforce.com/services/data/v20.0/sobjects/contact/describe',
+            url: config.salesforce.url+'sobjects/contact/describe',
             method: "GET",
             headers: headers
         }
