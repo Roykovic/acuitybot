@@ -261,7 +261,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 							var answer = answerObj[0]['_']
 							console.log("HOI")
 							console.log(answerObj)
-							console.log(answer[0]['_'])
+							console.log(answer[0])
 						}
 						if(answer){
 						return callback(fullname + '\'s ' + column + ' is ' + answer)}
