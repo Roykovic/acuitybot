@@ -143,6 +143,7 @@ restService.post('/hook', function(req, res) {
 		case "test":
 			OAuthController.checkExpiration();
         default:
+		console.log("DEFAULT")
             return wakeUp(res, req);
             break;
     }
