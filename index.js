@@ -77,13 +77,13 @@ restService.post('/hook', function(req, res) {
         case "User-info":
 		case "user-info.context":		
 		 userController.addUserEntities(sessionId, userID, function(succes) {
+			var index = 0;
 			var nameObj = req.body.result.parameters['fullName']
-			console.log("NAME OBJECT")
-			console.log(nameObj)
 			 if(!nameObj){
+				 index = 1;
 				 nameObj = req.body.result.contexts[0].parameters['fullName']
 			 }
-            var fullName = nameObj[Object.keys(nameObj)[1]]
+            var fullName = nameObj[Object.keys(nameObj)[index]]
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
                 return OAuthController.checkExpiration(userID, function(expired) {
