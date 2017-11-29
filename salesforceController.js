@@ -113,10 +113,11 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 					}
 
 					httpRequest(options, function(error, response, body) {
+						var error;
 						if(body){
 							body = JSON.parse(body);
+							error = body[0]['message'];
 						}
-						var error = body[0]['message']
 						callback(error)
 					})
 				})
