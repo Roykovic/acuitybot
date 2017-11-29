@@ -252,10 +252,10 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 				if (!error && response.statusCode == 200) {
 					return parser.parseString(body, function(err, json) {
 						if(columnNo = 0){
-							var answer = xpath.find(json, "//a[@class='email']");
+							var answer = xpath.find(json, "//a[@class='email']")['_'];
 						}
 						else{
-							var answer = xpath.find(json, "//div[@class='tel']/span");
+							var answer = xpath.find(json, "//div[@class='tel']/span")['_'];
 						}
 						
 						return callback(fullname + '\'s ' + column + ' is ' + answer)
