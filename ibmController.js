@@ -250,7 +250,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			}
 			return request(options, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
-					parser.parseString(body, function(err, json) {
+					return parser.parseString(body, function(err, json) {
 						console.log(columnNo)
 						if(columnNo == 0){
 							var answerObj = xpath.find(json, "//a[@class='email']");
@@ -261,8 +261,11 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 							var answer = answerObj[0]['_']
 						}
 						if(answer){
-						return callback(fullname + '\'s ' + column + ' is ' + answer)
-					}
+							return callback(fullname + '\'s ' + column + ' is ' + answer)
+						}
+						else{
+							return callback(fullname + '\'s ' + column + ' could not be found');
+						}
 					})
 				}
 				return callback(fullname + '\'s ' + column + ' could not be found');
