@@ -237,7 +237,7 @@ exports.getContacts = function(access_token, callback) {
 
 exports.getUserInfo = function(userID, fullname, column, callback) {
 	column = column.toLowerCase()
-	var  columnNo = bject.keys(config.ibm.columns).indexOf(column);
+	var  columnNo = Object.keys(config.ibm.columns).indexOf(column);
 	if(columnNo > -1){
 		oauth.getAccessToken('ibm', userID, function(access_token) {
 			var headers = {
