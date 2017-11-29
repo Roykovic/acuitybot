@@ -63,7 +63,7 @@ restService.post('/hook', function(req, res) {
     switch (intent) {
         case "update":
         case "data for update":
-			var parameters = req.body.result.parameters
+			var parameters = req.body.result
 			 if(!parameters){
 				 parameters = req.body.result.contexts[1].parameters
 			 }
