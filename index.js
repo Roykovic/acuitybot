@@ -78,6 +78,8 @@ restService.post('/hook', function(req, res) {
 		case "user-info.context":		
 		 userController.addUserEntities(sessionId, userID, function(succes) {
 			var nameObj = req.body.result.parameters['fullName']
+			console.log("NAME OBJECT")
+			console.log(nameObj)
 			 if(!nameObj){
 				 nameObj = req.body.result.contexts[0].parameters['fullName']
 			 }
@@ -95,7 +97,6 @@ restService.post('/hook', function(req, res) {
 						}
                     return returnJson(res, req, speech)
 					} else {
-						console.log("NON EXPIRED")
 						return returnJson(res, req, "This user could not be found in any of your connected apps")
                     }
                 })
