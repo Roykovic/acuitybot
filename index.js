@@ -63,6 +63,7 @@ restService.post('/hook', function(req, res) {
     switch (intent) {
         case "update":
         case "data for update":
+			console.log(req.body)
             var context = req.body.result.contexts[1]
             var column = context.parameters.Variable_row;
             var variable = context.parameters['variable.original'].replace("?","")
