@@ -237,7 +237,8 @@ exports.getContacts = function(access_token, callback) {
 
 exports.getUserInfo = function(userID, fullname, column, callback) {
 	column = column.toLowerCase()
-	if(Object.keys(config.ibm.columns).indexOf(column) > -1){
+	var  columnNo = bject.keys(config.ibm.columns).indexOf(column);
+	if(columnNo > -1){
 		oauth.getAccessToken('ibm', userID, function(access_token) {
 			var headers = {
 				"authorization": "Bearer " + access_token
@@ -250,11 +251,13 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			return request(options, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
 					return parser.parseString(body, function(err, json) {
-						var matches = xpath.find(json, "//span");
-						console.log("MATCHES")
-						console.log(matches)
-						var entries = json['feed']['entry'];
-						var answer = entries[0]['contributor'][0][column][0]
+						if(columnNo = 0){
+							var answer = xpath.find(json, "//a[@class='email']");
+						}
+						else{
+							var answer = xpath.find(json, "//div[@class='tel']/span");
+						}
+						
 						return callback(fullname + '\'s ' + column + ' is ' + answer)
 					})
 				}
