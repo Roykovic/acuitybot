@@ -93,9 +93,9 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 }
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
-	userController.getServiceByName(fullName, userID, function(serviceType) {
-		if (serviceType == service.services.SalesForce) {
-			oauth.getAccessToken('salesforce', userID, function(access_token) {
+	oauth.getAccessToken('salesforce', userID, function(access_token) {
+		exports.getUser(access_token, fullname, function(sfUser)) {
+			if (sfUser) {		
 				exports.getURLByName(access_token, fullname, function(url) {
 					var headers = {
 						"Authorization": "Bearer " + access_token,
