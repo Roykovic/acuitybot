@@ -76,7 +76,9 @@ restService.post('/hook', function(req, res) {
             break;
         case "User-info":
 		case "user-info.context":
-		console.log(req.body.result)
+		const util = require('util')
+
+		console.log(util.inspect(req.body.result, {showHidden: false, depth: null}))
 		
 		 userController.addUserEntities(sessionId, userID, function(succes) {
             var nameObj = req.body.result.parameters['fullName']
