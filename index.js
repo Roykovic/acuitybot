@@ -65,7 +65,7 @@ restService.post('/hook', function(req, res) {
         case "data for update":
 			var parameters = req.body.result.parameters
 			 if(!parameters){
-				 nameObj = req.body.result.contexts[1].parameters
+				 parameters = req.body.result.contexts[1].parameters
 			 }
             var column = parameters.Variable_row;
             var variable = parameters['variable.original'].replace("?","")
