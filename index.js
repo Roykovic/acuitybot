@@ -69,6 +69,8 @@ restService.post('/hook', function(req, res) {
             var fullname = context.parameters['fullName']['sf-name']
             return salesforceController.updateUserInfo(userID, fullname, column, variable, function(error) {
 				if(error){
+					console.log(error)
+					console.log(typeof error)
 					return returnJson(res, req, error);
 				}
 				else{
