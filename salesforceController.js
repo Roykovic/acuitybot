@@ -94,7 +94,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
 	oauth.getAccessToken('salesforce', userID, function(access_token) {
-		exports.getUser(access_token, fullname, function(sfUser)) {
+		exports.getUser(access_token, fullname, function(sfUser) {
 			if (sfUser) {		
 				exports.getURLByName(access_token, fullname, function(url) {
 					var headers = {
@@ -117,11 +117,11 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 						callback()
 					})
 				})
-			})
-		}
-		else{
-			callback("User is not found, or this " + column + " can not be changed")
-		}	
+			}
+			else{
+				callback("User is not found, or this " + column + " can not be changed")
+			}
+		})		
 	})
 }
 
