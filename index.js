@@ -81,8 +81,8 @@ restService.post('/hook', function(req, res) {
 		console.log(util.inspect(req.body.result, {showHidden: false, depth: null}))
 		
 		 userController.addUserEntities(sessionId, userID, function(succes) {
-            var nameObj = req.body.result.parameters['fullName']
-            var fullName = nameObj[Object.keys(nameObj)[0]]
+            var nameObj = req.body.result.contexts[0].parameters['fullName']
+            var fullName = nameObj[Object.keys(nameObj)[1]]
             var column = req.body.result.parameters['Variable_row']
 			console.log("INTENT DETAILS")
 			console.log(fullName)
