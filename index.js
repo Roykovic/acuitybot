@@ -75,18 +75,14 @@ restService.post('/hook', function(req, res) {
             })
             break;
         case "User-info":
-		case "user-info.context":
-		const util = require('util')
-
-		console.log(util.inspect(req.body.result, {showHidden: false, depth: null}))
-		
+		case "user-info.context":		
 		 userController.addUserEntities(sessionId, userID, function(succes) {
-            var nameObj = req.body.result.contexts[0].parameters['fullName']
+			var nameObj = req.body.result.parameters['fullName']
+			 if(!nameObj){
+				 nameObj = req.body.result.contexts[0].parameters['fullName']
+			 }
             var fullName = nameObj[Object.keys(nameObj)[1]]
             var column = req.body.result.parameters['Variable_row']
-			console.log("INTENT DETAILS")
-			console.log(fullName)
-			console.log(column)
             if (!fullName) {
                 return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired && expired.length > 0) {
@@ -109,7 +105,6 @@ restService.post('/hook', function(req, res) {
 					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
                         return returnJson(res, req, speech, followUp)
                     });
-                   // return returnJson(res, req, "Getting info from IBM is still a work in progress. " + fullName + " has been found. However, no further functionality is implemented yet")
                 }
                 if (serviceType == service.services.SalesForce) {
                     return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
