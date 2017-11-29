@@ -255,7 +255,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 							console.log("HOI")
 							var answerObj = xpath.find(json, "//a[@class='email']");
 							console.log(answerObj)
-							var answer = answerObj['_']
+							var answer = answerObj[0]['_']
 							console.log(answer)
 						}
 						else{
