@@ -17,7 +17,7 @@ exports.ibm.client_secret = "ad137be1630841a8ceba6f2928cae4bcc317887b2db3b9279c2
 exports.ibm.callback_uri = "https://safe-ocean-30268.herokuapp.com/auth/ibm"
 //IBM GENERAL
 exports.ibm.url = "https://apps.ce.collabserv.com/"
-exports.ibm.columns = Object.freeze({email:0, homephone:2})
+exports.ibm.columns = Object.freeze({email:0, phone:2})
 
 //MYSQL connection
 exports.connection = {
