@@ -252,7 +252,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 				if (!error && response.statusCode == 200) {
 					return parser.parseString(body, function(err, json) {
 						console.log(columnNo)
-						if(columnNo = 0){
+						if(columnNo == 0){
 							var answerObj = xpath.find(json, "//a[@class='email']");
 							var answer = answerObj['_']
 						}
