@@ -260,7 +260,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 							var answerObj = xpath.find(json, "//div[@class='tel']/span");
 							var answer = answerObj['_']
 						}
-						if(anwer){
+						if(answer){
 						return callback(fullname + '\'s ' + column + ' is ' + answer)}
 					})
 				}
