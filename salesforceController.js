@@ -113,7 +113,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 					}
 
 					httpRequest(options, function(error, response, body) {
-						console.log(body)
+						console.log(body[0])
 						callback()
 					})
 				})
