@@ -259,6 +259,9 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 						else{
 							var answerObj = xpath.find(json, "//div[@class='tel']/span");
 							var answer = answerObj[0]['_']
+							console.log("HOI")
+							console.log(answerObj)
+							console.log(answer[0]['_'])
 						}
 						if(answer){
 						return callback(fullname + '\'s ' + column + ' is ' + answer)}
