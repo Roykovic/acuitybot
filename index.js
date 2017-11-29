@@ -75,6 +75,7 @@ restService.post('/hook', function(req, res) {
             })
             break;
         case "User-info":
+		case "user-info.context":
 		 userController.addUserEntities(sessionId, userID, function(succes) {
             var nameObj = req.body.result.parameters['fullName']
             var fullName = nameObj[Object.keys(nameObj)[0]]
