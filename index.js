@@ -58,8 +58,6 @@ restService.get('/auth/:service', function(req, res) {
 
 restService.post('/hook', function(req, res) {
     var userID = req.body.originalRequest.data.data.personId
-   // request = req;
-   // result = res;
     var sessionId = req.body.sessionId;
 	console.log(sessionId)
     var intent = req.body.result.metadata.intentName;
@@ -76,10 +74,12 @@ restService.post('/hook', function(req, res) {
             break;
         case "User-info":
 		 userController.addUserEntities(sessionId, userID, function(succes) {
-			 console.log(succes)
             var nameObj = req.body.result.parameters['fullName']
             var fullName = nameObj[Object.keys(nameObj)[0]]
             var column = req.body.result.parameters['Variable_row']
+			console.log("INTENT DETAILS")
+			console.log(fullName)
+			console.log(column)
             if (!fullName) {
                 return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired && expired.length > 0) {
