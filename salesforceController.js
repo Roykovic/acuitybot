@@ -93,28 +93,36 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 }
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
-    oauth.getAccessToken('salesforce', userID, function(access_token) {
-        exports.getURLByName(access_token, fullname, function(url) {
-            var headers = {
-                "Authorization": "Bearer " + access_token,
-                "Content-Type": 'application/json'
-            }
+	userController.getServiceByName(fullName, userID, function(serviceType) {
+		if (serviceType == service.services.SalesForce) {
+			oauth.getAccessToken('salesforce', userID, function(access_token) {
+				exports.getURLByName(access_token, fullname, function(url) {
+					var headers = {
+						"Authorization": "Bearer " + access_token,
+						"Content-Type": 'application/json'
+					}
 
-            var body = {}
-            body[column] = variable;
+					var body = {}
+					body[column] = variable;
 
-            var options = {
-                'url': 'https://eu11.salesforce.com/' + url,
-                'method': "PATCH",
-                'headers': headers,
-                'body': JSON.stringify(body)
-            }
+					var options = {
+						'url': 'https://eu11.salesforce.com/' + url,
+						'method': "PATCH",
+						'headers': headers,
+						'body': JSON.stringify(body)
+					}
 
-            httpRequest(options, function(error, response, body) {
-                callback()
-            })
-        })
-    })
+					httpRequest(options, function(error, response, body) {
+						console.log(error)
+						callback()
+					})
+				})
+			})
+		}
+		else{
+			callback("User is not found, or this " + column + " can not be changed")
+		}	
+	})
 }
 
 exports.checkColumn = function(column, userID, callback) {
