@@ -67,6 +67,7 @@ restService.post('/hook', function(req, res) {
 			 if(!parameters){
 				 parameters = req.body.result.contexts[1].parameters
 			 }
+			 console.log(parameters)
             var column = parameters.Variable_row;
             var variable = parameters['variable.original'].replace("?","")
             var fullname = parameters['fullName']['sf-name']
