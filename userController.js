@@ -88,8 +88,6 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 					}
 					return salesforceController.getContacts(sf_access_token, function(sfContacts) {
 						return ibmController.getContacts(ibm_access_token, function(ibmContacts){
-							console.log(sfContacts)
-							console.log(ibmContacts)
 							var contacts = sfContacts.concat(ibmContacts);
 							for (var i = 0; i < contacts.length; ++i) {
 								if (i > 0) body += ','
