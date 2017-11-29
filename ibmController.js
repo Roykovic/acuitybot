@@ -253,11 +253,11 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 					return parser.parseString(body, function(err, json) {
 						if(columnNo = 0){
 							var answerObj = xpath.find(json, "//a[@class='email']");
-							var answer = answerObj['_'];
+							console.log(answerObj)
 						}
 						else{
 							var answerObj = xpath.find(json, "//div[@class='tel']/span")['_'];
-							var answer = answerObj['_'];
+							console.log(answerObj)
 						}
 						
 						return callback(fullname + '\'s ' + column + ' is ' + answer)
