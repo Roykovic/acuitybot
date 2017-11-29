@@ -250,9 +250,9 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			return request(options, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
 					return parser.parseString(body, function(err, json) {
-						var matches = xpath.find(json, "//span", "class");
+						var matches = xpath.evalFirst(json, "//span[@class='tel']");
 						console.log("MATCHES")
-						console.log(matches[0]['div'][5])
+						console.log(matches)
 						var entries = json['feed']['entry'];
 						var answer = entries[0]['contributor'][0][column][0]
 						return callback(fullname + '\'s ' + column + ' is ' + answer)
