@@ -251,16 +251,17 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			return request(options, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
 					return parser.parseString(body, function(err, json) {
+						console.log(columnNo)
 						if(columnNo = 0){
 							var answerObj = xpath.find(json, "//a[@class='email']");
-							console.log(answerObj)
+							var answer = answerObj['_']
 						}
 						else{
 							var answerObj = xpath.find(json, "//div[@class='tel']/span");
-							console.log(answerObj)
+							var answer = answerObj['_']
 						}
-						var answer = "..."
-						return callback(fullname + '\'s ' + column + ' is ' + answer)
+						if(anwer){
+						return callback(fullname + '\'s ' + column + ' is ' + answer)}
 					})
 				}
 				return callback(fullname + '\'s ' + column + ' could not be found');
