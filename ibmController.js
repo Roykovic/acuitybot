@@ -251,10 +251,12 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			return request(options, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
 					return parser.parseString(body, function(err, json) {
-						console.log(columnNo)
 						if(columnNo == 0){
+							console.log("HOI")
 							var answerObj = xpath.find(json, "//a[@class='email']");
+							console.log(answerObj)
 							var answer = answerObj['_']
+							console.log(answer)
 						}
 						else{
 							var answerObj = xpath.find(json, "//div[@class='tel']/span");
