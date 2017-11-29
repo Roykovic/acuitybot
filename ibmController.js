@@ -7,6 +7,7 @@ var request = require('request');
 var oauth = require('./oauth')
 var config = require('./config/config');
 var xml2js = require('xml2js');
+var xpath = require("xml2js-xpath");
 var parser = new xml2js.Parser();
 
 exports.auth = "";
@@ -248,8 +249,11 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 			}
 			return request(options, function(error, response, body) {
 				if (!error && response.statusCode == 200) {
-					return parser.parseString(body, function(err, HTTPresult) {
-						var entries = HTTPresult['feed']['entry'];
+					return parser.parseString(body, function(err, json) {
+						var matches = xpath.evalFirst(json, "//value", "id");
+						console.log("MATCHES")
+						console.log(matches)
+						var entries = json['feed']['entry'];
 						var answer = entries[0]['contributor'][0][column][0]
 						return callback(fullname + '\'s ' + column + ' is ' + answer)
 					})

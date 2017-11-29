@@ -14,7 +14,8 @@
     "express": "^4.13.4",
     "password-hash": "^1.2.2",
     "pg": "7.2.0",
-    "xml2js": "^0.4.19"
+    "xml2js": "^0.4.19",
+    "xml2js-xpath": "^0.8.0"
   },
   "devDependencies": {
     "cookie-parser": "^1.4.3",
