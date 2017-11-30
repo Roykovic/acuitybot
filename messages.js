@@ -11,5 +11,6 @@ exports.EN = Object.freeze({
 	MESSAGE_TODO_COMPLETED:'Todo $ has been marked as completed', 
 	MESSAGE_USER_INFO:'$\'s $ is $', 
 	MESSAGE_USER_INFO_NOT_FOUND:'$\'s $ could not be found', 
+	MESSAGE_USER_INFO_NOT_FOUND:'User could not be found, or this $ cannot be changed', 
 	SalesForce:2
 })

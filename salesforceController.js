@@ -1,5 +1,6 @@
 'use strict'
 
+var messageController = require('./messageController');
 var oauth = require('./oauth')
 var httpRequest = require('request');
 var config = require('./config/config');
@@ -80,8 +81,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
                         if (contacts[i].Name == fullname) {
                             var answer = contacts[i][returnColumn]
                             if (answer) {
-                                var speech = fullname + "'s " + returnColumn + " is " + answer
-                                return callback(speech)
+                                return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, returnColumn,answer]))
                             } else {
                                 return callback("", "update")
                             }
@@ -89,7 +89,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
                     }
                 })
             } else {
-                return callback(column + " does not exist, please check your spelling.")
+				return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [column]))
             }
         })
     })
@@ -126,7 +126,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 				})
 			}
 			else{
-				callback("User is not found, or this " + column + " can not be changed")
+				callback(messageController.getMessage('MESSAGE_USER_INFO_NOT_FOUND', [column]))
 			}
 		})		
 	})
