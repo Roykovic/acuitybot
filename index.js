@@ -88,7 +88,6 @@ restService.post('/hook', function(req, res) {
 				 nameObj = req.body.result.contexts[0].parameters['fullName']
 			 }
             var fullName = nameObj[Object.keys(nameObj)[index]]
-			console.log(fullName)
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
                 return OAuthController.checkExpiration(userID, function(expired) {
@@ -101,6 +100,7 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
+				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
 					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
                         return returnJson(res, req, speech, followUp)
