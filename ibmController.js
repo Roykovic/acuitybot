@@ -27,7 +27,8 @@ exports.getFromIBM = function(userID, type, callback) {
             var path = "activities/service/atom2/todos"
             break;
         default:
-			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [undefined]));
+			var hans;
+			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [hans]));
     }
     var method = "GET"
 	return oauth.getAccessToken('ibm', userID, function(access_token){
