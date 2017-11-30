@@ -8,7 +8,7 @@ var exports = module.exports = {};
 
 exports.getLoginMessage = function(services, userID, sessionId, language){
 	var speech = messages[language].MESSAGE_LOGIN;
-	for(services){
+	for(var i = 0; i<services.length; ++i){
 		speech += "\n"
 		speech += services[i]
 		speech += "\n"							
