@@ -78,8 +78,8 @@ exports.getServiceByName = function(fullname, userID, callback) {
 exports.addUserEntities = function(sessionId, userId, callback) {
  	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
     return exports.getUserEntities(sessionId, function(response) {
-           var body = '{ "entities": [ { "entries": ['
-           var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
+        var body = '{ "entities": [ { "entries": ['
+        var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
         return oauth.getAccessToken('salesforce', userId, function(sf_access_token) {
 			return oauth.getAccessToken('ibm', userId, function(ibm_access_token) {
 				return salesforceController.getContacts(sf_access_token, function(sfContacts) {
@@ -88,8 +88,6 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 						if(sfContacts)  Array.prototype.push.apply(contacts,sfContacts);
 						if(ibmContacts) Array.prototype.push.apply(contacts,ibmContacts);
 						for (var i = 0; i < contacts.length; ++i) {
-							console.log(contacts[i])
-							console.log(contacts[i].Name)
 							if (i > 0) body += ','
 							body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
 						}
