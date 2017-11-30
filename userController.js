@@ -78,30 +78,28 @@ exports.getServiceByName = function(fullname, userID, callback) {
 exports.addUserEntities = function(sessionId, userId, callback) {
  	var postPath = "https://api.api.ai/v1/userEntities?v=20150910&sessionId=" + sessionId
     return exports.getUserEntities(sessionId, function(response) {
-        if (!response || response < 0) {
-            var body = '{ "entities": [ { "entries": ['
-            var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
-            return oauth.getAccessToken('salesforce', userId, function(sf_access_token) {
-				 return oauth.getAccessToken('ibm', userId, function(ibm_access_token) {
-					return salesforceController.getContacts(sf_access_token, function(sfContacts) {
-						return ibmController.getContacts(ibm_access_token, function(ibmContacts){
-							var contacts = []; 
-							if(sfContacts) contacts.push(sfContacts);
-							if(ibmContacts) contacts.push(ibmContacts);
-							console.log(contacts)
-							for (var i = 0; i < contacts.length; ++i) {
-								if (i > 0) body += ','
-								body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
-							}
-							body += bodyEnd;		
-							return apiController.post(postPath, accesToken, body, function(response) {										
-								return callback(true)
-							})						
-						})
+           var body = '{ "entities": [ { "entries": ['
+           var bodyEnd = '], "name": "sf-name" } ], "sessionId":' + sessionId + '}'
+        return oauth.getAccessToken('salesforce', userId, function(sf_access_token) {
+			return oauth.getAccessToken('ibm', userId, function(ibm_access_token) {
+				return salesforceController.getContacts(sf_access_token, function(sfContacts) {
+					return ibmController.getContacts(ibm_access_token, function(ibmContacts){
+						var contacts = []; 
+						if(sfContacts) contacts.push(sfContacts);
+						if(ibmContacts) contacts.push(ibmContacts);
+						console.log(contacts)
+						for (var i = 0; i < contacts.length; ++i) {
+							if (i > 0) body += ','
+							body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
+						}
+						body += bodyEnd;		
+						return apiController.post(postPath, accesToken, body, function(response) {										
+							return callback(true)
+						})						
 					})
 				})
 			})
-        }			
+		})			
         return callback(true)
     })
 }
