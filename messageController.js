@@ -31,7 +31,7 @@ exports.getErrorMessage = function(error, statusCode, language){
 		return speech
 }
 
-exports.insertIntoString(string, inputArray){
+exports.insertIntoString = function(string, inputArray){
 	var counter = 0;
 	while(string.indexOf('?') > -1){
 		string.replace('?', inputArray[counter]);
