@@ -14,7 +14,7 @@ var parser = new xml2js.Parser();
 exports.getFromIBM = function(userID, type, callback) {
     var path;
     switch (type) {
-        case "communities":
+        case "communiies":
             var path = "communities/service/atom/communities/my"
             break;
         case "activities":
