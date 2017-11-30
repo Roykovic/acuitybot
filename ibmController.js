@@ -45,7 +45,12 @@ exports.getFromIBM = function(userID, type, callback) {
 			});		
 		}
 		else{
-			callback()
+			var speech = ""
+			speech += "\n"
+							speech += expired[i]
+							speech += "\n"							
+							speech += 'https://safe-ocean-30268.herokuapp.com' + "/login/"+expired[i]+"/" + userID + "/" + sessionId
+			callback(speech)
 		}	
 	})
 }
