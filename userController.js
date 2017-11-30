@@ -14,7 +14,7 @@ var oauth = require('./oauth')
         // salesForcedb.checkColumn(Pcolumn, function(column) { //check if the column exists in the db (to prevent exploits)
             // salesForcedb.query(column, fullName, function(result) { //Run 'query' function, and when finished run this function
                 // if (result && result.rows[0]) {
-                    If there is a result
+                   // If there is a result
                     // var resultObject = result.rows[0]
                     // var keys = Object.keys(resultObject);
                     // var resultKey = keys[0]
