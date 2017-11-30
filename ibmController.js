@@ -65,7 +65,7 @@ exports.postToIBM = function(callback, name, type, activity) {
                 break;
             case "activity nodes":
                 if (!activityID) {
-                    return callback("The activity doesn't exist")
+                    return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['activity'])
                 }
                 path = "activities/service/atom2/activity?activityUuid=" + activityID
                 body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
@@ -74,9 +74,9 @@ exports.postToIBM = function(callback, name, type, activity) {
         var method = "POST"
         return exports.getJSON(method, path, type, function(error) {
             if (error) {
-                var speech = error
+                var speech = messageController.getErrorMessage(error)
             } else {
-                var speech = "Entry has been succesfully added to your " + type;
+                var speech =  messageController.getMessage('MESSAGE_TYPE_ENTRY_ADDED', [type])
             }
             callback(speech)
         }, body);
@@ -87,14 +87,14 @@ exports.postToIBM = function(callback, name, type, activity) {
 exports.updateIBM = function(varName, callback) {
     exports.getIdByName(varName, '/activities/service/atom2/todos', function(id) {
         if (!id) {
-            return callback("Todo doesn't exist")
+            return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['Todo']))
         }
         exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(body) {
             var splittedString = body.split('</entry>')
             var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
             body = splittedString[0] + completed + '</entry>'
             exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
-                return callback("Todo '" + varName + "' has been marked as completed")
+                return callback( messageController.getMessage('MESSAGE_TODO_COMPLETED', [varName]))
             }, body)
 
         })
@@ -146,12 +146,7 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
-
-            var speech = error + "\nSomething went wrong, please check if this record exists. And if you have the appropriate rights to fulfill this action"
-            if (response) {
-                speech += "(" + response.statusCode + ")"
-            }
-            return callback(speech, true)
+            return callback(messageController.getErrorMessage(error, response.statusCode), true)
         }
     })
 }
@@ -268,18 +263,18 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 							var answer = answerObj[0]['_']
 						}
 						if(answer){
-							return callback(fullname + '\'s ' + column + ' is ' + answer)
+							return callback(messageController.getMessage("MESSAGE_USER_INFO", [fullname, column, answer]))
 						}
 						else{
-							return callback(fullname + '\'s ' + column + ' could not be found');
+							return callback(messageController.getMessage("MESSAGE_USER_INFO_NOT_FOUND", [fullname, column]))
 						}
 					})
 				}
-				return callback(fullname + '\'s ' + column + ' could not be found');
+				return callback(messageController.getMessage("MESSAGE_USER_INFO_NOT_FOUND", [fullname, column]))
 			})
 		})
 	}	
 	else{
-		return callback(fullname + '\'s ' + column + ' could not be found');
+		return callback(messageController.getMessage("MESSAGE_USER_INFO_NOT_FOUND", [fullname, column]))
 	}
 }
