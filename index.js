@@ -125,7 +125,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "ibmPost":
         case "ibmPostNode":
-            ibmController.postToIBM(function(res, speech, followUp) {
+            ibmController.postToIBM(function(res, speech, followUp, userID) {
                 return returnJson(speech, followUp);
             }, req.body.result.parameters['content'], req.body.result.parameters['type'], req.body.result.parameters['activity']);
             break;
