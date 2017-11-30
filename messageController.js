@@ -20,5 +20,5 @@ exports.getLoginMessage = function(services, userID, sessionId, language){
 
 exports.getMessage = function(messageType, language){
 	if(!language) language = "EN"
-	return messages.language.messageType
+	return messages[language].messageType
 }
