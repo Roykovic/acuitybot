@@ -22,5 +22,5 @@ exports.getMessage = function(messageType, language){
 	if(!language) language = "EN"
 	console.log(messages[language].messageType)
 	console.log(messages[language])
-	return messages[language].messageType
+	return messages[language][messageType]
 }
