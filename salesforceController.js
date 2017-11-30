@@ -6,6 +6,9 @@ var config = require('./config/config');
 var exports = module.exports = {};
 
 exports.getContacts = function(access_token, callback) {
+	if(!access_token){
+		return callback()
+	}
     var headers = {
         "Authorization": "Bearer " + access_token
     }

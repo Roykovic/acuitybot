@@ -214,6 +214,9 @@ exports.getUser = function(access_token, name, callback) {
 }
 
 exports.getContacts = function(access_token, callback) {
+	if(!access_token){
+		return callback()
+	}
     var headers = {
         "authorization": "Bearer " + access_token
     }
