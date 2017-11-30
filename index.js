@@ -91,9 +91,9 @@ restService.post('/hook', function(req, res) {
             if (!fullName) {
                 return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired && expired.length > 0) {
-						var speech = messageController.getLoginMessage(services, userID, sessionId language)
+						var speech = messageController.getLoginMessage(services, userID, sessionId, language)
 					} else {
-						var speech = messageController.getLoginMessage(services, userID, sessionId language)
+						var speech = messageController.getLoginMessage(services, userID, sessionId, language)
                     }
 					return returnJson(res, req, speech)
                 })

@@ -6,7 +6,7 @@ var messageMapEN;
 var messageMapNL;
 var exports = module.exports = {};
 
-exports.getLoginMessage = function(services, userID, sessionId language){
+exports.getLoginMessage = function(services, userID, sessionId, language){
 	var speech = messages[language].MESSAGE_LOGIN;
 	for(services){
 		speech += "\n"
