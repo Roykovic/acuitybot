@@ -124,6 +124,12 @@ restService.post('/hook', function(req, res) {
         case "getNodeFromIBM":
         case "getFromIBM":
             ibmController.getFromIBM(userID, req.body.result.parameters['type'], function(speech) {
+				if(!speech){
+							speech += "\n"
+							speech += expired[i]
+							speech += "\n"							
+							speech += 'https://safe-ocean-30268.herokuapp.com' + "/login/ibm/" + userID + "/" + sessionId
+				}
                 return returnJson(res, req, speech);
             });
             break;
