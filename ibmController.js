@@ -14,7 +14,7 @@ var parser = new xml2js.Parser();
 exports.getFromIBM = function(userID, type, callback) {
     var path;
     switch (type) {
-        case "communiies":
+        case "communities":
             var path = "communities/service/atom/communities/my"
             break;
         case "activities":
@@ -27,7 +27,7 @@ exports.getFromIBM = function(userID, type, callback) {
             var path = "activities/service/atom2/todos"
             break;
         default:
-			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [type]));
+			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [undefined]));
     }
     var method = "GET"
 	return oauth.getAccessToken('ibm', userID, function(access_token){
