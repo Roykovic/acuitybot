@@ -123,7 +123,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "getNodeFromIBM":
         case "getFromIBM":
-            ibmController.getFromIBM(req.body.result.parameters['type'], function(speech) {
+            ibmController.getFromIBM(userID, req.body.result.parameters['type'], function(speech) {
                 return returnJson(res, req, speech);
             });
             break;

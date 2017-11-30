@@ -10,9 +10,7 @@ var xml2js = require('xml2js');
 var xpath = require("xml2js-xpath");
 var parser = new xml2js.Parser();
 
-exports.auth = "";
-
-exports.getFromIBM = function(access_token, type, callback) {
+exports.getFromIBM = function(userID, type, callback) {
     var path;
     switch (type) {
         case "communities":
@@ -32,18 +30,24 @@ exports.getFromIBM = function(access_token, type, callback) {
 
     }
     var method = "GET"
-
-    return exports.getJSON(method, path, type, function(entries, error) {
-        if (error) {
-            return callback(entries)
-        }
-        if (entries) {
-            var speech = "These are your " + type + ": " + entries
-        } else {
-            var speech = "You don't have any " + type
-        }
-        callback(speech)
-    });
+	return oauth.getAccessToken('ibm', userID, function(access_token){
+		if(access_token){
+			return exports.getJSON(access_token, method, path, type, function(entries, error) {
+				if (error) {
+					return callback(entries)
+				}
+				if (entries) {
+					var speech = "These are your " + type + ": " + entries
+				} else {
+					var speech = "You don't have any " + type
+				}
+				callback(speech)
+			});		
+		}
+		else{
+			callback()
+		}	
+	})
 }
 
 exports.postToIBM = function(callback, name, type, activity) {
