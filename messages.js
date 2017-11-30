@@ -5,5 +5,7 @@ exports.EN = Object.freeze({
 	MESSAGE_LOGIN:"Please make sure you are logged in to all services first. Please use this link/these links: ", 
 	MESSAGE_USER_NOT_FOUND:"This user could not be found in any of your connected apps", 
 	MESSAGE_TYPE_NOT_FOUND:'Type $ could not be found in your system', 
+	MESSAGE_TYPE_ENTRIES_NOT_FOUND:'You don\'t have any $', 
+	MESSAGE_TYPE_ENTRIES:'These are your $: $', 
 	SalesForce:2
 })

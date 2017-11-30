@@ -27,8 +27,7 @@ exports.getFromIBM = function(userID, type, callback) {
             var path = "activities/service/atom2/todos"
             break;
         default:
-			var hans;
-			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [hans]));
+			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [type]));
     }
     var method = "GET"
 	return oauth.getAccessToken('ibm', userID, function(access_token){
@@ -38,9 +37,9 @@ exports.getFromIBM = function(userID, type, callback) {
 					return callback(entries)
 				}
 				if (entries) {
-					var speech = "These are your " + type + ": " + entries
+					var speech = messageController.getMessage('MESSAGE_TYPE_ENTRIES', [type, entries])
 				} else {
-					var speech = "You don't have any " + type
+					var speech = messageController.getMessage('MESSAGE_TYPE_ENTRIES_NOT_FOUND', [type])
 				}
 				callback(speech)
 			});		
