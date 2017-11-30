@@ -1,6 +1,7 @@
 'use strict'
 
 var exports = module.exports = {};
+var messageController = require("./messageController");
 var http = require("http");
 http.post = require('http-post');
 var request = require('request');
@@ -13,7 +14,7 @@ var parser = new xml2js.Parser();
 exports.getFromIBM = function(userID, type, callback) {
     var path;
     switch (type) {
-        case "communities":
+        case "communiies":
             var path = "communities/service/atom/communities/my"
             break;
         case "activities":
@@ -26,8 +27,7 @@ exports.getFromIBM = function(userID, type, callback) {
             var path = "activities/service/atom2/todos"
             break;
         default:
-            return callback("Cannot find " + type + " in system. Please check  your spelling or try again.");
-
+			return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [type]));
     }
     var method = "GET"
 	return oauth.getAccessToken('ibm', userID, function(access_token){

@@ -33,9 +33,8 @@ exports.getErrorMessage = function(error, statusCode, language){
 
 exports.insertIntoString = function(string, inputArray){
 	var counter = 0;
-	while(string.indexOf('?') > -1 && counter<string.length){
-		console.log( "JA DINGEN")
-		//string = string.replace('?', inputArray[counter]);
+	while(string.indexOf('$') > -1 && counter<string.length){
+		string = string.replace('$', inputArray[counter]);
 		counter++;
 	}
 	return string;
