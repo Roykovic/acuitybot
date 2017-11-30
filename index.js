@@ -60,6 +60,7 @@ restService.get('/auth/:service', function(req, res) {
 restService.post('/hook', function(req, res) {
     var userID = req.body.originalRequest.data.data.personId
     var sessionId = req.body.sessionId;
+	console.log(sessionId)
     var intent = req.body.result.metadata.intentName;
     switch (intent) {
         case "update":
