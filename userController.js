@@ -88,6 +88,7 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 							var contacts = []; 
 							if(sfContacts) contacts.push(sfContacts);
 							if(ibmContacts) contacts.push(ibmContacts);
+							console.log(contacts)
 							for (var i = 0; i < contacts.length; ++i) {
 								if (i > 0) body += ','
 								body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
