@@ -2,6 +2,7 @@ var exports = module.exports = {};
 
 //General OAUTH
 exports.grant_type = "authorization_code"
+exports.url = "https://safe-ocean-30268.herokuapp.com";
 
 //Salesforce OAUTH
 exports.salesforce = {}

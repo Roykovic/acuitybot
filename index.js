@@ -21,6 +21,7 @@ var apiController = require('./apiController')
 var userController = require('./userController')
 var ibmController = require('./ibmController')
 var salesforceController = require('./salesforceController')
+var messageController = require('./messageController')
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 var OAuthController = require('./oauth')
@@ -90,17 +91,11 @@ restService.post('/hook', function(req, res) {
             if (!fullName) {
                 return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired && expired.length > 0) {
-						var speech = "Please make sure you are logged in to all services first. Please use this link/these links: "
-						for(var i = 0; i<expired.length; ++i){
-							speech += "\n"
-							speech += expired[i]
-							speech += "\n"							
-							speech += 'https://safe-ocean-30268.herokuapp.com' + "/login/"+expired[i]+"/" + userID + "/" + sessionId
-						}
-                    return returnJson(res, req, speech)
+						var speech = messageController.getLoginMessage(services, userID, sessionId language)
 					} else {
-						return returnJson(res, req, "This user could not be found in any of your connected apps")
+						var speech = messageController.getLoginMessage(services, userID, sessionId language)
                     }
+					return returnJson(res, req, speech)
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
@@ -124,10 +119,6 @@ restService.post('/hook', function(req, res) {
         case "getNodeFromIBM":
         case "getFromIBM":
             ibmController.getFromIBM(userID, req.body.result.parameters['type'], function(speech) {
-				if(!speech){
-							speech += "\n"							
-							speech += 'https://safe-ocean-30268.herokuapp.com' + "/login/ibm/" + userID + "/" + sessionId
-				}
                 return returnJson(res, req, speech);
             });
             break;
