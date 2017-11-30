@@ -85,7 +85,9 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 				 return oauth.getAccessToken('ibm', userId, function(ibm_access_token) {
 					return salesforceController.getContacts(sf_access_token, function(sfContacts) {
 						return ibmController.getContacts(ibm_access_token, function(ibmContacts){
-							var contacts = sfContacts.concat(ibmContacts);
+							var contacts = []; 
+							contacts.push(sfContacts);
+							contacts.push(ibmContacts)
 							for (var i = 0; i < contacts.length; ++i) {
 								if (i > 0) body += ','
 								body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
