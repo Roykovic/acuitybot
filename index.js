@@ -136,14 +136,14 @@ restService.post('/hook', function(req, res) {
             break;
         case "joke":
             apiController.get('https://icanhazdadjoke.com/', function(res, joke) {
-                return returnJson(joke)
+                return returnJson(res, req, joke)
             })
             break;
 		case "test":
 			OAuthController.checkExpiration();
         default:
 		console.log("DEFAULT")
-            return wakeUp(res, req);
+            return wakeUp();
             break;
     }
 })
