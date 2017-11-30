@@ -51,37 +51,42 @@ exports.getFromIBM = function(userID, type, callback) {
 }
 
 exports.postToIBM = function(callback, name, type, activity) {
-    var path;
-    var body;
-    exports.getIdByName(activity, '/activities/service/atom2/activities', function(activityID) {
-        switch (type) {
-            case "communities":
-                path = "communities/service/atom/communities/my"
-                body = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><title type="text">' + name + '</title><content type="html"></content><category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:communityType>public</snx:communityType></entry>'
-                break;
-            case "activities":
-                path = "activities/service/atom2/activities"
-                body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0"  > <title type="text">' + name + '</title>    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>    <content type="html">             </content></entry>'
-                break;
-            case "activity nodes":
-                if (!activityID) {
-                    return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['activity']))
-                }
-                path = "activities/service/atom2/activity?activityUuid=" + activityID
-                body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
-        }
+	return oauth.getAccessToken('ibm', userID, function(access_token){
+		if(!access_token){
+			return callback(messageController.getMessage('MESSAGE_LOGIN'))
+		}
+		var path;
+		var body;
+		exports.getIdByName(access_token, activity, '/activities/service/atom2/activities', function(activityID) {
+			switch (type) {
+				case "communities":
+					path = "communities/service/atom/communities/my"
+					body = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"><title type="text">' + name + '</title><content type="html"></content><category term="community" scheme="http://www.ibm.com/xmlns/prod/sn/type"></category><snx:communityType>public</snx:communityType></entry>'
+					break;
+				case "activities":
+					path = "activities/service/atom2/activities"
+					body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:app="http://www.w3.org/2007/app" xmlns:snx="http://www.ibm.com/xmlns/prod/sn" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:thr="http://purl.org/syndication/thread/1.0"  > <title type="text">' + name + '</title>    <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="activity" label="Activity"/>    <category scheme="http://www.ibm.com/xmlns/prod/sn/priority" term="1" label="Normal"/>    <content type="html">             </content></entry>'
+					break;
+				case "activity nodes":
+					if (!activityID) {
+						return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['activity']))
+					}
+					path = "activities/service/atom2/activity?activityUuid=" + activityID
+					body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+			}
 
-        var method = "POST"
-        return exports.getJSON(method, path, type, function(error) {
-            if (error) {
-                var speech = messageController.getErrorMessage(error)
-            } else {
-                var speech =  messageController.getMessage('MESSAGE_TYPE_ENTRY_ADDED', [type])
-            }
-            callback(speech)
-        }, body);
+			var method = "POST"
+			return exports.getJSON(access_token, method, path, type, function(error) {
+				if (error) {
+					var speech = messageController.getErrorMessage(error)
+				} else {
+					var speech =  messageController.getMessage('MESSAGE_TYPE_ENTRY_ADDED', [type])
+				}
+				callback(speech)
+			}, body);
 
-    })
+		})
+	})	
 }
 
 exports.updateIBM = function(varName, callback) {
