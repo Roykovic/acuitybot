@@ -65,7 +65,7 @@ exports.postToIBM = function(callback, name, type, activity) {
                 break;
             case "activity nodes":
                 if (!activityID) {
-                    return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['activity'])
+                    return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['activity']))
                 }
                 path = "activities/service/atom2/activity?activityUuid=" + activityID
                 body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
