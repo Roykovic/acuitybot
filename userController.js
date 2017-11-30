@@ -85,8 +85,8 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 				return salesforceController.getContacts(sf_access_token, function(sfContacts) {
 					return ibmController.getContacts(ibm_access_token, function(ibmContacts){
 						var contacts = []; 
-						if(sfContacts) contacts.push(sfContacts);
-						if(ibmContacts) contacts.push(ibmContacts);
+						if(sfContacts) contacts.concat(sfContacts);
+						if(ibmContacts) contacts.concat(ibmContacts);
 						for (var i = 0; i < contacts.length; ++i) {
 							console.log(contacts[i])
 							console.log(contacts[i].Name)
