@@ -56,7 +56,6 @@ exports.getAllNames = function(callback) {
 exports.getServiceByName = function(fullname, userID, callback) {
     return oauth.getAccessToken('salesforce', userID, function(sf_access_token) {
 		return oauth.getAccessToken('ibm', userID, function(ibm_access_token) {
-			if (sf_access_token && ibm_access_token) {
 				salesforceController.getUser(sf_access_token, fullname, function(sfUser) {
 					if (sfUser) {
 						return callback(service.services.SalesForce)
@@ -68,9 +67,6 @@ exports.getServiceByName = function(fullname, userID, callback) {
 						return callback(service.services.None)
 					})
 				})
-			} else {
-				return callback();
-			}
 		})
    })
 }
