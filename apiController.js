@@ -1,5 +1,6 @@
 'use strict'
 var exports = module.exports = {};
+var messageController = require("./messageController");
 var http = require("http");
 http.post = require('http-post');
 var request = require('request');
@@ -35,11 +36,7 @@ exports.get = function(path, callback, auth, contentType) {
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
-            var speech = error + "\nSomething went wrong"
-            if (response) {
-                speech += "(" + response.statusCode + ")"
-            }
-            return callback(speech)
+			return callback(messageController.getErrorMessage(error, response.statuscode))
         }
     })
 }
@@ -64,12 +61,7 @@ exports.post = function(path, accesToken, body, callback) {
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
-            var speech = error + "\nSomething went wrong"
-            if (response) {
-                speech += "(" + response.statusCode + ")\n"
-            }
-            speech += body
-            return callback(speech)
+           return callback(messageController.getErrorMessage(error, response.statuscode))
         }
     })
 }

@@ -18,9 +18,24 @@ exports.getLoginMessage = function(services, userID, sessionId, language){
 	return speech;
 }
 
-exports.getMessage = function(messageType, language){
+exports.getMessage = function(messageType, variables, language){
 	if(!language) language = "EN"
-	console.log(messages[language].messageType)
-	console.log(messages[language])
-	return messages[language][messageType]
+	var speech = messages[language][messageType]
+	return exports.insertIntoString(speech, variables)
+}
+
+exports.getErrorMessage = function(error, statusCode, language){
+		if(!language) language = "EN"
+		var speech = error + "\nSomething went wrong"
+        if (statusCode) speech += "(" + statusCode + ")"
+		return speech
+}
+
+exports.insertIntoString(string, inputArray){
+	var counter = 0;
+	while(string.indexOf('?') > -1){
+		string.replace('?', inputArray[counter]);
+		counter++;
+	}
+	return string;
 }

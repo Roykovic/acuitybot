@@ -95,7 +95,7 @@ restService.post('/hook', function(req, res) {
                     if (expired && expired.length > 0) {
 						var speech = messageController.getLoginMessage(expired, userID, sessionId)
 					} else {
-						var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
+						var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND", ['test'])
                     }
 					return returnJson(res, req, speech)
                 })
@@ -112,7 +112,7 @@ restService.post('/hook', function(req, res) {
                     });
                 }
                 if (serviceType == service.services.None) {
-					var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
+					var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND", ['test'])
                 }
             })
 			})
