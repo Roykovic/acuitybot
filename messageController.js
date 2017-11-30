@@ -18,6 +18,7 @@ exports.getLoginMessage = function(services, userID, sessionId, language){
 	return speech;
 }
 
-exports.getMessage = function(messageType){
-	
+exports.getMessage = function(messageType, language){
+	if(!language) language = "EN"
+	return messages.language.messageType
 }

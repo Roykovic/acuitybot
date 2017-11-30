@@ -22,6 +22,7 @@ var userController = require('./userController')
 var ibmController = require('./ibmController')
 var salesforceController = require('./salesforceController')
 var messageController = require('./messageController')
+var messages = require('./messages')
 var xml2js = require('xml2js');
 var parser = new xml2js.Parser();
 var OAuthController = require('./oauth')
@@ -94,7 +95,7 @@ restService.post('/hook', function(req, res) {
                     if (expired && expired.length > 0) {
 						var speech = messageController.getLoginMessage(expired, userID, sessionId)
 					} else {
-						var speech = messageController.getLoginMessage(services, userID, sessionId)
+						var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
                     }
 					return returnJson(res, req, speech)
                 })
@@ -111,8 +112,7 @@ restService.post('/hook', function(req, res) {
                     });
                 }
                 if (serviceType == service.services.None) {
-					console.log("NONE")
-                    return returnJson(res, req, "This user could not be found in any of your connected apps")
+					var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
                 }
             })
 			})
