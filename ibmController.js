@@ -170,6 +170,7 @@ exports.getIdByName = function(access_token, varName, path, callback) {
     }
     request(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
+			console.log(body)
             return parser.parseString(body, function(err, HTTPresult) {
                 var entries = HTTPresult['feed']['entry'];
                 if (!entries) {
@@ -186,10 +187,6 @@ exports.getIdByName = function(access_token, varName, path, callback) {
                 return callback();
             })
         }
-		console.log("ERROR")
-		console.log(error)
-		console.log("Statuscode")
-		console.log(response.statusCode)
         return callback();
     })
 }
