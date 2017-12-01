@@ -127,7 +127,8 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 							body = JSON.parse(body);
 							error = body[0]['message'];
 						}
-						console.log(body)
+						console.log(response)
+						console.log(error)
 						console.log(response.statusCode)
 						callback(messageController.getErrorMessage(error))
 					})
