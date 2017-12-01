@@ -102,7 +102,7 @@ exports.updateIBM = function(varName, userID, callback) {
 			exports.getJSON(access_token, "GET", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(body) {
 				var splittedString = body.split('</entry>')
 				var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
-				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
+				exports.getJSON(access_token, "PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
 				body = splittedString[0] + completed + '</entry>'
 					return callback( messageController.getMessage('MESSAGE_TODO_COMPLETED', [varName]))
 				}, body)
@@ -160,7 +160,6 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
         //Either an error, or a statuscode for an insuccesful request
         else {
 			console.log(body)
-			console.log(callback)
             return callback(messageController.getErrorMessage(error), true)
         }
     })
