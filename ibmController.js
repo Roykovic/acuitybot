@@ -165,7 +165,7 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
 
 exports.getIdByName = function(access_token, varName, path, callback) {
 	console.log("VARNAME")
-	console.log(varname)
+	console.log(varName)
     var id = "";
     var headers = {
         "Content-Type": 'application/atom+xml',
