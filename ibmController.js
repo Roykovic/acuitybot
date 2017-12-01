@@ -172,7 +172,7 @@ exports.getIdByName = function(access_token, varName, path, callback) {
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
 				console.log(err)
-				console.log(typeof HTTPresult)
+				console.log(error)
                 var entries = HTTPresult['feed']['entry'];
                 if (!entries) {
                     return callback()
