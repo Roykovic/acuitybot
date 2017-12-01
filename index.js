@@ -182,7 +182,6 @@ function wakeUp(res, req) {
 }
 
 function log(reqIn, resIn, score, intent, callback) {
-	console.log(typeof resIn)
     var resOut = resIn.split(':')[0];
     return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
         callback();
@@ -190,19 +189,18 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(result, request, speech, followUp) {
-	console.log("********************************SPEECH")
-	console.log(speech)
-		var reqIn = request.body.result.resolvedQuery
-		var intent = request.body.result.metadata.intentName
-		var score = request.body.result.score
-		return log(reqIn, speech, score, intent, function() {
-			return result.json({
-				speech: speech,
-				displayText: speech,
-				source: 'apiai-webhook-sample',
-				followupEvent: {
-					name: followUp
-				}
-			});
-		})
+	var reqIn = request.body.result.resolvedQuery
+	var intent = request.body.result.metadata.intentName
+	var score = request.body.result.score
+	return log(reqIn, speech, score, intent, function() {
+		console.log("HOI")
+		return result.json({
+			speech: speech,
+			displayText: speech,
+			source: 'apiai-webhook-sample',
+			followupEvent: {
+				name: followUp
+			}
+		});
+	})
 }
