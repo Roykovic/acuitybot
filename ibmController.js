@@ -165,8 +165,6 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
 }
 
 exports.getIdByName = function(access_token, varName, path, callback) {
-	console.log("VARNAME")
-	console.log(varName)
 	if(!varName) return callback();
     var id = "";
     var headers = {
@@ -187,6 +185,7 @@ exports.getIdByName = function(access_token, varName, path, callback) {
                     return callback()
                 }
                 for (var index = 0; index < entries.length; ++index) {
+					console.log(entries[0]['title'][0]['_'])
                     if (entries[0]['title'][0]['_'].trim() == varName.trim()) {
                         var unformattedId = entries[index]['id'][0];
                         var parts = unformattedId.split(':')
