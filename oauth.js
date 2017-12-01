@@ -92,8 +92,6 @@ exports.checkExpiration = function(userID, callback){
 			i++;
 			serviceResult = result[0];
 			service = service.toLowerCase();
-			console.log(service)
-			console.log(serviceResult)
 			if(!serviceResult){
 				expired.push(service);
 			}

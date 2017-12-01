@@ -53,7 +53,7 @@ exports.getFromIBM = function(userID, type, callback) {
 exports.postToIBM = function(name, type, activity, userID, callback) {
 	return oauth.getAccessToken('ibm', userID, function(access_token){
 		if(!access_token){
-			return callback(messageController.getMessage('MESSAGE_LOGIN'))
+			return callback() //unauthorized
 		}
 		var path;
 		var body;
@@ -92,7 +92,7 @@ exports.postToIBM = function(name, type, activity, userID, callback) {
 exports.updateIBM = function(varName, userID, callback) {
 	return oauth.getAccessToken('ibm', userID, function(access_token){
 		if(!access_token){
-			return callback(messageController.getMessage('MESSAGE_LOGIN'))
+			return callback() //unauthorized
 		}
 		exports.getIdByName(access_token, varName, '/activities/service/atom2/todos', function(id) {
 			if (!id) {
@@ -101,8 +101,8 @@ exports.updateIBM = function(varName, userID, callback) {
 			exports.getJSON(access_token, "GET", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(body) {
 				var splittedString = body.split('</entry>')
 				var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
+				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
 				body = splittedString[0] + completed + '</entry>'
-				exports.getJSON(access_token, "PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
 					return callback( messageController.getMessage('MESSAGE_TODO_COMPLETED', [varName]))
 				}, body)
 
