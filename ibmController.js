@@ -94,7 +94,7 @@ exports.updateIBM = function(varName, userID, callback) {
 		if(!access_token){
 			return callback(messageController.getMessage('MESSAGE_LOGIN'))
 		}
-		exports.getIdByName(varName, '/activities/service/atom2/todos', function(id) {
+		exports.getIdByName(access_token, varName, '/activities/service/atom2/todos', function(id) {
 			if (!id) {
 				return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['Todo']))
 			}
@@ -178,7 +178,6 @@ exports.getIdByName = function(access_token, varName, path, callback) {
     request(options, function(error, response, body) {
         if (!error && response.statusCode == 200) {
             return parser.parseString(body, function(err, HTTPresult) {
-				console.log(body)
                 var entries = HTTPresult['feed']['entry'];
                 if (!entries) {
                     return callback()
