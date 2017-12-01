@@ -98,6 +98,8 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
 	oauth.getAccessToken('salesforce', userID, function(access_token) {
 		exports.getUser(access_token, fullname, function(sfUser) {
+			console.log("SF USER")
+			console.log(sfUser)
 			if (sfUser) {		
 				exports.getURLByName(access_token, fullname, function(url) {
 					var headers = {
@@ -126,7 +128,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 				})
 			}
 			else{
-				callback(messageController.getMessage('MESSAGE_USER_INFO_NOT_FOUND', [column]))
+				callback(messageController.getMessage('MESSAGE_USER_INFO_NOT_FOUND_2', [column]))
 			}
 		})		
 	})
