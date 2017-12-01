@@ -113,7 +113,6 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 
 					var body = {}
 					body[column] = variable;
-					console.log(body)
 					var options = {
 						'url': 'https://eu11.salesforce.com/' + url,
 						'method': "PATCH",
@@ -122,15 +121,14 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 					}
 
 					httpRequest(options, function(error, response, body) {
+						console.log(response.statusCode)
 						var error;
 						if(body){
 							body = JSON.parse(body);
 							error = body[0]['message'];
+							retcallback(messageController.getErrorMessage(error))
 						}
-						console.log(response)
-						console.log(error)
-						console.log(response.statusCode)
-						callback(messageController.getErrorMessage(error))
+						return callback()
 					})
 				})
 			}
