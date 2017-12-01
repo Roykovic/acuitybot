@@ -113,6 +113,7 @@ exports.updateIBM = function(varName, userID, callback) {
 
 
 exports.getJSON = function(access_token, method, path, type, callback, body) {
+	console.log(type)
     var headers = {
         "Content-Type": 'application/atom+xml',
         "authorization": "Bearer " + access_token
