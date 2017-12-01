@@ -72,6 +72,8 @@ restService.post('/hook', function(req, res) {
             var column = parameters.Variable_row;
             var variable = parameters['variable'].replace("?","")
             var fullname = parameters['sf-name']
+			console.log("*****************FULLNAME******************")
+			console.log(fullname)
             return salesforceController.updateUserInfo(userID, fullname, column, variable, function(error) {
 				if(error){
 					return returnJson(res, req, error);
