@@ -76,7 +76,7 @@ restService.post('/hook', function(req, res) {
 				if(login){
 					speech = messageController.getLoginMessage('ibm', userID, sessionId)
 				}
-				if(error){
+				else if(error){
 					speech = error;
 				}
 				else{
