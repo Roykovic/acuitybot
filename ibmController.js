@@ -159,7 +159,8 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
         }
         //Either an error, or a statuscode for an insuccesful request
         else {
-            return callback(messageController.getErrorMessage(error, response.statusCode), true)
+			console.log(body)
+            return callback(messageController.getErrorMessage(error), true)
         }
     })
 }
