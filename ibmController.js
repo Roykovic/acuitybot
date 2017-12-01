@@ -157,7 +157,6 @@ exports.getJSON = function(access_token, method, path, type, callback, body) {
 }
 
 exports.getIdByName = function(access_token, varName, path, callback) {
-console.log(varName)
     var id = "";
     var headers = {
         "Content-Type": 'application/atom+xml',
@@ -165,7 +164,7 @@ console.log(varName)
     }
 
     var options = {
-        url: config.ibm.url+ + path,
+        url: config.ibm.url + path,
         method: "GET",
         headers: headers,
     }
@@ -187,6 +186,10 @@ console.log(varName)
                 return callback();
             })
         }
+		console.log("ERROR")
+		console.log(error)
+		console.log("Statuscode")
+		console.log(response.statusCode)
         return callback();
     })
 }
