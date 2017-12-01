@@ -66,8 +66,6 @@ exports.registerToken = function(service, userID, access_token, refresh_token, e
 }
 
 exports.getAccessToken = function(service, userID, callback) {
-	console.log("********************userID********************")
-	console.log(userID)
 	return exports.checkExpiration(userID, function(expired){
 		if(expired.indexOf(service) > -1){
 			return callback(false)
@@ -94,6 +92,8 @@ exports.checkExpiration = function(userID, callback){
 			i++;
 			serviceResult = result[0];
 			service = service.toLowerCase();
+			console.log(service)
+			console.log(serviceResult)
 			if(!serviceResult){
 				expired.push(service);
 			}
