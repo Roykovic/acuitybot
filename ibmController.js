@@ -50,7 +50,7 @@ exports.getFromIBM = function(userID, type, callback) {
 	})
 }
 
-exports.postToIBM = function(callback, name, type, activity, userID) {
+exports.postToIBM = function(name, type, activity, userID, callback) {
 	return oauth.getAccessToken('ibm', userID, function(access_token){
 		if(!access_token){
 			return callback(messageController.getMessage('MESSAGE_LOGIN'))
