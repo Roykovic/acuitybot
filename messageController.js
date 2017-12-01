@@ -25,6 +25,7 @@ exports.getMessage = function(messageType, variables, language){
 }
 
 exports.getErrorMessage = function(error, statusCode, language){
+	var speech = "";
 		if(!language) language = "EN"
 		if(error) speech = error +"\n";
 		speech += "Something went wrong"
