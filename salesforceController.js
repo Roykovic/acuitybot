@@ -98,6 +98,9 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
 	oauth.getAccessToken('salesforce', userID, function(access_token) {
+		if(!access_token){
+			callback(true, true)
+		}
 		exports.getUser(access_token, fullname, function(sfUser) {
 			if (sfUser) {		
 				exports.getURLByName(access_token, fullname, function(url) {
@@ -122,7 +125,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 							body = JSON.parse(body);
 							error = body[0]['message'];
 						}
-						callback(error)
+						callback(messageController.getErrorMessage(error))
 					})
 				})
 			}

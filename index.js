@@ -68,19 +68,21 @@ restService.post('/hook', function(req, res) {
         case "data for update":
 			var parameters = req.body.result.parameters
 			if(!parameters) parameters = req.body.result.contexts[1].parameters
-			console.log(req.body.result)
             var column = parameters.Variable_row;
             var variable = parameters['variable'].replace("?","")
             var fullname = parameters['sf-name']
-			console.log("*****************FULLNAME******************")
-			console.log(fullname)
-            return salesforceController.updateUserInfo(userID, fullname, column, variable, function(error) {
+            return salesforceController.updateUserInfo(userID, fullname, column, variable, function(error, login) {
+				var speech;
+				if(login){
+					speech = messageController.getLoginMessage('ibm', userID, sessionId)
+				}
 				if(error){
-					return returnJson(res, req, error);
+					speech = error;
 				}
 				else{
-					return returnJson(res, req, fullname + "\'s " + column + " changed to " + variable);
+					speech = messageController.getMessage('MESSAGE_TYPE_USER_INFO_CHANGED', [fullname, column, variable])
 				}
+				return returnJson(res,req, speech)
             })
             break;
         case "User-info":
