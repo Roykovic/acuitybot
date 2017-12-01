@@ -182,6 +182,9 @@ exports.getIdByName = function(access_token, varName, path, callback) {
                 if (!entries) {
                     return callback()
                 }
+				console.log("ENTRIES")
+				console.log(entries)
+				console.log("END ENTRIES")
                 for (var index = 0; index < entries.length; ++index) {
                     if (entries[index]['title'][0]['_'].trim() == varName.trim()) {
                         var unformattedId = entries[index]['id'][0];
