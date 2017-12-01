@@ -113,7 +113,7 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 
 					var body = {}
 					body[column] = variable;
-
+					console.log(body)
 					var options = {
 						'url': 'https://eu11.salesforce.com/' + url,
 						'method': "PATCH",
