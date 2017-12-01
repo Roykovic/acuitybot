@@ -183,7 +183,7 @@ exports.getIdByName = function(access_token, varName, path, callback) {
                     return callback()
                 }
 				console.log("ENTRIES")
-				console.log(entries[index]['title'][0]['_'])
+				console.log(entries[0]['title'][0]['_'])
 				console.log("END ENTRIES")
                 for (var index = 0; index < entries.length; ++index) {
                     if (entries[index]['title'][0]['_'].trim() == varName.trim()) {
