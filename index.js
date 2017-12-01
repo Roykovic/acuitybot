@@ -134,6 +134,7 @@ restService.post('/hook', function(req, res) {
             break;
         case "ibmPost":
         case "ibmPostNode":
+		conssole.log(req.body.result.parameters)
             ibmController.postToIBM(req.body.result.parameters['content'], req.body.result.parameters['type'], req.body.result.parameters['activity'], userID, function(speech) {
                 if(!speech){
 					speech = messageController.getLoginMessage('ibm', userID, sessionId)
