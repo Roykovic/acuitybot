@@ -182,6 +182,7 @@ function wakeUp(res, req) {
 }
 
 function log(reqIn, resIn, score, intent, callback) {
+	console.log(typeof resIn)
     var resOut = resIn.split(':')[0];
     return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
         callback();
