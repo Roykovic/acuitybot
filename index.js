@@ -130,7 +130,7 @@ restService.post('/hook', function(req, res) {
             });
             break;
         case "markTodo":
-            ibmController.updateIBM(req.body.result.parameters['todoName'], function(res, speech) {
+            ibmController.updateIBM(req.body.result.parameters['todoName'], userID, function(res, speech) {
                 return returnJson(speech);
             });
             break;

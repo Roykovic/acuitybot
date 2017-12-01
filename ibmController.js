@@ -89,22 +89,28 @@ exports.postToIBM = function(name, type, activity, userID, callback) {
 	})	
 }
 
-exports.updateIBM = function(varName, callback) {
-    exports.getIdByName(varName, '/activities/service/atom2/todos', function(id) {
-        if (!id) {
-            return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['Todo']))
-        }
-        exports.getJSON("GET", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(body) {
-            var splittedString = body.split('</entry>')
-            var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
-            body = splittedString[0] + completed + '</entry>'
-            exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
-                return callback( messageController.getMessage('MESSAGE_TODO_COMPLETED', [varName]))
-            }, body)
+exports.updateIBM = function(varName, userID, callback) {
+	return oauth.getAccessToken('ibm', userID, function(access_token){
+		if(!access_token){
+			return callback(messageController.getMessage('MESSAGE_LOGIN'))
+		}
+		exports.getIdByName(varName, '/activities/service/atom2/todos', function(id) {
+			if (!id) {
+				return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['Todo']))
+			}
+			exports.getJSON(access_token, "GET", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(body) {
+				var splittedString = body.split('</entry>')
+				var completed = '<category scheme="http://www.ibm.com/xmlns/prod/sn/flags" term="completed" label="Completed"/>'
+				body = splittedString[0] + completed + '</entry>'
+				exports.getJSON("PUT", '/activities/service/atom2/activitynode?activityNodeUuid=' + id, "updateTodo", function(parameter) {
+					return callback( messageController.getMessage('MESSAGE_TODO_COMPLETED', [varName]))
+				}, body)
 
-        })
-    })
+			})
+		})
+	})
 }
+
 
 exports.getJSON = function(access_token, method, path, type, callback, body) {
     var headers = {
