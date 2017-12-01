@@ -66,7 +66,8 @@ restService.post('/hook', function(req, res) {
     switch (intent) {
         case "update":
         case "data for update":
-			var parameters = req.body.result.contexts[1].parameters
+			var parameters = req.body.result.parameters
+			if(!parameters) parameters = req.body.result.contexts[1].parameters
             var column = parameters.Variable_row;
             var variable = parameters['variable.original'].replace("?","")
             var fullname = parameters['sf-name']
