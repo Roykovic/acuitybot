@@ -69,13 +69,13 @@ exports.postToIBM = function(name, type, activity, userID, callback) {
 				break;
 			case "activity nodes":
 				exports.getIdByName(access_token, activity, '/activities/service/atom2/activities', function(activityID) {
-					console.log("Activity ID")
-					console.log(activityID)
 					if (!activityID) {
 						return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', ['activity']))
 					}
-					path = "activities/service/atom2/activity?activityUuid=" + activityID
-					body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+					else{
+						path = "activities/service/atom2/activity?activityUuid=" + activityID
+						body = '<entry xmlns="http://www.w3.org/2005/Atom" xmlns:snx="http://www.ibm.com/xmlns/prod/sn"> <title type="text">' + name + '</title> <category scheme="http://www.ibm.com/xmlns/prod/sn/type" term="todo" label="To Do"/> <content type="html">          	&lt;p dir="ltr">&lt;/p>      	  </content> <snx:communityUuid/> </entry>'
+					}
 				})
 		}
 
