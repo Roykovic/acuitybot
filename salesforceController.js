@@ -99,7 +99,7 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
 	oauth.getAccessToken('salesforce', userID, function(access_token) {
 		if(!access_token){
-			callback(true, true)
+			return callback(true, true)
 		}
 		exports.getUser(access_token, fullname, function(sfUser) {
 			if (sfUser) {		
