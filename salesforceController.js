@@ -27,9 +27,11 @@ exports.getContacts = function(access_token, callback) {
 }
 
 exports.getUser = function(access_token, fullname, callback) {
+	console.log(fullname)
     exports.getContacts(access_token, function(contacts) {
 		if(contacts){
 			for (var i = 0; i < contacts.length; ++i) {
+				console.log(contacts[i].Name)
 				if (contacts[i].Name == fullname) {
 					return callback(true)
 				}
@@ -98,8 +100,6 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
 	oauth.getAccessToken('salesforce', userID, function(access_token) {
 		exports.getUser(access_token, fullname, function(sfUser) {
-			console.log("SF USER")
-			console.log(sfUser)
 			if (sfUser) {		
 				exports.getURLByName(access_token, fullname, function(url) {
 					var headers = {
