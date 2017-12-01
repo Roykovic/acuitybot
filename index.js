@@ -74,7 +74,7 @@ restService.post('/hook', function(req, res) {
             return salesforceController.updateUserInfo(userID, fullname, column, variable, function(error, login) {
 				var speech;
 				if(login){
-					speech = messageController.getLoginMessage('ibm', userID, sessionId)
+					speech = messageController.getLoginMessage(['salesforce'], userID, sessionId)
 				}
 				else if(error){
 					speech = error;
