@@ -190,14 +190,12 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(result, request, speech, followUp) {
-	console.log("**********************SPEECH")
-	console.log(speech)
 	var reqIn = request.body.result.resolvedQuery
 	var intent = request.body.result.metadata.intentName
 	var score = request.body.result.score
 	return log(reqIn, speech, score, intent, function() {
-		console.log("HOI")
 		return result.json({
+			lang: "nl",
 			speech: speech,
 			displayText: speech,
 			source: 'apiai-webhook-sample',
