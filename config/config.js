@@ -1,5 +1,8 @@
 var exports = module.exports = {};
 
+//General
+exports.defaultLang = "EN";
+
 //General OAUTH
 exports.grant_type = "authorization_code"
 exports.url = "https://safe-ocean-30268.herokuapp.com";

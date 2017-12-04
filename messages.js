@@ -23,7 +23,7 @@ exports.NL = Object.freeze({
 	MESSAGE_TYPE_ENTRIES_NOT_FOUND:'Je hebt geen $', 
 	MESSAGE_TYPE_ENTRIES:'Dit zijn jouw $: $', 
 	MESSAGE_TYPE_ENTRY_ADDED:'invoer is toegevoegd aan jouw $', 
-	MESSAGE_TYPE_USER_INFO_CHANGED:'$\'s $ is verandert in $', 
+	MESSAGE_TYPE_USER_INFO_CHANGED:'$\'s $ is veranderd in $', 
 	MESSAGE_TODO_COMPLETED:'Todo "$" is afgevinkt', 
 	MESSAGE_USER_INFO:'$\'s $ is $', 
 	MESSAGE_USER_INFO_NOT_FOUND:'$\'s $ kon niet gevonden worden', 
