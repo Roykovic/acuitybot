@@ -87,11 +87,11 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
                     for (var i = 0, len = contacts.length; i < len; i++) {
 						console.log(contacts[i].Name)
                         if (contacts[i].Name == fullname) {
-                            var answer = contacts[i][returnColumn]
+                            var answer = contacts[i][column]
 							console.log("ANSWER")
 							console.log(answer)
                             if (answer) {
-                                return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, returnColumn,answer]))
+                                return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, column,answer]))
                             } else {
                                 return callback("", "update")
                             }
