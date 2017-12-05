@@ -107,8 +107,6 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType, user) {
-				console.log("SERVICETYPE")
-				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
 					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
                         return returnJson(res, req, speech, followUp)
@@ -121,6 +119,7 @@ restService.post('/hook', function(req, res) {
                 }
                 if (serviceType == service.services.None) {
 					var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
+					return returnJson(res, req, speech, followUp)
                 }
             })
 			})
