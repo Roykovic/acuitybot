@@ -85,8 +85,11 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
                 exports.getContacts(access_token, function(contacts) {
 					console.log("GETCONTACTS")
                     for (var i = 0, len = contacts.length; i < len; i++) {
+						console.log(contacts[i].Name)
                         if (contacts[i].Name == fullname) {
                             var answer = contacts[i][returnColumn]
+							console.log("ANSWER")
+							console.log(answer)
                             if (answer) {
                                 return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, returnColumn,answer]))
                             } else {
