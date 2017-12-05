@@ -144,16 +144,13 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 }
 
 exports.checkColumn = function(column, userID, callback) {
-	console.log("CHECKCOLUMN")
     exports.getColumns(userID, function(columns) {
-			console.log("GETCOLUMN")
         if (columns) {
             for (var i = 0, len = columns.length; i < len; i++) {
                 var columnFromDB = columns[i];
                 var lowerCaseColumn = columnFromDB.toLowerCase();
                 if (lowerCaseColumn == column.toLowerCase()) {
-                    callback(column);
-                    return
+                return callback(column);
                 }
             }
         }
