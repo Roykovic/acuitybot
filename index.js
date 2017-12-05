@@ -196,6 +196,7 @@ function returnJson(result, request, speech, followUp) {
 	var intent = request.body.result.metadata.intentName
 	var score = request.body.result.score
 	return log(reqIn, speech, score, intent, function() {
+		console.log("SOMETHING WENT HORRIBLY WRONG")
 		return result.json({
 			speech: speech,
 			displayText: speech,
