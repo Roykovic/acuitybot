@@ -83,12 +83,8 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
             if (returnColumn) {
                 exports.getContacts(access_token, function(contacts) {
                     for (var i = 0, len = contacts.length; i < len; i++) {
-													console.log("FOREACH CONTACT")
-																				console.log(contacts[i].Name)
                         if (contacts[i].Name == fullname) {
                             var answer = contacts[i][returnColumn]
-							console.log("ANSWER")
-							console.log(answer)
                             if (answer) {
                                 return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, returnColumn,answer]))
                             } else {
@@ -148,7 +144,9 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 }
 
 exports.checkColumn = function(column, userID, callback) {
+	console.log("CHECKCOLUMN")
     exports.getColumns(userID, function(columns) {
+			console.log("GETCOLUMN")
         if (columns) {
             for (var i = 0, len = columns.length; i < len; i++) {
                 var columnFromDB = columns[i];
