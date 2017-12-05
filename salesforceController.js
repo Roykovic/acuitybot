@@ -75,7 +75,7 @@ exports.getURLByName = function(access_token, fullname, callback) {
 
 exports.getUserInfo = function(userID, fullname, column, callback) {
     oauth.getAccessToken('salesforce', userID, function(access_token) {
-		access_token = AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G;
+		access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G';
         exports.checkColumn(column, userID, function(returnColumn) {
             if (returnColumn) {
                 exports.getContacts(access_token, function(contacts) {
