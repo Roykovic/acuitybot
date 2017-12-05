@@ -107,6 +107,8 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
+				console.log("SERVICETYPE")
+				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
 					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
                         return returnJson(res, req, speech, followUp)
