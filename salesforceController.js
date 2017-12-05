@@ -31,7 +31,7 @@ exports.getUser = function(access_token, fullname, callback) {
 		if(contacts){
 			for (var i = 0; i < contacts.length; ++i) {
 				if (contacts[i].Name == fullname) {
-					return callback(true)
+					return callback(contacts[i])
 				}
 			}
 		}
@@ -72,20 +72,14 @@ exports.getURLByName = function(access_token, fullname, callback) {
     })
 }
 
-exports.getUserInfo = function(userID, fullname, column, callback) {
-    oauth.getAccessToken('salesforce', userID, function(access_token) {
-                exports.getContacts(access_token, function(contacts) {
-                    for (var i = 0, len = contacts.length; i < len; i++) {
-                        if (contacts[i].Name == fullname) {
-                            var answer = contacts[i][column]
+exports.getUserInfo = function(userID, user, column, callback) {
+                            var answer = user[i][column]
                             if (answer) {
                                 return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, column,answer]))
                             } else {
                                 return callback("", "update")
                             }
                         }
-                    }
-                })
     })
 }
 

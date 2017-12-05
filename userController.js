@@ -58,11 +58,11 @@ exports.getServiceByName = function(fullname, userID, callback) {
 		return oauth.getAccessToken('ibm', userID, function(ibm_access_token) {
 				salesforceController.getUser(sf_access_token, fullname, function(sfUser) {
 					if (sfUser) {
-						return callback(service.services.SalesForce)
+						return callback(service.services.SalesForce, sfUser)
 					}
 					ibmController.getUser(ibm_access_token, fullname, function(ibmUser) {
 						if (ibmUser) {
-							return callback(service.services.IBM)
+							return callback(service.services.IBM, ibmUser)
 						}
 						return callback(service.services.None)
 					})
