@@ -107,8 +107,6 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType) {
-				console.log("SERVICETYPE")
-				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
 					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
                         return returnJson(res, req, speech, followUp)
@@ -192,6 +190,8 @@ function log(reqIn, resIn, score, intent, callback) {
 }
 
 function returnJson(result, request, speech, followUp) {
+	console.log("SPEECH")
+	console.log(speech)
 	var reqIn = request.body.result.resolvedQuery
 	var intent = request.body.result.metadata.intentName
 	var score = request.body.result.score
