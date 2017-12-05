@@ -77,10 +77,14 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
     oauth.getAccessToken('salesforce', userID, function(access_token) {
 		access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G';
         exports.checkColumn(column, userID, function(returnColumn) {
+			console.log("*************RETURNCOLUMN*********************")
+			console.log(returnColumn)
             if (returnColumn) {
                 exports.getContacts(access_token, function(contacts) {
+					console.log("*************CONTACTS*****************")
                     for (var i = 0, len = contacts.length; i < len; i++) {
                         if (contacts[i].Name == fullname) {
+							console.log(contacts[i])
                             var answer = contacts[i][returnColumn]
                             if (answer) {
                                 return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, returnColumn,answer]))
