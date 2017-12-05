@@ -114,6 +114,8 @@ restService.post('/hook', function(req, res) {
                 }
                 if (serviceType == service.services.SalesForce) {
                     return salesforceController.getUserInfo(userID, fullName, column, function(speech, followUp) {
+						console.log("USER INFO RECIEVED")
+						console.log(speech);
                         return returnJson(res, req, speech, followUp)
                     });
                 }
@@ -194,6 +196,7 @@ function returnJson(result, request, speech, followUp) {
 	var intent = request.body.result.metadata.intentName
 	var score = request.body.result.score
 	return log(reqIn, speech, score, intent, function() {
+		console.log("User info sent")
 		return result.json({
 			speech: speech,
 			displayText: speech,
