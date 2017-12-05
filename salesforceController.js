@@ -32,7 +32,6 @@ access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhR
     exports.getContacts(access_token, function(contacts) {
 		if(contacts){
 			for (var i = 0; i < contacts.length; ++i) {
-				console.log(contacts[i].Name)
 				if (contacts[i].Name == fullname) {
 					return callback(true)
 				}
@@ -81,15 +80,15 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 		console.log("GETACCESTOKEN")
 		access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G';
         exports.checkColumn(column, userID, function(returnColumn) {
-			console.log("*************RETURNCOLUMN*********************")
-			console.log(returnColumn)
             if (returnColumn) {
                 exports.getContacts(access_token, function(contacts) {
-					console.log("*************CONTACTS*****************")
                     for (var i = 0, len = contacts.length; i < len; i++) {
+													console.log("FOREACH CONTACT")
+																				console.log(contacts[i].Name)
                         if (contacts[i].Name == fullname) {
-							console.log(contacts[i])
                             var answer = contacts[i][returnColumn]
+							console.log("ANSWER")
+							console.log(answer)
                             if (answer) {
                                 return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, returnColumn,answer]))
                             } else {
