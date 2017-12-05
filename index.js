@@ -107,6 +107,8 @@ restService.post('/hook', function(req, res) {
                 })
             }
             return userController.getServiceByName(fullName, userID, function(serviceType, user) {
+				console.log("SERVICETYPE")
+				console.log(serviceType)
                 if (serviceType == service.services.IBM) {
 					return ibmController.getUserInfo(userID, fullName, column, function(speech, followUp) {
                         return returnJson(res, req, speech, followUp)
@@ -114,8 +116,6 @@ restService.post('/hook', function(req, res) {
                 }
                 if (serviceType == service.services.SalesForce) {
                     return salesforceController.getUserInfo(userID, user, column, function(speech, followUp) {
-						console.log("USER INFO RECIEVED")
-						console.log(speech);
                         return returnJson(res, req, speech, followUp)
                     });
                 }

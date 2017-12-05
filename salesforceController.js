@@ -73,11 +73,9 @@ exports.getURLByName = function(access_token, fullname, callback) {
 }
 
 exports.getUserInfo = function(userID, user, column, callback) {
-	console.log("USER")
-	console.log(user)
     var answer = user[column]
     if (answer) {
-        return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, column,answer]))
+        return callback(messageController.getMessage('MESSAGE_USER_INFO', [user.Name, column,answer]))
     } else {
         return callback("", "update")
     }
