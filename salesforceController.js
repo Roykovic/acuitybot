@@ -79,9 +79,9 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
     oauth.getAccessToken('salesforce', userID, function(access_token) {
 		console.log("GETACCESTOKEN")
 		access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G';
-        exports.checkColumn(column, userID, function(returnColumn) {
+//        exports.checkColumn(column, userID, function(returnColumn) {
 			console.log("CHECKCOLUMNS")
-            if (returnColumn) {
+//            if (returnColumn) {
                 exports.getContacts(access_token, function(contacts) {
 					console.log("GETCONTACTS")
                     for (var i = 0, len = contacts.length; i < len; i++) {
@@ -98,10 +98,10 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
                         }
                     }
                 })
-            } else {
-				return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [column]))
-            }
-        })
+ //           } else {
+//				return callback(messageController.getMessage('MESSAGE_TYPE_NOT_FOUND', [column]))
+//            }
+//        })
     })
 }
 
