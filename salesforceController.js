@@ -73,14 +73,12 @@ exports.getURLByName = function(access_token, fullname, callback) {
 }
 
 exports.getUserInfo = function(userID, user, column, callback) {
-                            var answer = user[i][column]
-                            if (answer) {
-                                return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, column,answer]))
-                            } else {
-                                return callback("", "update")
-                            }
-                        }
-    })
+    var answer = user[i][column]
+    if (answer) {
+        return callback(messageController.getMessage('MESSAGE_USER_INFO', [fullname, column,answer]))
+    } else {
+        return callback("", "update")
+    }
 }
 
 exports.updateUserInfo = function(userID, fullname, column, variable, callback) {
