@@ -28,6 +28,7 @@ exports.getContacts = function(access_token, callback) {
 
 exports.getUser = function(access_token, fullname, callback) {
 	console.log(fullname)
+access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G';
     exports.getContacts(access_token, function(contacts) {
 		if(contacts){
 			for (var i = 0; i < contacts.length; ++i) {
