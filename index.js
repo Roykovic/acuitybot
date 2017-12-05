@@ -185,18 +185,16 @@ function wakeUp(res, req) {
     return returnJson(res, req, speech);
 }
 
-function log(reqIn, resIn, score, intent, callback) {
+function log(reqIn, resIn, score, intent, ) {
     var resOut = resIn.split(':')[0];
-    return db.log(reqIn, resOut, score, intent, function(connectionEnd) {
-        callback();
-    })
+    return db.log(reqIn, resOut, score, intent)
 }
 
 function returnJson(result, request, speech, followUp) {
 	var reqIn = request.body.result.resolvedQuery
 	var intent = request.body.result.metadata.intentName
 	var score = request.body.result.score
-	return log(reqIn, speech, score, intent, function() {
+	log(reqIn, speech, score, intent)
 		console.log("User info sent")
 		return result.json({
 			speech: speech,
@@ -206,5 +204,4 @@ function returnJson(result, request, speech, followUp) {
 				name: followUp
 			}
 		});
-	})
 }
