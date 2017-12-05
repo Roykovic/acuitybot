@@ -59,8 +59,7 @@ restService.get('/auth/:service', function(req, res) {
 })
 
 restService.post('/hook', function(req, res) {
-   // var userID = req.body.originalRequest.data.data.personId
-   var userID = 'Y2lzY29zcGFyazovL3VzL1BFT1BMRS80NjllZDA3Yi01OGZmLTQ4NjYtYWIwZi01MmJmY2UwOTVmMDE';
+   var userID = req.body.originalRequest.data.data.personId
     var sessionId = req.body.sessionId;
 	console.log(sessionId)
     var intent = req.body.result.metadata.intentName;
