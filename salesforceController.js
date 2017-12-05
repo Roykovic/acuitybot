@@ -80,8 +80,10 @@ exports.getUserInfo = function(userID, fullname, column, callback) {
 		console.log("GETACCESTOKEN")
 		access_token = 'AR8AQGPbm4EmsCVyw2ytsqkY5jYdq58qSQObKasjTKTwNdWsCA7a6qVoWU5BWzhRpIqK3taRS._pSuE_DXpTuzI2VpGTU57G';
         exports.checkColumn(column, userID, function(returnColumn) {
+			console.log("CHECKCOLUMNS")
             if (returnColumn) {
                 exports.getContacts(access_token, function(contacts) {
+					console.log("GETCONTACTS")
                     for (var i = 0, len = contacts.length; i < len; i++) {
                         if (contacts[i].Name == fullname) {
                             var answer = contacts[i][returnColumn]
@@ -144,16 +146,20 @@ exports.updateUserInfo = function(userID, fullname, column, variable, callback) 
 }
 
 exports.checkColumn = function(column, userID, callback) {
+	console.log("CHECKCOLUMNS 2")
     exports.getColumns(userID, function(columns) {
+		console.log("GETCOLUMNS")
         if (columns) {
             for (var i = 0, len = columns.length; i < len; i++) {
                 var columnFromDB = columns[i];
                 var lowerCaseColumn = columnFromDB.toLowerCase();
                 if (lowerCaseColumn == column.toLowerCase()) {
+				console.log("CALLBACK COLUMN")
                 return callback(column);
                 }
             }
         }
-        return callback(null);
+		else{
+        return callback(null)};
     })
 }
