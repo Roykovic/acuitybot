@@ -195,7 +195,6 @@ function returnJson(result, request, speech, followUp) {
 	var score = request.body.result.score
 	return log(reqIn, speech, score, intent, function() {
 		return result.json({
-			lang: "nl",
 			speech: speech,
 			displayText: speech,
 			source: 'apiai-webhook-sample',
