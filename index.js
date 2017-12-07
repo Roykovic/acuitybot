@@ -97,6 +97,7 @@ restService.post('/hook', function(req, res) {
             var fullName = nameObj[Object.keys(nameObj)[index]]
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
+				console.log("NO NAME")
                 return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired && expired.length > 0) {
 						var speech = messageController.getLoginMessage(expired, userID, sessionId)
@@ -118,7 +119,6 @@ restService.post('/hook', function(req, res) {
                     });
                 }
                 if (serviceType == service.services.None) {
-					console.log("NO SERVICETYPE")
 					var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
 					return returnJson(res, req, speech)
                 }
