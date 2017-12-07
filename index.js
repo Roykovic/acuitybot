@@ -118,6 +118,7 @@ restService.post('/hook', function(req, res) {
                     });
                 }
                 if (serviceType == service.services.None) {
+					console.log("NO SERVICETYPE")
 					var speech = messageController.getMessage("MESSAGE_USER_NOT_FOUND")
 					return returnJson(res, req, speech)
                 }

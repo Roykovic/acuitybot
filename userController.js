@@ -88,7 +88,9 @@ exports.addUserEntities = function(sessionId, userId, callback) {
 							body += '{ "synonyms": [ "' + contacts[i].Name + '" ], "value": "' + contacts[i].Name + '" }'
 						}
 						body += bodyEnd;		
-						return apiController.post(postPath, accesToken, body, function(response) {										
+						return apiController.post(postPath, accesToken, body, function(response) {		
+								console.log("RESPONSE")
+								console.log(response)
 							return callback(true)
 						})						
 					})
