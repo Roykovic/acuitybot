@@ -94,10 +94,11 @@ restService.post('/hook', function(req, res) {
 				 index = 1;
 				 nameObj = req.body.result.contexts[0].parameters['fullName']
 			 }
+			 console.log("NAME OBJECT")
+			 console.log(nameObj)
             var fullName = nameObj[Object.keys(nameObj)[index]]
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
-				console.log("NO NAME")
                 return OAuthController.checkExpiration(userID, function(expired) {
                     if (expired && expired.length > 0) {
 						var speech = messageController.getLoginMessage(expired, userID, sessionId)
