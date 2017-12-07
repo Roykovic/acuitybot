@@ -94,8 +94,7 @@ restService.post('/hook', function(req, res) {
 				 index = 1;
 				 nameObj = req.body.result.contexts[0].parameters['fullName']
 			 }
-			 console.log("NAME OBJECT")
-			 console.log(nameObj)
+			console.log(req.body.result)
             var fullName = nameObj[Object.keys(nameObj)[index]]
             var column = req.body.result.parameters['Variable_row']
             if (!fullName) {
